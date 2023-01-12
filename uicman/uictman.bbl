@@ -1,0 +1,82 @@
+\begin{thebibliography}{10}
+
+\bibitem{latex_guide}
+
+Lamport, L.:
+\newblock {\itshape  \LaTeX{}: A Document Preparation System }.
+\newblock Reading, MA, Addison-Wesley Publishing Company, 1986.
+
+\bibitem{latex_engineers}
+
+Buerger, D.~J.:
+\newblock {\itshape  \LaTeX{} for Engineers \& Scientists }.
+\newblock New York, McGraw-Hill Publishing Company, 1990.
+
+\bibitem{use_tex}
+
+UIC Computer Center:
+\newblock {\itshape  Using \TeX{} at UIC }, 1989.
+\newblock Available from {\tt INFORM}.
+
+\bibitem{use_latex}
+
+UIC Computer Center:
+\newblock {\itshape  Using \LaTeX{} at UIC }, 1989.
+\newblock Available from {\tt INFORM}.
+
+\bibitem{tex31}
+
+UIC Computer Center:
+\newblock {\itshape  Mainframe \TeX{} Version 3.1 and Related Software }, 1991.
+\newblock Available from {\tt INFORM}.
+
+\bibitem{texrox}
+
+UIC Computer Center:
+\newblock {\itshape  \TeX{}, \LaTeX{} and \amstex{} Output on the Xerox 8790s
+  at UIC (TeXRoX) }, 1989.
+\newblock Available from {\tt INFORM}.
+
+\bibitem{thesis_dir}
+
+UIC Graduate College:
+\newblock {\itshape  Thesis Directions }, 1991.
+
+\bibitem{warbrick}
+
+Warbrick, J.:
+\newblock {\itshape  Essential \LaTeX{} }.
+\newblock Plymouth Polytechnic, 1989.
+
+\bibitem{amsltx}
+
+American Mathematical Society:
+\newblock {\itshape  \amslatex{} Version 1.0 User's Guide }, 1990.
+\newblock Available on the {\tt TEX} disk as {\tt AMSLATEX PS}.
+
+\bibitem{smpl_article}
+
+Grumbach, M., Morishima, A., and Taylor, J.~H.:
+\newblock Human sex chromosome abnormalities in relation to {DNA} replication.
+\newblock {\itshape  Proc. Natl. Acad. Sci. USA }, 49:581--589, 1963.
+
+\bibitem{smpl_book}
+
+Elkinton, J.~R. and Danowski, T.~S.:
+\newblock {\itshape  The Body Fluids }.
+\newblock Baltimore, Williams and Wilkins, 1955.
+
+\bibitem{smpl_incollection}
+
+Schneider, I.:
+\newblock Insect tissue culture.
+\newblock In {\itshape  Methods in Developmental Biology }, eds. F.~H. Wilt and
+  N.~K. Wesnes, pages 543--554. New York, Thomas Y. Crowell Co., 1967.
+
+\bibitem{smpl_masterthesis}
+
+Ross, D.:
+\newblock The {I}rish-{C}atholic Immigrant, 1980--1900.
+\newblock Master's thesis, Columbia University, New York, 1975.
+
+\end{thebibliography}

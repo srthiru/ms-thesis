@@ -1,0 +1,46 @@
+This is BibTeX, Version 0.99d (TeX Live 2022/Arch Linux)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: uictman.aux
+The style file: formb.bst
+Database file #1: uictman.bib
+You've used 13 entries,
+            2045 wiz_defined-function locations,
+            538 strings with 4993 characters,
+and the built_in function-call counts, 1958 in all, are:
+= -- 182
+> -- 53
+< -- 1
++ -- 25
+- -- 12
+* -- 92
+:= -- 302
+add.period$ -- 26
+call.type$ -- 13
+change.case$ -- 3
+chr.to.int$ -- 0
+cite$ -- 13
+duplicate$ -- 110
+empty$ -- 224
+format.name$ -- 12
+if$ -- 461
+int.to.chr$ -- 0
+int.to.str$ -- 13
+missing$ -- 8
+newline$ -- 80
+num.names$ -- 9
+pop$ -- 43
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 38
+stack$ -- 0
+substring$ -- 49
+swap$ -- 22
+text.length$ -- 1
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 0
+while$ -- 11
+width$ -- 15
+write$ -- 139
