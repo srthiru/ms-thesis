@@ -40,6 +40,11 @@
 %\usepackage{todonotes}
 \usepackage{cite}
 
+
+\usepackage{dsfont}
+\usepackage{amsfonts}
+\usepackage{comment}
+
 \usepackage{xspace}
 
 \hyphenation{PageRank Convex dictatorship Dic-ta-tor-ship}
@@ -103,9 +108,9 @@
 % Declarations for Front Matter
 
 \title{Title of Thesis is here}
-\author{First-name Lastname}
+\author{Thiruvenkadam Sivaprakasam Radhakrishnan}
 \pdegrees{}
-\degree{Doctor of Philosophy in Computer Science}
+\degree{Master's in Computer Science}
 \committee{Prof. Firstname1 Lastname1, Chair and Advisor \\ Prof. Firstname2 Lastname2  \\ Prof. Firstname3 Lastname3 \\ Prof. Firstname4 Lastname4 \\ Prof. Firstname5 Lastname5}
 \maketitle
 
@@ -152,6 +157,47 @@
  
 \summary
 Put your summary of thesis here.
+
+Things to add:
+
+\begin{enumerate}
+  \item Online Learning and Online Convex optimization
+    \begin{enumerate}
+      \item General intro
+      \item FoReL
+      \item Mirror Descent
+      \item Hedge
+      \item Mirror Descent with KL Divergence
+    \end{enumerate}
+  \item Policy gradients
+  \begin{enumerate}
+    \item General intro
+    \item Actor critic methods
+    \item PPO
+  \end{enumerate}
+  \item NeuRD
+  \item Making the connection between Mirror Descent and Policy gradients
+  \begin{enumerate}
+    \item MDPO
+    \item MMD
+  \end{enumerate}
+  \item NeuRD fix
+  \begin{enumerate}
+    \item MDPO
+    \item MMD
+  \end{enumerate}  
+  \item Experiments
+  \begin{enumerate}
+    \item Rock paper scissors; Khun Poker
+    \item MDPO vs MDPO-NR
+    \item MMD vs MMD-NR
+  \end{enumerate}
+\end{enumerate}
+
+
+\include{derivations.tex}
+
+\include{oco.tex}
 
 \chapter{Introduction}
 

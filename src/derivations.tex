@@ -1,0 +1,244 @@
+
+\newtheorem{theorem}{Theorem}
+
+
+\chapter{Derivations}
+
+\section{Online Learning}
+
+
+\subsection{FoReL}
+
+
+\section{Online Mirror Descent}
+
+
+The FoReL update rule is,
+
+\begin{align*}
+    w_{t+1} &= argmin_w R(w) + \sum_{i=1}^t \langle w, z_t \rangle \\
+            &= argmin_w R(w) + \langle w, z_{1:t}\rangle \\
+            &= argmax_w \langle w, -z_{1:t} \rangle - R(w)    
+\end{align*}
+
+Let $g(\theta) = argmax_w \langle w, \theta \rangle - R(w)$. Then the FoReL update rule can 
+be written as,
+
+\begin{align*}
+    \theta_{t+1} = \theta_t - z_t
+    w_{t+1} = g(\theta_{t+1})
+\end{align*}
+
+where $g(\theta)$ is a link function that projects the predictions back to the convex set $S$.
+
+Using different regularization functions yield different algorithms that have different regret bounds.
+
+\begin{theorem}
+    If R is a $(\frac{1}{\eta})$-strongly-convex function over $S$ with respect to some norm $\|.\|$, and OMD 
+    is run on a sequence with the following link function
+
+    $$g(\theta) = argmax_w (\langle w, \theta \rangle - R(w))$$
+
+    then,
+
+    $$\forall u \in S, Regret_T(u) \leq R(u) - min_{v \in S} R(v) + \eta \sum_{t=1}^T \|z\|_*^2$$
+
+    where $\|.\|_*$ is the dual norm.
+\end{theorem}
+
+
+\subsection{Hedge}
+
+
+Hedge or normalized Exponentiated Gradient is OMD with entropic regularization. The link function here is
+
+\begin{equation}
+    g_i(\theta) = \frac{e^{\eta \theta[i]}}{\sum_j e^{\eta \theta[j]}}.
+\end{equation}
+
+Fitting this into the OMD framework yields the following update rule,
+
+\begin{align*}
+    w_{t+1}[i] = \frac{w_t[i] e^{-\eta z_t[i]}}{\sum_j w_t[j] e^{-\eta z_t[j]}}
+\end{align*}
+
+We can analyze the regret bounds of Hedge with $R(w) = \frac{1}{\eta} \sum_i w[i] log(w[i])$. 
+
+
+It is also useful to analyze OMD with the language of duality. The framework utilizing duality makes it easier 
+in deriving new algorithms and also in proving tighter regret bounds.
+
+\subsection{Fenchel Conjugacy}
+
+The Fenchel conjugate of a function $f$ is defined as,
+
+$$f^*(\theta) = max_u \langle u, \theta \rangle - f(u)$$
+
+Fenchel conjugate by definition implies the Fenchel-Young inequality:
+
+$$\forall u, f^*(\theta) \geq \langle u, \theta \rangle - f(u)$$.
+
+If $u$ is a sub-gradient of $f^*$ at $\theta$ and if $f^*$ is differentiable, then the equality 
+condition holds when $u = \nabla f^*(\theta)$. 
+
+
+\subsection{Bergman Divergences}
+
+For a differentiable function $R$, the Bergman divergence between two vectors is defined as,
+
+\begin{equation}
+    D_R(w \| u) = R(w) - R(u) + (\langle R(u), w-u \rangle)
+\end{equation}
+
+Bergman divergence is asymmetric and is always non-negative if R is convex.
+
+\subsection{Online Mirror Descent in terms of Duality}
+
+The link function in the OMD framework is defined as,
+
+$$g(\theta) = argmax_w (\langle w, \theta \rangle - R(w)).$$
+
+This can be also rewritten in terms of the conjugate of $R$ as,
+
+$$g(\theta) = \nabla R^*(\theta)$$
+
+With this, we can obtain different algorithms by using different regularization functions and deriving 
+the update rules by using their conjugate.
+
+\subsection{KL-Divergence and its Fenchel Conjugate}
+
+KL-Divergence is a distance metric between two probability distributions and is defined as,
+
+$$D_{KL}(p \| q) = \sum_i p[i] log \frac{p[i]}{q[i]}$$
+
+
+% TODO: Derivation of the fenchel conjugate
+The Fenchel Conjugate of KL-Divergence is given by,
+
+$$f^*_q(x) = \log (\sum_i q_i e^{x_i}).$$
+
+
+\section{MDPO}
+
+The on-policy MDPO update rule is written as,
+
+$$\theta_{k+1} \leftarrow argmax_{\theta \in \Theta} \Psi(\theta, \theta_k)$$
+
+where,
+
+$$\Psi(\theta, \theta_k) = \mathbb{E}_{s \sim \rho_{\theta_{k}}} [\mathbb{E}_{a \sim \pi_{\theta}}[A^{\theta_k}(s, a)] - \frac{1}{t_k} KL(s; \pi_{\theta}, \pi_{\theta_k})]$$
+
+
+The gradient of the above update rule is as follows:
+
+\begin{align*}
+    \nabla_{\theta} \Psi(\theta, \theta_k) |_{\theta=\theta_k}
+                                    &= \mathbb{E}_{s \sim \rho_{\theta_k}} [\sum_a \nabla_{\theta} \pi_{\theta} (a|s) A^{\theta_k}(s, a)] \\
+                                    &= \mathbb{E}_{s \sim \rho_{\theta_k}} [\sum_a \pi_{\theta_k}(a|s) \frac{\nabla_{\theta} \pi_{\theta}(a|s)}{\pi_{\theta_k}(a|s)}  A^{\theta_k}(s, a)] \\
+                                    &= \mathbb{E}_{s \sim \rho_{\theta_k}, a \sim \pi_{\theta_k}} [\nabla \log \pi_{\theta_k} (a|s) A^{\theta_k}(s,a)]
+\end{align*}
+
+For one-step MDPO, the gradient of the KL-Divergence term becomes 0. Hence it is proposed that the policy update at each iteration $k$ is done through $m$ steps of SGD.
+
+$${\theta_k^{(0)} = \theta_k},$$
+
+$$\theta_k^{(i+1)} \leftarrow \theta_k^{(i)} + \eta \nabla_{\theta} \Psi(\theta, \theta_k)|_{\theta=\theta_k^{(i)}}$$
+
+and, $\theta_{k+1} = \theta_k^{(m)}$.
+
+
+Then the gradient of the objective function evaluated at each step of the SGD update is,
+
+\begin{align*}
+    \nabla_{\theta} \Psi(\theta, \theta_k)|_{\theta = \theta_k^{(i)}} &=
+                    \mathbb{E}_{s \sim \rho_{\theta_k}, a \sim \pi_{\theta_k}}[\frac{\pi_{\theta_k}^{(i)}}{\pi_{\theta_k}} \nabla \log \pi_{\theta_k^{(i)}} (a|s) A^{\theta_k}(s,a)] \\
+                    &- \frac{1}{t_k} \mathbb{E}_{s \sim \rho_{\theta_k}}[\nabla_{\theta} KL(s; \pi_{\theta}, \pi_{\theta_k})|_{\theta = \theta_k^{(i)}}].
+\end{align*}
+
+
+$$KL(s; \pi_{\theta}, \pi_{\theta_k}) = \sum_{a \in \mathcal{A}} \pi_{\theta_k^{(i)}}(a|s) \log \frac{\pi_{\theta_k^{(i)}}(a|s)}{\pi_{\theta_k}(a|s)}$$
+
+The gradient of the KL-Divergence term is given by,
+
+\begin{align*}
+    \nabla_{\theta} KL(s; \pi_{\theta}, \pi_{\theta_{k}})|_{\theta = \theta_{k}^{(i)}} 
+    &= \sum_{a \in \mathcal{A}} [\nabla_{\theta_{k}^{(i)}} (\pi_{\theta_k^{(i)}}(a|s) \log \pi_{\theta_k}^{(i)}(a|s)) - \nabla_{\theta_k^{(i)}} (\pi_{\theta_k^{(i)}}(a|s) \log \pi_{\theta_k}(a|s))] \\
+    &= \log \pi_{\theta_k^{(i)}}(a|s) \nabla_{\theta_{k}^{(i)}} \pi_{\theta_k^{(i)}}(a|s) + \nabla_{\theta_{k}^{(i)}} \pi_{\theta_k^{(i)}}(a|s) - \log \pi_{\theta_{k}}(a|s) \nabla_{\theta_{k}^{(i)}} \pi_{\theta_{k}^{(i)}}(a|s)\\
+    &= \sum_{a \in \mathcal{A}} [(\log \pi_{\theta_{k}}^{(i)}(a|s) + 1 - \log \pi_{\theta_k}(a|s)) \nabla_{\theta_{k}^{(i)}}{\pi_{\theta_k^{(i)}}}(a|s)].
+\end{align*}
+
+
+
+As for the first term of the gradient, it can be seen that the gradient includes a term to account for the fact that the action $a$ was sampled from the policy $\pi_{\theta_k}$
+
+\begin{align*}
+    \nabla_{\theta} \Psi(\theta, \theta_k)|_{\theta = \theta_k^{(i)}}
+        &= \mathbb{E}_{s \sim \rho_{\theta_k}} [\sum_a \nabla_{\theta_k^{(i)}} \pi_{\theta_k^{(i)}}(a|s) A^{\theta_k}(s, a)] \\
+        &= \mathbb{E}_{s \sim \rho_{\theta_k}} [\sum_a \pi_{\theta_k}(a|s) \frac{\pi_{\theta_k^{(i)}}(a|s)}{\pi_{\theta_k}(a|s)} \frac{\nabla_{\theta_k^{(i)}} \pi_{\theta_k^{(i)}}(a | s)}{\pi_{\theta_k^{(i)}}(a|s)} A^{\theta_k}(s, a)] \\
+        &= \mathbb{E}_{s \sim \rho_{\theta_k}, a \sim \pi_{\theta_k}} [\frac{\pi_{\theta_k^{(i)}}(a|s)}{\pi_{\theta_k}(a|s)} \nabla_{\theta_k^{(i)}} \log \pi_{\theta_k^{(i)}}(a | s) A^{\theta_k}(s, a)]
+\end{align*}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -790,7 +790,7 @@ Package: dsfont 1995/08/01 v0.1 Double stroke roman fonts
 \c@problem=\count371
 Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... none found.
- (aux/MainThesisFile.aux (aux/derivations.aux) (aux/oco.aux
+ (out/MainThesisFile.aux (out/derivations.aux) (out/oco.aux
 
 LaTeX Warning: Label `eqn_regretdef' multiply defined.
 
@@ -831,7 +831,7 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 106.
 LaTeX Info: Redefining \pageref on input line 106.
 LaTeX Info: Redefining \nameref on input line 106.
- (aux/MainThesisFile.out) (aux/MainThesisFile.out)
+ (out/MainThesisFile.out) (out/MainThesisFile.out)
 \@outlinefile=\write6
 \openout6 = `MainThesisFile.out'.
 
@@ -890,7 +890,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 130--131
 
 ]
 TABLE OF CONTENTS.
-(aux/MainThesisFile.toc)
+(out/MainThesisFile.toc)
 \tf@toc=\write7
 \openout7 = `MainThesisFile.toc'.
 
@@ -898,7 +898,7 @@ TABLE OF CONTENTS.
 
 ]
 LIST OF TABLES.
-(aux/MainThesisFile.lot)
+(out/MainThesisFile.lot)
 \tf@lot=\write8
 \openout8 = `MainThesisFile.lot'.
 
@@ -906,7 +906,7 @@ LIST OF TABLES.
 
 ]
 LIST OF FIGURES.
-(aux/MainThesisFile.lof)
+(out/MainThesisFile.lof)
 \tf@lof=\write9
 \openout9 = `MainThesisFile.lof'.
 
@@ -1109,10 +1109,10 @@ Underfull \hbox (badness 10000) in paragraph at lines 304--304
 
 [22
 
-] (aux/MainThesisFile.aux (aux/derivations.aux) (aux/oco.aux) * soulpos - computing points - it may take a few seconds *
+] (out/MainThesisFile.aux (out/derivations.aux) (out/oco.aux) * soulpos - computing points - it may take a few seconds *
 \openout3 = `MainThesisFile.upb'.
 
- (aux/MainThesisFile.upa))
+ (out/MainThesisFile.upa))
 
 LaTeX Warning: There were multiply-defined labels.
 
@@ -1120,15 +1120,15 @@ Package rerunfilecheck Info: File `MainThesisFile.out' has not changed.
 (rerunfilecheck)             Checksum: A0361561ABE6DAE416F3BE18226E98D5;3695.
  ) 
 Here is how much of TeX's memory you used:
- 29933 strings out of 478238
- 570821 string characters out of 5850457
+ 29934 strings out of 478238
+ 570825 string characters out of 5850457
  951108 words of memory out of 5000000
  47495 multiletter control sequences out of 15000+600000
  481369 words of font info for 71 fonts, out of 8000000 for 9000
  1144 hyphenation exceptions out of 8191
  99i,18n,94p,1094b,575s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on aux/MainThesisFile.pdf (30 pages, 293087 bytes).
+Output written on out/MainThesisFile.pdf (30 pages, 293087 bytes).
 PDF statistics:
  402 PDF objects out of 1000 (max. 8388607)
  330 compressed objects within 4 object streams

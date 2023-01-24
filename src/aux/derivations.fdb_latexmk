@@ -1,0 +1,14 @@
+# Fdb version 3
+["pdflatex"] 1674396338 "/home/thirur/stash/Coursework/Thesis/Writing/ms-thesis/src/derivations.tex" "out/derivations.pdf" "derivations" 1674396338
+  "/home/thirur/stash/Coursework/Thesis/Writing/ms-thesis/src/derivations.tex" 1674396338 4742 e4b5cd0c7c2ea9d73d4aa5eed65a3998 ""
+  "/usr/share/texmf-dist/fonts/map/fontname/texfonts.map" 1650183167 3524 cb3e574dea2d1052e39280babc910dc8 ""
+  "/usr/share/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm" 1650183167 1328 c834bbb027764024c09d3d2bf908b5f0 ""
+  "/usr/share/texmf-dist/fonts/tfm/public/cm/cmti10.tfm" 1650183167 1480 aa8e34af0eb6a2941b776984cf1dfdc4 ""
+  "/usr/share/texmf-dist/web2c/texmf.cnf" 1650183167 39911 2da6c67557ec033436fe5418a70a8a61 ""
+  "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1673126936 2927658 dcf906ae3a4d0b0d010ea991ff7351af ""
+  "aux/derivations.aux" 1674396181 294 f8917731134796e81053596731fce7a6 ""
+  "derivations.tex" 1674396338 4742 e4b5cd0c7c2ea9d73d4aa5eed65a3998 ""
+  (generated)
+  "aux/derivations.log"
+  "out/derivations.log"
+  "out/derivations.pdf"
