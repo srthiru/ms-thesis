@@ -21,8 +21,16 @@
 \contentsline {subsection}{\numberline {4.4.1} Optimistic Mirror Descent}{6}{subsection.4.4.1}%
 \contentsline {subsection}{\numberline {4.4.2} OFMMD}{6}{subsection.4.4.2}%
 \addvspace {\baselineskip }
-\contentsline {chapter}{\xnumberline {\ }APPENDICES}{7}{subsection.4.4.2}%
-\contentsline {chapter}{\xnumberline {\ }\ \ \ \ \ Appendix A}{8}{appendix.A}%
-\contentsline {chapter}{\xnumberline {\ }\ \ \ \ \ Appendix B}{9}{appendix.B}%
+\contentsline {chapter}{\xnumberline {5\hskip 2em}\uppercase {Experiments}}{7}{chapter.5}%
+\contentsline {section}{\numberline {5.1} Experimental Domains}{7}{section.5.1}%
+\contentsline {section}{\numberline {5.2} Evaluation Methods}{7}{section.5.2}%
+\contentsline {section}{\numberline {5.3} Tabular MMD Experiments}{7}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1} Results}{7}{subsection.5.3.1}%
+\contentsline {section}{\numberline {5.4} Neural MMD Experiments}{7}{section.5.4}%
+\contentsline {subsection}{\numberline {5.4.1} Results}{7}{subsection.5.4.1}%
 \addvspace {\baselineskip }
-\contentsline {chapter}{\xnumberline {\ }CITED LITERATURE}{10}{appendix.B}%
+\contentsline {chapter}{\xnumberline {\ }APPENDICES}{8}{subsection.5.4.1}%
+\contentsline {chapter}{\xnumberline {\ }\ \ \ \ \ Appendix A}{9}{appendix.A}%
+\contentsline {chapter}{\xnumberline {\ }\ \ \ \ \ Appendix B}{10}{appendix.B}%
+\addvspace {\baselineskip }
+\contentsline {chapter}{\xnumberline {\ }CITED LITERATURE}{11}{appendix.B}%

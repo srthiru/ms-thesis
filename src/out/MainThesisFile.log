@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Arch Linux) (preloaded format=pdflatex 2023.4.20)  9 MAY 2023 14:58
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Arch Linux) (preloaded format=pdflatex 2023.4.20)  9 MAY 2023 15:04
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -813,7 +813,7 @@ LaTeX Font Info:    Overwriting symbol font `wasy' in version `bold'
 \c@lemma=\count375
 Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... none found.
- (out/MainThesisFile.aux (out/chapters/0_intro.aux) (out/chapters/1_background.aux) (out/chapters/2_mmd.aux) (out/chapters/3_updates.aux) (out/derivations.aux) (out/oco.aux))
+ (out/MainThesisFile.aux (out/chapters/0_intro.aux) (out/chapters/1_background.aux) (out/chapters/2_mmd.aux) (out/chapters/3_updates.aux) (out/chapters/4_experiments.aux) (out/chapters/5_discussion.aux) (out/derivations.aux) (out/oco.aux))
 \openout1 = `MainThesisFile.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 112.
@@ -1085,6 +1085,40 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 
 
 ]
+\openout2 = `chapters/4_experiments.aux'.
+
+ (./chapters/4_experiments.tex
+CHAPTER 5.
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\hbox' on input line 1.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\@tempdima' on input line 1.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                \hskip 21.90005pt
+(hyperref)                replaced by space on input line 1.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\hss' on input line 1.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\uppercase' on input line 1.
+
+) [7
+
+
+
+
+]
+\openout2 = `chapters/5_discussion.aux'.
+
+ (./chapters/5_discussion.tex)
 \openout2 = `derivations.aux'.
 
 
@@ -1094,17 +1128,20 @@ No file derivations.tex.
 No file oco.tex.
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\hbox' on input line 171.
+(hyperref)                removing `\hbox' on input line 173.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\@tempdima' on input line 171.
+(hyperref)                removing `\@tempdima' on input line 173.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\hss' on input line 171.
+(hyperref)                removing `\hss' on input line 173.
 
-[7
+[8
+
+
+
 
 
 
@@ -1118,67 +1155,67 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Appendix A.
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\hbox' on input line 175.
+(hyperref)                removing `\hbox' on input line 177.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\@tempdima' on input line 175.
+(hyperref)                removing `\@tempdima' on input line 177.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\hss' on input line 175.
+(hyperref)                removing `\hss' on input line 177.
 
-[8
+[9
 
 ]
 Appendix B.
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\hbox' on input line 179.
+(hyperref)                removing `\hbox' on input line 181.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\@tempdima' on input line 179.
+(hyperref)                removing `\@tempdima' on input line 181.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\hss' on input line 179.
+(hyperref)                removing `\hss' on input line 181.
 
-[9
+[10
 
 ]
 CITED LITERATURE.
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\hbox' on input line 187.
+(hyperref)                removing `\hbox' on input line 189.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\@tempdima' on input line 187.
+(hyperref)                removing `\@tempdima' on input line 189.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\hss' on input line 187.
+(hyperref)                removing `\hss' on input line 189.
 
-(out/MainThesisFile.bbl) [10
+(out/MainThesisFile.bbl) [11
 
-] (out/MainThesisFile.aux (out/chapters/0_intro.aux) (out/chapters/1_background.aux) (out/chapters/2_mmd.aux) (out/chapters/3_updates.aux) (out/derivations.aux) (out/oco.aux))
+] (out/MainThesisFile.aux (out/chapters/0_intro.aux) (out/chapters/1_background.aux) (out/chapters/2_mmd.aux) (out/chapters/3_updates.aux) (out/chapters/4_experiments.aux) (out/chapters/5_discussion.aux) (out/derivations.aux) (out/oco.aux))
 Package rerunfilecheck Info: File `MainThesisFile.out' has not changed.
-(rerunfilecheck)             Checksum: 9EDACB1726E35DE5569D24E7B67146C2;3407.
+(rerunfilecheck)             Checksum: 09FC65C6D6DCF54FA57E5515F01B501F;4424.
  ) 
 Here is how much of TeX's memory you used:
- 30320 strings out of 476025
- 579327 string characters out of 5796532
- 1860388 words of memory out of 5000000
- 50115 multiletter control sequences out of 15000+600000
+ 30391 strings out of 476025
+ 581746 string characters out of 5796532
+ 1863388 words of memory out of 5000000
+ 50164 multiletter control sequences out of 15000+600000
  522316 words of font info for 68 fonts, out of 8000000 for 9000
  1144 hyphenation exceptions out of 8191
  99i,10n,94p,1093b,551s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on out/MainThesisFile.pdf (17 pages, 164639 bytes).
+Output written on out/MainThesisFile.pdf (18 pages, 167018 bytes).
 PDF statistics:
- 282 PDF objects out of 1000 (max. 8388607)
- 236 compressed objects within 3 object streams
- 46 named destinations out of 1000 (max. 500000)
- 189 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 322 PDF objects out of 1000 (max. 8388607)
+ 275 compressed objects within 3 object streams
+ 54 named destinations out of 1000 (max. 500000)
+ 245 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -5,13 +5,15 @@ A level-1 auxiliary file: chapters/0_intro.aux
 A level-1 auxiliary file: chapters/1_background.aux
 A level-1 auxiliary file: chapters/2_mmd.aux
 A level-1 auxiliary file: chapters/3_updates.aux
+A level-1 auxiliary file: chapters/4_experiments.aux
+A level-1 auxiliary file: chapters/5_discussion.aux
 A level-1 auxiliary file: derivations.aux
 A level-1 auxiliary file: oco.aux
 The style file: formb.bst
 Database file #1: BibFile.bib
 You've used 2 entries,
             2045 wiz_defined-function locations,
-            759 strings with 9980 characters,
+            761 strings with 10031 characters,
 and the built_in function-call counts, 476 in all, are:
 = -- 25
 > -- 43
