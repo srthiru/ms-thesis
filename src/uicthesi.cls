@@ -328,7 +328,7 @@
 \def\listofabbreviations{
    \clearpage
    \typeout{LIST OF ABBREVIATIONS.}
-   \def\section@mark{LIST OF ABBREVIATIONS}
+   \def\section@mark{LIST OF NOTATIONS}
    \@makeprelimhead}
 %    \end{macrocode}
 %

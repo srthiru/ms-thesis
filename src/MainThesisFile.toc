@@ -1,0 +1,48 @@
+\addvspace {\baselineskip }
+\contentsline {chapter}{\xnumberline {1\hskip 2em}\uppercase {Introduction}}{1}{chapter.1}%
+\addvspace {\baselineskip }
+\contentsline {chapter}{\xnumberline {2\hskip 2em}\uppercase {Background}}{2}{chapter.2}%
+\contentsline {section}{\numberline {2.1} Game Theory}{2}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1} Problem Domains}{2}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2} Solution Concepts}{2}{subsection.2.1.2}%
+\contentsline {subsection}{\numberline {2.1.3} Algorithms}{2}{subsection.2.1.3}%
+\contentsline {section}{\numberline {2.2} Online Learning}{2}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1} Mirror Descent}{2}{subsection.2.2.1}%
+\addvspace {\baselineskip }
+\contentsline {chapter}{\xnumberline {3\hskip 2em}\uppercase {Magnetic Mirror Descent}}{3}{chapter.3}%
+\contentsline {subsection}{\numberline {3.0.1} Mirror Descent}{3}{subsection.3.0.1}%
+\contentsline {subsection}{\numberline {3.0.2} MMD}{3}{subsection.3.0.2}%
+\addvspace {\baselineskip }
+\contentsline {chapter}{\xnumberline {4\hskip 2em}\uppercase {Extending MMD with NeuRD fix, Extragradient, and Optimism}}{6}{chapter.4}%
+\contentsline {section}{\numberline {4.1} Faster-MMD}{6}{section.4.1}%
+\contentsline {section}{\numberline {4.2} Neural Replicator Dynamics}{6}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1} FMMD-N}{6}{subsection.4.2.1}%
+\contentsline {section}{\numberline {4.3} Extragradient methods}{6}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1} FMMD-EG}{6}{subsection.4.3.1}%
+\contentsline {section}{\numberline {4.4} Optimism}{6}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1} Optimistic Mirror Descent}{6}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.2} OFMMD}{6}{subsection.4.4.2}%
+\addvspace {\baselineskip }
+\contentsline {chapter}{\xnumberline {5\hskip 2em}\uppercase {Derivations}}{7}{chapter.5}%
+\contentsline {section}{\numberline {5.1} Online Learning}{7}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1} FoReL}{7}{subsection.5.1.1}%
+\contentsline {section}{\numberline {5.2} Online Mirror Descent}{7}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1} Hedge}{8}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2} Fenchel Conjugacy}{9}{subsection.5.2.2}%
+\contentsline {subsection}{\numberline {5.2.3} Bergman Divergences}{9}{subsection.5.2.3}%
+\contentsline {subsection}{\numberline {5.2.4} Online Mirror Descent in terms of Duality}{9}{subsection.5.2.4}%
+\contentsline {subsection}{\numberline {5.2.5} KL-Divergence and its Fenchel Conjugate}{10}{subsection.5.2.5}%
+\contentsline {section}{\numberline {5.3} MDPO}{10}{section.5.3}%
+\addvspace {\baselineskip }
+\contentsline {chapter}{\xnumberline {6\hskip 2em}\uppercase {Online Learning and Online Convex Optimization}}{14}{chapter.6}%
+\contentsline {section}{\numberline {6.1} Online Learning}{14}{section.6.1}%
+\contentsline {section}{\numberline {6.2} Online Convex Optimization}{16}{section.6.2}%
+\contentsline {subsection}{\numberline {6.2.1} FoReL}{16}{subsection.6.2.1}%
+\contentsline {subsection}{\numberline {6.2.2} FoReL with Strongly Convex Regularizers}{19}{subsection.6.2.2}%
+\contentsline {section}{\numberline {6.3} Online Mirror Descent}{20}{section.6.3}%
+\addvspace {\baselineskip }
+\contentsline {chapter}{\xnumberline {\ }APPENDICES}{21}{section.6.3}%
+\contentsline {chapter}{\xnumberline {\ }\ \ \ \ \ Appendix A}{22}{appendix.A}%
+\contentsline {chapter}{\xnumberline {\ }\ \ \ \ \ Appendix B}{23}{appendix.B}%
+\addvspace {\baselineskip }
+\contentsline {chapter}{\xnumberline {\ }CITED LITERATURE}{24}{appendix.B}%
