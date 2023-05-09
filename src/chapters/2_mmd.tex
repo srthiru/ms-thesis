@@ -52,10 +52,12 @@ Now, the solution the the VI problem ($z_{\ast}= (x_{\ast}, y_{\ast})$), corresp
 solution of the saddle point problem stated in \ref{eqn:saddle}, and satisfies the best response conditions
 \ref{eqn:bestrescon1} and \ref{eqn:bestrescon2}.
 
+The algorithm that the authors propose is a non-Euclidean proximal gradient method to solve the VI($\calZ, F + \alpha \nabla g$) problem.
+
 We now restate the main algorithm as stated in \cite{sokotaUnified2023}(3.1),
 
 \begin{alprocedure}
-    \algorithmcfname{MMD}\label{alg:mmd}
+    \algorithmcfname{MMD}\label{alg:proxgrad}
     Starting with $z_1  \in \text{int dom } \psi \cap \calZ$, at each iteration $t$ do
     $z_{t+1} = \arg \min_{z \in \calZ} \eta (\langle F(z_t), z\rangle + \alpha g(z)) + B_{\psi} (z, z_t).$
 \end{alprocedure}
@@ -71,13 +73,21 @@ With the following assumptions, $z_{t+1}$ is well defined:
           relative to $\psi$ over $\calZ$ with $g$ differentiable over int dom $\psi$.
 \end{itemize}
 
-Algorithm \ref{alg:mmd} provides the following convergence guarantees,
+Algorithm \ref{alg:proxgrad} provides the following convergence guarantees,
+
+Assuming that the solution $z_{\ast}$ to the problem VI($\calZ, F + \alpha \nabla g$) lies in the int dom $\psi$, then
+the algorithm \ref{alg:proxgrad} guarantees
+
+$$ B_{\psi} (z_{\ast}; z_{t + 1}) \leq \left(\frac{1}{1 + \eta \alpha}\right)^t B_{\psi} (z_{\ast}; z_1),$$
+
+if $\alpha > 0$, and $\eta \leq \frac{\alpha}{L^2}$.
 
 
 
 
+MMD is also a first attempt in developing algorithms that are performant in both
+Single-agent and Multi-agent settings.
 
-MMD attempts to unify Single-agent and Multi-agent RL by designing a single
-algorithm that performs competitively in both problem settings. In single-agent RL
-MMD's performance is competitive with that of PPO. And, in the multi-agent setting
-the performance of tabular MMD is as good as CFR, but worse than CFR+.
+In single-agent RL MMD's performance is competitive with that of PPO in Atari and MuJoCo environments
+(though not evaluated extensively). And, in the multi-agent setting the performance of tabular MMD is on par
+with that of CFR, but worse than that of CFR+.
