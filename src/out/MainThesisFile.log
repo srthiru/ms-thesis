@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Arch Linux) (preloaded format=pdflatex 2023.4.20)  9 MAY 2023 15:04
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Arch Linux) (preloaded format=pdflatex 2023.4.20)  23 MAY 2023 12:43
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -811,35 +811,36 @@ LaTeX Font Info:    Overwriting symbol font `wasy' in version `bold'
 )
 \c@definition=\count374
 \c@lemma=\count375
+\c@theorem=\count376
 Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... none found.
- (out/MainThesisFile.aux (out/chapters/0_intro.aux) (out/chapters/1_background.aux) (out/chapters/2_mmd.aux) (out/chapters/3_updates.aux) (out/chapters/4_experiments.aux) (out/chapters/5_discussion.aux) (out/derivations.aux) (out/oco.aux))
+ (out/MainThesisFile.aux (out/chapters/0_intro.aux) (out/chapters/outline.aux) (out/chapters/1_background.aux) (out/chapters/2_mmd.aux) (out/chapters/3_updates.aux) (out/chapters/4_experiments.aux) (out/chapters/5_discussion.aux) (out/derivations.aux) (out/oco.aux))
 \openout1 = `MainThesisFile.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 112.
-LaTeX Font Info:    ... okay on input line 112.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 112.
-LaTeX Font Info:    ... okay on input line 112.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 112.
-LaTeX Font Info:    ... okay on input line 112.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 112.
-LaTeX Font Info:    ... okay on input line 112.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 112.
-LaTeX Font Info:    ... okay on input line 112.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 112.
-LaTeX Font Info:    ... okay on input line 112.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 112.
-LaTeX Font Info:    ... okay on input line 112.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 112.
-LaTeX Font Info:    ... okay on input line 112.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 112.
-LaTeX Font Info:    ... okay on input line 112.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 113.
+LaTeX Font Info:    ... okay on input line 113.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 113.
+LaTeX Font Info:    ... okay on input line 113.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 113.
+LaTeX Font Info:    ... okay on input line 113.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 113.
+LaTeX Font Info:    ... okay on input line 113.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 113.
+LaTeX Font Info:    ... okay on input line 113.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 113.
+LaTeX Font Info:    ... okay on input line 113.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 113.
+LaTeX Font Info:    ... okay on input line 113.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 113.
+LaTeX Font Info:    ... okay on input line 113.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 113.
+LaTeX Font Info:    ... okay on input line 113.
 
 
 Package hyperref Warning: Height of page (\paperheight) is invalid (0.0pt),
 (hyperref)                using 11in.
 
-Package hyperref Info: Link coloring OFF on input line 112.
+Package hyperref Info: Link coloring OFF on input line 113.
 (out/MainThesisFile.out) (out/MainThesisFile.out)
 \@outlinefile=\write6
 \openout6 = `MainThesisFile.out'.
@@ -847,7 +848,7 @@ Package hyperref Info: Link coloring OFF on input line 112.
  (/usr/share/texmf-dist/tex/latex/fmtcount/fc-english.def
 File: fc-english.def 2016/01/12
 )
-Package soulpos Info: Loading soulutf8 on input line 112.
+Package soulpos Info: Loading soulutf8 on input line 113.
  (/usr/share/texmf-dist/tex/generic/soul/soulutf8.sty
 Package: soulutf8 2023-02-18 v3.0 Permit use of UTF-8 characters in soul (HO)
 
@@ -872,40 +873,40 @@ Package: soul-ori 2023-02-18 v3.0 letterspacing/underlining (mf)
 \SOUL@hyphkern=\dimen314
 \SOUL@dimen=\dimen315
 \SOUL@dimeni=\dimen316
-\SOUL@minus=\count376
-\SOUL@comma=\count377
-\SOUL@apo=\count378
-\SOUL@grave=\count379
+\SOUL@minus=\count377
+\SOUL@comma=\count378
+\SOUL@apo=\count379
+\SOUL@grave=\count380
 \SOUL@spaceskip=\skip92
 \SOUL@ttwidth=\dimen317
 \SOUL@uldp=\dimen318
 \SOUL@ulht=\dimen319
 )) (/usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count380
+\scratchcounter=\count381
 \scratchdimen=\dimen320
 \scratchbox=\box81
-\nofMPsegments=\count381
-\nofMParguments=\count382
+\nofMPsegments=\count382
+\nofMParguments=\count383
 \everyMPshowfont=\toks48
-\MPscratchCnt=\count383
+\MPscratchCnt=\count384
 \MPscratchDim=\dimen321
-\MPnumerator=\count384
-\makeMPintoPDFobject=\count385
+\MPnumerator=\count385
+\makeMPintoPDFobject=\count386
 \everyMPtoPDFconversion=\toks49
 )
 
-Package todonotes Warning: The length marginparwidth is less than 2cm and will most likely cause issues with the appearance of inserted todonotes. The issue can be solved by adding a line like \setlength {\marginparwidth }{2cm} prior to loading the todonotes package. on input line 112.
+Package todonotes Warning: The length marginparwidth is less than 2cm and will most likely cause issues with the appearance of inserted todonotes. The issue can be solved by adding a line like \setlength {\marginparwidth }{2cm} prior to loading the todonotes package. on input line 113.
 
-LaTeX Font Info:    Trying to load font information for U+msa on input line 122.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 123.
 (/usr/share/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 122.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 123.
  (/usr/share/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Trying to load font information for U+wasy on input line 122.
+LaTeX Font Info:    Trying to load font information for U+wasy on input line 123.
  (/usr/share/texmf-dist/tex/latex/wasysym/uwasy.fd
 File: uwasy.fd 2020/01/19 v2.4 Wasy-2 symbol font definitions
 ) [1
@@ -914,7 +915,7 @@ File: uwasy.fd 2020/01/19 v2.4 Wasy-2 symbol font definitions
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
 ACKNOWLEDGMENTS.
 
-Underfull \hbox (badness 10000) in paragraph at lines 136--137
+Underfull \hbox (badness 10000) in paragraph at lines 137--138
 
  []
 
@@ -922,24 +923,19 @@ Underfull \hbox (badness 10000) in paragraph at lines 136--137
 
 ]
 TABLE OF CONTENTS.
-(out/MainThesisFile.toc
-Overfull \hbox (0.63104pt too wide) in paragraph at lines 14--14
- [][] [][]\OT1/cmr/bx/n/10.95 EXTENDING MMD WITH NEURD FIX, EX-TRA-GRA-DI-ENT, 
- []
+(out/MainThesisFile.toc [3
 
-)
+])
 \tf@toc=\write7
 \openout7 = `MainThesisFile.toc'.
 
- [3
-
-]
+ [4]
 LIST OF TABLES.
 (out/MainThesisFile.lot)
 \tf@lot=\write8
 \openout8 = `MainThesisFile.lot'.
 
- [4
+ [5
 
 ]
 LIST OF FIGURES.
@@ -947,15 +943,15 @@ LIST OF FIGURES.
 \tf@lof=\write9
 \openout9 = `MainThesisFile.lof'.
 
- [5
+ [6
 
 ]
 LIST OF ABBREVIATIONS.
-[6
+[7
 
 ]
 SUMMARY.
-[7
+[8
 
 ]
 \openout2 = `chapters/0_intro.aux'.
@@ -987,7 +983,13 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 
 
 ]
-Package marginnote Info: Using workaround for absolute page number on input line 163.
+\openout2 = `chapters/outline.aux'.
+
+ (./chapters/outline.tex) [2
+
+
+
+]
 \openout2 = `chapters/1_background.aux'.
 
  (./chapters/1_background.tex
@@ -1013,12 +1015,12 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `\uppercase' on input line 1.
 
-) [2
+[3
 
 
 
 
-]
+]) [4]
 \openout2 = `chapters/2_mmd.aux'.
 
  (./chapters/2_mmd.tex
@@ -1044,16 +1046,12 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `\uppercase' on input line 1.
 
-
-Package hyperref Warning: Difference (2) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 3.
-
-[3
+[5
 
 
 
 
-] [4]) [5]
+] [6]) [7] [8]
 \openout2 = `chapters/3_updates.aux'.
 
  (./chapters/3_updates.tex
@@ -1079,12 +1077,12 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `\uppercase' on input line 1.
 
-) [6
+[9
 
 
 
 
-]
+]) [10]
 \openout2 = `chapters/4_experiments.aux'.
 
  (./chapters/4_experiments.tex
@@ -1110,7 +1108,7 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `\uppercase' on input line 1.
 
-) [7
+) [11
 
 
 
@@ -1128,17 +1126,17 @@ No file derivations.tex.
 No file oco.tex.
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\hbox' on input line 173.
+(hyperref)                removing `\hbox' on input line 175.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\@tempdima' on input line 173.
+(hyperref)                removing `\@tempdima' on input line 175.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\hss' on input line 173.
+(hyperref)                removing `\hss' on input line 175.
 
-[8
+[12
 
 
 
@@ -1155,67 +1153,67 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Appendix A.
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\hbox' on input line 177.
+(hyperref)                removing `\hbox' on input line 179.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\@tempdima' on input line 177.
+(hyperref)                removing `\@tempdima' on input line 179.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\hss' on input line 177.
+(hyperref)                removing `\hss' on input line 179.
 
-[9
+[13
 
 ]
 Appendix B.
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\hbox' on input line 181.
+(hyperref)                removing `\hbox' on input line 183.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\@tempdima' on input line 181.
+(hyperref)                removing `\@tempdima' on input line 183.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\hss' on input line 181.
+(hyperref)                removing `\hss' on input line 183.
 
-[10
+[14
 
 ]
 CITED LITERATURE.
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\hbox' on input line 189.
+(hyperref)                removing `\hbox' on input line 191.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\@tempdima' on input line 189.
+(hyperref)                removing `\@tempdima' on input line 191.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\hss' on input line 189.
+(hyperref)                removing `\hss' on input line 191.
 
-(out/MainThesisFile.bbl) [11
+(out/MainThesisFile.bbl) [15
 
-] (out/MainThesisFile.aux (out/chapters/0_intro.aux) (out/chapters/1_background.aux) (out/chapters/2_mmd.aux) (out/chapters/3_updates.aux) (out/chapters/4_experiments.aux) (out/chapters/5_discussion.aux) (out/derivations.aux) (out/oco.aux))
+] (out/MainThesisFile.aux (out/chapters/0_intro.aux) (out/chapters/outline.aux) (out/chapters/1_background.aux) (out/chapters/2_mmd.aux) (out/chapters/3_updates.aux) (out/chapters/4_experiments.aux) (out/chapters/5_discussion.aux) (out/derivations.aux) (out/oco.aux))
 Package rerunfilecheck Info: File `MainThesisFile.out' has not changed.
-(rerunfilecheck)             Checksum: 09FC65C6D6DCF54FA57E5515F01B501F;4424.
+(rerunfilecheck)             Checksum: 2EFAF23E95E5A3AD6407CDD495EC5FE8;5545.
  ) 
 Here is how much of TeX's memory you used:
- 30391 strings out of 476025
- 581746 string characters out of 5796532
- 1863388 words of memory out of 5000000
- 50164 multiletter control sequences out of 15000+600000
+ 30458 strings out of 476025
+ 583232 string characters out of 5796532
+ 1864388 words of memory out of 5000000
+ 50207 multiletter control sequences out of 15000+600000
  522316 words of font info for 68 fonts, out of 8000000 for 9000
  1144 hyphenation exceptions out of 8191
- 99i,10n,94p,1093b,551s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 99i,11n,94p,1093b,596s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on out/MainThesisFile.pdf (18 pages, 167018 bytes).
+Output written on out/MainThesisFile.pdf (23 pages, 177651 bytes).
 PDF statistics:
- 322 PDF objects out of 1000 (max. 8388607)
- 275 compressed objects within 3 object streams
- 54 named destinations out of 1000 (max. 500000)
- 245 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 401 PDF objects out of 1000 (max. 8388607)
+ 348 compressed objects within 4 object streams
+ 71 named destinations out of 1000 (max. 500000)
+ 317 words of extra memory for PDF output out of 10000 (max. 10000000)
 

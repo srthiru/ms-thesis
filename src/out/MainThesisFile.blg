@@ -2,6 +2,7 @@ This is BibTeX, Version 0.99d (TeX Live 2023/Arch Linux)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: MainThesisFile.aux
 A level-1 auxiliary file: chapters/0_intro.aux
+A level-1 auxiliary file: chapters/outline.aux
 A level-1 auxiliary file: chapters/1_background.aux
 A level-1 auxiliary file: chapters/2_mmd.aux
 A level-1 auxiliary file: chapters/3_updates.aux
@@ -11,44 +12,44 @@ A level-1 auxiliary file: derivations.aux
 A level-1 auxiliary file: oco.aux
 The style file: formb.bst
 Database file #1: BibFile.bib
-You've used 2 entries,
+You've used 5 entries,
             2045 wiz_defined-function locations,
-            761 strings with 10031 characters,
-and the built_in function-call counts, 476 in all, are:
-= -- 25
-> -- 43
-< -- 0
-+ -- 15
-- -- 13
-* -- 41
-:= -- 91
-add.period$ -- 4
-call.type$ -- 2
-change.case$ -- 2
+            784 strings with 10865 characters,
+and the built_in function-call counts, 1360 in all, are:
+= -- 100
+> -- 93
+< -- 1
++ -- 33
+- -- 28
+* -- 106
+:= -- 223
+add.period$ -- 10
+call.type$ -- 5
+change.case$ -- 5
 chr.to.int$ -- 0
-cite$ -- 2
-duplicate$ -- 20
-empty$ -- 41
-format.name$ -- 13
-if$ -- 96
+cite$ -- 5
+duplicate$ -- 55
+empty$ -- 121
+format.name$ -- 28
+if$ -- 298
 int.to.chr$ -- 0
-int.to.str$ -- 2
-missing$ -- 2
-newline$ -- 15
-num.names$ -- 2
-pop$ -- 8
+int.to.str$ -- 5
+missing$ -- 4
+newline$ -- 32
+num.names$ -- 5
+pop$ -- 21
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 7
+skip$ -- 32
 stack$ -- 0
-substring$ -- 0
-swap$ -- 3
-text.length$ -- 0
+substring$ -- 61
+swap$ -- 18
+text.length$ -- 1
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 0
-while$ -- 2
-width$ -- 3
-write$ -- 23
+while$ -- 9
+width$ -- 6
+write$ -- 54

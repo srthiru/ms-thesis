@@ -1358,6 +1358,9 @@ INPUT out/MainThesisFile.aux
 INPUT out/chapters/0_intro.aux
 INPUT out/chapters/0_intro.aux
 INPUT out/chapters/0_intro.aux
+INPUT out/chapters/outline.aux
+INPUT out/chapters/outline.aux
+INPUT out/chapters/outline.aux
 INPUT out/chapters/1_background.aux
 INPUT out/chapters/1_background.aux
 INPUT out/chapters/1_background.aux
@@ -1504,6 +1507,15 @@ INPUT ./chapters/0_intro.tex
 INPUT chapters/0_intro.tex
 INPUT ./chapters/0_intro.tex
 INPUT chapters/0_intro.tex
+INPUT ./chapters/outline.tex
+OUTPUT out/chapters/outline.aux
+INPUT ./chapters/outline.tex
+INPUT ./chapters/outline.tex
+INPUT ./chapters/outline.tex
+INPUT ./chapters/outline.tex
+INPUT chapters/outline.tex
+INPUT ./chapters/outline.tex
+INPUT chapters/outline.tex
 INPUT ./chapters/1_background.tex
 OUTPUT out/chapters/1_background.aux
 INPUT ./chapters/1_background.tex
@@ -1559,6 +1571,9 @@ INPUT out/MainThesisFile.aux
 INPUT out/chapters/0_intro.aux
 INPUT out/chapters/0_intro.aux
 INPUT out/chapters/0_intro.aux
+INPUT out/chapters/outline.aux
+INPUT out/chapters/outline.aux
+INPUT out/chapters/outline.aux
 INPUT out/chapters/1_background.aux
 INPUT out/chapters/1_background.aux
 INPUT out/chapters/1_background.aux

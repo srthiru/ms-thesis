@@ -6,6 +6,23 @@ Sokota, S., D'Orazio, R., Kolter, J.~Z., Loizou, N., Lanctot, M., Mitliagkas, I.
 \newblock A {{Unified Approach}} to {{Reinforcement Learning}}, {{Quantal Response Equilibria}}, and {{Two-Player Zero-Sum Games}}.
 \newblock In {\itshape  The {{Eleventh International Conference}} on {{Learning Representations}} }, February 2023.
 
+\bibitem{hennesNeural2020}
+
+Hennes, D., Morrill, D., Omidshafiei, S., Munos, R., Perolat, J., Lanctot, M., Gruslys, A., Lespiau, J.-B., Parmas, P., {Duenez-Guzman}, E., and Tuyls, K.:
+\newblock Neural {{Replicator Dynamics}}, February 2020.
+
+\bibitem{korpelevichEG1976}
+
+Korpelevich, G.~M.:
+\newblock The extragradient method for finding saddle points and other problems.
+\newblock {\itshape  Matecon }, 12:747--756, 1976.
+
+\bibitem{mokhtariUnified2020}
+
+Mokhtari, A., Ozdaglar, A., and Pattathil, S.:
+\newblock A {{Unified Analysis}} of {{Extra-gradient}} and {{Optimistic Gradient Methods}} for {{Saddle Point Problems}}: {{Proximal Point Approach}}.
+\newblock In {\itshape  Proceedings of the {{Twenty Third International Conference}} on {{Artificial Intelligence}} and {{Statistics}} }, pages 1497--1507. {PMLR}, June 2020.
+
 \bibitem{Farine20162243}
 
 Farine, D.~R., Strandburg-Peshkin, A., Couzin, I.~D., Berger-Wolf, T.~Y., and Crofoot, M.~C.:

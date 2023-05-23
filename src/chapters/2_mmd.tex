@@ -1,93 +1,107 @@
 \chapter{Magnetic Mirror Descent}
 
-\subsection{Mirror Descent}
+\section{Mirror Descent}
 
+In this section we introduce Mirror Descent, and discuss MDPO, and MMD - two mirror descent-based
+reinforcement learning algorithms.
 
+A disadvantage of FoReL~\ref{sec:forel} in solving online learning problems is that, there is a
+minimization at every step.
+Mirror descent overcomes this disadvantage by using a recursive update rule that does not required
+us to perform a minimization at every step.
 
+\subsection[MDPO]{Mirror Descent Policy
+	Optimization}
 
-\subsection[MMD]{Magnetic Mirror Descent}
+\section[MMD]{Magnetic Mirror Descent}
 
-Magnetic mirror descent (MMD) \cite{sokotaUnified2023} is a last-iterate equilibrium approximation algorithm
-for two-player zero-sum games that is an extension of mirror descent with entropy regularization.
+Magnetic mirror descent (MMD)~\cite{sokotaUnified2023} is a last-iterate equilibrium approximation
+algorithm for two-player zero-sum games that is an extension of mirror descent with entropy
+regularization.
 
-The idea behind MMD begins with the observation that solving for QRE in two-player zero-sum games can
-be reformulated as the solution to a negative entropy regularized saddle point problem as follows,
+The idea behind MMD begins with the observation that solving for QRE in two-player zero-sum games
+can be reformulated as the solution to a negative entropy regularized saddle point problem as
+follows,
 
-\begin{equation}\label{eqn:saddle}
-    \min_{x \in \mathcal{X}} \max_{y \in \mathcal{Y}} \alpha g_1(x) + f(x, y) + \alpha g_2(y),
+\begin{equation}
+	\label{eqn:saddle} \min_{x \in \mathcal{X}} \max_{y
+		\in \mathcal{Y}} \alpha g_1(x) + f(x, y) + \alpha g_2(y),
 \end{equation}
 
-where $\mathcal{X} \subset \mathbb{R}^n$, $\mathcal{Y} \subset \mathbb{R}^m$ are closed and convex, and
-$g_1: \mathbb{R}^n \rightarrow \mathbb{R}$,
-$g_2: \mathbb{R}^m \rightarrow \mathbb{R}$,
-$f : \mathbb{R}^n \times \mathbb{R}^m \rightarrow \mathbb{R}$.
+where
+$\mathcal{X} \subset \mathbb{R}^n$, $\mathcal{Y} \subset \mathbb{R}^m$ are closed and convex, and
+$g_1: \mathbb{R}^n \rightarrow \mathbb{R}$, $g_2: \mathbb{R}^m \rightarrow \mathbb{R}$, $f :
+	\mathbb{R}^n \times \mathbb{R}^m \rightarrow \mathbb{R}$.
 
-The solution $(x_{\ast}, y_{\ast})$ to \ref{eqn:saddle}, is a Nash equilibrium in the reguarlized game
-with the following best response conditions,
+The solution $(x_{\ast}, y_{\ast})$ to~\ref{eqn:saddle}, is a Nash equilibrium in the reguarlized
+game with the following best response conditions,
 
-\begin{equation}\label{eqn:bestrescon1}
-    x_{\ast} \in \arg \min_{x \in \mathcal{X}} \alpha g_1(x) + f(x, y_{\ast})
+\begin{equation}
+	\label{eqn:bestrescon1} x_{\ast} \in \arg \min_{x \in \mathcal{X}} \alpha g_1(x) + f(x, y_{\ast})
 \end{equation}
 
-\begin{equation}\label{eqn:bestrescon2}
-    y_{\ast} \in \arg \min_{y \in \mathcal{Y}} \alpha g_2(y) + f(x_{\ast}, y)
+\begin{equation}
+	\label{eqn:bestrescon2} y_{\ast} \in \arg
+	\min_{y \in \mathcal{Y}} \alpha g_2(y) + f(x_{\ast}, y)
 \end{equation}
 
+\subsection{Zero-sum games and Variational Inequalities}
 
-\subsection*{Zero-sum games and Variational Inequalities}
-MMD reframes the solution to QRE as a variational inequality problem.
+MMD reframes the
+solution to QRE as a variational inequality problem.
 
 \begin{definition}
-    Given $\calZ \subseteq \R^n$ and mapping $G: \calZ \rightarrow \R^n$, the variational inequality problem
-    VI($\calZ, G$) is to find $z_{\ast} \in \calZ$ such that,
+	Given $\calZ \subseteq \R^n$ and mapping $G: \calZ \rightarrow \R^n$, the variational inequality
+	problem VI ($\calZ, G$) is to find $z_{\ast} \in \calZ$ such that,
 
-    $$\langle G(z_{\ast}, z - z_{\ast}) \rangle \geq 0 \quad \forall z \in \calZ. $$
+	\[ \langle
+		G(z_{\ast}, z - z_{\ast}) \rangle \geq 0 \quad \forall z \in \calZ.
+	\]
 \end{definition}
 
-
-The optimality conditions are equivalent to VI$(\calZ, G)$, where $G = F + \alpha \nabla g$,  $\calZ = \mathcal{X} \times \mathcal{Y}$, and
-$g: \calZ \rightarrow \mathbb{R}$.
+The optimality conditions are equivalent to VI$(\calZ, G)$, where $G = F + \alpha \nabla g$, $\calZ
+	= \mathcal{X} \times \mathcal{Y}$, and $g: \calZ \rightarrow \mathbb{R}$.
 
 Now, the solution the the VI problem ($z_{\ast}= (x_{\ast}, y_{\ast})$), corresponds to the
-solution of the saddle point problem stated in \ref{eqn:saddle}, and satisfies the best response conditions
-\ref{eqn:bestrescon1} and \ref{eqn:bestrescon2}.
+solution of the saddle point problem stated in~\ref{eqn:saddle}, and satisfies the best response
+conditions~\ref{eqn:bestrescon1} and~\ref{eqn:bestrescon2}.
 
-The algorithm that the authors propose is a non-Euclidean proximal gradient method to solve the VI($\calZ, F + \alpha \nabla g$) problem.
+The algorithm that the authors propose is a non-Euclidean proximal gradient method to solve the VI
+($\calZ, F + \alpha \nabla g$) problem.
 
-We now restate the main algorithm as stated in \cite{sokotaUnified2023}(3.1),
+We now restate the main algorithm as stated in Sokota et.
+al,~\cite{sokotaUnified2023} (3.1),
 
 \begin{alprocedure}
-    \algorithmcfname{MMD}\label{alg:proxgrad}
-    Starting with $z_1  \in \text{int dom } \psi \cap \calZ$, at each iteration $t$ do
-    $z_{t+1} = \arg \min_{z \in \calZ} \eta (\langle F(z_t), z\rangle + \alpha g(z)) + B_{\psi} (z, z_t).$
+	\algorithmcfname{MMD}\label{alg:proxgrad}
+	Starting with $z_1 \in \text{int dom } \psi \cap \calZ$, at each iteration $t$ do $z_{t+1} = \arg
+		\min_{z \in \calZ} \eta (\langle F(z_t), z\rangle + \alpha g(z)) + B_{\psi} (z, z_t).
+	$
 \end{alprocedure}
 
 With the following assumptions, $z_{t+1}$ is well defined:
 
 \begin{itemize}
-    \item $\psi$ is 1-strongly convex with respect to $\|.\|$ over $\calZ$, and for
-          any $l$, stepsize $\eta > 0$, $\alpha > 0$,
-          $z_{t+1} = \arg \min_{z \in \calZ} \eta (\langle l, z \rangle + \alpha g(z)) + B_{\psi}(z;z_t) \in \text{int dom } \psi.$
+	\item $\psi$ is 1-strongly convex with respect to $\|.
+		      \|$ over $\calZ$, and for
+	      any $l$, stepsize $\eta > 0$, $\alpha > 0$,
+	      $z_{t+1} = \arg \min_{z \in \calZ} \eta (\langle l, z \rangle + \alpha g(z)) + B_{\psi}(z;z_t) \in \text{int dom } \psi.$
 
-    \item $F$ is monotone and $L$-smooth with respect to $\|.\|$ and $g$ is 1-strongly convex
-          relative to $\psi$ over $\calZ$ with $g$ differentiable over int dom $\psi$.
+	\item $F$ is monotone and $L$-smooth with respect to $\|.\|$ and $g$ is 1-strongly convex
+	      relative to $\psi$ over $\calZ$ with $g$ differentiable over int dom $\psi$.
 \end{itemize}
 
 Algorithm \ref{alg:proxgrad} provides the following convergence guarantees,
 
-Assuming that the solution $z_{\ast}$ to the problem VI($\calZ, F + \alpha \nabla g$) lies in the int dom $\psi$, then
-the algorithm \ref{alg:proxgrad} guarantees
+Assuming that the solution $z_{\ast}$ to the problem VI ($\calZ, F + \alpha \nabla g$) lies in the
+int dom $\psi$, then the algorithm~\ref{alg:proxgrad} guarantees
 
-$$ B_{\psi} (z_{\ast}; z_{t + 1}) \leq \left(\frac{1}{1 + \eta \alpha}\right)^t B_{\psi} (z_{\ast}; z_1),$$
+\[ B_{\psi}
+	(z_{\ast}; z_{t + 1}) \leq {\left(\frac{1}{1 + \eta \alpha}\right)}^t B_{\psi} (z_{\ast}; z_1), \]
 
 if $\alpha > 0$, and $\eta \leq \frac{\alpha}{L^2}$.
 
-
-
-
-MMD is also a first attempt in developing algorithms that are performant in both
-Single-agent and Multi-agent settings.
-
-In single-agent RL MMD's performance is competitive with that of PPO in Atari and MuJoCo environments
-(though not evaluated extensively). And, in the multi-agent setting the performance of tabular MMD is on par
-with that of CFR, but worse than that of CFR+.
+In single-agent settings MMD's performance is competitive with PPO in Atari and MuJoCo
+environments.
+And, in the multi-agent setting the performance of tabular MMD is on par with CFR, but worse than
+CFR+.

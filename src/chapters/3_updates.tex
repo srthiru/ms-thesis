@@ -1,13 +1,50 @@
-\chapter{Extending MMD with NeuRD fix, Extragradient, and Optimism}
+\chapter{Faster MMD and MDPO}
 
 \section{Faster-MMD}
 
-\section{Neural Replicator Dynamics}
+We now propose a few modified versions of Magnetic Mirror Descent, and MDPO
+
+\section{Neural Replicator Dynamics (NeuRD)} Neural Replicator Dynamics (NeuRD)
+\cite{hennesNeural2020} is a model-free sample-based algorithm that applies function approximation
+to Replicator Dynamics.
+Replicator Dynamics is an idea from Evolutionary game theory (EGT) that defines operators to update
+the dynamics of a population in ord to maximize some pay-off defined by a fitness function.
+
+The single-population replicator dynamics is defined by the following system of differntial
+equations:
+
+\begin{equation}
+	\label{eqn:rd} \dot{\pi}(a) = \pi(a)[u(a, \pi) -
+		\bar{u}(\pi)], \forall a \in \mathcal{A}
+\end{equation}
+
+Hennes et.
+al, \cite{hennesNeural2020} show equivalence between Softmax Policy gradients
+\ref{sec:spg} and continuous-time Replicator Dynamics \cite[THEOREM 1, on p5]{hennesNeural2020}\label{thm:spgrd}.
+
+NeuRD can be applied to reinforcement learning as a single line change to the Softmax Policy
+gradient.
+This can be seen as applying a fix to the update of the Softmax Policy gradient algorithm to make
+it more responsive to changes in a non-stationary environment.
+We refer to this as the ``NeuRD-fix''.
+
 \subsection{FMMD-N}
 
-\section{Extragradient methods}
+The first modified version of MMD, and MDPO is obtained applying the NeuRD-fix to these algorithms.
+Below, we derive the gradient of the behavioral form update rule for these algorithms, and show
+where the fix applies in these updates.
+
+\section{Extragradient updates}
+
+The Extragradient method was first introduced by G.M.Korpelevich~\cite{korpelevichEG1976}.
+EG is a classical method for solving smooth and strongly convex-concave bilinear saddle point
+problems with a linear rate of convergence.
+Extragradient and Optimistic Gradient Descent Ascent methods have been shown to be approximations
+of proximal-point method for solving saddle point methods~\cite{mokhtariUnified2020}.
 
 \subsection{FMMD-EG}
+In this section, we outline a version of MMD with extragradient updates that we call
+\textit{FMMD-EG}.
 
 \section{Optimism}
 
