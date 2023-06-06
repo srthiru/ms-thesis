@@ -13,20 +13,28 @@ a minimization at every step.
 There are different views of arriving at Mirror Descent as an optimization algorithm, some of which
 include the FTRL view, the mirror map view, \dots
 
-- Mirror descent algorithm -
-a Mirror descent convergence guarantee.
-- Mirror descent applied to game theory and marl.
+- Mirror descent algorithm
 
-\subsection[MDPO]{Mirror
-	Descent Policy Optimization}
+- Mirror descent convergence guarantee for OCO
 
-\section[MMD]{Magnetic Mirror Descent}
+\subsection[MDPO]{Mirror Descent Policy Optimization}
 
-Magnetic Mirror Descent~\cite{sokotaUnified2023} is a non-euclidean proximal gradient method that
-can more generally be applied to solve Variational Inequality problems with certain structures.
-Sokota et al.~\cite{sokotaUnified2023} cast solving for QREs in two-player zero-sum games as a
-variational inequality problem and apply MMD to solve for QREs with linear last-iterate convergence
-guarantees.
+\section[MMD]{Magnetic
+  Mirror Descent}
+
+Magnetic Mirror Descent~\cite{sokotaUnified2023} is an approach
+that is applicable both as an equilibrium solving algorithm and a reinforcement learning algorithm.
+% with certain structures
+The main results of Sokota et.al~\cite{sokotaUnified2023} are as follows.
+First, they establish an equivalence between solving for normal-form reduced QRE of a two-player
+zero-sum EFG and solving a variational inequality problem with some specific properties.
+Second, based on this connection they propose a non-euclidean proximal gradient method as an
+equilibrium finding algorithm in two-player zero-sum games.
+They also prove a linear last-iterate convergence guarantee for the algorithm as a QRE solver.
+
+% Sokota et al.~\cite{sokotaUnified2023} cast solving for
+% QREs in two-player zero-sum games as a and apply MMD to solve for QREs with linear last-iterate
+% convergence guarantees.
 % They do so by first representing the two-player zero-sum games as a bilinear saddle point problem
 % and then showing the equivalence between solving the saddle point problem and solving variation
 % inequality problems under specific conditions.
@@ -37,15 +45,16 @@ guarantees.
 \subsection{Connection between Variational Inequalities and QREs}
 
 Variational inequalities are a general class of problems that have a wide range of applications.
-A Variational Inequality problem is generally of the following form (for convenience, we use the
-same notation and symbols as in~\cite{sokotaUnified2023}):
+A Variational Inequality problem is generally of the following form (we use the same notation and
+symbols as in~\cite{sokotaUnified2023}):
 
 \begin{definition}
-	Given $\calZ \subseteq \R^n$ and mapping $G: \calZ \rightarrow \R^n$, the variational inequality
-	problem VI ($\calZ, G$) is to find $z_{\ast} \in \calZ$ such that,
+	Given $\calZ
+		\subseteq \R^n$ and mapping $G: \calZ \rightarrow \R^n$, the variational inequality problem VI
+	($\calZ, G$) is to find $z_{\ast} \in \calZ$ such that,
 
-	\[ \langle
-		G(z_{\ast}), z - z_{\ast} \rangle \geq 0 \quad \forall z \in \calZ.
+	\[ \langle G(z_{\ast}),
+		z - z_{\ast} \rangle \geq 0 \quad \forall z \in \calZ.
 	\]
 \end{definition}
 
@@ -63,55 +72,34 @@ where $\mathcal{X} \subset \mathbb{R}^n$, $\mathcal{Y} \subset \mathbb{R}^m$
 are closed and convex, and $g_1: \mathbb{R}^n \rightarrow \mathbb{R}$, $g_2: \mathbb{R}^m
 	\rightarrow \mathbb{R}$, $f : \mathbb{R}^n \times \mathbb{R}^m \rightarrow \mathbb{R}$.
 
-The solution $(x_{\ast}, y_{\ast})$ to~\ref{eqn:saddle}, is a Nash equilibrium in the reguarlized
-game with the following best response conditions and optimality conditions: \begin{equation}
-	\langle \nabla g_1(x_*) + \nabla_{x_*} f(x_*, y_*), x - x_* \rangle \geq 0, \forall x \in \calX ;
-	\langle \nabla g_2(y_*) + \nabla_{y_*} f(x_*, y_*), y - y_* \rangle \geq 0, \forall x \in \calY.
+The solution $(x_{\ast}, y_{\ast})$ to the saddle point problem~\ref{eqn:saddle}, corresponds to
+the Nash equilibrium of the reguarlized game with the following first-order optimality conditions:
+
+\begin{equation}
+	\label{eqn:optcon1} \langle \nabla g_1(x_*) + \nabla_{x_*}
+	f(x_*, y_*), x - x_* \rangle \geq 0, \forall x \in \calX.
 \end{equation}
 
 \begin{equation}
-	\label{eqn:bestrescon1} x_{\ast} \in \arg \min_{x \in \mathcal{X}} \alpha g_1(x) + f(x, y_{\ast})
+	\label{eqn:optcon2}
+	\langle \nabla g_2(y_*) + \nabla_{y_*} f(x_*, y_*),
+	y - y_* \rangle \geq 0, \forall y \in \calY.
 \end{equation}
 
-\begin{equation}
-	\label{eqn:bestrescon2} y_{\ast} \in \arg
-	\min_{y \in \mathcal{Y}} \alpha g_2(y) + f(x_{\ast}, y)
-\end{equation}
-
-The optimality conditions are equivalent to VI$(\calZ, G)$, where $G = F + \alpha \nabla g$, $\calZ
-	= \mathcal{X} \times \mathcal{Y}$, and $g: \calZ \rightarrow \mathbb{R}$.
-
-Now, the solution the the VI problem ($z_{\ast}= (x_{\ast}, y_{\ast})$), corresponds to the
-solution of the saddle point problem stated in~\ref{eqn:saddle}, and satisfies the best response
-conditions~\ref{eqn:bestrescon1} and~\ref{eqn:bestrescon2}.
+These optimality conditions are equivalent to VI$(\calZ, G)$, where $G = F + \alpha \nabla g$,
+$\calZ = \mathcal{X} \times \mathcal{Y}$, and $g: \calZ \rightarrow \mathbb{R}$.
+Hence, the solution the the VI problem ($z_{\ast}= (x_{\ast}, y_{\ast})$), corresponds to the
+solution of the saddle point problem stated in~\ref{eqn:saddle}.
 
 \subsection{MMD Algorithm}
 
-The algorithm that the authors propose is a non-Euclidean proximal gradient method to solve the VI
-($\calZ, F + \alpha \nabla g$) problem with the following update at each iteration:
+The authors first propose a non-Euclidean proximal gradient method to solve the VI ($\calZ, F +
+	\alpha \nabla g$) with the following update at each iteration:
 
 \begin{equation}
-	\label{eqn:proxgrad} z_{t+1} = \arg \min_{z \in \calZ} \eta
-	(\langle F(z_t), z\rangle + \alpha g(z)) + B_{\psi} (z; z_t).
+	\label{eqn:proxgrad} z_{t+1} = \arg \min_{z \in \calZ} \eta (\langle F(z_t), z\rangle + \alpha
+	g(z)) + B_{\psi} (z; z_t).
 \end{equation}
-
-The MMD algorithm uses the same update as~\ref{eqn:proxgrad}, with $g$ taken to be $\psi$ or
-$B_{\psi}(.
-	;z')$
-for some z'.
-We now restate the main algorithm as stated in Sokota et.
-al,~\cite{sokotaUnified2023},
-
-\begin{alprocedure}
-	\algorithmcfname{MMD~\cite[(Algorithm 3.6)]{sokotaUnified2023}}\label{alg:mmd}
-	Starting with $z_1 \in \text{int dom } \psi \cap \calZ$, at each iteration $t$ do $$ z_{t+1} = \arg
-		\min_{z \in \calZ} \eta (\langle F(z_t), z\rangle + \alpha \psi(z)) + B_{\psi} (z; z_t).
-	$$
-	or,
-	Given some $z'$, do $$ z_{t+1} = \arg \min_{z \in \calZ} \eta (\langle F(z_t), z\rangle + \alpha
-		B_{\psi}(z; z')) + B_{\psi} (z, z_t).
-	$$
-\end{alprocedure}
 
 With the following assumptions, $z_{t+1}$ is well defined:
 
@@ -125,6 +113,24 @@ With the following assumptions, $z_{t+1}$ is well defined:
 	      relative to $\psi$ over $\calZ$ with $g$ differentiable over int dom $\psi$.
 \end{itemize}
 
+The algorithm that is termed MMD uses the same update as~\ref{eqn:proxgrad}, with $g$ taken to be
+$\psi$ or $B_{\psi}(.
+	;z')$ for some z'.
+
+We now restate the main algorithm as stated in Sokota et.al,~\cite{sokotaUnified2023},
+
+\begin{alprocedure}[H] \algorithmcfname{MMD~\cite[(Algorithm
+			3.6)]{sokotaUnified2023}} \label{alg:mmd} Starting with $z_1 \in \text{int dom } \psi \cap \calZ$,
+	at each iteration $t$ do $$ z_{t+1} = \arg \min_{z \in \calZ} \eta (\langle F(z_t), z\rangle +
+		\alpha \psi(z)) + B_{\psi} (z; z_t).
+	$$
+	or,
+	Given some $z'$, do $$ z_{t+1} = \arg \min_{z \in \calZ} \eta (\langle F(z_t), z\rangle + \alpha
+		B_{\psi}(z; z')) + B_{\psi} (z, z_t).
+	$$
+\end{alprocedure}
+
+\hfill \break
 Algorithm~\ref{alg:mmd} provides the following convergence guarantees.
 
 \begin{theorem}
@@ -142,15 +148,13 @@ Algorithm~\ref{alg:mmd} provides the following convergence guarantees.
 
 \subsection{Behavioral form MMD}
 
-While Algorithm~\ref{alg:mmd} gives a concrete update rule, it involves solving an optimization at
-each iteration.
-This can be done either in closed form for a given set of parameters or by performing stochastic
-gradient descent at each step to approximate the closed form.
+Algorithm~\ref{alg:mmd} can be either implemented in closed form for a given set of parameters or
+by performing stochastic gradient descent at each step to approximate the closed form.
 This approximation is especially useful when it is not possible to compute the closed form such as
-in function approximation cases.
+in function approximation settings.
 
-In the two form of updates from Algorithm~\ref{alg:mmd}, the second form involves a magnet policy
-$z'$, that is used to guide the learning at each iteration.
+In the two form of updates specified in Algorithm~\ref{alg:mmd}, the second form involves a $z'$,
+term that is referred to as the magnet.
 This can either be a reference policy such as the ones used in Imitation learning, or one that is
 trailing the current policy to stabilize learning.
 Alternatively, one can also use a uniform policy in which case the term reduces to entropy and acts
@@ -169,18 +173,18 @@ where $\pi_t$ is the current policy, $q_t$ is a vector
 containing the q-values following the policy $\pi_t$, and $H(\pi)$ is the entropy of the policy
 being optimized.
 
-Here is a sketch of an algorithm for on-policy MMD using the behavioral form update in RL terms
-similar to
+% Here is a sketch of an algorithm for on-policy MMD using the behavioral form update in RL terms
+% similar to
 
-\begin{alprocedure}
-	\algorithmcfname{MMD-BF}\label{alg:mmdbf}
+% \begin{alprocedure}
+% 	\algorithmcfname{MMD-BF}\label{alg:mmdbf}
 
-\end{alprocedure}
+% \end{alprocedure}
 
-\textbf{Gradient of MMD}
+% \textbf{Gradient of MMD}
 
-\textbf{Remarks}: In single-agent settings MMD's performance is competitive
-with PPO in Atari and MuJoCo environments.
+In single-agent settings MMD's performance is competitive with PPO in Atari and MuJoCo
+environments.
 And, in the multi-agent setting the performance of tabular MMD is on par with CFR, but worse than
 CFR+.
 

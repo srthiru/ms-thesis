@@ -25,19 +25,21 @@ Hennes
 et.al,~\cite{hennesNeural2020} show equivalence between Softmax Policy gradients~\ref{sec:spg} and
 continuous-time Replicator Dynamics~\cite[THEOREM 1, on p5]{hennesNeural2020}\label{thm:spgrd}.
 
-NeuRD can be implemented as a single line change to SPG.
-This can be seen as applying a fix to the update of the SPG algorithm to make it more responsive to
-changes in a non-stationary environment.
-We refer to this as the ``NeuRD-fix''.
+NeuRD can be implemented as a single line change to the SPG algorithm.
+This can be seen as applying a fix to the update of SPG to make it more responsive to changes in a
+non-stationary environment.
 Since the typical neural network representation of policies use softmax projection on the logits,
-NeuRD-fix is a more general idea that is applicable to algorithms beyond just SPG.
-It has been adapted into other algorithms to improve performance or induce convergence in
-competitive and cooperative settings.
+the idea of fixing the gradient updates can be applied more generally to algorithms beyond SPG.
+The NeuRD loss has been adapted into other algorithms to improve performance or induce convergence
+in competitive and cooperative settings.
 Chhablani et.al,~\cite{chhablaniCounterfactual2021} showed improved performance in
 identical-interest games by applying the NeuRD fix to COMA~\cite{foersterCounterfactual2018}.
 Perolat et.al,~\cite{perolatMastering2022} used a NeuRD based loss function along with adaptive
-regularization~\cite{perolatPoincare2021} to induce last-iterate convergence in the game of
-Stratego.
+regularization~\cite{perolatPoincare2021} to induce last-iterate convergence in Stratego.
+
+\subsection{MMD-N}
+
+\subsection{MDPO-N}
 
 \section{Extragradient updates}
 
@@ -48,13 +50,17 @@ Extragradient is a classical method for solving smooth and strongly convex-conca
 point problems with a linear rate of convergence.
 Extragradient and Optimistic Gradient Descent Ascent methods have been shown to be approximations
 of proximal-point method for solving saddle point methods~\cite{mokhtariUnified2020}.
-In this work, we extend MMD, and FMMD with extragradient updates to investigate the effect of
-extragradients in these settings in terms of inducing convergence and also speeding up the rate of
-convergence.
+
+\subsection{MMD-EG}
+
+\subsection{MDPO-EG}
 
 \section{Optimism}
 
-Optimism is another proximal
+% Optimism is another proximal
 
 \subsection{Optimistic Mirror Descent}
+
+\subsection{OMMD}
+\subsection{OMDPO}
 

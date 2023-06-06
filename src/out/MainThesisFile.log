@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Arch Linux) (preloaded format=pdflatex 2023.4.20)  5 JUN 2023 23:50
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Arch Linux) (preloaded format=pdflatex 2023.4.20)  6 JUN 2023 14:16
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -800,18 +800,25 @@ Package: cite 2015/02/27  v 5.5
 Package: dsfont 1995/08/01 v0.1 Double stroke roman fonts
 ) (/usr/share/texmf-dist/tex/latex/comment/comment.sty
 \CommentStream=\write5
- Excluding comment 'comment')
-\c@Lcount=\count372
-\c@problem=\count373
+ Excluding comment 'comment') (/usr/share/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count372
+\float@exts=\toks42
+\float@box=\box81
+\@float@everytoks=\toks43
+\@floatcapt=\box82
+)
+\c@Lcount=\count373
+\c@problem=\count374
  (/usr/share/texmf-dist/tex/latex/wasysym/wasysym.sty
 Package: wasysym 2020/01/19 v2.4 Wasy-2 symbol support package
 \symwasy=\mathgroup9
 LaTeX Font Info:    Overwriting symbol font `wasy' in version `bold'
 (Font)                  U/wasy/m/n --> U/wasy/b/n on input line 93.
 )
-\c@definition=\count374
-\c@lemma=\count375
-\c@theorem=\count376
+\c@definition=\count375
+\c@lemma=\count376
+\c@theorem=\count377
 Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... none found.
  (out/MainThesisFile.aux (out/chapters/0_intro.aux) (out/chapters/outline.aux) (out/chapters/1_background.aux) (out/chapters/2_mmd.aux) (out/chapters/3_updates.aux) (out/chapters/4_experiments.aux) (out/chapters/5_discussion.aux) (out/derivations.aux) (out/oco.aux))
@@ -861,39 +868,39 @@ Package soulutf8 Warning: This package is obsolete,
 Package: soul 2023-02-18 v3.0 Permit use of UTF-8 characters in soul (HO)
  (/usr/share/texmf-dist/tex/generic/soul/soul-ori.sty
 Package: soul-ori 2023-02-18 v3.0 letterspacing/underlining (mf)
-\SOUL@word=\toks42
-\SOUL@lasttoken=\toks43
-\SOUL@syllable=\toks44
-\SOUL@cmds=\toks45
-\SOUL@buffer=\toks46
-\SOUL@token=\toks47
+\SOUL@word=\toks44
+\SOUL@lasttoken=\toks45
+\SOUL@syllable=\toks46
+\SOUL@cmds=\toks47
+\SOUL@buffer=\toks48
+\SOUL@token=\toks49
 \SOUL@syllgoal=\dimen311
 \SOUL@syllwidth=\dimen312
 \SOUL@charkern=\dimen313
 \SOUL@hyphkern=\dimen314
 \SOUL@dimen=\dimen315
 \SOUL@dimeni=\dimen316
-\SOUL@minus=\count377
-\SOUL@comma=\count378
-\SOUL@apo=\count379
-\SOUL@grave=\count380
+\SOUL@minus=\count378
+\SOUL@comma=\count379
+\SOUL@apo=\count380
+\SOUL@grave=\count381
 \SOUL@spaceskip=\skip92
 \SOUL@ttwidth=\dimen317
 \SOUL@uldp=\dimen318
 \SOUL@ulht=\dimen319
 )) (/usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count381
+\scratchcounter=\count382
 \scratchdimen=\dimen320
-\scratchbox=\box81
-\nofMPsegments=\count382
-\nofMParguments=\count383
-\everyMPshowfont=\toks48
-\MPscratchCnt=\count384
+\scratchbox=\box83
+\nofMPsegments=\count383
+\nofMParguments=\count384
+\everyMPshowfont=\toks50
+\MPscratchCnt=\count385
 \MPscratchDim=\dimen321
-\MPnumerator=\count385
-\makeMPintoPDFobject=\count386
-\everyMPtoPDFconversion=\toks49
+\MPnumerator=\count386
+\makeMPintoPDFobject=\count387
+\everyMPtoPDFconversion=\toks51
 )
 
 Package todonotes Warning: The length marginparwidth is less than 2cm and will most likely cause issues with the appearance of inserted todonotes. The issue can be solved by adding a line like \setlength {\marginparwidth }{2cm} prior to loading the todonotes package. on input line 113.
@@ -1056,7 +1063,7 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 
 
 
-] [8] [9] [10] [11]) [12]
+] [8] [9] [10]) [11]
 \openout2 = `chapters/3_updates.aux'.
 
  (./chapters/3_updates.tex
@@ -1082,12 +1089,12 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `\uppercase' on input line 1.
 
-[13
+[12
 
 
 
 
-]) [14]
+]) [13] [14]
 \openout2 = `chapters/4_experiments.aux'.
 
  (./chapters/4_experiments.tex
@@ -1120,12 +1127,34 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 
 ]
 
-LaTeX Warning: Reference `sec:rpsne' on page 16 undefined on input line 34.
+LaTeX Warning: Reference `sec:rpsne' on page 16 undefined on input line 36.
 
 
-LaTeX Warning: Reference `fig:divplots' on page 16 undefined on input line 81.
+LaTeX Warning: Reference `fig:divplots' on page 16 undefined on input line 85.
 
-[16] [17]) [18]
+<FIG/MMD_QRE.png, id=385, 3006.23125pt x 1560.83125pt>
+File: FIG/MMD_QRE.png Graphic file (type png)
+<use FIG/MMD_QRE.png>
+Package pdftex.def Info: FIG/MMD_QRE.png  used on input line 88.
+(pdftex.def)             Requested size: 426.79134pt x 221.58719pt.
+[16] [17
+pdfTeX warning (ext4): destination with the same identifier (name{table.5.1}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.89 \end{figure}
+                 ]
+<FIG/MDPO_NE.png, id=396, 3006.23125pt x 1560.83125pt>
+File: FIG/MDPO_NE.png Graphic file (type png)
+<use FIG/MDPO_NE.png>
+Package pdftex.def Info: FIG/MDPO_NE.png  used on input line 92.
+(pdftex.def)             Requested size: 426.79134pt x 221.58719pt.
+ [18 <./FIG/MMD_QRE.png>]
+<FIG/MMD_NE.png, id=402, 3006.23125pt x 1560.83125pt>
+File: FIG/MMD_NE.png Graphic file (type png)
+<use FIG/MMD_NE.png>
+Package pdftex.def Info: FIG/MMD_NE.png  used on input line 96.
+(pdftex.def)             Requested size: 426.79134pt x 221.58719pt.
+ [19 <./FIG/MDPO_NE.png> <./FIG/MMD_NE.png>]) [20]
 \openout2 = `chapters/5_discussion.aux'.
 
  (./chapters/5_discussion.tex)
@@ -1148,7 +1177,7 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `\hss' on input line 155.
 
-[19
+[21
 
 
 
@@ -1175,7 +1204,7 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `\hss' on input line 159.
 
-[20
+[22
 
 ]
 Appendix B.
@@ -1192,9 +1221,9 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `\hss' on input line 163.
 
 
-LaTeX Warning: Citation `Farine20162243' on page 21 undefined on input line 167.
+LaTeX Warning: Citation `Farine20162243' on page 23 undefined on input line 167.
 
-[21
+[23
 
 ]
 CITED LITERATURE.
@@ -1210,28 +1239,28 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `\hss' on input line 171.
 
-(out/MainThesisFile.bbl [22
+(out/MainThesisFile.bbl [24
 
-]) [23] (out/MainThesisFile.aux (out/chapters/0_intro.aux) (out/chapters/outline.aux) (out/chapters/1_background.aux) (out/chapters/2_mmd.aux) (out/chapters/3_updates.aux) (out/chapters/4_experiments.aux) (out/chapters/5_discussion.aux) (out/derivations.aux) (out/oco.aux))
+]) [25] (out/MainThesisFile.aux (out/chapters/0_intro.aux) (out/chapters/outline.aux) (out/chapters/1_background.aux) (out/chapters/2_mmd.aux) (out/chapters/3_updates.aux) (out/chapters/4_experiments.aux) (out/chapters/5_discussion.aux) (out/derivations.aux) (out/oco.aux))
 
 LaTeX Warning: There were undefined references.
 
 Package rerunfilecheck Info: File `MainThesisFile.out' has not changed.
-(rerunfilecheck)             Checksum: 9728F30C23EA0D762D03F2B1B65C5ECD;5930.
+(rerunfilecheck)             Checksum: 150890A1C13E66A17D9F9E58AD4D10D5;6515.
  ) 
 Here is how much of TeX's memory you used:
- 30494 strings out of 476025
- 583778 string characters out of 5796532
- 1864388 words of memory out of 5000000
- 50221 multiletter control sequences out of 15000+600000
+ 30604 strings out of 476025
+ 585563 string characters out of 5796532
+ 1865388 words of memory out of 5000000
+ 50315 multiletter control sequences out of 15000+600000
  522316 words of font info for 68 fonts, out of 8000000 for 9000
  1144 hyphenation exceptions out of 8191
  99i,11n,94p,1093b,615s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on out/MainThesisFile.pdf (31 pages, 206612 bytes).
+Output written on out/MainThesisFile.pdf (33 pages, 1378728 bytes).
 PDF statistics:
- 473 PDF objects out of 1000 (max. 8388607)
- 409 compressed objects within 5 object streams
- 93 named destinations out of 1000 (max. 500000)
- 317 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 518 PDF objects out of 1000 (max. 8388607)
+ 446 compressed objects within 5 object streams
+ 100 named destinations out of 1000 (max. 500000)
+ 380 words of extra memory for PDF output out of 10000 (max. 10000000)
 

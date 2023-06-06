@@ -22,24 +22,30 @@
 \contentsline {section}{\numberline {3.2} MMD}{7}{section.3.2}%
 \contentsline {subsection}{\numberline {3.2.1} Connection between Variational Inequalities and QREs}{8}{subsection.3.2.1}%
 \contentsline {subsection}{\numberline {3.2.2} MMD Algorithm}{9}{subsection.3.2.2}%
-\contentsline {subsection}{\numberline {3.2.3} Behavioral form MMD}{11}{subsection.3.2.3}%
-\contentsline {subsection}{\numberline {3.2.4} Equivalence of MMD and MDPO}{12}{subsection.3.2.4}%
+\contentsline {subsection}{\numberline {3.2.3} Behavioral form MMD}{10}{subsection.3.2.3}%
+\contentsline {subsection}{\numberline {3.2.4} Equivalence of MMD and MDPO}{11}{subsection.3.2.4}%
 \addvspace {\baselineskip }
-\contentsline {chapter}{\xnumberline {4\hskip 2em}\uppercase {Modified Updates for Mirror-descent based methods}}{13}{chapter.4}%
-\contentsline {section}{\numberline {4.1} Neural Replicator Dynamics (NeuRD)}{13}{section.4.1}%
-\contentsline {section}{\numberline {4.2} Extragradient updates}{14}{section.4.2}%
+\contentsline {chapter}{\xnumberline {4\hskip 2em}\uppercase {Modified Updates for Mirror-descent based methods}}{12}{chapter.4}%
+\contentsline {section}{\numberline {4.1} Neural Replicator Dynamics (NeuRD)}{12}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1} MMD-N}{13}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2} MDPO-N}{13}{subsection.4.1.2}%
+\contentsline {section}{\numberline {4.2} Extragradient updates}{13}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1} MMD-EG}{14}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2} MDPO-EG}{14}{subsection.4.2.2}%
 \contentsline {section}{\numberline {4.3} Optimism}{14}{section.4.3}%
 \contentsline {subsection}{\numberline {4.3.1} Optimistic Mirror Descent}{14}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2} OMMD}{14}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.3} OMDPO}{14}{subsection.4.3.3}%
 \addvspace {\baselineskip }
 \contentsline {chapter}{\xnumberline {5\hskip 2em}\uppercase {Experiments}}{15}{chapter.5}%
 \contentsline {section}{\numberline {5.1} Experimental Domains}{15}{section.5.1}%
 \contentsline {section}{\numberline {5.2} Evaluation Methods}{16}{section.5.2}%
 \contentsline {section}{\numberline {5.3} Results}{16}{section.5.3}%
 \contentsline {subsection}{\numberline {5.3.1} Tabular Experiments}{16}{subsection.5.3.1}%
-\contentsline {subsection}{\numberline {5.3.2} Neural Experiments}{18}{subsection.5.3.2}%
+\contentsline {subsection}{\numberline {5.3.2} Neural Experiments}{20}{subsection.5.3.2}%
 \addvspace {\baselineskip }
-\contentsline {chapter}{\xnumberline {\ }APPENDICES}{19}{subsection.5.3.2}%
-\contentsline {chapter}{\xnumberline {\ }\ \ \ \ \ Appendix A}{20}{appendix.A}%
-\contentsline {chapter}{\xnumberline {\ }\ \ \ \ \ Appendix B}{21}{appendix.B}%
+\contentsline {chapter}{\xnumberline {\ }APPENDICES}{21}{subsection.5.3.2}%
+\contentsline {chapter}{\xnumberline {\ }\ \ \ \ \ Appendix A}{22}{appendix.A}%
+\contentsline {chapter}{\xnumberline {\ }\ \ \ \ \ Appendix B}{23}{appendix.B}%
 \addvspace {\baselineskip }
-\contentsline {chapter}{\xnumberline {\ }CITED LITERATURE}{22}{appendix.B}%
+\contentsline {chapter}{\xnumberline {\ }CITED LITERATURE}{24}{appendix.B}%

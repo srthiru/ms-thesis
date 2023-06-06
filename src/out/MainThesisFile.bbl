@@ -47,4 +47,9 @@ Mokhtari, A., Ozdaglar, A., and Pattathil, S.:
 \newblock A {{Unified Analysis}} of {{Extra-gradient}} and {{Optimistic Gradient Methods}} for {{Saddle Point Problems}}: {{Proximal Point Approach}}.
 \newblock In {\itshape  Proceedings of the {{Twenty Third International Conference}} on {{Artificial Intelligence}} and {{Statistics}} }, pages 1497--1507. {PMLR}, June 2020.
 
+\bibitem{liangRLlib2018}
+
+Liang, E., Liaw, R., Moritz, P., Nishihara, R., Fox, R., Goldberg, K., Gonzalez, J.~E., Jordan, M.~I., and Stoica, I.:
+\newblock {{RLlib}}: {{Abstractions}} for {{Distributed Reinforcement Learning}}, June 2018.
+
 \end{thebibliography}

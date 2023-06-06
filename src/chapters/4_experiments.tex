@@ -5,14 +5,16 @@ Through the experiments, we aim to answer the following questions:
 
 \begin{itemize}
 	\item How does the addition of the NeuRD-fix, Extragradient updates, Optimism
-	      affect the convergence rate of these algorithms?
+	      affect the convergence rate of these algorithms in solving for QREs, and Nash equilibrium?
 	\item What is the last-iterate vs average-iterate convergence behavior of these algorithms in the presence of these modifications?
 	\item Do these performance improvements scale well with the size of the game?
 \end{itemize}
 
 \section{Experimental Domains}
 In answering the above questions, we consider both tabular and function approximation settings.
-For the tabular experiments we evaluate the methods using the following environments - Perturbed
+For the tabular experiments we evaluate the performance of these algorithms for convergence to QRE
+and Nash equilibrium.
+methods using the following environments - Perturbed
 RPS.
 
 For the function approximation setting, we evaluate the algorithms on Kuhn Poker, Abrupt Dark Hex,
@@ -61,14 +63,16 @@ of all combinations and their convergence behaviors can be found in the appendix
 		 \toprule 
 		\hline MMD (cf)			& y & y & y & y \\ 
 		\hline FMMD (bf)		& y & y & y & y \\
+		\hline FMMD-N			& y & x & x & x \\
 		\hline FMMD-EG			& y & y & y & y \\
-		\hline FMMD-N			& y & y & y & y \\
-		\hline FMMD-N-EG		& y & y & y & y \\
-		\hline FMMD-N-OPT		& y & y & y & y \\
-		\hline MDPO-EG			& y & x & x & x \\
-		\hline MDPO-EG-OPT		& y & x & x & x \\
-		\hline MDPO-N-EG		& y & y & x & x \\
-		\hline MDPO-N-EG-OPT	& y & y & x & x \\
+		\hline FMMD-N-EG		& y & y & x & x \\
+		\hline FMMD-N-OPT		& y & x & x & x \\
+		\hline MDPO				& x & x & - & - \\
+		\hline MDPO-N			& x & x & - & - \\
+		\hline MDPO-EG			& y & y & - & - \\
+		\hline MDPO-N-EG		& y & y & - & - \\
+		\hline MDPO-EG-OPT		& y & y & - & - \\
+		\hline MDPO-N-EG-OPT	& y & y & - & - \\
 		\hline
 
 	\end{tabular} \caption{Convergence in Perturbed RPS}
@@ -80,9 +84,21 @@ Apart from the final convergence results, we also make a few observations regard
 convergence for these variants.
 From \ref{fig:divplots}, we note the following
 
+\begin{figure}[H]
+	\includegraphics[width=15cm]{FIG/MMD_QRE.png}
+\end{figure}
+
+\begin{figure}[H]
+	\includegraphics[width=15cm]{FIG/MDPO_NE.png}
+\end{figure}
+
+\begin{figure}[H]
+	\includegraphics[width=15cm]{FIG/MMD_NE.png}
+\end{figure}
+
 \begin{itemize}
-	\item{MDPO with
-	            extragradient updates have superlinear last iterate convergence to Nash equilibrium.
+	\item{MDPO with extragradient updates have superlinear last iterate convergence to Nash
+	            equilibrium.
 	      }
 	\item{MMD with NeuRD fix and extragradient }
 \end{itemize}
@@ -91,8 +107,13 @@ From \ref{fig:divplots}, we note the following
 
 Based on the observations from the Tabular NFG experiments, we evaluate the most promising
 combinations of these algorithms in the function approximation setting.
-As discussed in~\cite{sokotaUnified2023}, due to its similarity MMD can be implemented with minor
-changes to PPO.
+As discussed in~\cite{sokotaUnified2023}, behavioral form MMD can be implemented as a reinforcement
+learning algorithm with minor changes to PPO due to its similarity.
+We implemented MMD, in a similar way as described in~\cite{sokotaUnified2023} by modifying the PPO
+implementation in RLLib~\cite{liangRLlib2018}.
+We also use RLLib's OpenSpiel adapter with some modifications to use information states as inputs
+as opposed to observations.
+We train these reinforcement learning agents in self-play for the environments mentioned above.
 
 - Implementation details (RLLib, PPO modifications, GAE)
 - Neural network architecture, hyperparameters

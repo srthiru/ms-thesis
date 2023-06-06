@@ -15,45 +15,45 @@ Database file #1: BibFile.bib
 Database file #2: Citations.bib
 Warning--I didn't find a database entry for "Farine20162243"
 Warning--empty booktitle in korpelevichextragradient1976
-You've used 8 entries,
+You've used 9 entries,
             2045 wiz_defined-function locations,
-            802 strings with 12349 characters,
-and the built_in function-call counts, 2703 in all, are:
-= -- 172
-> -- 246
+            807 strings with 12628 characters,
+and the built_in function-call counts, 2927 in all, are:
+= -- 181
+> -- 275
 < -- 2
-+ -- 85
-- -- 77
-* -- 238
-:= -- 455
-add.period$ -- 17
-call.type$ -- 8
-change.case$ -- 8
++ -- 95
+- -- 86
+* -- 259
+:= -- 496
+add.period$ -- 18
+call.type$ -- 9
+change.case$ -- 9
 chr.to.int$ -- 0
-cite$ -- 9
-duplicate$ -- 101
-empty$ -- 211
-format.name$ -- 77
-if$ -- 573
+cite$ -- 10
+duplicate$ -- 104
+empty$ -- 227
+format.name$ -- 86
+if$ -- 617
 int.to.chr$ -- 0
-int.to.str$ -- 8
+int.to.str$ -- 9
 missing$ -- 7
-newline$ -- 50
-num.names$ -- 8
-pop$ -- 41
+newline$ -- 55
+num.names$ -- 9
+pop$ -- 48
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 57
+skip$ -- 61
 stack$ -- 0
 substring$ -- 105
-swap$ -- 34
+swap$ -- 35
 text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 1
-while$ -- 16
-width$ -- 9
-write$ -- 85
+while$ -- 17
+width$ -- 10
+write$ -- 93
 (There were 2 warnings)
