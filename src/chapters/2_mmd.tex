@@ -2,39 +2,72 @@
 
 \section{Mirror Descent}
 
-In this section we introduce Mirror Descent, and discuss MDPO, and MMD - two mirror descent-based
-reinforcement learning algorithms.
+In this section we discuss about Mirror Descent, and two mirror descent-based reinforcement
+learning algorithms (MDPO, and MMD).
 
 A disadvantage of FoReL~\ref{sec:forel} in solving online learning problems is that, there is a
 minimization at every step.
-Mirror descent overcomes this disadvantage by using a recursive update rule that does not required
-us to perform a minimization at every step.
+Mirror descent overcomes this by using a recursive update rule that does not required us to perform
+a minimization at every step.
 
-\subsection[MDPO]{Mirror Descent Policy
-	Optimization}
+There are different views of arriving at Mirror Descent as an optimization algorithm, some of which
+include the FTRL view, the mirror map view, \dots
+
+- Mirror descent algorithm -
+a Mirror descent convergence guarantee.
+- Mirror descent applied to game theory and marl.
+
+\subsection[MDPO]{Mirror
+	Descent Policy Optimization}
 
 \section[MMD]{Magnetic Mirror Descent}
 
-Magnetic mirror descent (MMD)~\cite{sokotaUnified2023} is a last-iterate equilibrium approximation
-algorithm for two-player zero-sum games that is an extension of mirror descent with entropy
-regularization.
+Magnetic Mirror Descent~\cite{sokotaUnified2023} is a non-euclidean proximal gradient method that
+can more generally be applied to solve Variational Inequality problems with certain structures.
+Sokota et al.~\cite{sokotaUnified2023} cast solving for QREs in two-player zero-sum games as a
+variational inequality problem and apply MMD to solve for QREs with linear last-iterate convergence
+guarantees.
+% They do so by first representing the two-player zero-sum games as a bilinear saddle point problem
+% and then showing the equivalence between solving the saddle point problem and solving variation
+% inequality problems under specific conditions.
+% They then use this connection to derive an algorithm that is termed Magnetic Mirror Descent (MMD).
+% In this section we detail how this relation is established and also outline the algorithm for
+% Magnetic Mirror Descent as presented in~\cite{sokotaUnified2023}.
 
-The idea behind MMD begins with the observation that solving for QRE in two-player zero-sum games
-can be reformulated as the solution to a negative entropy regularized saddle point problem as
-follows,
+\subsection{Connection between Variational Inequalities and QREs}
+
+Variational inequalities are a general class of problems that have a wide range of applications.
+A Variational Inequality problem is generally of the following form (for convenience, we use the
+same notation and symbols as in~\cite{sokotaUnified2023}):
+
+\begin{definition}
+	Given $\calZ \subseteq \R^n$ and mapping $G: \calZ \rightarrow \R^n$, the variational inequality
+	problem VI ($\calZ, G$) is to find $z_{\ast} \in \calZ$ such that,
+
+	\[ \langle
+		G(z_{\ast}), z - z_{\ast} \rangle \geq 0 \quad \forall z \in \calZ.
+	\]
+\end{definition}
+
+% Represent QRE as a bilinear saddle point problem
+
+Solving for QREs in two-player zero-sum games can be represented as the following bilinear saddle
+point problem:
 
 \begin{equation}
-	\label{eqn:saddle} \min_{x \in \mathcal{X}} \max_{y
-		\in \mathcal{Y}} \alpha g_1(x) + f(x, y) + \alpha g_2(y),
+	\label{eqn:saddle} \min_{x \in \mathcal{X}}
+	\max_{y \in \mathcal{Y}} \alpha g_1(x) + f(x, y) + \alpha g_2(y),
 \end{equation}
 
-where
-$\mathcal{X} \subset \mathbb{R}^n$, $\mathcal{Y} \subset \mathbb{R}^m$ are closed and convex, and
-$g_1: \mathbb{R}^n \rightarrow \mathbb{R}$, $g_2: \mathbb{R}^m \rightarrow \mathbb{R}$, $f :
-	\mathbb{R}^n \times \mathbb{R}^m \rightarrow \mathbb{R}$.
+where $\mathcal{X} \subset \mathbb{R}^n$, $\mathcal{Y} \subset \mathbb{R}^m$
+are closed and convex, and $g_1: \mathbb{R}^n \rightarrow \mathbb{R}$, $g_2: \mathbb{R}^m
+	\rightarrow \mathbb{R}$, $f : \mathbb{R}^n \times \mathbb{R}^m \rightarrow \mathbb{R}$.
 
 The solution $(x_{\ast}, y_{\ast})$ to~\ref{eqn:saddle}, is a Nash equilibrium in the reguarlized
-game with the following best response conditions,
+game with the following best response conditions and optimality conditions: \begin{equation}
+	\langle \nabla g_1(x_*) + \nabla_{x_*} f(x_*, y_*), x - x_* \rangle \geq 0, \forall x \in \calX ;
+	\langle \nabla g_2(y_*) + \nabla_{y_*} f(x_*, y_*), y - y_* \rangle \geq 0, \forall x \in \calY.
+\end{equation}
 
 \begin{equation}
 	\label{eqn:bestrescon1} x_{\ast} \in \arg \min_{x \in \mathcal{X}} \alpha g_1(x) + f(x, y_{\ast})
@@ -45,20 +78,6 @@ game with the following best response conditions,
 	\min_{y \in \mathcal{Y}} \alpha g_2(y) + f(x_{\ast}, y)
 \end{equation}
 
-\subsection{Zero-sum games and Variational Inequalities}
-
-MMD reframes the
-solution to QRE as a variational inequality problem.
-
-\begin{definition}
-	Given $\calZ \subseteq \R^n$ and mapping $G: \calZ \rightarrow \R^n$, the variational inequality
-	problem VI ($\calZ, G$) is to find $z_{\ast} \in \calZ$ such that,
-
-	\[ \langle
-		G(z_{\ast}, z - z_{\ast}) \rangle \geq 0 \quad \forall z \in \calZ.
-	\]
-\end{definition}
-
 The optimality conditions are equivalent to VI$(\calZ, G)$, where $G = F + \alpha \nabla g$, $\calZ
 	= \mathcal{X} \times \mathcal{Y}$, and $g: \calZ \rightarrow \mathbb{R}$.
 
@@ -66,17 +85,32 @@ Now, the solution the the VI problem ($z_{\ast}= (x_{\ast}, y_{\ast})$), corresp
 solution of the saddle point problem stated in~\ref{eqn:saddle}, and satisfies the best response
 conditions~\ref{eqn:bestrescon1} and~\ref{eqn:bestrescon2}.
 
-The algorithm that the authors propose is a non-Euclidean proximal gradient method to solve the VI
-($\calZ, F + \alpha \nabla g$) problem.
+\subsection{MMD Algorithm}
 
+The algorithm that the authors propose is a non-Euclidean proximal gradient method to solve the VI
+($\calZ, F + \alpha \nabla g$) problem with the following update at each iteration:
+
+\begin{equation}
+	\label{eqn:proxgrad} z_{t+1} = \arg \min_{z \in \calZ} \eta
+	(\langle F(z_t), z\rangle + \alpha g(z)) + B_{\psi} (z; z_t).
+\end{equation}
+
+The MMD algorithm uses the same update as~\ref{eqn:proxgrad}, with $g$ taken to be $\psi$ or
+$B_{\psi}(.
+	;z')$
+for some z'.
 We now restate the main algorithm as stated in Sokota et.
-al,~\cite{sokotaUnified2023} (3.1),
+al,~\cite{sokotaUnified2023},
 
 \begin{alprocedure}
-	\algorithmcfname{MMD}\label{alg:proxgrad}
-	Starting with $z_1 \in \text{int dom } \psi \cap \calZ$, at each iteration $t$ do $z_{t+1} = \arg
-		\min_{z \in \calZ} \eta (\langle F(z_t), z\rangle + \alpha g(z)) + B_{\psi} (z, z_t).
-	$
+	\algorithmcfname{MMD~\cite[(Algorithm 3.6)]{sokotaUnified2023}}\label{alg:mmd}
+	Starting with $z_1 \in \text{int dom } \psi \cap \calZ$, at each iteration $t$ do $$ z_{t+1} = \arg
+		\min_{z \in \calZ} \eta (\langle F(z_t), z\rangle + \alpha \psi(z)) + B_{\psi} (z; z_t).
+	$$
+	or,
+	Given some $z'$, do $$ z_{t+1} = \arg \min_{z \in \calZ} \eta (\langle F(z_t), z\rangle + \alpha
+		B_{\psi}(z; z')) + B_{\psi} (z, z_t).
+	$$
 \end{alprocedure}
 
 With the following assumptions, $z_{t+1}$ is well defined:
@@ -91,17 +125,66 @@ With the following assumptions, $z_{t+1}$ is well defined:
 	      relative to $\psi$ over $\calZ$ with $g$ differentiable over int dom $\psi$.
 \end{itemize}
 
-Algorithm \ref{alg:proxgrad} provides the following convergence guarantees,
+Algorithm~\ref{alg:mmd} provides the following convergence guarantees.
 
-Assuming that the solution $z_{\ast}$ to the problem VI ($\calZ, F + \alpha \nabla g$) lies in the
-int dom $\psi$, then the algorithm~\ref{alg:proxgrad} guarantees
+\begin{theorem}
+	\label{thm:mmdconv}
+	\cite[Theorem 3.4]{sokotaUnified2023}
+	Assuming that the solution $z_{\ast}$ to the problem VI ($\calZ, F + \alpha \nabla g$) lies in the
+	int dom $\psi$, then
 
-\[ B_{\psi}
-	(z_{\ast}; z_{t + 1}) \leq {\left(\frac{1}{1 + \eta \alpha}\right)}^t B_{\psi} (z_{\ast}; z_1), \]
+	\[ B_{\psi} (z_{\ast}; z_{t + 1}) \leq {\left(\frac{1}{1 +
+				\eta \alpha}\right)}^t B_{\psi} (z_{\ast}; z_1), \]
 
-if $\alpha > 0$, and $\eta \leq \frac{\alpha}{L^2}$.
+	if $\alpha > 0$, and $\eta
+		\leq \frac{\alpha}{L^2}$.
+\end{theorem}
 
-In single-agent settings MMD's performance is competitive with PPO in Atari and MuJoCo
-environments.
+\subsection{Behavioral form MMD}
+
+While Algorithm~\ref{alg:mmd} gives a concrete update rule, it involves solving an optimization at
+each iteration.
+This can be done either in closed form for a given set of parameters or by performing stochastic
+gradient descent at each step to approximate the closed form.
+This approximation is especially useful when it is not possible to compute the closed form such as
+in function approximation cases.
+
+In the two form of updates from Algorithm~\ref{alg:mmd}, the second form involves a magnet policy
+$z'$, that is used to guide the learning at each iteration.
+This can either be a reference policy such as the ones used in Imitation learning, or one that is
+trailing the current policy to stabilize learning.
+Alternatively, one can also use a uniform policy in which case the term reduces to entropy and acts
+as a regularization term and encourages exploration.
+For the rest of our discussion on MMD, we assume the magnet to always be a uniform policy.
+
+With $\psi$ taken to be negative entropy, the behavioral form of MMD is to perform the following
+update at each information state,
+
+\begin{equation}
+	\label{eqn:mmdbf} \pi_{t+1}
+	= \arg \max_{\pi} \mathbb{E}_{A \sim \pi} q_t(A) + \alpha H(\pi) - \frac{1}{\eta} KL(\pi, \pi_t),
+\end{equation}
+
+where $\pi_t$ is the current policy, $q_t$ is a vector
+containing the q-values following the policy $\pi_t$, and $H(\pi)$ is the entropy of the policy
+being optimized.
+
+Here is a sketch of an algorithm for on-policy MMD using the behavioral form update in RL terms
+similar to
+
+\begin{alprocedure}
+	\algorithmcfname{MMD-BF}\label{alg:mmdbf}
+
+\end{alprocedure}
+
+\textbf{Gradient of MMD}
+
+\textbf{Remarks}: In single-agent settings MMD's performance is competitive
+with PPO in Atari and MuJoCo environments.
 And, in the multi-agent setting the performance of tabular MMD is on par with CFR, but worse than
 CFR+.
+
+\subsection{Equivalence of MMD and MDPO}
+
+- MDPO with an added entropy term is equivalent to MMD with negative entropy mirror map and
+uniform magnet.

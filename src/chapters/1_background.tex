@@ -1,35 +1,102 @@
 \chapter{Background}
 
-We begin by providing some necessary background in Game Theory, Online Learning, and Reinforcement
-learning to make the reader familiar with the concepts required to follow the ideas discussed in
+We begin by providing some necessary background in Reinforcement learning , Game Theory, and Online
+Learning to make the reader familiar with the concepts required to follow the ideas discussed in
 the following sections.
-
-\section{Game Theory}
-- what is game theory?
-- why is it useful?
-- how is it related?
-
-\subsection{Problem Domains and Representations}
-- how are problems typically represented in game theory?
-- what are the usual representations?
-Normal Form games, Extensive Form games, Sequence Form.
-- how is this relevant?
-
-\subsection{Solution Concepts}
-- what are solution concepts?
-- what are the common solution concepts?
-Nash equilibrium, Quantal response equilibrium.
-- what are the relevant information related to solution conepts for this work?
-Existence of a nash equilibrium Uniqueness of QRE
 
 \section{Reinforcement
   Learning}
 
 \subsection{Policy gradient methods}
+- One way of doing RL is to directly manipulate the policy to maximize some reward.
+- Then use the reward and compute a gradient with respect to policy.
+- Reward might not be typically differentiable, so some workaround is needed to arrive at a gradient-based update rule.
+
+\subsubsection{Reinforce}
+- Widely popular PG algorithm, many insantiations possible including variants with baselines to reduce variance.
+- Convergence is proven using PG theorem.
 
 \subsubsection{Softmax Policy Gradients}\label{sec:spg}
+- Parametrizing policies
+- One way of projecting parametrized policy to a probability simplex is Softmax
+
+PG with softmax parameterization is referred to as Softmax Policy gradients.
 
 \subsection{PPO}
+
+- Trust region methods
+- PPO an approximation of TRPO with hueristic objective
+
+\section{Game Theory}
+
+Game theory is the mathematical study of interaction between agents to produce outcomes while
+trying to uphold certain individual or group preferences.
+It has a wide range of applications including economics, biology, and computer science.
+
+In this work, we mainly focus on a branch of game theory called non-cooperative game theory in
+which each agent has their own indivudual preference.
+
+\subsection{Problem Representations}
+
+In discussing agent interactions, and preferences, we need a formal notion of how agents act, and
+how agent preferences can be defined.
+In game theory, agent preferences are formalized using Utility theory, where each agent has a
+utility function that maps the agents preferences over outcomes to a real value.
+
+The primary way of modeling problems in game theory is through a \textit{game} that encodes
+information about the agents, possible actions agents can take in different situations, their
+preferences, and the outcome of an interaction.
+There are many types of such representations, a few relevant of which we introduce below.
+Before we introduce such representations, we first cover some preliminary concepts that will be
+helpful in formally defining those representations and agent preferences.
+
+- what are utilities, and strategies?
+
+\subsubsection*{Normal-Form Games}
+
+Normal-Form games are a popular way of representing situations in which all agents act
+simultaneously and the outcome is revealed after each agent has taken their action.
+A few popular games that can be represented in this form are rock-paper-scissors, matching pennies,
+prisoner's dilemma etc. A more formal definition of a normal-form game is as follows:
+
+\begin{definition}[Normal-form games]
+
+	A $(N, A, u)$ tuple
+	is a n-player normal form game, where $N$ is the set of players, $A = A_1 \times A_2 \ldots \times
+		A_n$, with $A_i$ being the set of actions available to player $i$, and $u = (u_i \forall i \in N)$
+	is the set of utility functions that map an action profile to a real utility value for each agent,
+	$u_i: A \mapsto \R$.
+
+\end{definition}
+
+Normal-form games are typically represented using a n-dimensional tensor, where each dimension
+represents the possible actions available to each agent, and every entry represents an outcome.
+The actual entries of the
+
+\subsubsection*{Sequential Games}
+
+Although normal-form games provide a neat representation, many real-world scenarios necessitate
+agents act sequentially which is difficult to represent as a matrix.
+These problems require a tree-like representation where each node is an agent's turn to make a
+choice, and each edge is a possible action.
+There are a few ways to represent such scenarios, one being normal-form games themselves.
+A downside is that the size of the normal-form representation for sequential games explode
+exponentially in the size of the game tree.
+Other possible representations include the Extensive-form, and Sequence-form.
+
+\begin{definition}[Extensive-form games]
+\end{definition}
+
+\begin{definition}[Sequence form games]
+\end{definition}
+
+\subsection{Solution Concepts}
+
+Now that we have - what are solution concepts?
+- what are the common solution concepts?
+Nash equilibrium, Quantal response equilibrium.
+- what are the relevant information related to solution conepts for this work?
+Existence of a nash equilibrium Uniqueness of QRE
 
 \section{Online Learning}
 
@@ -48,3 +115,6 @@ adversarial) setting.
 
 \subsection{Hedge}
 - what is hedge?
+
+\subsection{Gradient Descent}
+Gradient descent as a FTRL variant

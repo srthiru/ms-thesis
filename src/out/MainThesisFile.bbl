@@ -11,22 +11,40 @@ Sokota, S., D'Orazio, R., Kolter, J.~Z., Loizou, N., Lanctot, M., Mitliagkas, I.
 Hennes, D., Morrill, D., Omidshafiei, S., Munos, R., Perolat, J., Lanctot, M., Gruslys, A., Lespiau, J.-B., Parmas, P., {Duenez-Guzman}, E., and Tuyls, K.:
 \newblock Neural {{Replicator Dynamics}}, February 2020.
 
-\bibitem{korpelevichEG1976}
+\bibitem{chhablaniCounterfactual2021}
+
+Chhablani, C. and Kash, I.~A.:
+\newblock Counterfactual {{Multiagent Policy Gradients}} and {{Regret Minimization}} in {{Cooperative Settings}}.
+\newblock In {\itshape  {{AAAI}} }, 2021.
+
+\bibitem{foersterCounterfactual2018}
+
+Foerster, J., Farquhar, G., Afouras, T., Nardelli, N., and Whiteson, S.:
+\newblock Counterfactual {{Multi-Agent Policy Gradients}}.
+\newblock {\itshape  Proceedings of the AAAI Conference on Artificial Intelligence }, 32(1), April 2018.
+
+\bibitem{perolatMastering2022}
+
+Perolat, J., {de Vylder}, B., Hennes, D., Tarassov, E., Strub, F., {de Boer}, V., Muller, P., Connor, J.~T., Burch, N., Anthony, T., McAleer, S., Elie, R., Cen, S.~H., Wang, Z., Gruslys, A., Malysheva, A., Khan, M., Ozair, S., Timbers, F., Pohlen, T., Eccles, T., Rowland, M., Lanctot, M., Lespiau, J.-B., Piot, B., Omidshafiei, S., Lockhart, E., Sifre, L., Beauguerlange, N., Munos, R., Silver, D., Singh, S., Hassabis, D., and Tuyls, K.:
+\newblock Mastering the {{Game}} of {{Stratego}} with {{Model-Free Multiagent Reinforcement Learning}}.
+\newblock {\itshape  Science }, 378(6623):990--996, December 2022.
+
+\bibitem{perolatPoincare2021}
+
+Perolat, J., Munos, R., Lespiau, J.-B., Omidshafiei, S., Rowland, M., Ortega, P., Burch, N., Anthony, T., Balduzzi, D., Vylder, B.~D., Piliouras, G., Lanctot, M., and Tuyls, K.:
+\newblock From {{Poincar\'e Recurrence}} to {{Convergence}} in {{Imperfect Information Games}}: {{Finding Equilibrium}} via {{Regularization}}.
+\newblock In {\itshape  Proceedings of the 38th {{International Conference}} on {{Machine Learning}} }, pages 8525--8535. {PMLR}, July 2021.
+
+\bibitem{korpelevichextragradient1976}
 
 Korpelevich, G.~M.:
 \newblock The extragradient method for finding saddle points and other problems.
-\newblock {\itshape  Matecon }, 12:747--756, 1976.
+\newblock 1976.
 
 \bibitem{mokhtariUnified2020}
 
 Mokhtari, A., Ozdaglar, A., and Pattathil, S.:
 \newblock A {{Unified Analysis}} of {{Extra-gradient}} and {{Optimistic Gradient Methods}} for {{Saddle Point Problems}}: {{Proximal Point Approach}}.
 \newblock In {\itshape  Proceedings of the {{Twenty Third International Conference}} on {{Artificial Intelligence}} and {{Statistics}} }, pages 1497--1507. {PMLR}, June 2020.
-
-\bibitem{Farine20162243}
-
-Farine, D.~R., Strandburg-Peshkin, A., Couzin, I.~D., Berger-Wolf, T.~Y., and Crofoot, M.~C.:
-\newblock Individual variation in local interaction rules can explain emergent patterns of spatial organization in wild baboons.
-\newblock {\itshape  Proceedings of the Royal Society of London B: Biological Sciences }, 284(1853), 2017.
 
 \end{thebibliography}

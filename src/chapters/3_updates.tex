@@ -1,14 +1,17 @@
-\chapter{Faster MMD and MDPO}
+\chapter{Modified Updates for Mirror-descent based methods}
 
-\section{Faster-MMD}
+We propose applying a few modifications to the methods discussed in the previous section and
+investigate the effect of these modifications in terms of their performance and convergence
+behaviors in two-player zero-sum games.
+We first introduce the proposed modifications to be applied on the methods discussed in the
+previous section, and then provide a description of how these modifications fit into those
+algorithms.
 
-We now propose a few modified versions of Magnetic Mirror Descent, and MDPO
-
-\section{Neural Replicator Dynamics (NeuRD)} Neural Replicator Dynamics (NeuRD)
-\cite{hennesNeural2020} is a model-free sample-based algorithm that applies function approximation
-to Replicator Dynamics.
+\section{Neural Replicator Dynamics (NeuRD)}
+Neural Replicator Dynamics (NeuRD)~\cite{hennesNeural2020} is a model-free sample-based algorithm
+that is an application of Replicator Dynamics to Policy Gradients.
 Replicator Dynamics is an idea from Evolutionary game theory (EGT) that defines operators to update
-the dynamics of a population in ord to maximize some pay-off defined by a fitness function.
+the dynamics of a population in order to maximize some pay-off defined by a fitness function.
 
 The single-population replicator dynamics is defined by the following system of differntial
 equations:
@@ -18,36 +21,40 @@ equations:
 		\bar{u}(\pi)], \forall a \in \mathcal{A}
 \end{equation}
 
-Hennes et.
-al, \cite{hennesNeural2020} show equivalence between Softmax Policy gradients
-\ref{sec:spg} and continuous-time Replicator Dynamics \cite[THEOREM 1, on p5]{hennesNeural2020}\label{thm:spgrd}.
+Hennes
+et.al,~\cite{hennesNeural2020} show equivalence between Softmax Policy gradients~\ref{sec:spg} and
+continuous-time Replicator Dynamics~\cite[THEOREM 1, on p5]{hennesNeural2020}\label{thm:spgrd}.
 
-NeuRD can be applied to reinforcement learning as a single line change to the Softmax Policy
-gradient.
-This can be seen as applying a fix to the update of the Softmax Policy gradient algorithm to make
-it more responsive to changes in a non-stationary environment.
+NeuRD can be implemented as a single line change to SPG.
+This can be seen as applying a fix to the update of the SPG algorithm to make it more responsive to
+changes in a non-stationary environment.
 We refer to this as the ``NeuRD-fix''.
-
-\subsection{FMMD-N}
-
-The first modified version of MMD, and MDPO is obtained applying the NeuRD-fix to these algorithms.
-Below, we derive the gradient of the behavioral form update rule for these algorithms, and show
-where the fix applies in these updates.
+Since the typical neural network representation of policies use softmax projection on the logits,
+NeuRD-fix is a more general idea that is applicable to algorithms beyond just SPG.
+It has been adapted into other algorithms to improve performance or induce convergence in
+competitive and cooperative settings.
+Chhablani et.al,~\cite{chhablaniCounterfactual2021} showed improved performance in
+identical-interest games by applying the NeuRD fix to COMA~\cite{foersterCounterfactual2018}.
+Perolat et.al,~\cite{perolatMastering2022} used a NeuRD based loss function along with adaptive
+regularization~\cite{perolatPoincare2021} to induce last-iterate convergence in the game of
+Stratego.
 
 \section{Extragradient updates}
 
-The Extragradient method was first introduced by G.M.Korpelevich~\cite{korpelevichEG1976}.
-EG is a classical method for solving smooth and strongly convex-concave bilinear saddle point
-problems with a linear rate of convergence.
+The Extragradient method was first introduced by
+G.M.Korpelevich~\cite{korpelevichextragradient1976} as a modification of gradient descent methods
+in solving saddle point problems.
+Extragradient is a classical method for solving smooth and strongly convex-concave bilinear saddle
+point problems with a linear rate of convergence.
 Extragradient and Optimistic Gradient Descent Ascent methods have been shown to be approximations
 of proximal-point method for solving saddle point methods~\cite{mokhtariUnified2020}.
-
-\subsection{FMMD-EG}
-In this section, we outline a version of MMD with extragradient updates that we call
-\textit{FMMD-EG}.
+In this work, we extend MMD, and FMMD with extragradient updates to investigate the effect of
+extragradients in these settings in terms of inducing convergence and also speeding up the rate of
+convergence.
 
 \section{Optimism}
 
+Optimism is another proximal
+
 \subsection{Optimistic Mirror Descent}
 
-\subsection{OFMMD}

@@ -82,7 +82,7 @@
     \SetAlCapNameFnt{\small}
     \SetAlCapHSkip{0pt}
   }{\end{algorithm2e}}
-  
+
   \newenvironment{alprocedure}[1][htb]
   {\renewcommand{\algorithmcfname}{Algorithm}% Update algorithm name
    \begin{algorithm2e}[#1]%
@@ -91,7 +91,7 @@
 \SetAlCapNameFnt{\small}
 \SetAlCapHSkip{0pt}
 \IncMargin{-\parindent}
-   
+
   }{\end{algorithm2e}}
 
 % T: Addditions to the template
@@ -118,44 +118,24 @@
 \author{Thiruvenkadam Sivaprakasam Radhakrishnan}
 \pdegrees{}
 \degree{Master's in Computer Science}
-\committee{Prof. Ian Kash, Chair and Advisor \\ Prof. Anastasios Sidiropoulos  \\ Prof. Ugo Buy}
-\maketitle
+\committee{Prof.
+	Ian Kash, Chair and Advisor \\ Prof.
+	Anastasios Sidiropoulos \\ Prof.
+	Ugo Buy} \maketitle
 
+\acknowledgements {The thesis has been completed.
+	% \dedication% {\null\vfil% {\large% \begin{center}% To myself,\\\vspace{12pt}% Perry H. Disdainful,\\\vspace{12pt}% the only person worthy of my company.% \end{center}}% \vfil\null}
+	.. (INSERT YOUR TEXTS)\\
 
-% \dedication
-% {\null\vfil
-% {\large
-% \begin{center}
-% To myself,\\\vspace{12pt}
-% Perry H. Disdainful,\\\vspace{12pt}
-% the only person worthy of my company.
-% \end{center}}
-% \vfil\null}
+	\begin{flushright}
+		YOUR INITIAL
+	\end{flushright}}
 
-
-\acknowledgements
-{The thesis has been completed... (INSERT YOUR TEXTS)\\
-
-  \begin{flushright}YOUR INITIAL\end{flushright}}
-% \acknowledgements
-% {I want to ``thank'' my committee, without whose ridiculous demands, I
-% would have graduated so, so, very much faster.}
-
-% \preface
-% This preface is purely optional at UIC.
-
-\tableofcontents
-\listoftables
-\listoffigures
-\listofabbreviations
-\begin{list}
-  {}
-  {\setlength
-    {\labelwidth}{1in}
-    \setlength{\leftmargin}{1.5in}
-    \setlength{\labelsep}{.5in}
-    \setlength{\rightmargin}{\leftmargin}}
-  \item[$\theta$\hfill] Parameters of a function approximator.
+\tableofcontents \listoftables \listoffigures
+\listofabbreviations \begin{list} {} {\setlength {\labelwidth}{1in} \setlength{\leftmargin}{1.5in}
+		\setlength{\labelsep}{.5in} \setlength{\rightmargin}{\leftmargin}} \item[$\theta$\hfill] Parameters
+		of a function approximator.
+		% \acknowledgements% {I want to ``thank'' my committee, without whose ridiculous demands, I% would have graduated so, so, very much faster.}% \preface% This preface is purely optional at UIC.
 \end{list}
 
 \summary
@@ -188,7 +168,7 @@ Ancillary material should be put in appendices.
 
 %\nocite{*}
 \bibformb
-\bibliography{BibFile}
+\bibliography{BibFile,Citations}
 \newpage
 % \vita
 % This is where the vita goes.  Its organization is left as an exercise.
