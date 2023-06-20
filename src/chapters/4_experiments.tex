@@ -1,120 +1,142 @@
 \chapter{Experiments}
 
-We now evaluate our proposed methods empirically in various settings.
-Through the experiments, we aim to answer the following questions:
+We now evaluate our proposed methods experimentally in both tabular and function approximation settings.
+Though these algorithms can be applied both as approximate equilibrium solvers QRE and Nash equilibirum.
+We present some results for convergence to QRE in the tabular setting but focus on Nash convergence mainly 
+for the tabular and function approximation setting.
 
+Through the experiments, we aim to answer the following questions:
 \begin{itemize}
-	\item How does the addition of the NeuRD-fix, Extragradient updates, Optimism
+	\item How does the addition of NeuRD-fix, Extragradient updates, and Optimistic upates
 	      affect the convergence rate of these algorithms in solving for QREs, and Nash equilibrium?
 	\item What is the last-iterate vs average-iterate convergence behavior of these algorithms in the presence of these modifications?
 	\item Do these performance improvements scale well with the size of the game?
 \end{itemize}
 
-\section{Experimental Domains}
-In answering the above questions, we consider both tabular and function approximation settings.
-For the tabular experiments we evaluate the performance of these algorithms for convergence to QRE
-and Nash equilibrium.
-methods using the following environments - Perturbed
-RPS.
-
+We evaluate the converegence behavior of all these algorithms on Perturned RPS.
 For the function approximation setting, we evaluate the algorithms on Kuhn Poker, Abrupt Dark Hex,
 and Phantom Tic-tac-toe.
-Kuhn Poker is a smaller extensive form game that allows for more introspection and accurate
-measurement of performance.
-Whereas, Abrupt Dark Hex, and Phantom TTT are large games that test the stability of these
-modifications in settings with a large state-space.
+Kuhn Poker is a smaller extensive form game that allows for more introspection and exact exploitability computation.
+Whereas, Abrupt Dark Hex, and Phantom TTT are games with a large state-space that test the scalability of these
+algorithms.
 
 \section{Evaluation Methods}
+Our main focus being the convergence behaviors and the speed of convergence of these algorithms we need a notion of 
+distance from the equilibrium point.
 
-Typically, to measure the convergence rate of an algorithm we can use either a a measure of
-distance from an equilibrium if the equilibrium point is known or, a measure of exploitability as
-an indication of the policies reaching the equilibrium.
+\subsection{Divergence to the equilibrium}
+In settings with a known unique equilibrium such as for QREs, or Nash equilibrium in symmetric markov games, 
+we can compute the distance of the current policy to the known equilibrium using a measure of distance in the policy space such as the KL-Divergence. 
 
-For tabular settings since the equilibrium solutions are known, we use both exact exploitability
-and KL-divergence to the equilibrium to evaluate the algorithms.
 For PerturbedRPS, we use the QRE solutions computed through Gambit and, we also derive the unique
-Nash Equilibrium (please refer to \ref{sec:rpsne} in the appendix for the derivation) for
-PerturbedRPS.
+Nash Equilibrium (please refer to~\ref{sec:rpsne} in the appendix for the derivation) for
+PerturbedRPS.\
 
--Define exact exploitability
+\subsection{Exploitability}
+In general, there might not be a unique Nash equilibrium. 
+In such cases, another notion of distance from the equilibrium is needed to measure convergence. 
+Exploitability measures the gain in value by deviating from the current strategy. 
+This is measured by computing the utility of a best response agent against the current policy, as an indiciation 
+of incentive to deviate from the current policy.
+Exploitability at the equilibrium is zero by definition since no player wants to deviate from their current strategy.
 
-For the function approximation settings we use the above metrics for the smaller games Kuhn Poker,
-and 2x2 Dark Hex which also have equilibrium solutions computed through Gambit.
-For the larger games, since exact exploitability computation is not possible and we do not know the
-equilibrium solution, we use an approximate measure of exploitability by using a DQN to approximate
+\subsection{Approximate Exploitability}
+For larger games, it is not possible to compute the exact exploitability due to the large state space. 
+However, we can approximate the exploitability by training a best response agent against the fixed current policy to be exploited. 
+Then the exploitability can be approximated by sampling trajectories and measuring the average reward the best response 
+agent acheived against the exploited policy.
+
+In function approximation settings we compute exact exploitability for Kuhn Poker,
+and 2$\times$2 Dark Hex.
+For the larger games, compute approximate exploitability by training a DQN best response agent to approximate
 the best response computation similar to~\cite{sokotaUnified2023}.
 
-\section{Results}
+\section{Tabular Experiments}
 
-\subsection{Tabular Experiments}
 Below, we give an overview of Last, and Average iterate convergences of 3 different algorithms -
 MMD, MDPO, SPG, and their variants obtained by applying combinations of the modified updates.
 We give the convergence results for the more interesting behaviors observed, a more exhaustive list
 of all combinations and their convergence behaviors can be found in the appendix.
 
 % \begin{noindent}
-\begin{table}
-	\centering
-	\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
-		\hline
-		& \multicolumn{2}{c|}{Nash} & \multicolumn{2}{c|}{QRE ($\alpha$=0.5)}              \\
-		\cline{2-5}
-		Algorithm         		& Avg & Last & Avg & Last \\
-		 \toprule 
-		\hline MMD (cf)			& y & y & y & y \\ 
-		\hline FMMD (bf)		& y & y & y & y \\
-		\hline FMMD-N			& y & x & x & x \\
-		\hline FMMD-EG			& y & y & y & y \\
-		\hline FMMD-N-EG		& y & y & x & x \\
-		\hline FMMD-N-OPT		& y & x & x & x \\
-		\hline MDPO				& x & x & - & - \\
-		\hline MDPO-N			& x & x & - & - \\
-		\hline MDPO-EG			& y & y & - & - \\
-		\hline MDPO-N-EG		& y & y & - & - \\
-		\hline MDPO-EG-OPT		& y & y & - & - \\
-		\hline MDPO-N-EG-OPT	& y & y & - & - \\
-		\hline
 
-	\end{tabular} \caption{Convergence in Perturbed RPS}
+\begin{table}[htbp]
+	\centering
+	\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+	\hline
+	\multirow{3}{*}{\textbf{Algorithm}} &
+	\multicolumn{4}{c|}{\textbf{Nash}} &
+	\multicolumn{2}{c|}{\textbf{QRE ($\alpha$=0.5)}} \\
+	\cline{2-7}
+	& 
+	\multicolumn{2}{c|}{\textbf{MMD}} & 
+	\multicolumn{2}{c|}{\textbf{MDPO}} &
+	\multicolumn{2}{c|}{\textbf{MMD}} \\
+	\cline{2-7}
+	& \textbf{Avg} & \textbf{Last} & \textbf{Avg} & \textbf{Last}
+	& \textbf{Avg} & \textbf{Last} \\
+	\hline
+	Base	 	& y & y & x & y 		& y & y \\
+	\hline
+	NeuRD 		& y & y & y & \red{x} 	& y & y \\
+	\hline
+	EG 			& y & y & y & y 	& y & y \\
+	\hline
+	OPT 		& y & y & y & n 	& y & y \\
+	\hline
+	EG-OPT 		& y & y & y & y 	& y & y \\
+	\hline
+	EG-N 		& y & y & y & y 	& y & y \\
+	\hline
+	OPT-N 		& y & y & y & n 	& y & y \\
+	\hline
+	EG-OPT-N	& y & y & y & y 	& y & y \\
+	\hline
+	\end{tabular}
+	\caption{Convergence in Perturbed RPS}
 	\label{tab:tabular}
 \end{table}
 % \end{noindent}
 
-Apart from the final convergence results, we also make a few observations regarding the speed of
-convergence for these variants.
-From \ref{fig:divplots}, we note the following
-
 \begin{figure}[H]
-	\includegraphics[width=15cm]{FIG/MMD_QRE.png}
+	% \subfigure{\includegraphics[width=0.5\linewidth]{plots/MDPO_NE.png}}
+	% \subfigure{\input{plots/tikz/nash.pgf}}
 \end{figure}
 
-\begin{figure}[H]
-	\includegraphics[width=15cm]{FIG/MDPO_NE.png}
-\end{figure}
 
 \begin{figure}[H]
-	\includegraphics[width=15cm]{FIG/MMD_NE.png}
+	\includegraphics[width=15cm]{plots/MMD_NE.png}
 \end{figure}
 
 \begin{itemize}
-	\item{MDPO with extragradient updates have superlinear last iterate convergence to Nash
+	\item{MDPO-EG has superlinear last iterate convergence to Nash
 	            equilibrium.
 	      }
 	\item{MMD with NeuRD fix and extragradient }
 \end{itemize}
 
-\subsection{Neural Experiments}
+From the above experimental results, we note the following:
+
+\begin{itemize}
+	\item {MDPO with extragradient updates has superlinear convergence to Nash equilibrium}
+	\item {Extragradient updates, and the NeuRD fix speedup convergence in both MMD and MDPO for convergence 
+	to both Nash equilibrium and QREs.}
+\end{itemize}
+
+Based on the above findings, we test some of these variants in the function approximation setting for 
+two-player zero-sum games with a large state space.
+
+\subsection{Deep Multi-agent RL Experiments}
 
 Based on the observations from the Tabular NFG experiments, we evaluate the most promising
 combinations of these algorithms in the function approximation setting.
-As discussed in~\cite{sokotaUnified2023}, behavioral form MMD can be implemented as a reinforcement
-learning algorithm with minor changes to PPO due to its similarity.
-We implemented MMD, in a similar way as described in~\cite{sokotaUnified2023} by modifying the PPO
+As noted in~\cite{sokotaUnified2023}, we implement MMD by modifying the PPO
 implementation in RLLib~\cite{liangRLlib2018}.
 We also use RLLib's OpenSpiel adapter with some modifications to use information states as inputs
 as opposed to observations.
 We train these reinforcement learning agents in self-play for the environments mentioned above.
 
+\textbf{Implementation Details:} 
 - Implementation details (RLLib, PPO modifications, GAE)
 - Neural network architecture, hyperparameters
 

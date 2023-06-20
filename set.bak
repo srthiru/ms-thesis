@@ -1,0 +1,31 @@
+
+  "latex-workshop.view.pdf.external.viewer.command": "sioyek",
+  "latex-workshop.view.pdf.external.synctex.args": [
+    "--inverse-search",
+    "code /opt/visual-studio-code/resources/app/out/cli.js --ms-enable-electron-run-as-node -r -g \"%1:%2\"",
+    "--reuse-instance",
+    "--forward-search-file",
+    "%TEX%",
+    "--forward-search-line",
+    "%LINE%",
+    "%PDF%"
+  ],
+  "latex-workshop.latex.outDir": "%DIR%/out",
+  "latex-workshop.linting.chktex.enabled": true,
+  "latex-workshop.latexindent.args": [
+    "-c",
+    "%DIR%/",
+    "%TMPFILE%",
+    "-m",
+    "-l",
+    "~/indentconfig.yaml"
+  ],
+  "latex-workshop.linting.chktex.exec.args": [
+    "-wall",
+    "-n22",
+    "-n30",
+    "-e16",
+    "-q",
+    "-n46",
+    "-n8" // wrong length of dash
+  ],

@@ -98,23 +98,31 @@
 % For darkheaded arrows
 \usepackage{wasysym}
 
+% For plots
+\usepackage{pgfplots}
+
 
 \newtheorem{definition}{Definition}
 \newtheorem{lemma}{Lemma}
 \newtheorem{theorem}{Theorem}
 
+% Color comments
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+
 % Shorthand for notations
 \newcommand{\R}{\mathbb{R}}
+\newcommand{\E}{\mathbb{E}}
 \newcommand{\calX}{\mathcal{X}}
 \newcommand{\calY}{\mathcal{Y}}
 \newcommand{\calZ}{\mathcal{Z}}
+\newcommand{\calH}{\mathcal{H}}
 
 
 \begin{document}
 
 % Declarations for Front Matter
 
-\title{Title of Thesis is here}
+\title{Modified upates for Mirror Descent based methods in two-player zero-sum games.}
 \author{Thiruvenkadam Sivaprakasam Radhakrishnan}
 \pdegrees{}
 \degree{Master's in Computer Science}
@@ -139,7 +147,7 @@
 \end{list}
 
 \summary
-Put your summary of thesis here.
+Put your summary of thesis.
 
 \include{chapters/0_intro.tex}
 \include{chapters/outline.tex}
@@ -164,7 +172,6 @@ Ancillary material should be put in appendices.
 
 % Here is yet another appendix! Wahoo!
 
-\cite{Farine20162243}
 
 %\nocite{*}
 \bibformb

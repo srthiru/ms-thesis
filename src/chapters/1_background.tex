@@ -1,22 +1,111 @@
 \chapter{Background}
 
-We begin by providing some necessary background in Reinforcement learning , Game Theory, and Online
-Learning to make the reader familiar with the concepts required to follow the ideas discussed in
-the following sections.
+This work mainly discusses algorithms that are present in the intersection of three subject areas
+namely, Reinforcement learning, Game Theory, and Online Learning.
+We begin by providing some brief background to familiarize the reader with the relevant concepts
+required to follow the ideas discussed in the following sections.
+We also point to more comprehensive resources for a more detailed discussion of the same.
 
 \section{Reinforcement
   Learning}
 
-\subsection{Policy gradient methods}
-- One way of doing RL is to directly manipulate the policy to maximize some reward.
-- Then use the reward and compute a gradient with respect to policy.
-- Reward might not be typically differentiable, so some workaround is needed to arrive at a gradient-based update rule.
+% What is it?
+Reinforcement learning is sub-domain of machine learning that deals with designing interactive
+agents that learn to maximize a reward signal in an environment.
+The reward signal encodes information about the goal that the designer wants the agent to learn to
+achieve without informing anything about how that goal should be achevied.
 
-\subsubsection{Reinforce}
-- Widely popular PG algorithm, many insantiations possible including variants with baselines to reduce variance.
+% Motivation to study and design RL algorithms
+Reinforcement learning problems are formalized as Markov Decision Processes (MDPs) that are defined
+as follows \red{MDP definition}
+
+Reinforcement learning has been shown to be
+effective in many application domains to learn and solve an arbitrary problem as long as it can be
+encapsulated into an interactive environment with a well-defined reward signal.
+\red{examples}
+
+Reinforcement learning algorithms typically involve learning value functions and policies.
+A policy is the action plan followed by the agent that dictates how the agent acts given a
+particular state.
+Formally, a policy maps a state to a probability distribution over the set of possible actions
+$\pi: S \mapsto A$.
+A value function estimates the worth (\red{better word?
+}) of the agent being in a given state while following
+a particular policy $\pi$, i.e., $v_{\pi}: S \mapsto \R$.
+The worth is typically determined by the expected return following the policy from that state.
+
+$$ v_{\pi}(s) = \E[G_t | S_t = s]$$
+
+Similarly, we can also specify the value of taking a specific action $a$ at a given state, as
+opposed to the value of the entire state.
+These are typically known as action values or q-values
+
+$$ a_{\pi}(s, a) =
+	\E[G_t | S_t = s, A_t = a] $$
+
+A foundational property is that the value
+functions satisfy the Bellman equation:
+
+\red{bellman eqn}
+
+Fixed points of the Bellman quation are optimal policies and optimal value functions.
+For small MDPs that strictly satisfy the Markov property, Bellman equiation can be explicity
+solved.
+However, for larger state spaces and settings that do not satisfy the assumptionsthere is a need to
+design algorithms that solve this equation approximately.
+
+In settings where the transitions and rewards can be represented explicitly in a tabular manner,
+dynamic programming is one approach to solve the Bellman equation.
+For most practical applications it is necessary to develop parameterized policies and approximate
+value functions.
+
+In formulating Reinforcement learning algorithms, there are two major approaches, and their
+derivatives.
+One approach is to
+
+Most of the tabular, and iterative methods require an
+explicit model of an environment with access to the transition functions.
+In the absence of a model or transition functions, one can use Monet Carlo methods to approximate
+these probabilities through sampling.
+This method of learning from experience by iteracting with a blackbox enivornment or a simulator is
+the setting in most of the recent efforts in machine learning.
+This is because it is difficult to explictly design a model that accurately captures all the
+properties of a real-world artifact, and exhaustively model the effects of taking all the actions
+that are available to the agent.
+It is also sometimes impossible or unknown.
+However, it is possible to have access to such a real-world artifact, and we only need to provide
+an interface for the agent to the artifact and expose available actions to the agent.
+We can use the real-world artifact to evaluate these actions and their effects and convert them
+into rewards to provide a signal for the agent to learn from.
+
+\label{sec:spg} \subsection{Policy gradient
+	methods}\label{sec:pg}
+
+Apart from the value-based methods discussed above, another approach is to directly optimize a
+parameterized policy that maximizes the expected reward.
+A value function maybe used in learning the policy, but the agent always uses the policy for
+deciding on actions.
+These are generally called Policy gradient methods, and methods that use a value function in
+addition to learn the policy are called actor-critic methods.
+Here the actor refers to the policy, and the critic refers to the value function that evaluates the
+action taking by the policy guiding the policy learning.
+Policy gradient methods generally have the advantage that the policy space could be simpler to
+learn compared to the value function space.
+
+One key challenge in Policy gradient methods is that the evaluation of performance of a policy
+depends on the state distribution which could be unknown.
+However, the Policy Gradient Theorem establishes that the gradient is independent of underlying
+environment's state distribution as long as it is stationary conditioned on the current policy.
+
+The most popular policy gradient method is Reinforce, which is a Monte Carlo policy gradient
+method.
+
+\textbf{Reinforce} -
+Widely popular PG algorithm, many insantiations possible including variants with baselines to
+reduce variance.
 - Convergence is proven using PG theorem.
 
-\subsubsection{Softmax Policy Gradients}\label{sec:spg}
+\textbf{Softmax Policy Gradients}
 - Parametrizing policies
 - One way of projecting parametrized policy to a probability simplex is Softmax
 
@@ -27,12 +116,30 @@ PG with softmax parameterization is referred to as Softmax Policy gradients.
 - Trust region methods
 - PPO an approximation of TRPO with hueristic objective
 
+\subsection{Multi-agent Reinforcement Learning (MARL)}
+
+There are a few key challenges in extending Reinforcement learning algorithms to multi-agent
+settings.
+From a theoretical perspective, many of the function approximation based algorithms assume that the
+state distribution $\mu(s)$ remains stationary for a given policy.
+However, in multi-agent settings the state distribution can become non-stationary due to the
+changes in the behavior of the other agents.
+This makes it difficult in adapting the algorithms disucssed above directly to multi-agent
+settings.
+
+From an algorithm design perspective, the action space explodes exponentially in multi-agent
+settings making it computationally challenging to apply reinforcement algorithms without
+decomposing the problem into more managable sub-problems first.
+
 \section{Game Theory}
 
 Game theory is the mathematical study of interaction between agents to produce outcomes while
 trying to uphold certain individual or group preferences.
 It has a wide range of applications including economics, biology, and computer science.
-
+In overcoming the challenges mentioned above, many algorithms have adopted game-theoretic
+constrtucts and ideas when designing Reinforcement learning algorithms for multi-agent settings.
+It is also a common practice to use game theoretic constructs in evaluating the performance of
+multi-agent algorithms and provide theoretical guarantees.
 In this work, we mainly focus on a branch of game theory called non-cooperative game theory in
 which each agent has their own indivudual preference.
 
@@ -98,23 +205,150 @@ Nash equilibrium, Quantal response equilibrium.
 - what are the relevant information related to solution conepts for this work?
 Existence of a nash equilibrium Uniqueness of QRE
 
-\section{Online Learning}
+\section{Online Learning and
+  Online Convex Optimization}
 
-- what is online learning?
+Online learning is the study of designing
+algorithms that use historical knowledge in making predictions for future rounds while trying to
+minimize some loss function in an adaptive (possibly adversarial) setting.
 
-Online learning is the study of designing algorithms that use historical knowledge in predicting
-actions for future rounds while trying to minimize some loss function in an adaptive (possibly
-adversarial) setting.
+% Why is it relevant?
+The problem of training agents in a potentially non-stationary setting can be cast into an online
+learning problem.
+Hence, it is useful to study online learning algorithms from the perspective of designing
+reinforcement learning algorithms as they provide a framework for the analysis of the algorithms
+and deriving theoretical guarantees.
+% In this work, we also study algorithms that can be derived from an online-learning perspective, and
+% also can be shown equivalent to popular online learning algorithms.
+The brief background provided in this section closely follows the details as presented
+in~\cite{shalev-shwartzOnline2012}.
+For a more in-depth introduction into Online learning and Online Convex Optimization, please refer
+to the above work.
 
-- why is it useful?
-- why is it relevant here?
+% Definition
+In Online Learning, a learner is tasked with predicting the answer to a set of questions over a
+sequence of consecutive rounds.
+We now define an Online learning problem more formally as follows:
+
+\begin{definition}
+	\label{def:olearning} For each round $t$, given an instance $x_t \in \calX$, and
+	a prediction $p_t \in \calY$, a loss function $l(p_t, y_t) \mapsto \R$
+\end{definition}
+
+At each round t, a question $x_t$ is taken from an instance domain $\calX$, and
+the learner is required to predict an answer, $p_t$ to this question.
+After the prediction is made, the correct answer $y_t$, from a target domain $\calY$ is revealed
+and the learner suffers a loss $l(p_t, y_t)$.
+The prediction $p_t$ could belong to $\calY$ or a larger set, $\mathcal{D}$.
+
+% Assumptions around the problem definition
+% It is known that without any further assumptions about the learning problem, a learner's regret can
+% be unbounded in an adversarial setting~\cite{coverBehavior1965}.
+
+% A popular assumption in Online learning settings is called Realizability, where we assume the
+% target mapping arises from a fixed hypothesis class $\calH$.
+The main aim of an online learning algorithm $A$, is to minimize the cumulative regret of a learner
+with respect to the best competing hypothesis $h^*$ from the assumed hypothesis class $\calH$.
+
+\begin{equation}
+	\label{eqn:regret}
+	Regret_T(h^*) = \sum_{t=1}^T l(p_t, y_t) - \sum_{t=1}^T l(h^*(x_t), y_t),
+\end{equation}
+
+The regret of $A$ with $\calH$ is,
+
+\begin{equation}
+	\label{eqn:regret_all} Regret_T(\calH) = \max_{h^* \in \calH} Regret_T(h^*)
+\end{equation}
+
+A popular framework for studying and designing Online learning algorithms is
+through Convex optimization.
+The assumptions made around the framework provides properties that are useful in deriving
+convergence guarantees.
+
+The typical structure of online learning expressed as an online convex optimization problem is as
+follows:
+
+\begin{alprocedure}[H] \algorithmcfname{OCO}~\label{alg:oco}
+
+	input: a convex set S for t = 1, 2.
+	$\ldots$
+
+	predict a vector $w_t \in S$
+
+	receive a convex loss function $f_t: S \mapsto \mathbb{R}$
+\end{alprocedure}
+
+Reframing~\ref{eqn:regret} in terms of convex optimization, we refer to a competing hypothesis here
+as some vector $u$ from the convex set $S$.
+
+\begin{equation}
+	Regret_T(u) = \sum_{t=1}^T f_t(w_t) - \sum_{t=1}^T f_t(u)
+\end{equation}
+
+and
+similarly, the regret with respect to a set of competing vectors $U$ is, \begin{equation}
+	Regret_T(U) = \max_{u \in U} Regret_T(u)
+\end{equation}
+
+The set $U$ can be same
+as $S$ or different in other cases.
+Here we assume $U=S$ and $S=\mathbb{R^d}$ unless specified otherwise.
 
 \subsection{FoReL}\label{sec:forel}
-- what is forel?
-- relevant info?
 
-\subsection{Hedge}
-- what is hedge?
+Follow-the-Regularized-leader (FoReL) is a classic online learning algorithm that acts as a base in
+deriving various regret mimization algorithms.
+The idea of FoReL is to include a regularization term to stabilize the updates in each iteration
+leading to better convergence behaviors.
+
+The learning rule can be written as,
+
+$$\forall t, w_t = argmin_{w \in S}
+	\sum_{i=1}^{t-1} f_i(w) + R(w).
+$$
+
+where $R(w)$ is the regularization term.
+The choice of the regularization function lead to different algorithms with varying regret bounds.
 
 \subsection{Gradient Descent}
+
+In the case of linear loss functions with respect to some $z_t$, i.e., $f_t(w) = \langle w, z_t
+	\rangle$, and $S=\mathbb{R}^d$, if FoReL is run with $l_2$-norm regularization $R(w) = \frac{1}{2
+		\eta} \|w\|_2^2$, then the learning rule can be written as,
+
+\begin{equation}
+	w_{t+1} = -\eta \sum_{i=1}^t z_i = w_t - \eta z_t
+\end{equation}
+
+Since, $\nabla
+	f_t(w_t) = z_t$, this can also be written as, $w_{t+1} = w_t - \eta \nabla f_t(w_t)$.
+This update rule is also commonly known as Online Gradient Descent.
+The regret of FoReL run on Online linear optimization with a euclidean-norm regularizer is:
+
+$$Regret_T(U) \leq BL \sqrt {2T}.
+$$
+
+where $U = {u : \|u\| \leq B}$ and $\frac{1}{T} \sum_{t=1}^T \|z_t\|_2^2 \leq L^2$ with $\eta = \frac{B}{L\sqrt{2T}}$.
+
+Beyond Euclidean regularization, FoReL can also be run with other regularization functions and
+yield similar regret bounds given that the regularization functions are strongly convex.
+
+\begin{definition}
+	For any $\sigma$-strongly-convex function $f: S \mapsto \mathbb{R}$ with respect to a norm $\|.
+		\|$, for any $w \in S$,
+	\begin{equation}
+		\forall z \in \partial f(w), \forall u \in S, f(u) \geq f(w) + \langle z, u - w\rangle + \frac{\sigma}{2}\| u - w \|^2.
+	\end{equation}
+\end{definition}
+
+\begin{lemma}
+	\label{lem:forelrb}
+	For a FoReL algorithm producing a sequence of vectors $w_1, \ldots, w_T$ with a sequence of loss
+	functions $f_1, \ldots, f_T$, for all $u \in S$, $$\sum_{t=1}^T (f_t(w_t) - f_t(u)) \leq R(u) -
+		R(w_1) + \sum_{t=1}^T (f_t(w_t) - f_t(w_{t+1}))$$
+\end{lemma}
+
+\subsection{Hedge} - what is hedge?
+
 Gradient descent as a FTRL variant

@@ -1,4 +1,49 @@
 \chapter{Introduction}
 
-In this work, we study two mirror-descent based reinforcement learning algorithms and propose novel
-improvements to them.
+Multiagent Systems (MAS)~\cite{tuylsMultiagent2012} are frameworks of problems of distributed nature with independent actors called agents 
+that cooperate or compete to achieve some outcome.
+Due to the complexity of such problems, designing efficient algorithms for them can be challenging.
+Machine learning presents opportunities in creating learning algorithms for agents in Multi-agent settings.
+Multiagent Learning (MAL) is an area of research that studies the application of machine learning to 
+Multiagent Systems.
+Reinforcement learning (RL), an area of study within machine learning is a popular choice of learning technique 
+due to its compatability in terms of learning through interaction.
+Although RL algorithms have gained applications in various domains, their direct
+applicability in multi-agent setting is limited due to the non-stationarity problem.
+Multiagent Reinforcement Learning (MARL) as a research area deals with designing efficient and 
+performant RL algorithms for general multiagent problems by incorporating ideas from game theory, online learning, and evolutionary
+biology etc.
+Apart from the non-stationarity problem 
+There are a range of problems that are currently being studied in designing Multi-agent systems, including 
+communication, 
+
+Two-player zero-sum games are instances of multiagent systems that are purely competitive in nature.
+Due to their unique structure, two-player zero-sum games can also be represented as saddle-point 
+problems that provide certain analytical properties.
+This presents an opportunity to study and design optimization algorithms under the dynamics of two-player 
+zero-sum games, with an aim to extend these algorithms to general multiagent settings.
+Two-player zero-sum games also model other learning problems~\cite{goodfellowGenerative2014} and as such these advances can also be equivalently 
+applied or adapted to solve them. 
+
+Mirror Descent is a popular first order optimization algorithm that has wide applications.
+In this work, we study mirror-descent based reinforcement learning algorithms in the context of
+two-player zero-sum games.
+Specifically we study Mirror Descent Policy Optimization, and Magnetic Mirror Descent, two recent
+algorithms that extends Mirror Descent as Single RL algorithms, and approximate equilibrium solvers.
+We propose novel improvements to these algorithms by incorporating existing techniques and study their convergence 
+behaviors in normal form games.
+We also evaluate the performance of these algorithms in large extensive form
+games under function approximation.
+We summarize our findings regarding the effectiveness of mirror-descent based reinforcement
+learning algorithms in the multiagent setting and the effect of the modifications we apply.
+Through these study we provide some recommendations in designing MARL algorithms and  
+close with some remarks about future research directions.
+
+\red{?}
+Recent developments have demonstrated a vast potential in application of machine learning, and deep learning 
+to a wide range of domains with efforts in creating more general large-scale foundational models to smaller specialized 
+models that are optimized for specific use cases.
+Due to such progress it can be expected that there will soon be a prevalance of such learnt applications 
+deployed in a variety of context gaining increasing power of autonomy and execution.
+It can be forseen that soon these models will have to be adaptive in the presence of other such 
+models that are either competing or cooperative in nature.

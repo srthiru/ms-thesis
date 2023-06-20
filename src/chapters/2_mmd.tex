@@ -1,29 +1,77 @@
-\chapter{Magnetic Mirror Descent}
+\chapter{Mirror Descent in Reinforcement Learning}
 
 \section{Mirror Descent}
 
 In this section we discuss about Mirror Descent, and two mirror descent-based reinforcement
 learning algorithms (MDPO, and MMD).
+Mirror descent is a popular first order optimization algorithm that has seen wide applications in
+machine learning, and reinforcement learning.
 
-A disadvantage of FoReL~\ref{sec:forel} in solving online learning problems is that, there is a
-minimization at every step.
-Mirror descent overcomes this by using a recursive update rule that does not required us to perform
-a minimization at every step.
+There are different views of arriving at Mirror Descent as an optimization algorithm, here we
+present the Mirror Descent framework through the lens of mirror maps.
 
-There are different views of arriving at Mirror Descent as an optimization algorithm, some of which
-include the FTRL view, the mirror map view, \dots
+\subsection{Mirror Maps}
 
-- Mirror descent algorithm
+% Define Bregman divergence
+\begin{definition}
+	\label{def:bregman}
+	Given a convex set $\calX \subset \R^n$, and a differentiable convex function $f: \calX \mapsto
+		\R$, the Bregman Divergence associated with the function $f$ is defined as,
 
-- Mirror descent convergence guarantee for OCO
+	$$
+		D_f(x, y) = f(x) - f(y) - \nabla f(y)^T (x-y).
+	$$
+\end{definition}
+
+We can also define a few properties that the function $f$ has based on the Bregman Divergence.
+\begin{definition}[Strongly Smooth]~\label{def:strsmooth}
+	Given a convex set $\calX \in \R^n$, a convex function $f: \calX \mapsto \R$ is $\sigma$-strongly
+	smooth with respect to a norm $\|.
+		% Define Strongly convex, strongly smooth.
+		\|$, if $\|\nabla f(x) - \nabla f(y) \|_{\ast} \leq \sigma \|x - y \|, \forall x, y \in \calX$.
+\end{definition}
+
+For an alternate view of deriving Mirror Descent as an improvement of FoReL, please refer
+to~\cite{shalev-shwartzOnline2012}[Section 2.6].
+% A disadvantage of FoReL~\ref{sec:forel} in solving online learning problems is that, there is a
+% minimization that must be performed at every step.
+% Mirror descent overcomes this by using a recursive update rule that does not required us to perform
+% a minimization at every step.
+
+There have been a few well-established efforts in adapting mirror descent from a general
+first-order optimization algorithm as described above into a reinforcement learning algorithm.
+In this work, we mainly consider two such algorithms, namely MDPO (Mirror Descent Policy
+Optimization), and MMD (Magnetic Mirror Descent).
+We provide a high-level description of the approach taken in arriving at these algorithms and how
+they are connected to Mirror Descent before applying modifications on top of these algorithms in an
+effort to improve convergence behaviors of these algorithms in two-player zero-sum settings.
 
 \subsection[MDPO]{Mirror Descent Policy Optimization}
 
-\section[MMD]{Magnetic
-  Mirror Descent}
+The first of these algorithms Mirror Descent Policy Optimization~\cite{tomarMirror2022} addresses
+the problem of trust-region solving to stabilize reinforcement learning updates.
+Reinforcement learning algorithms, especially Policy gradient methods are notoriously known for
+having high-variance updates causing troubles in converging to the optimal policy \red{cite}.
+One approach to tackle this problem from an optimization perspective is to ensure that the policy
+does not change drastically with each gradient update to stabilize the learning.
+This is popularly known as trust region optimization.
+PPO, TRPO are popular single agent reinforcement learning algorithms that incorporate trust region
+optimization into \dots \red{outline PPO, and TRPO}.
+\cite{schulmanProximal2017}
 
-Magnetic Mirror Descent~\cite{sokotaUnified2023} is an approach
-that is applicable both as an equilibrium solving algorithm and a reinforcement learning algorithm.
+While MDPO differs from the above approaches in that they arrive at a similar algorithm from the
+perspective of Mirror Descent, they also show strong connections to PPO, TRPO, and SAC.
+
+\subsection{Mirror Descent as an RL algorithm}
+\red{RL objective is not convex; can still use MD..
+	\cite{shaniAdaptive2020}}
+
+$$ \pi_{k+1} <- \arg \max_{\pi \in \Pi} \E_{s \sim \rho_{\pi_k}} $$
+
+\section[MMD]{Magnetic Mirror Descent}
+
+Magnetic Mirror Descent~\cite{sokotaUnified2023} is an approach that is applicable both as an
+equilibrium solving algorithm and a reinforcement learning algorithm.
 % with certain structures
 The main results of Sokota et.al~\cite{sokotaUnified2023} are as follows.
 First, they establish an equivalence between solving for normal-form reduced QRE of a two-player

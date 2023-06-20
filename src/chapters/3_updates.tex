@@ -1,17 +1,19 @@
 \chapter{Modified Updates for Mirror-descent based methods}
 
-We propose applying a few modifications to the methods discussed in the previous section and
-investigate the effect of these modifications in terms of their performance and convergence
-behaviors in two-player zero-sum games.
-We first introduce the proposed modifications to be applied on the methods discussed in the
-previous section, and then provide a description of how these modifications fit into those
-algorithms.
+The main work of this thesis is exploring a few existing techniques that have been proven to be 
+effective in multi-agent settings in the context of the above alogrithms.
+These techniques are namely - Neural Replicator Dynamics~\cite{hennesNeural2020}, Extragradient methods~\cite{korpelevichextragradient1976}, and Optimistic updates \red{[?]}. 
+We propose combining these techniques to the methods discussed in the previous section and
+investigate their behavior through experiments in two-player zero-sum games.
+We now discuss these techniques and how they have generally been applied in the literature. 
+While discussing each technique, we also outline how they fit into the algorithms discussed 
+in the previous section and hypothesize about the potential effects these modifications.
 
 \section{Neural Replicator Dynamics (NeuRD)}
-Neural Replicator Dynamics (NeuRD)~\cite{hennesNeural2020} is a model-free sample-based algorithm
-that is an application of Replicator Dynamics to Policy Gradients.
 Replicator Dynamics is an idea from Evolutionary game theory (EGT) that defines operators to update
 the dynamics of a population in order to maximize some pay-off defined by a fitness function.
+Neural Replicator Dynamics (NeuRD) is an extension of Replicator Dynamics 
+to function approximation settings.
 
 The single-population replicator dynamics is defined by the following system of differntial
 equations:
@@ -21,25 +23,33 @@ equations:
 		\bar{u}(\pi)], \forall a \in \mathcal{A}
 \end{equation}
 
-Hennes
-et.al,~\cite{hennesNeural2020} show equivalence between Softmax Policy gradients~\ref{sec:spg} and
+Hennes et.al,~\cite{hennesNeural2020} show equivalence between Softmax Policy gradients~\ref{sec:pg} and
 continuous-time Replicator Dynamics~\cite[THEOREM 1, on p5]{hennesNeural2020}\label{thm:spgrd}.
 
-NeuRD can be implemented as a single line change to the SPG algorithm.
-This can be seen as applying a fix to the update of SPG to make it more responsive to changes in a
-non-stationary environment.
+With knowledge of this equivalence they detail how NeuRD can be implemented as a one line change to SPG.
+This can be viewed as a fix to the regular SPG update to make it more suited to multi-agent settings 
+by making the policy updates more responsive to changes in dynamics.
+
+Replicator dynamics also have a strong connection to no-regret algorithms, and in this work, the authors also establish 
+the equivalence between single-state all actions tabular NeuRD, Hedge, and discrete time RD~\cite[Statement 1, p5]{hennesNeural2020}.
+Due to this equivalence, NeuRD also inherits the no-regret properties of algorithms like Hedge.
+While NeuRD has average iterate convergence, the authors also induce last iterate convergence in imperfect 
+information settings for NeuRD using reward transformation based regularization~\cite{perolatPoincare2021}.
+
+
 Since the typical neural network representation of policies use softmax projection on the logits,
 the idea of fixing the gradient updates can be applied more generally to algorithms beyond SPG.
 The NeuRD loss has been adapted into other algorithms to improve performance or induce convergence
 in competitive and cooperative settings.
 Chhablani et.al,~\cite{chhablaniCounterfactual2021} showed improved performance in
 identical-interest games by applying the NeuRD fix to COMA~\cite{foersterCounterfactual2018}.
-Perolat et.al,~\cite{perolatMastering2022} used a NeuRD based loss function along with adaptive
-regularization~\cite{perolatPoincare2021} to induce last-iterate convergence in Stratego.
+Perolat et.al,~\cite{perolatMastering2022} used NeuRD loss to approximate Replicator dynamics 
+as a part of the DeepNash algorithm. 
+They used the same reward transformation based adaptive regularization~\cite{perolatPoincare2021} to induce last-iterate convergence in training agents for the game of Stratego.
 
-\subsection{MMD-N}
+\subsection{NeuRD fix in MMD, and MDPO}
+The NeuRD fix can be applied to MMD, and MDPO in a similar way to SPG.
 
-\subsection{MDPO-N}
 
 \section{Extragradient updates}
 
