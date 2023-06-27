@@ -13,16 +13,9 @@ Through the experiments, we aim to answer the following questions:
 	\item Do these performance improvements scale well with the size of the game?
 \end{itemize}
 
-We evaluate the converegence behavior of all these algorithms on Perturned RPS.
-For the function approximation setting, we evaluate the algorithms on Kuhn Poker, Abrupt Dark Hex,
-and Phantom Tic-tac-toe.
-Kuhn Poker is a smaller extensive form game that allows for more introspection and exact exploitability computation.
-Whereas, Abrupt Dark Hex, and Phantom TTT are games with a large state-space that test the scalability of these
-algorithms.
-
-\section{Evaluation Methods}
-Our main focus being the convergence behaviors and the speed of convergence of these algorithms we need a notion of 
-distance from the equilibrium point.
+\section{Evaluation Metrics}
+Our main focus being the convergence behaviors and speed of convergence we need a notion of 
+distance from the equilibrium point to measure the performance of these algorithms.
 
 \subsection{Divergence to the equilibrium}
 In settings with a known unique equilibrium such as for QREs, or Nash equilibrium in symmetric markov games, 
@@ -34,11 +27,12 @@ PerturbedRPS.\
 
 \subsection{Exploitability}
 In general, there might not be a unique Nash equilibrium. 
-In such cases, another notion of distance from the equilibrium is needed to measure convergence. 
-Exploitability measures the gain in value by deviating from the current strategy. 
+In such cases, another notion of distance from the equilibrium is needed to measure convergence.
+Exploitability measures the gain in value by deviating from the current strategy.
 This is measured by computing the utility of a best response agent against the current policy, as an indiciation 
 of incentive to deviate from the current policy.
-Exploitability at the equilibrium is zero by definition since no player wants to deviate from their current strategy.
+
+\blue{ - Exploitability formal expression in terms of best responses, and value.}
 
 \subsection{Approximate Exploitability}
 For larger games, it is not possible to compute the exact exploitability due to the large state space. 
@@ -46,17 +40,13 @@ However, we can approximate the exploitability by training a best response agent
 Then the exploitability can be approximated by sampling trajectories and measuring the average reward the best response 
 agent acheived against the exploited policy.
 
-In function approximation settings we compute exact exploitability for Kuhn Poker,
-and 2$\times$2 Dark Hex.
-For the larger games, compute approximate exploitability by training a DQN best response agent to approximate
-the best response computation similar to~\cite{sokotaUnified2023}.
-
 \section{Tabular Experiments}
+We evaluate the converegence behavior of all these algorithms on Perturned RPS.
 
-Below, we give an overview of Last, and Average iterate convergences of 3 different algorithms -
-MMD, MDPO, SPG, and their variants obtained by applying combinations of the modified updates.
-We give the convergence results for the more interesting behaviors observed, a more exhaustive list
-of all combinations and their convergence behaviors can be found in the appendix.
+
+\ref{tab:tabres} summarizes the last and average iterate convergences behaviors of 3 different algorithms -
+MMD, MDPO, SPG under the proposed modifications.
+We present the results for NE, and QRE convergence (with 0.5 temperature). Fig
 
 % \begin{noindent}
 
@@ -93,8 +83,8 @@ of all combinations and their convergence behaviors can be found in the appendix
 	EG-OPT-N	& y & y & y & y 	& y & y \\
 	\hline
 	\end{tabular}
-	\caption{Convergence in Perturbed RPS}
-	\label{tab:tabular}
+	\caption{QRE and Nash convergence in Perturbed RPS for last, and average iterates.}
+	\label{tab:tabres}
 \end{table}
 % \end{noindent}
 
@@ -128,13 +118,27 @@ two-player zero-sum games with a large state space.
 
 \subsection{Deep Multi-agent RL Experiments}
 
+
 Based on the observations from the Tabular NFG experiments, we evaluate the most promising
 combinations of these algorithms in the function approximation setting.
 As noted in~\cite{sokotaUnified2023}, we implement MMD by modifying the PPO
 implementation in RLLib~\cite{liangRLlib2018}.
 We also use RLLib's OpenSpiel adapter with some modifications to use information states as inputs
 as opposed to observations.
-We train these reinforcement learning agents in self-play for the environments mentioned above.
+
+For the function approximation setting, we evaluate the algorithms on Kuhn Poker, Abrupt Dark Hex,
+and Phantom Tic-tac-toe.
+Kuhn Poker is a smaller extensive form game that allows for more introspection and exact exploitability computation.
+Whereas, Abrupt Dark Hex, and Phantom TTT are games with a large state-space that test the scalability of these
+algorithms.
+
+In function approximation settings we compute exact exploitability for Kuhn Poker,
+and 2$\times$2 Dark Hex.
+For the larger games, compute approximate exploitability by training a DQN best response agent to approximate
+the best response computation similar to~\cite{sokotaUnified2023}.
+
+We train these reinforcement learning agents i self-play for the environments mentioned above.
+
 
 \textbf{Implementation Details:} 
 - Implementation details (RLLib, PPO modifications, GAE)

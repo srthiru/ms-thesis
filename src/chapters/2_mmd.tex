@@ -1,43 +1,5 @@
 \chapter{Mirror Descent in Reinforcement Learning}
 
-\section{Mirror Descent}
-
-In this section we discuss about Mirror Descent, and two mirror descent-based reinforcement
-learning algorithms (MDPO, and MMD).
-Mirror descent is a popular first order optimization algorithm that has seen wide applications in
-machine learning, and reinforcement learning.
-
-There are different views of arriving at Mirror Descent as an optimization algorithm, here we
-present the Mirror Descent framework through the lens of mirror maps.
-
-\subsection{Mirror Maps}
-
-% Define Bregman divergence
-\begin{definition}
-	\label{def:bregman}
-	Given a convex set $\calX \subset \R^n$, and a differentiable convex function $f: \calX \mapsto
-		\R$, the Bregman Divergence associated with the function $f$ is defined as,
-
-	$$
-		D_f(x, y) = f(x) - f(y) - \nabla f(y)^T (x-y).
-	$$
-\end{definition}
-
-We can also define a few properties that the function $f$ has based on the Bregman Divergence.
-\begin{definition}[Strongly Smooth]~\label{def:strsmooth}
-	Given a convex set $\calX \in \R^n$, a convex function $f: \calX \mapsto \R$ is $\sigma$-strongly
-	smooth with respect to a norm $\|.
-		% Define Strongly convex, strongly smooth.
-		\|$, if $\|\nabla f(x) - \nabla f(y) \|_{\ast} \leq \sigma \|x - y \|, \forall x, y \in \calX$.
-\end{definition}
-
-For an alternate view of deriving Mirror Descent as an improvement of FoReL, please refer
-to~\cite{shalev-shwartzOnline2012}[Section 2.6].
-% A disadvantage of FoReL~\ref{sec:forel} in solving online learning problems is that, there is a
-% minimization that must be performed at every step.
-% Mirror descent overcomes this by using a recursive update rule that does not required us to perform
-% a minimization at every step.
-
 There have been a few well-established efforts in adapting mirror descent from a general
 first-order optimization algorithm as described above into a reinforcement learning algorithm.
 In this work, we mainly consider two such algorithms, namely MDPO (Mirror Descent Policy
@@ -92,104 +54,76 @@ The gradient of KL-Divergence with respect to the parameters theta is given by:
 
 \section[MMD]{Magnetic Mirror Descent}
 
-Another extension of Mirror Descent to Reinforcement learning is Magnetic Mirror Descent~\cite{sokotaUnified2023}.
-The main aim of this work is creating an RL algorithm that performs well in both single, and 
-multiagent settings.
-The authors start-off by casting QRE solving as a bilinear saddle point problem and establish its equivalence 
-to solving Variational Inequality problems with specific structures.
+Another extension of Mirror Descent to reinforcement learning is Magnetic Mirror Descent~\cite{sokotaUnified2023}, 
+that attempts to create a unified algorithm that works well in both single and multiagent settings.
+In this work, first an equivalence between solving regularized saddle point problems
+and Variational Inequality problems with composite structures is established. 
+Then this connection is used to propose an equilibrium solving algorithm that has linear last iterate convergence guarantees. 
+Moreover, the proposed method is extended as a reinforcement learning algorithm in single agent setting, and 
+also as a multiagent reinforcement algorithm through selfplay.
 
 \subsection{Connection between Variational Inequalities and QREs}
 
-Variational inequalities are a general class of problems that have a wide range of applications.
-A Variational Inequality problem is generally of the following form:
-
-\begin{definition}
-	Given $\calZ
-		\subseteq \R^n$ and mapping $G: \calZ \rightarrow \R^n$, the variational inequality problem VI
-	($\calZ, G$) is to find $z_{\ast} \in \calZ$ such that,
-
-	\[ \langle G(z_{\ast}),
-		z - z_{\ast} \rangle \geq 0 \quad \forall z \in \calZ.
-	\]
-\end{definition}
-
-Solving for QREs in two-player zero-sum games can be represented as the following bilinear saddle
-point problem:
-
+Finding the QRE of a two-player zero-sum game can be represented as the following entropy-regularized saddle
+point problem. Given $\calX \subseteq \R^n$, $calY \subseteq \R^m$, and $g_1: \R^n \mapsto \R$, $g_2: \R^m \mapsto \R$, 
+find:
 \begin{equation}
 	\label{eqn:saddle} \min_{x \in \mathcal{X}}
 	\max_{y \in \mathcal{Y}} \alpha g_1(x) + f(x, y) + \alpha g_2(y),
 \end{equation}
 
-where $\mathcal{X} \subset \mathbb{R}^n$, $\mathcal{Y} \subset \mathbb{R}^m$
-are closed and convex, and $g_1: \mathbb{R}^n \rightarrow \mathbb{R}$, $g_2: \mathbb{R}^m
-	\rightarrow \mathbb{R}$, $f : \mathbb{R}^n \times \mathbb{R}^m \rightarrow \mathbb{R}$.
-
-The solution $(x_{\ast}, y_{\ast})$ to the saddle point problem~\ref{eqn:saddle}, corresponds to
-the Nash equilibrium of the reguarlized game with the following first-order optimality conditions:
-
+The solution $(x_{\ast}, y_{\ast})$ to the saddle point problem~\ref{eqn:saddle} has the following first-order optimality conditions:
 \begin{equation}
-	\label{eqn:optcon1} \langle \nabla g_1(x_*) + \nabla_{x_*}
-	f(x_*, y_*), x - x_* \rangle \geq 0, \forall x \in \calX.
+	\label{eqn:optcon} 
+	\begin{split}
+		\langle \alpha \nabla g_1(x_*) + \nabla_{x_*}
+		f(x_*, y_*), x - x_* \rangle \geq 0, \forall x \in \calX. \\
+		\langle \alpha \nabla g_2(y_*) + \nabla_{y_*} f(x_*, y_*),
+		y - y_* \rangle \geq 0, \forall y \in \calY.
+	\end{split}
 \end{equation}
 
-\begin{equation}
-	\label{eqn:optcon2}
-	\langle \nabla g_2(y_*) + \nabla_{y_*} f(x_*, y_*),
-	y - y_* \rangle \geq 0, \forall y \in \calY.
-\end{equation}
+A Variational Inequality (VI) problem, written as $VI(Z, F)$ is generally defined as follows:
+\begin{definition}
+	\label{def:vi}
+	Given $\calZ
+		\subseteq \R^n$ and mapping $F: \calZ \rightarrow \R^n$, the variational inequality problem VI
+	($\calZ, F$) is to find $z_{\ast} \in \calZ$ such that,
+	\[ \langle F(z_{\ast}),
+		z - z_{\ast} \rangle \geq 0 \quad \forall z \in \calZ.
+	\]
+\end{definition}
 
-These optimality conditions are equivalent to VI$(\calZ, G)$, where $G = F + \alpha \nabla g$,
-$\calZ = \mathcal{X} \times \mathcal{Y}$, and $g: \calZ \rightarrow \mathbb{R}$.
+The reguarlized saddle point problem~\ref{eqn:saddle} of solving for QREs can be related to the VI problem 
+with a composite objective. If $G = F + \alpha \nabla g$, and $\calZ = \mathcal{X} \times \mathcal{Y}$, 
+where 
+The optimality conditions~\ref{eqn:optcon} are equivalent to VI$(\calZ, G)$, where $G = F + \alpha \nabla g$,
+, and $g: \calZ \rightarrow \mathbb{R}$.
 Hence, the solution the the VI problem ($z_{\ast}= (x_{\ast}, y_{\ast})$), corresponds to the
 solution of the saddle point problem stated in~\ref{eqn:saddle}.
 
-
-% Sokota et al.~\cite{sokotaUnified2023} cast solving for
-% QREs in two-player zero-sum games as a and apply MMD to solve for QREs with linear last-iterate
-% convergence guarantees.
-% They do so by first representing the two-player zero-sum games as a bilinear saddle point problem
-% and then showing the equivalence between solving the saddle point problem and solving variation
-% inequality problems under specific conditions.
-% They then use this connection to derive an algorithm that is termed Magnetic Mirror Descent (MMD).
-% In this section we detail how this relation is established and also outline the algorithm for
-% Magnetic Mirror Descent as presented in~\cite{sokotaUnified2023}.
-
-
-
-% Represent QRE as a bilinear saddle point problem
-
-
-
 \subsection{MMD Algorithm}
 
-Based on the above connection they propose a non-euclidean proximal gradient method as an
-equilibrium finding algorithm in two-player zero-sum games.
-They also prove a linear last-iterate convergence guarantee for the algorithm as a QRE solver.
+Various algorithms have been proposed to solve the VI problem~\ref{def:vi}.
+In particular, the proximal point method has linear last iterate convergence for Variational 
+inequality problems with a monotone operator~\cite{rockafellarMonotone1976}.
+This algorithm was extended to composite objectives~\cite{tsenglinear1995}, and to non-euclidean 
+spaces with Bergman divergence as a proximity measure, 
+that allows for non-euclidean proximal regularization~\cite{tsengApproximation2010}.
 
-The authors first propose a non-Euclidean proximal gradient method to solve the VI ($\calZ, F +
-	\alpha \nabla g$) with the following update at each iteration:
+This non-euclidean proximal gradient algorithm, that is more generally applicable for VI problems 
+with monotone operators, performs the following update at each iteration:
 
 \begin{equation}
 	\label{eqn:proxgrad} z_{t+1} = \arg \min_{z \in \calZ} \eta (\langle F(z_t), z\rangle + \alpha
 	g(z)) + B_{\psi} (z; z_t).
 \end{equation}
 
-With the following assumptions, $z_{t+1}$ is well defined:
+where $\psi$ is a strongly convex function with respect to $\|.\|$ over $\calZ$.
 
-\begin{itemize}
-	\item $\psi$ is 1-strongly convex with respect to $\|.
-		      \|$ over $\calZ$, and for
-	      any $l$, stepsize $\eta > 0$, $\alpha > 0$,
-	      $z_{t+1} = \arg \min_{z \in \calZ} \eta (\langle l, z \rangle + \alpha g(z)) + B_{\psi}(z;z_t) \in \text{int dom } \psi.$
-
-	\item $F$ is monotone and $L$-smooth with respect to $\|.\|$ and $g$ is 1-strongly convex
-	      relative to $\psi$ over $\calZ$ with $g$ differentiable over int dom $\psi$.
-\end{itemize}
-
-The algorithm that is termed MMD uses the same update as~\ref{eqn:proxgrad}, with $g$ taken to be
-$\psi$ or $B_{\psi}(.
-	;z')$ for some z'.
+The algorithm that is termed Magnetic Mirror Descent (MMD) uses the same update as~\ref{eqn:proxgrad}, with $g$ taken to be
+$\psi$ as a proximal regularization operator or $B_{\psi}(.;z')$ enforcing $z_{t+1}$ to move close to some reference vector 
+$z'$. In the latter case, $z'$ is referred to as the magnet, hence the name Magnetic Mirror Descent.
 
 We now restate the main algorithm as stated in Sokota et.al,~\cite{sokotaUnified2023},
 
@@ -247,22 +181,15 @@ where $\pi_t$ is the current policy, $q_t$ is a vector
 containing the q-values following the policy $\pi_t$, and $H(\pi)$ is the entropy of the policy
 being optimized.
 
-% Here is a sketch of an algorithm for on-policy MMD using the behavioral form update in RL terms
-% similar to
-
-% \begin{alprocedure}
-% 	\algorithmcfname{MMD-BF}\label{alg:mmdbf}
-
-% \end{alprocedure}
-
-% \textbf{Gradient of MMD}
-
 In single-agent settings MMD's performance is competitive with PPO in Atari and MuJoCo
 environments.
 And, in the multi-agent setting the performance of tabular MMD is on par with CFR, but worse than
 CFR+.
 
-\subsection{Equivalence of MMD and MDPO}
+\subsection{Comparison of MMD to other Mirror Decent based methods}
 
-- MDPO with an added entropy term is equivalent to MMD with negative entropy mirror map and
-uniform magnet.
+The non-euclidean proximal gradient method~\ref{eqn:proxgrad}, has strong connections to Mirror Descent. 
+\cite[Appendix D.3]{sokotaUnified2023} also details this relationship by showing MMD is equivalent to Mirror 
+Descent with an added regularization term.
+Since MDPO is a direct extension of Mirror Descent to reinforcement learning, negative entropy based MMD 
+is also equivalent to MDPO with an added negative entropy regularization as detailed in~\cite[Appendix L]{sokotaUnified2023}.

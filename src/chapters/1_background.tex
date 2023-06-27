@@ -1,10 +1,8 @@
 \chapter{Background}
-
 This work mainly discusses algorithms that are present in the intersection of three subject areas
 namely, Reinforcement learning, Game Theory, and Online Learning.
-We begin by providing some brief background to familiarize the reader with the relevant concepts
-required to follow the ideas discussed in the following sections.
-We also point to more comprehensive resources for a more detailed discussion of the same.
+We provide some brief background to relevant concepts required to follow the ideas discussed in the following sections 
+and point to more comprehensive resources when applicable.
 
 \section{Reinforcement
   Learning}
@@ -17,66 +15,65 @@ achieve without informing anything about how that goal should be achevied.
 
 % Motivation to study and design RL algorithms
 Reinforcement learning problems are formalized as Markov Decision Processes (MDPs) that are defined
-as follows \red{MDP definition}
+as follows 
+
+\blue{ - MDP formal definition}
 
 Reinforcement learning has been shown to be
 effective in many application domains to learn and solve an arbitrary problem as long as it can be
 encapsulated into an interactive environment with a well-defined reward signal.
-\red{examples}
+\blue{ - cite RL applications}
 
 Reinforcement learning algorithms typically involve learning value functions and policies.
 A policy is the action plan followed by the agent that dictates how the agent acts given a
 particular state.
 Formally, a policy maps a state to a probability distribution over the set of possible actions
 $\pi: S \mapsto A$.
-A value function estimates the worth (\red{better word?
-}) of the agent being in a given state while following
+A value function estimates the value of the agent being in a given state under 
 a particular policy $\pi$, i.e., $v_{\pi}: S \mapsto \R$.
-The worth is typically determined by the expected return following the policy from that state.
+One way of estimating this value is the expected return acheived following the policy from that state:
 
-$$ v_{\pi}(s) = \E[G_t | S_t = s]$$
+$$ v_{\pi}(s) = \E_{\pi}[G_t | S_t = s]$$
 
 Similarly, we can also specify the value of taking a specific action $a$ at a given state, as
 opposed to the value of the entire state.
 These are typically known as action values or q-values
 
 $$ a_{\pi}(s, a) =
-	\E[G_t | S_t = s, A_t = a] $$
+	\E_{\pi}[G_t | S_t = s, A_t = a] $$
 
 A foundational property is that the value
 functions satisfy the Bellman equation:
 
-\red{bellman eqn}
+\blue{- Bellman eqn expression}
 
 Fixed points of the Bellman quation are optimal policies and optimal value functions.
 For small MDPs that strictly satisfy the Markov property, Bellman equiation can be explicity
 solved.
-However, for larger state spaces and settings that do not satisfy the assumptionsthere is a need to
-design algorithms that solve this equation approximately.
-
 In settings where the transitions and rewards can be represented explicitly in a tabular manner,
 dynamic programming is one approach to solve the Bellman equation.
-For most practical applications it is necessary to develop parameterized policies and approximate
+However, for most practical applications it is common to use parameterized policies and approximate
 value functions.
 
 In formulating Reinforcement learning algorithms, there are two major approaches, and their
 derivatives.
-One approach is to
 
-Most of the tabular, and iterative methods require an
-explicit model of an environment with access to the transition functions.
-In the absence of a model or transition functions, one can use Monet Carlo methods to approximate
-these probabilities through sampling.
-This method of learning from experience by iteracting with a blackbox enivornment or a simulator is
-the setting in most of the recent efforts in machine learning.
-This is because it is difficult to explictly design a model that accurately captures all the
-properties of a real-world artifact, and exhaustively model the effects of taking all the actions
-that are available to the agent.
-It is also sometimes impossible or unknown.
-However, it is possible to have access to such a real-world artifact, and we only need to provide
-an interface for the agent to the artifact and expose available actions to the agent.
-We can use the real-world artifact to evaluate these actions and their effects and convert them
-into rewards to provide a signal for the agent to learn from.
+\blue{- Value-based methods}
+
+% Most of the tabular, and iterative methods require an
+% explicit model of an environment with access to the transition functions.
+% In the absence of a model or transition functions, one can use Monet Carlo methods to approximate
+% these probabilities through sampling.
+% This method of learning from experience by iteracting with a blackbox enivornment or a simulator is
+% the setting in most of the recent efforts in machine learning.
+% This is because it is difficult to explictly design a model that accurately captures all the
+% properties of a real-world artifact, and exhaustively model the effects of taking all the actions
+% that are available to the agent.
+% It is also sometimes impossible or unknown.
+% However, it is possible to have access to such a real-world artifact, and we only need to provide
+% an interface for the agent to the artifact and expose available actions to the agent.
+% We can use the real-world artifact to evaluate these actions and their effects and convert them
+% into rewards to provide a signal for the agent to learn from.
 
 \label{sec:spg} \subsection{Policy gradient
 	methods}\label{sec:pg}
@@ -100,16 +97,20 @@ environment's state distribution as long as it is stationary conditioned on the 
 The most popular policy gradient method is Reinforce, which is a Monte Carlo policy gradient
 method.
 
-\textbf{Reinforce} -
-Widely popular PG algorithm, many insantiations possible including variants with baselines to
-reduce variance.
-- Convergence is proven using PG theorem.
+\textbf{Reinforce}: 
+\blue{
+	- Widely popular PG algorithm, many insantiations possible including variants with baselines to
+	reduce variance.
+	- Convergence is proven using PG theorem.
+}
 
 \textbf{Softmax Policy Gradients}
-- Parametrizing policies
-- One way of projecting parametrized policy to a probability simplex is Softmax
+\blue{
+	- Parametrizing policies
+	- PG with softmax parameterization is referred to as Softmax Policy gradients.
+	- General significance of softmax
+}
 
-PG with softmax parameterization is referred to as Softmax Policy gradients.
 
 \subsection{PPO}
 
@@ -265,13 +266,27 @@ A popular framework for studying and designing Online learning algorithms is
 through Convex optimization.
 The assumptions made around the framework provides properties that are useful in deriving
 convergence guarantees.
+We define a few terms below that are used in this section and the following ones.
+
+% Convex sets and Convex functions
+
+\begin{definition}[Strongly Smooth]~\label{def:strsmooth}
+	Given a convex set $\calX \in \R^n$, a convex function $f: \calX \mapsto \R$ is $\sigma$-strongly
+	smooth with respect to a norm $\|.
+		\|$, if $\|\nabla f(x) - \nabla f(y) \|_{\ast} \leq \sigma \|x - y \|, \forall x, y \in \calX$.
+	For a given constant $L$, this is also referred to as $L-smooth$.
+\end{definition}
+
+% Strongly smooth/L-smooth
+
+% Monotonicity/Strong monotonicity
 
 The typical structure of online learning expressed as an online convex optimization problem is as
 follows:
 
 \begin{alprocedure}[H] \algorithmcfname{OCO}~\label{alg:oco}
 
-	input: a convex set S for t = 1, 2.
+	input: a convex set S for t = 1, 2, 
 	$\ldots$
 
 	predict a vector $w_t \in S$
@@ -352,3 +367,34 @@ yield similar regret bounds given that the regularization functions are strongly
 \subsection{Hedge} - what is hedge?
 
 Gradient descent as a FTRL variant
+
+
+\section{Mirror Descent}
+
+In this section we discuss about Mirror Descent, and two mirror descent-based reinforcement
+learning algorithms (MDPO, and MMD).
+Mirror descent is a popular first order optimization algorithm that has seen wide applications in
+machine learning, and reinforcement learning.
+
+There are different views of arriving at Mirror Descent as an optimization algorithm, here we
+present the Mirror Descent framework through the lens of mirror maps.
+
+\subsection{Mirror Maps}
+
+% Define Bregman divergence
+\begin{definition}
+	\label{def:bregman}
+	Given a convex set $\calX \subset \R^n$, and a differentiable convex function $f: \calX \mapsto
+		\R$, the Bregman Divergence associated with the function $f$ is defined as,
+
+	$$
+		D_f(x, y) = f(x) - f(y) - \nabla f(y)^T (x-y).
+	$$
+\end{definition}
+
+For an alternate view of deriving Mirror Descent as an improvement of FoReL, please refer
+to~\cite{shalev-shwartzOnline2012}[Section 2.6].
+% A disadvantage of FoReL~\ref{sec:forel} in solving online learning problems is that, there is a
+% minimization that must be performed at every step.
+% Mirror descent overcomes this by using a recursive update rule that does not required us to perform
+% a minimization at every step.
