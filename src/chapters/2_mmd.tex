@@ -68,33 +68,40 @@ perspective of Mirror Descent, they also show strong connections to PPO, TRPO, a
 
 $$ \pi_{k+1} <- \arg \max_{\pi \in \Pi} \E_{s \sim \rho_{\pi_k}} $$
 
+
+\textbf{Gradient of KL-Divergence}
+
+Let's consider a reference policy $Q$ and $P_{\theta}$, a policy that is being optimized. 
+The reverse KL-Divergence between the two is given by
+
+$$
+D_{KL}(P_{\theta} \| Q) = \sum_{a \in A} P_{\theta}(a) \log \frac{P_{\theta}(a)}{Q(a)}
+$$
+
+The gradient of KL-Divergence with respect to the parameters theta is given by:
+
+\begin{equation*}
+	\begin{split}
+\nabla_{\theta} D_{KL} &= \sum_{a \in A} \nabla_{\theta} [P_{\theta}(a) \log P_{\theta}(a)] - 
+						\nabla_{\theta} [P_{\theta}(a) \log Q(a)] \\
+						&= \sum_{a \in A} [\nabla_{\theta} P_{\theta}(a) \log P_{\theta}(a) + \nabla_{\theta} P_{\theta}(a)] -  
+						 \nabla_{\theta} P_{\theta}(a) \log Q(a) \\
+						&= \sum_{a \in A} \nabla_{\theta} P_{\theta}(a) (\log P_{\theta}(a) - \log Q(a) + 1)
+	\end{split}
+\end{equation*}
+
 \section[MMD]{Magnetic Mirror Descent}
 
-Magnetic Mirror Descent~\cite{sokotaUnified2023} is an approach that is applicable both as an
-equilibrium solving algorithm and a reinforcement learning algorithm.
-% with certain structures
-The main results of Sokota et.al~\cite{sokotaUnified2023} are as follows.
-First, they establish an equivalence between solving for normal-form reduced QRE of a two-player
-zero-sum EFG and solving a variational inequality problem with some specific properties.
-Second, based on this connection they propose a non-euclidean proximal gradient method as an
-equilibrium finding algorithm in two-player zero-sum games.
-They also prove a linear last-iterate convergence guarantee for the algorithm as a QRE solver.
-
-% Sokota et al.~\cite{sokotaUnified2023} cast solving for
-% QREs in two-player zero-sum games as a and apply MMD to solve for QREs with linear last-iterate
-% convergence guarantees.
-% They do so by first representing the two-player zero-sum games as a bilinear saddle point problem
-% and then showing the equivalence between solving the saddle point problem and solving variation
-% inequality problems under specific conditions.
-% They then use this connection to derive an algorithm that is termed Magnetic Mirror Descent (MMD).
-% In this section we detail how this relation is established and also outline the algorithm for
-% Magnetic Mirror Descent as presented in~\cite{sokotaUnified2023}.
+Another extension of Mirror Descent to Reinforcement learning is Magnetic Mirror Descent~\cite{sokotaUnified2023}.
+The main aim of this work is creating an RL algorithm that performs well in both single, and 
+multiagent settings.
+The authors start-off by casting QRE solving as a bilinear saddle point problem and establish its equivalence 
+to solving Variational Inequality problems with specific structures.
 
 \subsection{Connection between Variational Inequalities and QREs}
 
 Variational inequalities are a general class of problems that have a wide range of applications.
-A Variational Inequality problem is generally of the following form (we use the same notation and
-symbols as in~\cite{sokotaUnified2023}):
+A Variational Inequality problem is generally of the following form:
 
 \begin{definition}
 	Given $\calZ
@@ -105,8 +112,6 @@ symbols as in~\cite{sokotaUnified2023}):
 		z - z_{\ast} \rangle \geq 0 \quad \forall z \in \calZ.
 	\]
 \end{definition}
-
-% Represent QRE as a bilinear saddle point problem
 
 Solving for QREs in two-player zero-sum games can be represented as the following bilinear saddle
 point problem:
@@ -139,7 +144,28 @@ $\calZ = \mathcal{X} \times \mathcal{Y}$, and $g: \calZ \rightarrow \mathbb{R}$.
 Hence, the solution the the VI problem ($z_{\ast}= (x_{\ast}, y_{\ast})$), corresponds to the
 solution of the saddle point problem stated in~\ref{eqn:saddle}.
 
+
+% Sokota et al.~\cite{sokotaUnified2023} cast solving for
+% QREs in two-player zero-sum games as a and apply MMD to solve for QREs with linear last-iterate
+% convergence guarantees.
+% They do so by first representing the two-player zero-sum games as a bilinear saddle point problem
+% and then showing the equivalence between solving the saddle point problem and solving variation
+% inequality problems under specific conditions.
+% They then use this connection to derive an algorithm that is termed Magnetic Mirror Descent (MMD).
+% In this section we detail how this relation is established and also outline the algorithm for
+% Magnetic Mirror Descent as presented in~\cite{sokotaUnified2023}.
+
+
+
+% Represent QRE as a bilinear saddle point problem
+
+
+
 \subsection{MMD Algorithm}
+
+Based on the above connection they propose a non-euclidean proximal gradient method as an
+equilibrium finding algorithm in two-player zero-sum games.
+They also prove a linear last-iterate convergence guarantee for the algorithm as a QRE solver.
 
 The authors first propose a non-Euclidean proximal gradient method to solve the VI ($\calZ, F +
 	\alpha \nabla g$) with the following update at each iteration:

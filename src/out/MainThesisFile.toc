@@ -21,8 +21,8 @@
 \contentsline {subsection}{\numberline {3.1.2} MDPO}{16}{subsection.3.1.2}%
 \contentsline {subsection}{\numberline {3.1.3} Mirror Descent as an RL algorithm}{16}{subsection.3.1.3}%
 \contentsline {section}{\numberline {3.2} MMD}{17}{section.3.2}%
-\contentsline {subsection}{\numberline {3.2.1} Connection between Variational Inequalities and QREs}{17}{subsection.3.2.1}%
-\contentsline {subsection}{\numberline {3.2.2} MMD Algorithm}{18}{subsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.2.1} Connection between Variational Inequalities and QREs}{18}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2} MMD Algorithm}{19}{subsection.3.2.2}%
 \contentsline {subsection}{\numberline {3.2.3} Behavioral form MMD}{20}{subsection.3.2.3}%
 \contentsline {subsection}{\numberline {3.2.4} Equivalence of MMD and MDPO}{21}{subsection.3.2.4}%
 \addvspace {\baselineskip }
