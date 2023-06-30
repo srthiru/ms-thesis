@@ -73,19 +73,17 @@ On-policy MDPO has strong connections to TRPO, and PPO. It has been shown to hav
 than the latter algorithms in continuous control tasks, and Atari environments.~\cite{tomarMirror2022}
 
 \subsection{MDPO in MARL}
-Although MDPO shows strong empirical performance in single-agent RL, it is not directly extendable to multi-agent settings.
-The main challenge here is the non-stationarity problem that is discussed in~\ref{sec:marl}.
+Although MDPO shows strong empirical performance in single-agent RL, it is not directly extendable to multi-agent settings 
+due to the non-stationarity of the dynamics.
 
-In this section, we derive the update rule for a tabular all-actions MDPO and apply it to the PerturbedRPS problem discussed in section 
- to show 
-the convergence behavior of MDPO in a multi-agent setting.
+We demonstrate the behavior of MDPO in a simple multi-agent setting using the Perturbed RPS problem 
+discussed in section~\ref{subsec:reps}.
+We first derive the update rule for a tabular all-actions version of MDPO.
 
 %For tabular all-actions MDPO in MARL, the policy update rule at iteration k for agent i is given by: 
 \blue{derivation tbd}
 
-Fig \blue{add trajectory plots} shows the convergence behavior of MDPO in the Perturbed RPS problem. 
-We can see that MDPO fails to converge to a Nash equilibrium (indicated by the red dot).
-This is due to the non-stationarity problem caused by the simultaneous updates of both agents.
+From the trajectories in Fig \blue{add trajectory plots} we can see that MDPO fails to converge to a Nash equilibrium (marked by a red dot).
 In this next chapter we discuss how to overcome this problem, and how to adapt MDPO for last-iterate convergence in two-player zero-sum games.
 
 \section[MMD]{Magnetic Mirror Descent}

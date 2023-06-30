@@ -23,7 +23,7 @@
 \contentsline {section}{\numberline {3.2} MMD}{20}{section.3.2}%
 \contentsline {subsection}{\numberline {3.2.1} Connection between Variational Inequalities and QREs}{21}{subsection.3.2.1}%
 \contentsline {subsection}{\numberline {3.2.2} MMD Algorithm}{22}{subsection.3.2.2}%
-\contentsline {subsection}{\numberline {3.2.3} Behavioral form MMD}{24}{subsection.3.2.3}%
+\contentsline {subsection}{\numberline {3.2.3} Behavioral form MMD}{23}{subsection.3.2.3}%
 \contentsline {subsection}{\numberline {3.2.4} Comparison of MMD to other Mirror Decent based methods}{25}{subsection.3.2.4}%
 \addvspace {\baselineskip }
 \contentsline {chapter}{\xnumberline {4\hskip 2em}\uppercase {Modified Updates for Mirror-descent based methods}}{26}{chapter.4}%
