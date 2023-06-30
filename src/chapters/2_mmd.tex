@@ -69,8 +69,8 @@ where $i=0,1,\ldots,m-1$.
 % 	\end{split}
 % \end{equation*}
 
-On-policy MDPO has strong connections to TRPO, and PPO, and has been shown to have better empirical performance 
-in continuous control tasks, and Atari environments~\cite{tomarMirror2022}.
+On-policy MDPO has strong connections to TRPO, and PPO. It has been shown to have better empirical performance 
+than the latter algorithms in continuous control tasks, and Atari environments.~\cite{tomarMirror2022}
 
 \subsection{MDPO in MARL}
 Although MDPO shows strong empirical performance in single-agent RL, it is not directly extendable to multi-agent settings.
@@ -195,17 +195,41 @@ through gradient updates in other cases.
 For a parameterized policy $pi_\theta$, when $\psi$ is negative entropy the update rule from Algorithm~\ref{alg:mmd} can be restated in 
 RL terms as follows:
 \begin{equation}
-	\label{eqn:mmdbf} \pi_{\theta_{k+1}}
+	\label{eqn:mmdbf} \pi_{\theta_{k+1}}(s,a)
 	= \arg \max_{\theta} \E_{s \sim \rho_{\theta_k}} \left[ \E_{a \sim \pi_{\theta_k}} [Q_{\theta_k}(s, a)] + \alpha H(\pi_\theta) - \frac{1}{\eta} KL(\pi_\theta, \pi_{\theta_k}) \right],
 \end{equation}
 
 where $H(\pi_\theta)$ is the entropy of the policy
 being optimized.
 
+This behavioral form update can also be approximated using gradient updates similar to MDPO. 
+
+For $m$ steps MDPO uses the following gradient to update the policy parameters, 
+\begin{equation}
+	\label{eqn:mdpograd}
+	\nabla_{\theta} J(\theta, \theta_k)|_{\theta = \theta_k^{(i)}} = \E_{s \sim \rho_{\theta_k} \\ a \sim \theta_k} 
+	[\frac{\pi_{\theta_k}^{(i)}}{\pi_{\theta_k}} \nabla_{\theta} \log \pi_{\theta_k}^(i) (a|s) A_{\theta_k}(s,a)] - 
+	\frac{1}{t_k} \E_{s \sim \rho_{\theta_k}} [\nabla_\theta KL(s; \theta, \theta_k)]
+\end{equation}
+where $i=0,1,\ldots,m-1$.
+
+To examine the effect of the choice of $m$, we compare the performance of the behavioral form update from~\ref{eqn:mmdbf}  
+to the closed-form for MMD with a negative entropy mirror map as given below:
+$$\pi_{k+1} \propto [\pi_t \rho^{\alpha \eta} e^{\eta Q_{\pi_k}}]^{\frac{1}{1+\alpha \eta}}$$
+
+For a two-player zero-sum normal form game, the expected Q-values are the expected payoffs for the max and min players respectively.
+As there is only one state, we can replace the expectations in the update with an all-action Q-value computation that is only dependent 
+upon the opponent's policy. 
+
+In Fig~\ref{fig:?}, we plot the norm of the difference between the closed-form and behavioral form policies at each iteration. 
+It can be seen that the behavioral form approximates the closed form well as expected for most choices of step size and $m$. 
+For large number of gradient steps, or large step sizes the updates are unstable. 
+For all our tabular experiments, we use a step-size of 0.1, and $m=10$.
+
 \subsection{Comparison of MMD to other Mirror Decent based methods}
 
 The non-euclidean proximal gradient method~\ref{eqn:proxgrad}, has strong connections to Mirror Descent~\cite[Appendix D.3]{sokotaUnified2023}.
-\blue{other works also discuss this relationship between mirror descent and proximal gradient methods applied to VIs}.
+\blue{TBD: other works also discuss this relationship between mirror descent and proximal gradient methods applied to VIs}.
 Consequently negative entropy based MMD is also equivalent to MDPO with an added entropy regularization 
 as detailed in~\cite[Appendix L]{sokotaUnified2023} and as can be seen from~\ref{eqn:mdrl} and~\ref{eqn:mmdbf}.
 

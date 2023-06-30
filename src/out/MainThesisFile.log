@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.6.22)  30 JUN 2023 13:08
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.6.22)  30 JUN 2023 14:22
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -866,7 +866,11 @@ File: pgflibraryplotmarks.code.tex 2023-01-15 v3.1.10 (3.1.10)
 \c@theorem=\count384
 Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... none found.
- (out/MainThesisFile.aux (out/chapters/0_intro.aux) (out/chapters/outline.aux) (out/chapters/1_background.aux) (out/chapters/2_mmd.aux) (out/chapters/3_updates.aux) (out/chapters/4_experiments.aux) (out/chapters/5_neural.aux) (out/chapters/6_discussion.aux) (out/chapters/7_discussion.aux))
+ (out/MainThesisFile.aux (out/chapters/0_intro.aux) (out/chapters/outline.aux) (out/chapters/1_background.aux) (out/chapters/2_mmd.aux
+
+LaTeX Warning: Label `eqn:mdpograd' multiply defined.
+
+) (out/chapters/3_updates.aux) (out/chapters/4_experiments.aux) (out/chapters/5_neural.aux) (out/chapters/6_discussion.aux) (out/chapters/7_discussion.aux))
 \openout1 = `MainThesisFile.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 125.
@@ -1117,7 +1121,11 @@ LaTeX Warning: Reference `eqn:mdobj' on page 18 undefined on input line 28.
 
 
 
-] [19] [20] [21] [22] [23]) [24]
+] [19] [20] [21] [22] [23] [24]
+
+LaTeX Warning: Reference `fig:?' on page 25 undefined on input line 224.
+
+) [25]
 \openout2 = `chapters/3_updates.aux'.
 
  (./chapters/3_updates.tex
@@ -1143,12 +1151,12 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `\uppercase' on input line 1.
 
-[25
+[26
 
 
 
 
-] [26]) [27]
+] [27]) [28]
 \openout2 = `chapters/4_experiments.aux'.
 
  (./chapters/4_experiments.tex
@@ -1174,7 +1182,7 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `\uppercase' on input line 1.
 
-[28
+[29
 
 
 
@@ -1185,20 +1193,20 @@ Overfull \hbox (0.3018pt too wide) in paragraph at lines 34--43
  []
 
 
-LaTeX Warning: Reference `sec:rpsne' on page 29 undefined on input line 45.
+LaTeX Warning: Reference `sec:rpsne' on page 30 undefined on input line 45.
 
-[29]
-<plots/MMD_NE.png, id=491, 3006.23125pt x 1560.83125pt>
+[30]
+<plots/MMD_NE.png, id=497, 3006.23125pt x 1560.83125pt>
 File: plots/MMD_NE.png Graphic file (type png)
 <use plots/MMD_NE.png>
 Package pdftex.def Info: plots/MMD_NE.png  used on input line 99.
 (pdftex.def)             Requested size: 426.79134pt x 221.58719pt.
- [30] [31
+ [31] [32
 pdfTeX warning (ext4): destination with the same identifier (name{table.5.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
 l.101 
-      ]) [32 <./plots/MMD_NE.png>]
+      ]) [33 <./plots/MMD_NE.png>]
 \openout2 = `chapters/5_neural.aux'.
 
  (./chapters/5_neural.tex
@@ -1228,12 +1236,12 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
 (hyperref)                than one, level fixed on input line 3.
 
-[33
+[34
 
 
 
 
-]) [34]
+]) [35]
 \openout2 = `chapters/6_discussion.aux'.
 
 
@@ -1253,7 +1261,7 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `\hss' on input line 169.
 
-[35
+[36
 
 
 
@@ -1277,7 +1285,7 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `\hss' on input line 173.
 
-[36
+[37
 
 ]
 Appendix B.
@@ -1293,7 +1301,7 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `\hss' on input line 177.
 
-[37
+[38
 
 ]
 CITED LITERATURE.
@@ -1309,9 +1317,9 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `\hss' on input line 184.
 
-(out/MainThesisFile.bbl [38
+(out/MainThesisFile.bbl [39
 
-{/opt/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]) [39] (out/MainThesisFile.aux (out/chapters/0_intro.aux) (out/chapters/outline.aux) (out/chapters/1_background.aux) (out/chapters/2_mmd.aux) (out/chapters/3_updates.aux) (out/chapters/4_experiments.aux) (out/chapters/5_neural.aux) (out/chapters/6_discussion.aux) (out/chapters/7_discussion.aux))
+{/opt/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]) [40] (out/MainThesisFile.aux (out/chapters/0_intro.aux) (out/chapters/outline.aux) (out/chapters/1_background.aux) (out/chapters/2_mmd.aux) (out/chapters/3_updates.aux) (out/chapters/4_experiments.aux) (out/chapters/5_neural.aux) (out/chapters/6_discussion.aux) (out/chapters/7_discussion.aux))
  ***********
 LaTeX2e <2023-06-01> patch level 1
 L3 programming layer <2023-06-16>
@@ -1320,22 +1328,25 @@ L3 programming layer <2023-06-16>
 
 LaTeX Warning: There were undefined references.
 
+
+LaTeX Warning: There were multiply-defined labels.
+
 Package rerunfilecheck Info: File `MainThesisFile.out' has not changed.
 (rerunfilecheck)             Checksum: CCC882047640DC3681577D56F1244989;7491.
  ) 
 Here is how much of TeX's memory you used:
- 40355 strings out of 475723
- 915297 string characters out of 5758895
+ 40358 strings out of 475723
+ 915325 string characters out of 5758895
  1866769 words of memory out of 5000000
- 60200 multiletter control sequences out of 15000+600000
+ 60201 multiletter control sequences out of 15000+600000
  523797 words of font info for 71 fonts, out of 8000000 for 9000
  1144 hyphenation exceptions out of 8191
  99i,15n,101p,1093b,617s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </opt/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></opt/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></opt/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></opt/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></opt/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></opt/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></opt/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></opt/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></opt/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></opt/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></opt/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></opt/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></opt/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></opt/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></opt/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfti1095.pfb>
-Output written on out/MainThesisFile.pdf (47 pages, 629714 bytes).
+Output written on out/MainThesisFile.pdf (48 pages, 633190 bytes).
 PDF statistics:
- 638 PDF objects out of 1000 (max. 8388607)
- 551 compressed objects within 6 object streams
- 135 named destinations out of 1000 (max. 500000)
+ 644 PDF objects out of 1000 (max. 8388607)
+ 556 compressed objects within 6 object streams
+ 137 named destinations out of 1000 (max. 500000)
  370 words of extra memory for PDF output out of 10000 (max. 10000000)
 
