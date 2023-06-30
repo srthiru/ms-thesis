@@ -7,48 +7,50 @@ A level-1 auxiliary file: chapters/1_background.aux
 A level-1 auxiliary file: chapters/2_mmd.aux
 A level-1 auxiliary file: chapters/3_updates.aux
 A level-1 auxiliary file: chapters/4_experiments.aux
-A level-1 auxiliary file: chapters/5_discussion.aux
+A level-1 auxiliary file: chapters/5_neural.aux
+A level-1 auxiliary file: chapters/6_discussion.aux
+A level-1 auxiliary file: chapters/7_discussion.aux
 The style file: formb.bst
 Database file #1: BibFile.bib
 Database file #2: Citations.bib
 You've used 18 entries,
             2045 wiz_defined-function locations,
-            869 strings with 14477 characters,
-and the built_in function-call counts, 5053 in all, are:
-= -- 373
-> -- 367
-< -- 3
-+ -- 130
-- -- 112
-* -- 446
-:= -- 833
-add.period$ -- 36
+            875 strings with 13967 characters,
+and the built_in function-call counts, 4791 in all, are:
+= -- 405
+> -- 265
+< -- 4
++ -- 96
+- -- 78
+* -- 374
+:= -- 748
+add.period$ -- 39
 call.type$ -- 18
-change.case$ -- 18
+change.case$ -- 17
 chr.to.int$ -- 0
 cite$ -- 18
-duplicate$ -- 183
-empty$ -- 437
-format.name$ -- 112
-if$ -- 1071
+duplicate$ -- 198
+empty$ -- 450
+format.name$ -- 78
+if$ -- 1063
 int.to.chr$ -- 0
 int.to.str$ -- 18
-missing$ -- 15
+missing$ -- 16
 newline$ -- 108
-num.names$ -- 18
-pop$ -- 66
+num.names$ -- 19
+pop$ -- 68
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 89
+skip$ -- 102
 stack$ -- 0
-substring$ -- 280
-swap$ -- 47
-text.length$ -- 3
+substring$ -- 289
+swap$ -- 58
+text.length$ -- 4
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 0
-while$ -- 40
+while$ -- 41
 width$ -- 20
-write$ -- 191
+write$ -- 196

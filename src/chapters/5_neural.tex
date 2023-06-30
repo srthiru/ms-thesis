@@ -1,0 +1,35 @@
+\chapter{Neural Experiments}
+
+\subsection{Approximate Exploitability}
+For larger games, it is not possible to compute the exact exploitability due to the large state space. 
+However, we can approximate the exploitability by training a best response agent against the fixed current policy to be exploited. 
+Then the exploitability can be approximated by sampling trajectories and measuring the average reward the best response 
+agent acheived against the exploited policy.
+
+\subsection{Deep Multi-agent RL Experiments}
+
+Based on the observations from the Tabular NFG experiments, we evaluate the most promising
+combinations of these algorithms in the function approximation setting.
+As noted in~\cite{sokotaUnified2023}, we implement MMD by modifying the PPO
+implementation in RLLib~\cite{liangRLlib2018}.
+We also use RLLib's OpenSpiel adapter with some modifications to use information states as inputs
+as opposed to observations.
+
+For the function approximation setting, we evaluate the algorithms on Kuhn Poker, Abrupt Dark Hex,
+and Phantom Tic-tac-toe.
+Kuhn Poker is a smaller extensive form game that allows for more introspection and exact exploitability computation.
+Whereas, Abrupt Dark Hex, and Phantom TTT are games with a large state-space that test the scalability of these
+algorithms.
+
+In function approximation settings we compute exact exploitability for Kuhn Poker,
+and 2$\times$2 Dark Hex.
+For the larger games, compute approximate exploitability by training a DQN best response agent to approximate
+the best response computation similar to~\cite{sokotaUnified2023}.
+
+We train these reinforcement learning agents i self-play for the environments mentioned above.
+
+
+\textbf{Implementation Details:} 
+- Implementation details (RLLib, PPO modifications, GAE)
+- Neural network architecture, hyperparameters
+

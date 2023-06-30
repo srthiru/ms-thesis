@@ -1,13 +1,15 @@
 \chapter{Modified Updates for Mirror-descent based methods}
 
-The main work of this thesis is exploring a few existing techniques that have been proven to be 
-effective in multi-agent settings in the context of the above alogrithms.
-These techniques are namely - Neural Replicator Dynamics~\cite{hennesNeural2020}, Extragradient methods~\cite{korpelevichextragradient1976}, and Optimistic updates \red{[?]}. 
-We propose combining these techniques to the methods discussed in the previous section and
-investigate their behavior through experiments in two-player zero-sum games.
-We now discuss these techniques and how they have generally been applied in the literature. 
-While discussing each technique, we also outline how they fit into the algorithms discussed 
-in the previous section and hypothesize about the potential effects these modifications.
+Our main contribution is in exploring existing techniques in multiagent learning and last-iterate convergence 
+literature, and studying their effectiveness when combined with mirror-descent based algorithms
+discussed in the previous section.
+More specifically, we study the following three techniques - Neural Replicator Dynamics~\cite{hennesNeural2020}, 
+the Extragradient algorithm~\cite{korpelevichextragradient1976}, 
+and the Optimistic gradient algorithm~\cite{popovmodification1980}.
+In this section we describe these techniques in more detail and how they fit into the problem that we are 
+trying to address.
+In the next section we perform a detailed experimental evaluation of these algorithms in two-player zero-sum 
+games and summarize our findings.
 
 \section{Neural Replicator Dynamics (NeuRD)}
 Replicator Dynamics is an idea from Evolutionary game theory (EGT) that defines operators to update
@@ -48,7 +50,7 @@ We also observe that while alternating updates shows average-iterate convergence
 The NeuRD fix can be applied to MMD, and MDPO in a similar way to SPG.
 
 
-\section{Extragradient updates}
+\section{Extrapolation methods}
 
 The Extragradient method (EG) was first introduced by
 G.M.Korpelevich~\cite{korpelevichextragradient1976} as a modification of gradient descent methods

@@ -8,44 +8,64 @@ and point to more comprehensive resources when applicable.
   Learning}
 
 % What is it?
-Reinforcement learning is sub-domain of machine learning that deals with designing interactive
+Reinforcement learning (RL) is sub-domain of machine learning that deals with designing interactive
 agents that learn to maximize a reward signal in an environment.
 The reward signal encodes information about the goal that the designer wants the agent to learn to
 achieve without informing anything about how that goal should be achevied.
-
-% Motivation to study and design RL algorithms
-Reinforcement learning problems are formalized as Markov Decision Processes (MDPs) that are defined
-as follows 
-
-\blue{ - MDP formal definition}
-
 Reinforcement learning has been shown to be
 effective in many application domains to learn and solve an arbitrary problem as long as it can be
 encapsulated into an interactive environment with a well-defined reward signal.
 \blue{ - cite RL applications}
 
-Reinforcement learning algorithms typically involve learning value functions and policies.
-A policy is the action plan followed by the agent that dictates how the agent acts given a
-particular state.
-Formally, a policy maps a state to a probability distribution over the set of possible actions
-$\pi: S \mapsto A$.
-A value function estimates the value of the agent being in a given state under 
-a particular policy $\pi$, i.e., $v_{\pi}: S \mapsto \R$.
-One way of estimating this value is the expected return acheived following the policy from that state:
+% Motivation to study and design RL algorithms
+\textbf{Markov Decision Process.} Reinforcement learning problems are formally modeled as Markov Decision Processes (MDPs), that represented 
+as a 
+tuple $(\calS, \calA, P, R, \gamma, \mu)$ where: $\calS$ is the state space, $\calA$ is the action space, 
+$P(s'|s,a): \calS \times \calA \times \calS \mapsto [0, 1]$ is the transition or the dynamics function, 
+$R(s,a) \subset \R$ is the reward function,  
+$\gamma \in [0,1]$ is the discount factor and $\mu$ is the initial state distribution.
 
-$$ v_{\pi}(s) = \E_{\pi}[G_t | S_t = s]$$
+The objective is to maximize the expected discounted reward:
+$$G_t = \sum_{k=0}^{\infty} \gamma^k R(s_{t+k}, a_{t+k})$$
 
-Similarly, we can also specify the value of taking a specific action $a$ at a given state, as
-opposed to the value of the entire state.
-These are typically known as action values or q-values
+In learning to take actions that maximize this objective, algorithms usually involve learning value functions 
+and policies. A policy is a mapping from a state to an action distribution $\pi: \calS \mapsto \calA$, and a value 
+function $V_{\pi}(s)$ estimates the expected reward that can be achieved from the current state by following a 
+given policy: $V_{\pi}(s) = \E_{\pi}[G_t | S_t = s]$.
 
-$$ a_{\pi}(s, a) =
-	\E_{\pi}[G_t | S_t = s, A_t = a] $$
+The objective can then be reformulated as to find a policy that maximizes the value of the initial state under 
+the starting distribution $\mu$:
+$$\max_\pi \E_{s_0 \sim \mu}[V_{\pi}(s_0)]$$
 
-A foundational property is that the value
-functions satisfy the Bellman equation:
+Action-value or Q-value  function estimates the expected reward of taking a specific action $a$ at a given 
+state $s$ and then following the policy $\pi$: $ Q_{\pi}(s, a) = \E_{\pi}[G_t | S_t = s, A_t = a] $.
+The difference between Q and V functions is referred to as the advantage function $A_\pi(s,a) = Q_\pi(s,a) - V_\pi(s)$. 
+This is the advantage of taking a particular action over following the average policy.
+The \textbf{optimal policy} $\pi^{\ast}$ is one that maximizes the value function. There maybe more than one optimal policy, but 
+they all share the same value function $V_{\pi^{\ast}} = \max_{\pi} V_\pi(s), \forall s \in \calS$.
 
-\blue{- Bellman eqn expression}
+\textbf{Generalized Policy Iteration (GPI).} For small, finite state spaces optimal policies can be learnt through tabular methods and dynamic programming. 
+Policy iteration is an iterative method that employs policy evaluation, and improvement steps to learn the optimal policy. 
+The policy evaluation step learns the value function for the current policy using the following iterative update 
+until it converges.
+$$V_{k+1}(s) = \E_{\pi} [R_{t+1} + \gamma V_k(S_t+1 | S_t = s)]$$
+
+Policy improvement step then uses the value function to greedily improve the current policy, $\pi_{k+1}(s) = \arg \max_a Q_{k}(s,a)$.
+Policy improvement always yields a strictly better policy except when the policy is already optimal~\cite{suttonReinforcement2018}.
+Exact convergence of policy evaluation might make the learning process slower. 
+This step can be truncated to only evaluate the value for the immediate states (i.e. perform only one step of policy evaluation).
+This is known as \textbf{value iteration}.
+In \textit{Generalized policy iteration (GPI)}, these steps are run independently, and asynchronously until convergence.
+
+For very large state spaces that is common in many practical applications, there is a need to learn approximate 
+value functions and parameterized policies. This is typically done through function approximation. 
+
+\blue{
+	\begin{itemize}
+		\item Bellman eqn
+		\item 
+	\end{itemize}
+}
 
 Fixed points of the Bellman quation are optimal policies and optimal value functions.
 For small MDPs that strictly satisfy the Markov property, Bellman equiation can be explicity
@@ -57,9 +77,6 @@ value functions.
 
 In formulating Reinforcement learning algorithms, there are two major approaches, and their
 derivatives.
-
-\blue{- Value-based methods}
-
 % Most of the tabular, and iterative methods require an
 % explicit model of an environment with access to the transition functions.
 % In the absence of a model or transition functions, one can use Monet Carlo methods to approximate
@@ -75,19 +92,18 @@ derivatives.
 % We can use the real-world artifact to evaluate these actions and their effects and convert them
 % into rewards to provide a signal for the agent to learn from.
 
-\label{sec:spg} \subsection{Policy gradient
-	methods}\label{sec:pg}
+\label{sec:spg} \subsection{Policy gradient methods}\label{sec:pg}
 
-Apart from the value-based methods discussed above, another approach is to directly optimize a
-parameterized policy that maximizes the expected reward.
-A value function maybe used in learning the policy, but the agent always uses the policy for
-deciding on actions.
-These are generally called Policy gradient methods, and methods that use a value function in
-addition to learn the policy are called actor-critic methods.
-Here the actor refers to the policy, and the critic refers to the value function that evaluates the
-action taking by the policy guiding the policy learning.
-Policy gradient methods generally have the advantage that the policy space could be simpler to
+Policy gradient method involve directly learning a parameterized policy that enables action selection 
+without the use of a value function.
+These are generally called Policy gradient methods, and are a major area of study within Reinforcement learning.
+Policy gradient methods sometimes have the advantage that the policy space could be simpler to
 learn compared to the value function space.
+In this case, the policy is parameterized by $\theta \in \Theta$ and $\pi(s, a) = P(s, a; \theta)$.
+
+Given some objective $J(\theta)$, these methods seek to learn the parameters that maximize this objective through 
+gradient ascent.
+
 
 One key challenge in Policy gradient methods is that the evaluation of performance of a policy
 depends on the state distribution which could be unknown.
@@ -96,6 +112,10 @@ environment's state distribution as long as it is stationary conditioned on the 
 
 The most popular policy gradient method is Reinforce, which is a Monte Carlo policy gradient
 method.
+
+A value function may still be used in guiding the policy learning, and these are called actor-critic methods.
+Here the actor refers to the policy, and the critic refers to the value function that evaluates the
+action taking by the policy guiding the policy learning.
 
 \textbf{Reinforce}: 
 \blue{
@@ -117,7 +137,7 @@ method.
 - Trust region methods
 - PPO an approximation of TRPO with hueristic objective
 
-\subsection{Multi-agent Reinforcement Learning (MARL)}
+\subsection{Multi-agent Reinforcement Learning (MARL)}\label{sec:marl}
 
 There are a few key challenges in extending Reinforcement learning algorithms to multi-agent
 settings.
@@ -160,9 +180,7 @@ helpful in formally defining those representations and agent preferences.
 
 - what are utilities, and strategies?
 
-\subsubsection*{Normal-Form Games}
-
-Normal-Form games are a popular way of representing situations in which all agents act
+\textbf{Normal-Form Games:} Normal-Form games are a popular way of representing situations in which all agents act
 simultaneously and the outcome is revealed after each agent has taken their action.
 A few popular games that can be represented in this form are rock-paper-scissors, matching pennies,
 prisoner's dilemma etc. A more formal definition of a normal-form game is as follows:
@@ -180,6 +198,8 @@ prisoner's dilemma etc. A more formal definition of a normal-form game is as fol
 Normal-form games are typically represented using a n-dimensional tensor, where each dimension
 represents the possible actions available to each agent, and every entry represents an outcome.
 The actual entries of the
+
+An NFG that is widely popular in the literature is the \textbf{Biased/Perturbed RPS} problem. \blue{add details.}
 
 \subsubsection*{Sequential Games}
 
@@ -206,8 +226,7 @@ Nash equilibrium, Quantal response equilibrium.
 - what are the relevant information related to solution conepts for this work?
 Existence of a nash equilibrium Uniqueness of QRE
 
-\section{Online Learning and
-  Online Convex Optimization}
+\section{Online Learning and Mirror Descent}
 
 Online learning is the study of designing
 algorithms that use historical knowledge in making predictions for future rounds while trying to

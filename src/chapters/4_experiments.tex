@@ -19,11 +19,7 @@ distance from the equilibrium point to measure the performance of these algorith
 
 \subsection{Divergence to the equilibrium}
 In settings with a known unique equilibrium such as for QREs, or Nash equilibrium in symmetric markov games, 
-we can compute the distance of the current policy to the known equilibrium using a measure of distance in the policy space such as the KL-Divergence. 
-
-For PerturbedRPS, we use the QRE solutions computed through Gambit and, we also derive the unique
-Nash Equilibrium (please refer to~\ref{sec:rpsne} in the appendix for the derivation) for
-PerturbedRPS.\
+we can compute the distance of the current policy to the known equilibrium using a measure of distance in the policy space such as the KL-Divergence.
 
 \subsection{Exploitability}
 In general, there might not be a unique Nash equilibrium. 
@@ -34,15 +30,20 @@ of incentive to deviate from the current policy.
 
 \blue{ - Exploitability formal expression in terms of best responses, and value.}
 
-\subsection{Approximate Exploitability}
-For larger games, it is not possible to compute the exact exploitability due to the large state space. 
-However, we can approximate the exploitability by training a best response agent against the fixed current policy to be exploited. 
-Then the exploitability can be approximated by sampling trajectories and measuring the average reward the best response 
-agent acheived against the exploited policy.
-
 \section{Tabular Experiments}
-We evaluate the converegence behavior of all these algorithms on Perturned RPS.
+For the tabular domain, we study the learning behavior of these algorithms on
+PerturbedRPS and Matching Pennies. 
+PerturbedRPS, a modified version of the standard Rock Paper Scissors, is a symmetric Normal form game 
+that has a unique Nash Equlibrium.
+Although it is a simple problem, standard RL algorithms fail to converge due to the non-stationarity 
+induced by the opponent.
+We employ the standard model of alternating updates to learn a parameterized policy for both agents. 
+We use softmax parameterization, and perform updates to learn the logits associated with each action. 
+The logits then act as action preferences which are sampled from using the softmax function to get a stochastic policy.
 
+For PerturbedRPS, we use the QRE solutions computed through Gambit and, we also derive the unique
+Nash Equilibrium (please refer to~\ref{sec:rpsne} in the appendix for the derivation) for
+PerturbedRPS.\
 
 \ref{tab:tabres} summarizes the last and average iterate convergences behaviors of 3 different algorithms -
 MMD, MDPO, SPG under the proposed modifications.
@@ -115,32 +116,4 @@ From the above experimental results, we note the following:
 
 Based on the above findings, we test some of these variants in the function approximation setting for 
 two-player zero-sum games with a large state space.
-
-\subsection{Deep Multi-agent RL Experiments}
-
-
-Based on the observations from the Tabular NFG experiments, we evaluate the most promising
-combinations of these algorithms in the function approximation setting.
-As noted in~\cite{sokotaUnified2023}, we implement MMD by modifying the PPO
-implementation in RLLib~\cite{liangRLlib2018}.
-We also use RLLib's OpenSpiel adapter with some modifications to use information states as inputs
-as opposed to observations.
-
-For the function approximation setting, we evaluate the algorithms on Kuhn Poker, Abrupt Dark Hex,
-and Phantom Tic-tac-toe.
-Kuhn Poker is a smaller extensive form game that allows for more introspection and exact exploitability computation.
-Whereas, Abrupt Dark Hex, and Phantom TTT are games with a large state-space that test the scalability of these
-algorithms.
-
-In function approximation settings we compute exact exploitability for Kuhn Poker,
-and 2$\times$2 Dark Hex.
-For the larger games, compute approximate exploitability by training a DQN best response agent to approximate
-the best response computation similar to~\cite{sokotaUnified2023}.
-
-We train these reinforcement learning agents i self-play for the environments mentioned above.
-
-
-\textbf{Implementation Details:} 
-- Implementation details (RLLib, PPO modifications, GAE)
-- Neural network architecture, hyperparameters
 
