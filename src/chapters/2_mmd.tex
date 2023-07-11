@@ -1,52 +1,116 @@
-\chapter{Mirror Descent in Reinforcement Learning} 
+\chapter{Mirror Descent in Reinforcement Learning}
 
-There have been a few recent efforts in adapting mirror descent from a constrained convex optimization 
-algorithm into a reinforcement learning algorithm.
-In this work, we study two such algorithms, namely MDPO (Mirror Descent Policy
-Optimization), and MMD (Magnetic Mirror Descent).
-We first describe these algorithms and their connection to Mirror Descent in this section.
-In the next section we propose some modifications to be applied on top of these algorithms 
-to improve their convergence behaviors in two-player zero-sum settings.
-
-For the following discussion, and the experiments, we consider a class of parameterized stochastic policies, 
-i.e., $\Pi = \{\pi_{\theta}, \theta \in \Theta\}$.
-We also only consider on-policy learning.
+Given the generality of the mirror descent algorithm as a first order optimization method, there
+has been continued efforts to incorporate it as a single/multi-agent reinforcement learning
+algorithm.
+Extensive studies of mirror descent under various settings and assumptions help in deriving much
+needed theoretical guarantees for mirror descent based reinforcement learning algorithms in terms
+of sample complexity, and convergence rates.
+In this work, we study two such algorithms, namely MDPO (Mirror Descent Policy Optimization), and
+MMD (Magnetic Mirror Descent).
+We first begin with a discussion of PG methods in RL to set a base for the rest of the chapter
+before moving on to the above algorithms.
+% For the following discussion, and the experiments, we consider a class of parameterized stochastic policies,
+% i.e., $\Pi = \{\pi_{\theta}, \theta \in \Theta\}$.
+% We also only consider on-policy learning.
 
 % \blue{RL objective is not convex; can still use MD..
 % 	\cite{shaniAdaptive2020}}
 
+\section{Policy Gradients}
+
+\label{sec:spg} \subsection{Policy gradient methods}\label{sec:pg}
+
+Policy gradient method involve directly learning a parameterized policy that enables action
+selection without the use of a value function.
+These are generally called Policy gradient methods, and are a major area of study within
+Reinforcement learning.
+Policy gradient methods sometimes have the advantage that the policy space could be simpler to
+learn compared to the value function space.
+In this case, the policy is parameterized by $\theta \in \Theta$ and $\pi(s, a) = P(s, a; \theta)$.
+
+Given some objective $J(\theta)$, these methods seek to learn the parameters that maximize this
+objective through gradient ascent.
+
+One key challenge in Policy gradient methods is that the evaluation of performance of a policy
+depends on the state distribution which could be unknown.
+However, the Policy Gradient Theorem establishes that the gradient is independent of underlying
+environment's state distribution as long as it is stationary conditioned on the current policy.
+The most popular policy gradient method is Reinforce uses monte-carlo estimations to approximate
+the value estimation.
+A value function may still be used in guiding the policy learning, and these are called
+actor-critic methods.
+Here the actor refers to the policy, and the critic refers to the value function that evaluates the
+action taking by the policy guiding the policy learning.
+
+\textbf{Reinforce}:
+\blue{
+	- Widely popular PG algorithm, many insantiations possible including variants with baselines to
+	reduce variance.
+	- Convergence is proven using PG theorem.
+}
+
+\textbf{Softmax Policy Gradients}
+\blue{
+	- Parametrizing policies
+	- PG with softmax parameterization is referred to as Softmax Policy gradients.
+	- General significance of softmax
+}
+
+\subsection{PPO}
+
+- Trust region methods
+- PPO an approximation of TRPO with hueristic objective
+
 \section[MDPO]{Mirror Descent Policy Optimization}
 
-The first method we discuss is the Mirror Descent Policy Optimization~\cite{tomarMirror2022} (MDPO). 
-MDPO deals with the problem of trust-region based policy learning. 
-Trust-region methods aim to stabilize learning by constraining the policy update at each iteration.
-State-of-the-art RL algorithms like PPO~\cite{schulmanProximal2017}, TRPO~\cite{schulmanTrust2015} are instances of trust region
-optimization methods.
+The first method we discuss is the Mirror Descent Policy Optimization~ \cite{tomarMirror2022}
+(MDPO).
+MDPO tackles the problem developing a stable reinforcement learning algorithm through the framework
+of trust-region optimization.
+Trust-region optimization stabilizes learning by constraining the policy update at each iteration.
+Instances of trust region optimization methods such as PPO~ \cite{schulmanProximal2017}, TRPO~
+\cite{schulmanTrust2015} and their variants have found large success in single agent RL with
+state-of-the-art performances in a wide array of tasks.
 
-Mirror Descent as such can also be interpreted as a trust-region optimization algorithm due to the presense of 
-proximal regularization.
-MDPO adapts the mirror descent objective~\ref{eqn:mdobj} into RL terms is as follows:
-\begin{equation}\label{eqn:mdrl}
-	\pi_{k+1}(.|s) \leftarrow \arg\max_{\pi \in \Pi} \E_{a \sim \pi} [A_{\pi_k}(s,a)] - \frac{1}{t_k} KL(s; \pi, \pi_k) 	
-\end{equation}
-
-This objective is then approximately solved at each iteration through gradient ascent.
-We focus on the on-policy variant of MDPO where, for a parameterized policy $\pi_{\theta}$ 
-the above update rule is reframed into:
-$$\theta_{k+1} \leftarrow \arg\max_{\theta} J(\theta, \theta_k)$$
-$$\text{where}, J(\theta, \theta_k) = \E_{s \sim \rho_{\theta_k}} [ \E_{a \sim \pi_\theta}[A_{\theta_k}(s,a)] - \frac{1}{t_k} KL(s; \pi_\theta, \pi_{\theta_k}]$$
-The gradient of the KL component of the above objective for one step of SGD is zero. Hence, it is necessary to 
-take multiple steps of stochastic gradient updates to approximate the objective in~\ref{eqn:mdrl}.
-
-For $m$ steps MDPO uses the following gradient to update the policy parameters, 
+Due to the presence of a proximal regularization, mirror descent in itself can be interpreted as a
+trust-region optimization method.
+%cite reference?
+Building on top of existing theoretical guarantees for mirror descent in tabular RL settings, MDPO
+derives practical RL algorithms that is performant in function approximation settings.
+Using the formulation of a parameterized policy from~ \ref{sec:pg}, MDPO performs the following
+update at each iteration:
 \begin{equation}
-	\label{eqn:mdpograd}
-	\nabla_{\theta} J(\theta, \theta_k)|_{\theta = \theta_k^{(i)}} = \E_{s \sim \rho_{\theta_k} \\ a \sim \theta_k} 
-	[\frac{\pi_{\theta_k}^{(i)}}{\pi_{\theta_k}} \nabla_{\theta} \log \pi_{\theta_k}^(i) (a|s) A_{\theta_k}(s,a)] - 
-	\frac{1}{t_k} \E_{s \sim \rho_{\theta_k}} [\nabla_\theta KL(s; \theta, \theta_k)]
+	\label{eqn:mdrl} \pi_{k+1}(.
+	|s) \leftarrow \arg
+	\max_{\pi \in \Pi}
+	\E_{a \sim \pi} [A_{\pi_k}(s,a)] -
+	\frac{1}{t_k}
+	KL(s; \pi, \pi_k)
 \end{equation}
-where $i=0,1,\ldots,m-1$.
 
+This update is approximately solved at each
+iteration by taking a few stochastic gradient steps.
+The gradient of the KL component of the above objective for one step of SGD is zero, and hence it
+is necessary to take multiple gradient steps every iteration to correctly approximate the mirror
+descent objective.
+Tomar et.al, derive on-policy and off-policy variants of MDPO, and in this work we mainly focus on
+the on-policy algorithm.
+
+For a parameterized policy $ \pi_{\theta}$ the on-policy MDPO update is given by: $$ \theta_{k+1}
+	\leftarrow \arg \max_{\theta} J(\theta, \theta_k)$$ $$ \text{where}, J(\theta, \theta_k) = \E_{s
+		\sim \rho_{\theta_k}} [ \E_{a \sim \pi_\theta}[A_{\theta_k}(s,a)] - \frac{1}{t_k} KL(s; \pi_\theta,
+		\pi_{\theta_k}]$$
+
+For $m$ steps MDPO uses the following gradient to update the
+policy parameters,
+\begin{equation}
+	\label{eqn:mdpograd} \nabla_{\theta} J(\theta,
+	\theta_k)|_{\theta = \theta_k^{(i)}} = \E_{s \sim \rho_{\theta_k} \\ a \sim \theta_k} [ \frac{
+			\pi_{\theta_k}^{(i)}}{ \pi_{\theta_k}} \nabla_{\theta} \log \pi_{\theta_k}^{(i)} (a|s)
+		A_{\theta_k}(s,a)] - \frac{1}{t_k} \E_{s \sim \rho_{\theta_k}} [\nabla_\theta KL(s; \pi_\theta,
+		\pi_{\theta_k})_{|\theta= \theta_k^{(i)}}]
+\end{equation} where $i=0,1,\ldots,m-1$.
 
 % \textbf{Gradient of KL-Divergence}
 
@@ -69,102 +133,125 @@ where $i=0,1,\ldots,m-1$.
 % 	\end{split}
 % \end{equation*}
 
-On-policy MDPO has strong connections to TRPO, and PPO. It has been shown to have better empirical performance 
-than the latter algorithms in continuous control tasks, and Atari environments.~\cite{tomarMirror2022}
+MDPO strong connections to the other constrained optimization RL algorithms and entropy regularized
+algorithms.
+We refer to~ \cite{tomarMirror2022} for a detailed discussion of connections between on-policy MDPO
+to PPO and TRPO, and off-policy MDPO to SAC.
+% MDPO has been shown to have better empirical performance than PPO, and TRPO in continuous control tasks, and Atari environments.
 
 \subsection{MDPO in MARL}
-Although MDPO shows strong empirical performance in single-agent RL, it is not directly extendable to multi-agent settings 
-due to the non-stationarity of the dynamics.
+Although MDPO exhibits strong empirical performance in single-agent RL, it is not directly
+extendable to multi-agent settings due to the non-stationarity of the dynamics.
 
-We demonstrate the behavior of MDPO in a simple multi-agent setting using the Perturbed RPS problem 
-discussed in section~\ref{subsec:reps}.
-We first derive the update rule for a tabular all-actions version of MDPO.
+We demonstrate the behavior of MDPO using the Perturbed RPS problem discussed in Section~
+\ref{subsec:reps}.
+Normal form games allow for tabular policy representations with direct or softmax
+parameterizations.
+Algorithms can typically use exact value estimations for all possible actions (payoffs) given the
+opponent policy, as opposed to a sample-based expected value estimations.
+This is referred to as the all-actions setting (also known as \textit{full-feedback} or first-order
+information setting).
+In this setting, the gradient computation in~ \ref{eqn:mdpograd} becomes: \[ \nabla_{\theta}
+	J(\theta, \theta_k)|_{\theta = \theta_k^{(i)}} = \nabla_{\theta} \sum_{a \in A} [
+		\pi_{\theta_k}^{(i)} (a) A_{\theta_k}(a)] - \frac{1}{t_k} [\nabla_\theta KL(\pi_\theta,
+		\pi_{\theta_k})] \]
 
-%For tabular all-actions MDPO in MARL, the policy update rule at iteration k for agent i is given by: 
-\blue{derivation tbd}
-
-From the trajectories in Fig \blue{add trajectory plots} we can see that MDPO fails to converge to a Nash equilibrium (marked by a red dot).
-In this next chapter we discuss how to overcome this problem, and how to adapt MDPO for last-iterate convergence in two-player zero-sum games.
+From the trajectories in Fig \blue{add trajectory plots} we
+can see that MDPO fails to converge to a Nash equilibrium (marked by a red dot).
+In the next chapter we discuss ways to adapt MDPO for last-iterate convergence in two-player
+zero-sum games.
 
 \section[MMD]{Magnetic Mirror Descent}
 
-Another extension of Mirror Descent to reinforcement learning is Magnetic Mirror Descent~\cite{sokotaUnified2023}, 
-that attempts to create a unified approach to work well in both single and multiagent settings.
-This work studies the relation between equilibrium solving and Variational inequalities with composite structures. 
-Taking advantage of this connection, a equilibrium solving algorithm has linear last-iterate convergence guarantees is proposed. 
-Moreover, this approach extends well as a reinforcement learning algorithm in single agent, and multiagent settings.
-In this section, first we outline the connection between Varational inequalities and equlibrium solving as presented in~\cite{sokotaUnified2023}. 
+Another extension of Mirror Descent to reinforcement learning is Magnetic Mirror Descent~
+\cite{sokotaUnified2023}, that attempts to create a unified approach to work well in both single
+and multiagent settings.
+This work studies the relation between equilibrium solving and Variational inequalities with
+composite structures.
+Taking advantage of this connection, a equilibrium solving algorithm has linear last-iterate
+convergence guarantees is proposed.
+Moreover, this approach extends well as a reinforcement learning algorithm in single agent, and
+multiagent settings.
+In this section, first we outline the connection between Varational inequalities and equlibrium
+solving as presented in~ \cite{sokotaUnified2023}.
 Then we outline the Magnetic Mirror Descent algorithm and its convergence properties.
 
 \subsection{Connection between Variational Inequalities and QREs}
 A Variational Inequality (VI) problem, written as $VI(Z, F)$ is generally defined as follows:
 \begin{definition}
-	\label{def:vi}
-	Given $\calZ
-		\subseteq \R^n$ and mapping $F: \calZ \rightarrow \R^n$, the variational inequality problem VI($\calZ, F$) 
-		is to find $z_{\ast} \in \calZ$ such that,
-	\[ \langle F(z_{\ast}),
-		z - z_{\ast} \rangle \geq 0 \quad \forall z \in \calZ.
+	\label{def:vi} Given $\calZ \subseteq \R^n$ and mapping $F: \calZ \rightarrow
+		\R^n$, the variational inequality problem VI($\calZ, F$) is to find $z_{\ast} \in \calZ$ such that,
+	\[ \langle F(z_{\ast}), z - z_{\ast} \rangle \geq 0 \quad \forall z \in \calZ.
 	\]
 \end{definition}
 
-The VI problem described above is very general, and as such a wide range of problems can be cast into this 
-framework~\cite{facchineiFiniteDimensional2004}. We mainly focus on the relation between VI problems with a similar structure, 
-and QREs.
+The VI problem described above is very general, and as such a wide range of problems can be cast
+into this framework~ \cite{facchineiFiniteDimensional2004}.
+We mainly focus on the relation between VI problems with a similar structure, and QREs.
 
-Finding the QRE of a two-player zero-sum game can be represented as the following entropy-regularized saddle
-point problem. Given $\calX \subseteq \R^n$, $calY \subseteq \R^m$, and $g_1: \R^n \mapsto \R$, $g_2: \R^m \mapsto \R$, 
-find:
+Finding the QRE of a two-player zero-sum game can be represented as the following
+entropy-regularized saddle point problem.
+Given $\calX \subseteq \R^n$, $calY \subseteq \R^m$, and $g_1: \R^n \mapsto \R$, $g_2: \R^m \mapsto
+	\R$, find:
 \begin{equation}
-	\label{eqn:saddle} \min_{x \in \mathcal{X}}
-	\max_{y \in \mathcal{Y}} \alpha g_1(x) + f(x, y) + \alpha g_2(y),
+	\label{eqn:saddle} \min_{x \in \mathcal{X}} \max_{y \in \mathcal{Y}}
+	\alpha g_1(x) + f(x, y) + \alpha g_2(y),
 \end{equation}
 
-The solution $(x_{\ast}, y_{\ast})$ to the saddle point problem~\ref{eqn:saddle} has the following first-order optimality conditions:
+The solution
+$(x_{\ast}, y_{\ast})$ to the saddle point problem~ \ref{eqn:saddle} has the following first-order
+optimality conditions:
 \begin{equation}
-	\label{eqn:optcon} 
+	\label{eqn:optcon}
 	\begin{split}
-		\langle \alpha \nabla g_1(x_*) + \nabla_{x_*}
-		f(x_*, y_*), x - x_* \rangle \geq 0, \forall x \in \calX. \\
-		\langle \alpha \nabla g_2(y_*) + \nabla_{y_*} f(x_*, y_*),
+		\langle \alpha \nabla
+		g_1(x_*) + \nabla_{x_*} f(x_*, y_*), x - x_* \rangle \geq 0, \forall x \in \calX.
+		\\
+		\langle \alpha \nabla g_2(y_*) +
+		\nabla_{y_*} f(x_*, y_*),
 		y - y_* \rangle \geq 0, \forall y \in \calY.
 	\end{split}
 \end{equation}
 
-The reguarlized saddle point problem~\ref{eqn:saddle} of solving for QREs is equivalent to the VI problem 
-with the following composite objective $G = F + \alpha \nabla g$,  where $\calZ = \mathcal{X} \times \mathcal{Y}$, 
-$F(z) = [\nabla_x f(x,y) - \nabla_y f(x,y)]$, and $\nabla g = [\nabla_y g_1(x), \nabla_x g_2(y)]$.
-The optimality conditions~\ref{eqn:optcon} are equivalent to the VI$(\calZ, G)$, and thus the solution 
-to the VI: $z^* = (x^*, y^*)$ is also the solution to the saddle point problem stated in~\ref{eqn:saddle}.
+The reguarlized saddle point problem~ \ref{eqn:saddle} of solving for QREs is equivalent to the VI
+problem with the following composite objective $G = F + \alpha \nabla g$, where $\calZ =
+	\mathcal{X} \times \mathcal{Y}$, $F(z) = [\nabla_x f(x,y) - \nabla_y f(x,y)]$, and $\nabla g =
+	[\nabla_y g_1(x), \nabla_x g_2(y)]$.
+The optimality conditions~ \ref{eqn:optcon} are equivalent to the VI$(\calZ, G)$, and thus the
+solution to the VI: $z^* = (x^*, y^*)$ is also the solution to the saddle point problem stated in~
+\ref{eqn:saddle}.
 
 \subsection{MMD Algorithm}
 
-Various algorithms have been proposed to solve the VI problem~\ref{def:vi}.
-In particular, the proximal point method has linear last iterate convergence for Variational 
-inequality problems with a monotone operator~\cite{rockafellarMonotone1976}.
-This algorithm was extended to composite objectives~\cite{tsenglinear1995}, and to non-euclidean 
-spaces with Bergman divergence as a proximity measure, 
-that allows for non-euclidean proximal regularization~\cite{tsengApproximation2010}.
+Various algorithms have been proposed to solve the VI problem~ \ref{def:vi}.
+In particular, the proximal point method has linear last iterate convergence for Variational
+inequality problems with a monotone operator~ \cite{rockafellarMonotone1976}.
+This algorithm was extended to composite objectives~ \cite{tsenglinear1995}, and to non-euclidean
+spaces with Bergman divergence as a proximity measure, that allows for non-euclidean proximal
+regularization~ \cite{tsengApproximation2010}.
 
 The non-euclidean proximal gradient algorithm, that is more generally applicable to any VI problem
 with a monotone operator, performs the following update at each iteration:
 
 \begin{equation}
-	\label{eqn:proxgrad} z_{t+1} = \arg \min_{z \in \calZ} \eta (\langle F(z_t), z\rangle + \alpha
-	g(z)) + B_{\psi} (z; z_t).
+	\label{eqn:proxgrad} z_{t+1} = \arg \min_{z \in \calZ} \eta (\langle F(z_t),
+	z\rangle + \alpha g(z)) + B_{\psi} (z; z_t).
 \end{equation}
 
 where $\psi$ is a strongly convex function with respect to $\|.\|$ over $\calZ$.
 
-The algorithm that is termed Magnetic Mirror Descent (MMD) uses the same update as~\ref{eqn:proxgrad} with $g$ taken to be
-either $\psi$, or $B_{\psi}(.;z')$. In the former, $\psi$ is as a strongly convex regularizer that makes the objective smoother and encouranges 
-exploration. In the latter form, $B_{\psi}$ is another proximity term that forces the iterates ($z_{t+1}$) to stay close to some  
-\textit{magnet} ($z'$). For all our discussion, we only consider the former update rule which is more widely 
-applicable.
+The algorithm that is termed Magnetic Mirror Descent (MMD) uses the same update as~
+\ref{eqn:proxgrad} with $g$ taken to be either $\psi$, or $B_{\psi}(.
+	;z')$.
+In the former, $\psi$ is as a strongly convex regularizer that makes the objective smoother and
+encouranges exploration.
+In the latter form, $B_{\psi}$ is another proximity term that forces the iterates ($z_{t+1}$) to
+stay close to some \textit{magnet} ($z'$).
+For all our discussion, we only consider the former update rule which is more widely applicable.
 
-We now restate the main algorithm as stated in Sokota et.al,~\cite{sokotaUnified2023},
+We now restate the main algorithm as stated in Sokota et.al,~ \cite{sokotaUnified2023},
 
-\begin{alprocedure}[H] \algorithmcfname{MMD~\cite[(Algorithm
+\begin{alprocedure}[H] \algorithmcfname{MMD~ \cite[(Algorithm
 			3.6)]{sokotaUnified2023}} \label{alg:mmd} Starting with $z_1 \in \text{int dom } \psi \cap \calZ$,
 	at each iteration $t$ do $$ z_{t+1} = \arg \min_{z \in \calZ} \eta (\langle F(z_t), z\rangle +
 		\alpha \psi(z)) + B_{\psi} (z; z_t).
@@ -172,65 +259,72 @@ We now restate the main algorithm as stated in Sokota et.al,~\cite{sokotaUnified
 \end{alprocedure}
 
 \hfill \break
-Algorithm~\ref{alg:mmd} provides the following convergence guarantees.
+Algorithm~
+\ref{alg:mmd} provides the following convergence guarantees.
 \begin{theorem}
 	\label{thm:mmdconv}
 	\cite[Theorem 3.4]{sokotaUnified2023}
 	Assuming that the solution $z_{\ast}$ to the problem VI ($\calZ, F + \alpha \nabla g$) lies in the
 	int dom $\psi$, then
 
-	\[ B_{\psi} (z_{\ast}; z_{t + 1}) \leq {\left(\frac{1}{1 +
-				\eta \alpha}\right)}^t B_{\psi} (z_{\ast}; z_1), \]
+	\[ B_{\psi} (z_{\ast}; z_{t + 1}) \leq { \left(\frac{1}{1
+				+ \eta \alpha}\right)}^t B_{\psi} (z_{\ast}; z_1), \]
 
-	if $\alpha > 0$, and $\eta
-		\leq \frac{\alpha}{L^2}$.
+	if $\alpha > 0$, and
+	$\eta \leq \frac{\alpha}{L^2}$.
 \end{theorem}
 
 \subsection{Behavioral form MMD}
 
-The update rule from Algorithm~\ref{alg:mmd} admits closed form in some instances, while requires approximation 
-through gradient updates in other cases.
-For a parameterized policy $pi_\theta$, when $\psi$ is negative entropy the update rule from Algorithm~\ref{alg:mmd} can be restated in 
-RL terms as follows:
+The update rule from Algorithm~ \ref{alg:mmd} admits closed form in some instances, while requires
+approximation through gradient updates in other cases.
+For a parameterized policy $pi_\theta$, when $\psi$ is negative entropy the update rule from
+Algorithm~ \ref{alg:mmd} can be restated in RL terms as follows:
 \begin{equation}
-	\label{eqn:mmdbf} \pi_{\theta_{k+1}}(s,a)
-	= \arg \max_{\theta} \E_{s \sim \rho_{\theta_k}} \left[ \E_{a \sim \pi_{\theta_k}} [Q_{\theta_k}(s, a)] + \alpha H(\pi_\theta) - \frac{1}{\eta} KL(\pi_\theta, \pi_{\theta_k}) \right],
+	\label{eqn:mmdbf}
+	\pi_{ \theta_{k+1}}(s,a) = \arg \max_{\theta} \E_{s \sim \rho_{\theta_k}} \left[ \E_{a \sim
+			\pi_{\theta_k}} [Q_{\theta_k}(s, a)] + \alpha H(\pi_\theta) - \frac{1}{\eta} KL(\pi_\theta,
+		\pi_{\theta_k}) \right],
 \end{equation}
 
-where $H(\pi_\theta)$ is the entropy of the policy
-being optimized.
+where $H(\pi_\theta)$ is the entropy of
+the policy being optimized.
 
-This behavioral form update can also be approximated using gradient updates similar to MDPO. 
-
-For $m$ steps MDPO uses the following gradient to update the policy parameters, 
+This behavioral form update can also be approximated using gradient updates similar to MDPO.
+For $m$ steps MMD uses the following gradient to update the policy parameters,
 \begin{equation}
-	\label{eqn:mdpograd}
-	\nabla_{\theta} J(\theta, \theta_k)|_{\theta = \theta_k^{(i)}} = \E_{s \sim \rho_{\theta_k} \\ a \sim \theta_k} 
-	[\frac{\pi_{\theta_k}^{(i)}}{\pi_{\theta_k}} \nabla_{\theta} \log \pi_{\theta_k}^(i) (a|s) A_{\theta_k}(s,a)] - 
-	\frac{1}{t_k} \E_{s \sim \rho_{\theta_k}} [\nabla_\theta KL(s; \theta, \theta_k)]
-\end{equation}
-where $i=0,1,\ldots,m-1$.
+	\label{eqn:mmdgrad} \nabla_{\theta} J(\theta, \theta_k)|_{\theta = \theta_k^{(i)}} = \E_{s \sim
+		\rho_{\theta_k} \\ a \sim \theta_k} [ \frac{ \pi_{\theta_k}^{(i)}}{ \pi_{\theta_k}} \nabla_{\theta}
+		\log \pi_{\theta_k}^{(i)} (a|s) A_{\theta_k}(s,a)] + \alpha H( \pi_{\theta_k}^{(i)}) -
+	\frac{1}{\eta} \E_{s \sim \rho_{\theta_k}} [\nabla_\theta KL(s; \pi_\theta,
+		\pi_{\theta_k})_{|\theta= \theta_k^{(i)}}]
+\end{equation} where $i=0,1,\ldots,m-1$.
 
-To examine the effect of the choice of $m$, we compare the performance of the behavioral form update from~\ref{eqn:mmdbf}  
-to the closed-form for MMD with a negative entropy mirror map as given below:
-$$\pi_{k+1} \propto [\pi_t \rho^{\alpha \eta} e^{\eta Q_{\pi_k}}]^{\frac{1}{1+\alpha \eta}}$$
+To examine the effect of the choice of $m$, we compare the performance of the behavioral form
+update from~ \ref{eqn:mmdbf} to the closed-form for MMD with a negative entropy mirror map~
+\cite[equation (12)]{sokotaUnified2023}: $$ \pi_{k+1} \propto [\pi_t \rho^{\alpha \eta} e^{\eta
+				Q_{\pi_k}}]^{ \frac{1}{1+\alpha \eta}}$$
 
-For a two-player zero-sum normal form game, the expected Q-values are the expected payoffs for the max and min players respectively.
-As there is only one state, we can replace the expectations in the update with an all-action Q-value computation that is only dependent 
-upon the opponent's policy. 
+For a two-player zero-sum normal form
+game, the expected Q-values are the expected payoffs for the max and min players respectively.
+As there is only one state, we can replace the expectations in the update with an all-action
+Q-value computation that is only dependent upon the opponent's policy.
 
-In Fig~\ref{fig:?}, we plot the norm of the difference between the closed-form and behavioral form policies at each iteration. 
-It can be seen that the behavioral form approximates the closed form well as expected for most choices of step size and $m$. 
-For large number of gradient steps, or large step sizes the updates are unstable. 
+In Fig~ \ref{fig:?
+}, we plot the norm of the difference between the closed-form and behavioral form policies at each iteration.
+It can be seen that the behavioral form approximates the closed form well as expected for most
+choices of step size and $m$.
+For large number of gradient steps, or large step sizes the updates are unstable.
 For all our tabular experiments, we use a step-size of 0.1, and $m=10$.
 
 \subsection{Comparison of MMD to other Mirror Decent based methods}
 
-The non-euclidean proximal gradient method~\ref{eqn:proxgrad}, has strong connections to Mirror Descent~\cite[Appendix D.3]{sokotaUnified2023}.
+The non-euclidean proximal gradient method~ \ref{eqn:proxgrad}, has strong connections to Mirror
+Descent~ \cite[Appendix D.3]{sokotaUnified2023}.
 \blue{TBD: other works also discuss this relationship between mirror descent and proximal gradient methods applied to VIs}.
-Consequently negative entropy based MMD is also equivalent to MDPO with an added entropy regularization 
-as detailed in~\cite[Appendix L]{sokotaUnified2023} and as can be seen from~\ref{eqn:mdrl} and~\ref{eqn:mmdbf}.
-
+Consequently negative entropy based MMD is also equivalent to MDPO with an added entropy
+regularization as detailed in~ \cite[Appendix L]{sokotaUnified2023} and as can be seen from~
+\ref{eqn:mdrl} and~ \ref{eqn:mmdbf}.
 
 MMD as a reinforcement learning algorithm performs on par with CFR.
 In single agent settings MMD's performance is competitive with PPO in Atari and MuJoCo

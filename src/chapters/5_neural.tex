@@ -1,35 +1,55 @@
-\chapter{Neural Experiments}
+\chapter{Experiments: Deep Multi-Agent Reinforcement Learning}
+Expanding on our the observations from the tabular experiments, we proceed to evaluate the better
+performing algorithms under function approximation in large-scale 2p0s to answer
+question~\ref{qn3}.
+We only evaluate the Base, NeuRD, and Optimism-based variants of the algorithms for the neural
+network based experiments.
+
+\section{Experiment Setup}
+We evaluate the algorithms on Kuhn Poker, Abrupt Dark Hex, and Phantom Tic-tac-toe.
+Kuhn Poker is a smaller extensive form game that allows for more introspection and exact
+exploitability computation.
+Whereas, Abrupt Dark Hex, and Phantom TTT are games with a large state-space that test the
+scalability of these algorithms.
+We train both the players simultaneously in self-play.
 
 \subsection{Approximate Exploitability}
-For larger games, it is not possible to compute the exact exploitability due to the large state space. 
-However, we can approximate the exploitability by training a best response agent against the fixed current policy to be exploited. 
-Then the exploitability can be approximated by sampling trajectories and measuring the average reward the best response 
-agent acheived against the exploited policy.
+For larger games, it is not possible to compute the exact exploitability due to the large state
+space.
+However, we can approximate the exploitability by training a best response agent against the fixed
+current policy to be exploited.
+Then the exploitability can be approximated by sampling trajectories and measuring the average
+reward the best response agent acheived against the exploited policy.
+Let $\pi_{BR}$ be a learnt best-response approximator against a given exploitee policy
+$\pi_{fixed}$, then the approximate exploitability is given by:
 
-\subsection{Deep Multi-agent RL Experiments}
+$$\text{Exp}_{appx} (\pi_{BR}, \pi_{fixed}) = \sum_{t=1}^T \E[G_t | S=s_t, a_t=(\pi_{BR}(a_t|s_t),
+		\pi_{fixed}(a_t|s_t))]$$
 
-Based on the observations from the Tabular NFG experiments, we evaluate the most promising
-combinations of these algorithms in the function approximation setting.
-As noted in~\cite{sokotaUnified2023}, we implement MMD by modifying the PPO
-implementation in RLLib~\cite{liangRLlib2018}.
-We also use RLLib's OpenSpiel adapter with some modifications to use information states as inputs
-as opposed to observations.
+\subsection{Implementation Details} All the algorithms
+are implemented in RLLib~\cite{liangRLlib2018}, and we use OpenSpiel's implementation of the above
+mentioned EFGs to evaluate the performance of these algorithms (similar
+to~\cite{sokotaUnified2023}).
+For all the experiments we employ actor-critic version of the alogrithms without shared parameters
+for the policy and value networks (default choice within RLLib).
+All networks are Multi-layered Perceptrons with 2 hidden layers each with 128 hidden units.
+We use GAE for computing the advantage estimates.
+Please refer to the table~\ref{tab:hpes} in the appendix for a more exhaustive list of
+hyperparameter values.
 
-For the function approximation setting, we evaluate the algorithms on Kuhn Poker, Abrupt Dark Hex,
-and Phantom Tic-tac-toe.
-Kuhn Poker is a smaller extensive form game that allows for more introspection and exact exploitability computation.
-Whereas, Abrupt Dark Hex, and Phantom TTT are games with a large state-space that test the scalability of these
-algorithms.
-
-In function approximation settings we compute exact exploitability for Kuhn Poker,
-and 2$\times$2 Dark Hex.
-For the larger games, compute approximate exploitability by training a DQN best response agent to approximate
-the best response computation similar to~\cite{sokotaUnified2023}.
-
-We train these reinforcement learning agents i self-play for the environments mentioned above.
-
-
-\textbf{Implementation Details:} 
-- Implementation details (RLLib, PPO modifications, GAE)
-- Neural network architecture, hyperparameters
-
+\section{Results}
+For Kuhn Poker, and Abrupt Dark Hex 2$\times$2, we train the agents in self-play for 1M steps.
+Fig~\ref{fig:neuralsmall} plots the exact exploitabililty of the joint policy as a function of the
+iterations.
+We also compute approximate exploitability for the smaller games by training a DQN best-response
+agent for 1M steps against the fixed trained agents.
+We then evaluate the performance of the trained DQN agent against the joint policy for 1000
+episodes (500 against the min player, and 500 against the max player).
+\ref{tab:kuhnapproxexpl} summarizes the approximate exploitability results for Kuhn Poker and 2$\times$2 Dark Hex.
+The algorithms that correspond to better performances with respect to the exact exploitability have
+lower approximate exploitability as expected.
+For Abrupt Dark Hex 3$\times$3, and Phantom TTT we train both the learning agents and the DQN
+best-response agent for 5M steps.
+Fig~\ref{fig:neurallarge} shows the approximate exploitability metric for different algorithms.
+We also evaluate these algorithms by having the trained agents play against each other in a
+head-to-head manner.

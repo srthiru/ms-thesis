@@ -110,6 +110,7 @@
 
 % Color comments
 \newcommand{\red}[1]{\textcolor{red}{#1}}
+\newcommand{\green}[1]{\textcolor{green}{#1}}
 \newcommand{\blue}[1]{\textcolor{blue}{#1}}
 
 % Shorthand for notations
@@ -144,8 +145,10 @@
 	\end{flushright}}
 
 \tableofcontents \listoftables \listoffigures
-\listofabbreviations \begin{list} {} {\setlength {\labelwidth}{1in} \setlength{\leftmargin}{1.5in}
-		\setlength{\labelsep}{.5in} \setlength{\rightmargin}{\leftmargin}} \item[$\theta$\hfill] Parameters
+\listofabbreviations
+\begin{list} {} {\setlength {\labelwidth}{1in} \setlength{\leftmargin}{1.5in}
+		\setlength{\labelsep}{.5in} \setlength{\rightmargin}{\leftmargin}}
+	\item[$\theta$\hfill] Parameters
 		of a function approximator.
 		% \acknowledgements% {I want to ``thank'' my committee, without whose ridiculous demands, I% would have graduated so, so, very much faster.}% \preface% This preface is purely optional at UIC.
 \end{list}
@@ -161,7 +164,7 @@ Put your summary of thesis.
 \include{chapters/4_experiments.tex}
 \include{chapters/5_neural.tex}
 \include{chapters/6_discussion.tex}
-\include{chapters/7_discussion.tex}
+\include{chapters/7_conclusion.tex}
 
 % \include{derivations.tex}
 % \include{oco.tex}
@@ -177,7 +180,6 @@ Ancillary material should be put in appendices.
 \chapter{Some More Ancillary Stuff}
 
 % Here is yet another appendix! Wahoo!
-
 
 %\nocite{*}
 \bibformb

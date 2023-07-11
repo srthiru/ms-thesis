@@ -1,72 +1,170 @@
 \chapter{Modified Updates for Mirror-descent based methods}
+\label{chp:updates}
 
-Our main contribution is in exploring existing techniques in multiagent learning and last-iterate convergence 
-literature, and studying their effectiveness when combined with mirror-descent based algorithms
-discussed in the previous section.
-More specifically, we study the following three techniques - Neural Replicator Dynamics~\cite{hennesNeural2020}, 
-the Extragradient algorithm~\cite{korpelevichextragradient1976}, 
+Our main contribution is adapting existing techniques for inducing convergence in multiagent
+settings with the algorithms discussed in the previous section.
+More specifically, we study the following three techniques - Neural Replicator
+Dynamics~\cite{hennesNeural2020}, the Extragradient algorithm~\cite{korpelevichextragradient1976},
 and the Optimistic gradient algorithm~\cite{popovmodification1980}.
-In this section we describe these techniques in more detail and how they fit into the problem that we are 
-trying to address.
-In the next section we perform a detailed experimental evaluation of these algorithms in two-player zero-sum 
-games and summarize our findings.
+In this section we describe these techniques in more detail and provide our proposed modifications
+to the mirror descent algorithms.
 
 \section{Neural Replicator Dynamics (NeuRD)}
-Replicator Dynamics is an idea from Evolutionary game theory (EGT) that defines operators to update
-the dynamics of a population in order to maximize some pay-off defined by a fitness function.
-Neural Replicator Dynamics (NeuRD) is an extension of Replicator Dynamics 
-to function approximation settings.
 
-The single-population replicator dynamics is defined by the following system of differntial
-equations:
+% The continuous-time single-population replicator dynamics is defined by the following system of
+% differential equations:
+% \begin{equation}
+% 	\label{eqn:rd} \dot{\pi}(a) = \pi(a)[u(a, \pi) -
+% 		\bar{u}(\pi)], \forall a \in \mathcal{A}
+% \end{equation}
 
+Consider the problem of learning a parameterized policy $\pi_{\theta}$ in a single-state all-action
+problem setting.
+In such a setting, SPG employs the following update at each iteration
+$t$~\cite[Section~A.1]{hennesNeural2020}: \[y_{\theta_t}(a) = y_{\theta_{t-1}} (a) + \eta_t
+	\pi_{\theta_{t-1}}(a) [r_t(a) - \bar{r_t}], \forall a \in A\] where $y$ represents the logits,
+$r_t(a)$ is the immediate reward associated with action $a$, and $\bar{r}_t$ is the average reward
+of the state.
+
+The above SPG update is equivalent to the instant regret scaled by the current policy.
+This scaling makes it difficult for SPG to adapt to sudden changes in rewards associated with
+actions that are already less likely under the current policy.
+This problem is more evident in multiagent settings where the opponent's policy can change
+arbitrarily affecting rewards associated with actions even in the single-state setting.
+
+Motivated by this observation, Hennes et.al~\cite{hennesNeural2020} propose to make modifications
+to SPG using the idea of Replicator dynamics from Evolutionary game theory.
+Replicator Dynamics defiens operators that describe the dynamics of a population's evolution when
+attempting to maximize some arbitrary utility function.
+Replicator dynamics also have a strong connection to no-regret algorithms, and in this work, the
+authors also establish the equivalence between single-state all actions tabular NeuRD, Hedge, and
+discrete time RD~\cite[Statement 1, p5]{hennesNeural2020}.
+Due to this equivalence, NeuRD also inherits the property of no-regret algorithms that their
+time-average policy converges to the Nash equilibrium.
+
+Neural Replicator Dynamics (NeuRD) is an adaptation of discrete-time Replicator Dynamics to
+reinforcement learning under function approximation settings.
+NeuRD can be implemented as a one line change to SPG, bypassing the gradients with respect to the
+softmax operator and computing the gradients of the parameters directly with respect to the logits.
+
+% While NeuRD has average iterate convergence,  also induce last iterate convergence in
+% imperfect information settings for NeuRD using reward transformation based regularization~\cite{perolatPoincare2021}.
+Since most RL algorithms, including the ones discussed in the previous chapter utilize Softmax
+parameterization, the NeuRD fix is directly applicable to the policy loss component of their
+respective loss functions without any major changes.
+In our work, we apply the NeuRD fix to the policy loss component of the MMD and MDPO loss
+functions.
+
+\subsection{Alternating vs Simultaneous gradient updates}
+As an aside, we wish to discuss two possible update schemes for discrete learning dynamics, namely
+- Simultaneous and Alternating updates.
+
+We also observe that while alternating updates shows average-iterate convergence, simultaneous
+updates do not converge.
+\begin{figure}[H]
+	\centering
+	\scalebox{0.6}[0.6]{\input{figs/tabular/altvsim.pgf}}
+	\caption[Simultaneous gradient updates vs Alternate gradient updates updates]{NeuRD converges with alternating updates, but not with simultaneous updates.}
+\end{figure}
+We note that~\cite{hennesNeural2020} also use alternating updates in all their experiments
+evaluating NeuRD.
+A similar behavior of simultaneous gradient updates diverging was also observed
+in~\cite{gidelVariational2020} for unconstrained min-max problems.
+As noted in the earlier work, the sequence of iterates have bounded error, and thus the average
+policy converges to the optimal point.
+Based on these observations, we use alternating udpates for all our tabular experiments.
+Both of these are symmetric update schemes in the sense that both the players perform update in a
+similar manner.
+Asymmetric updates have also been studied in a similar context and has been shown to improve the
+speed of convergence~\cite{daskalakisTraining2018}.
+
+\section{Extragradient and Optimistic Gradient}
+First-order optimization algorithms are studied extensively in varying contexts including solving
+variational inequalities, saddle-point problems, and convex optimization.
+While gradient based methods including the classic Arrow-Hurwicz method work well for many
+optimization problems, for saddle point problems they converge only under strong-convexity even in
+the unconstrained case~\cite{heConvergence2022}.
+
+The \textbf{Extragradients (EG)}: G.M.Korpelevich~\cite{korpelevichextragradient1976} introduced EG
+as a modification of the Arrow-Hurwicz method for solving convex-concave saddle point problems, and
+variational inequality problems with strongly monotone operators.
+The EG algorithm follows the sequence of updates as given below:
 \begin{equation}
-	\label{eqn:rd} \dot{\pi}(a) = \pi(a)[u(a, \pi) -
-		\bar{u}(\pi)], \forall a \in \mathcal{A}
+	\label{eqn:eg}
+	\begin{split}
+		\bar{x}_{k} = P_{\calX}[x_k - \eta f(x_k, y_k)] \\ \bar{y}_{k} = P_{\calY}[y_k + \eta
+				f(x_k, y_k)] \\ x_{k+1} = P_{\calX}[x_k - \eta f(\bar{x}_k, \bar{y}_k)] \\ y_{k+1} = P_{\calY}[x_k
+				+ \eta f(\bar{x}_k, \bar{y}_k)]
+	\end{split}
+\end{equation} If $f$ is $L$-smooth, and $0 < \eta <
+	1/L$ is the step size, EG has asymptoticlast-iterate convergence.
+~\cite{tsenglinear1995} - Last iterate linear convergence using extragradient method for VI problems.
+
+\textbf{Optimistic gradients (OPT)}: For the same problem~\cite{popovmodification1980} also proposed a modification to the Arrow-Hurwicz
+method that differs from the EG method by reusing the \textit{extragradients} of previous iteration
+instead of computing an additional gradient in each iteration.
+This form of update, popularly known as \textbf{Optimistic updates} can be expressed through the
+following sequence:
+\begin{equation}
+	\label{eqn:opt}
+	\begin{split}
+		\bar{x}_{k} = P_{\calX}[x_k -
+				\eta f(\bar{x}_{k-1}, \bar{y}_{k-1})] \\ \bar{y}_{k} = P_{\calY}[y_k + \eta f(\bar{x}_{k-1},
+				\bar{y}_{k-1})] \\ x_{k+1} = P_{\calX}[x_k - \eta f(\bar{x}_k, \bar{y}_k)] \\ y_{k+1} =
+		P_{\calY}[x_k + \eta f(\bar{x}_k, \bar{y}_k)]
+	\end{split}
 \end{equation}
 
-Hennes et.al,~\cite{hennesNeural2020} show equivalence between Softmax Policy gradients~\ref{sec:pg} and
-continuous-time Replicator Dynamics~\cite[THEOREM 1, on p5]{hennesNeural2020}\label{thm:spgrd}.
+Variations of the above algorithms have been studied throughout the literature.
+Most notably, Optimistic Gradient Descent Ascent and Optimistic Multiplicative Weights Update are
+well-established algorithms that use Optimistic udpates.
 
-With knowledge of this equivalence they detail how NeuRD can be implemented as a one line change to SPG.
-This can be viewed as a fix to the regular SPG update to make it more suited to multi-agent settings 
-by making the policy updates more responsive to changes in dynamics.
+\blue{
+	\cite{rakhlinOptimization2013} studied this algorithm in the context of Online learning with
+	predictable sequences under the name Optimistic Mirror Descent.
+	Optimistic updates coincides with the idea of using a predictor for the performance of next
+	iteration to guide the updates in Online learning~\cite{}.
+	While this assumption is valid for the problem of learning with predictable sequences, it is also
+	valid in multiagent settings if the objective function is convex and both players use regularized
+	learning algorithms.
+}
+Within this work, OMD was also studied in the context of zero-sum games with strongly uncoupled
+dynamics.
+This work showed a convergence rate of $O(log T/T)$ for all-actions setting and hypothesized that a
+better rate than $O(1/\sqrt{T})$ is not possible for the sample based setting.
+Optimistic Mirror Descent (OMD) is an extragradient version of Mirror Descent, and OGDA can be
+shown to be an instantiation of OMD that uses \textit{extrapolation from past}.
+OMD updates are given by:
+\begin{equation}
+	\label{eqn:eg}
+	\begin{split}
+		x_{k+1} = P[x_k - 2\eta
+				f(x_k, y_k) + \eta f(x_{k-1}, y_{k-1})] \\ y_{k+1} = P[x_k + 2\eta f(x_k, y_k) - \eta f(x_{k-1},
+				y_{k-1})]
+	\end{split}
+\end{equation}
 
-Replicator dynamics also have a strong connection to no-regret algorithms, and in this work, the authors also establish 
-the equivalence between single-state all actions tabular NeuRD, Hedge, and discrete time RD~\cite[Statement 1, p5]{hennesNeural2020}.
-Due to this equivalence, NeuRD also inherits the no-regret properties of algorithms like Hedge.
-While NeuRD has average iterate convergence, the authors also induce last iterate convergence in imperfect 
-information settings for NeuRD using reward transformation based regularization~\cite{perolatPoincare2021}.
+\cite{daskalakisTraining2018} studied OMD
+to tackle the problem of instability in training GANs.
+The also prove last-iterate convergence for OMD in bilinear games and detail an optimistic version
+of the Adam optimizer.
+OGDA has linear last-iterate convergence \cite{daskalakisTraining2018}.
 
-e As seen in Fig.., tabular SPG does not converge to the Nash Equilibrium, 
-whereas the average policy of tabular NeuRD converges to the Nash Equlibrium.
+OMD was also studied in \cite{gidelVariational2020} for the problem of convergence in GANs under
+the framework of Variational Inequalities, dubbed \textit{extrapolation from the past}.
+Here, extrapolation refers to the EG algorithm, and Optimism is interpreted as EG with the
+extrapolation done using the past iterations gradient as an estimate of the extragradient.
+They also prove convergence for stochastic VI problems with strong monotone operators for the
+average of the iterates.
+~\cite{mertikopoulosOptimistic2019} also study the EG method for training GANs by establishing a framework of
+\textit{coherence}, and show that EG has last-iterate convergence for coherent VI problems.
 
-\subsection{Alternating vs Simultaneous updates}
-
-We also observe that while alternating updates shows average-iterate convergence, simultaneous updates do not converge.
-\b{More background about this}
-
-\subsection{NeuRD fix in MMD, and MDPO}
-The NeuRD fix can be applied to MMD, and MDPO in a similar way to SPG.
-
-
-\section{Extrapolation methods}
-
-The Extragradient method (EG) was first introduced by
-G.M.Korpelevich~\cite{korpelevichextragradient1976} as a modification of gradient descent methods
-in solving saddle point problems.
-EG is a classical method for solving smooth and strongly convex-concave bilinear saddle
-point problems with a linear rate of convergence.
+Optimism is often interpreted as an adaptation of the Extragradient method with the idea to avoid
+the additional call to a gradient oracle by estimating the extrapolation using the previous
+iteration's gradient.
 Extragradient and Optimistic Gradient Descent Ascent methods have been shown to be approximations
 of proximal-point method for solving saddle point methods~\cite{mokhtariUnified2020}.
 
-EG also has linear last-iterate convergence guarantees for variational inequality problems with a 
-strongly monotone operator. This 
-\cite{tsenglinear1995} - Last iterate linear convergence using extragradient method for VI problems.
-
-\subsection{MMD-EG}
-
-\subsection{MDPO-EG}
-
-\section{Optimism}
+In our work, we study the effects of adapting extragradient and optimistic updates into the
+algorithms discussed in the previous chapter for 2p0s games.
 

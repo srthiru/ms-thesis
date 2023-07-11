@@ -12,6 +12,12 @@ Goodfellow, I., {Pouget-Abadie}, J., Mirza, M., Xu, B., {Warde-Farley}, D., Ozai
 \newblock Generative {{Adversarial Nets}}.
 \newblock In {\itshape  Advances in {{Neural Information Processing Systems}} }, volume~27. {Curran Associates, Inc.}, 2014.
 
+\bibitem{suttonReinforcement2018}
+
+Sutton, R.~S. and Barto, A.~G.:
+\newblock {\itshape  Reinforcement Learning: An Introduction }.
+\newblock Adaptive Computation and Machine Learning Series. {Cambridge, Massachusetts}, {The MIT Press}, second edition edition, 2018.
+
 \bibitem{shalev-shwartzOnline2012}
 
 {Shalev-Shwartz}, S.:
@@ -29,17 +35,41 @@ Tomar, M., Shani, L., Efroni, Y., and Ghavamzadeh, M.:
 Schulman, J., Wolski, F., Dhariwal, P., Radford, A., and Klimov, O.:
 \newblock Proximal {{Policy Optimization Algorithms}}, August 2017.
 
-\bibitem{shaniAdaptive2020}
+\bibitem{schulmanTrust2015}
 
-Shani, L., Efroni, Y., and Mannor, S.:
-\newblock Adaptive {{Trust Region Policy Optimization}}: {{Global Convergence}} and {{Faster Rates}} for {{Regularized MDPs}}.
-\newblock {\itshape  Proceedings of the AAAI Conference on Artificial Intelligence }, 34(04):5668--5675, April 2020.
+Schulman, J., Levine, S., Abbeel, P., Jordan, M., and Moritz, P.:
+\newblock Trust {{Region Policy Optimization}}.
+\newblock In {\itshape  Proceedings of the 32nd {{International Conference}} on {{Machine Learning}} }, pages 1889--1897. {PMLR}, June 2015.
 
 \bibitem{sokotaUnified2023}
 
 Sokota, S., D'Orazio, R., Kolter, J.~Z., Loizou, N., Lanctot, M., Mitliagkas, I., Brown, N., and Kroer, C.:
 \newblock A {{Unified Approach}} to {{Reinforcement Learning}}, {{Quantal Response Equilibria}}, and {{Two-Player Zero-Sum Games}}.
 \newblock In {\itshape  The {{Eleventh International Conference}} on {{Learning Representations}} }, February 2023.
+
+\bibitem{facchineiFiniteDimensional2004}
+
+eds. F. Facchinei and J.-S. Pang
+\newblock {\itshape  Finite-{{Dimensional Variational Inequalities}} and {{Complementarity Problems}} }.
+\newblock Springer {{Series}} in {{Operations Research}} and {{Financial Engineering}}. {New York, NY}, {Springer}, 2004.
+
+\bibitem{rockafellarMonotone1976}
+
+Rockafellar, R.~T.:
+\newblock Monotone {{Operators}} and the {{Proximal Point Algorithm}}.
+\newblock {\itshape  SIAM Journal on Control and Optimization }, 14(5):877--898, August 1976.
+
+\bibitem{tsenglinear1995}
+
+Tseng, P.:
+\newblock On linear convergence of iterative methods for the variational inequality problem.
+\newblock {\itshape  Journal of Computational and Applied Mathematics }, 60(1):237--252, June 1995.
+
+\bibitem{tsengApproximation2010}
+
+Tseng, P.:
+\newblock Approximation accuracy, gradient methods, and error bound for structured convex optimization.
+\newblock {\itshape  Mathematical Programming }, 125(2):263--295, October 2010.
 
 \bibitem{hennesNeural2020}
 
@@ -52,11 +82,49 @@ Korpelevich, G.~M.:
 \newblock The extragradient method for finding saddle points and other problems.
 \newblock {\itshape  Matecon }, 12:747--756, 1976.
 
-\bibitem{perolatPoincare2021}
+\bibitem{popovmodification1980}
 
-Perolat, J., Munos, R., Lespiau, J.-B., Omidshafiei, S., Rowland, M., Ortega, P., Burch, N., Anthony, T., Balduzzi, D., Vylder, B.~D., Piliouras, G., Lanctot, M., and Tuyls, K.:
-\newblock From {{Poincar\'e Recurrence}} to {{Convergence}} in {{Imperfect Information Games}}: {{Finding Equilibrium}} via {{Regularization}}.
-\newblock In {\itshape  Proceedings of the 38th {{International Conference}} on {{Machine Learning}} }, pages 8525--8535. {PMLR}, July 2021.
+Popov, L.~D.:
+\newblock A modification of the {{Arrow-Hurwicz}} method for search of saddle points.
+\newblock {\itshape  Mathematical notes of the Academy of Sciences of the USSR }, 28(5):845--848, November 1980.
+
+\bibitem{gidelVariational2020}
+
+Gidel, G., Berard, H., Vignoud, G., Vincent, P., and {Lacoste-Julien}, S.:
+\newblock A {{Variational Inequality Perspective}} on {{Generative Adversarial Networks}}, August 2020.
+
+\bibitem{daskalakisTraining2018}
+
+Daskalakis, C., Ilyas, A., Syrgkanis, V., and Zeng, H.:
+\newblock Training {{GANs}} with {{Optimism}}, February 2018.
+
+\bibitem{heConvergence2022}
+
+He, B., Xu, S., and Yuan, X.:
+\newblock On {{Convergence}} of the {{Arrow}}\textendash{{Hurwicz Method}} for {{Saddle Point Problems}}.
+\newblock {\itshape  Journal of Mathematical Imaging and Vision }, 64(6):662--671, July 2022.
+
+\bibitem{rakhlinOptimization2013}
+
+Rakhlin, A. and Sridharan, K.:
+\newblock Optimization, {{Learning}}, and {{Games}} with {{Predictable Sequences}}, November 2013.
+
+\bibitem{mertikopoulosOptimistic2019}
+
+Mertikopoulos, P., Lecouat, B., Zenati, H., Foo, C.-S., Chandrasekhar, V., and Piliouras, G.:
+\newblock Optimistic {{Mirror Descent}} in {{Saddle-Point Problems}}: {{Going}} the {{Extra}} ({{Gradient}}) {{Mile}}.
+\newblock 2019.
+
+\bibitem{mokhtariUnified2020}
+
+Mokhtari, A., Ozdaglar, A., and Pattathil, S.:
+\newblock A {{Unified Analysis}} of {{Extra-gradient}} and {{Optimistic Gradient Methods}} for {{Saddle Point Problems}}: {{Proximal Point Approach}}.
+\newblock In {\itshape  Proceedings of the {{Twenty Third International Conference}} on {{Artificial Intelligence}} and {{Statistics}} }, pages 1497--1507. {PMLR}, June 2020.
+
+\bibitem{liangRLlib2018}
+
+Liang, E., Liaw, R., Moritz, P., Nishihara, R., Fox, R., Goldberg, K., Gonzalez, J.~E., Jordan, M.~I., and Stoica, I.:
+\newblock {{RLlib}}: {{Abstractions}} for {{Distributed Reinforcement Learning}}, June 2018.
 
 \bibitem{chhablaniCounterfactual2021}
 
@@ -76,15 +144,10 @@ Perolat, J., {de Vylder}, B., Hennes, D., Tarassov, E., Strub, F., {de Boer}, V.
 \newblock Mastering the {{Game}} of {{Stratego}} with {{Model-Free Multiagent Reinforcement Learning}}.
 \newblock {\itshape  Science }, 378(6623):990--996, December 2022.
 
-\bibitem{mokhtariUnified2020}
+\bibitem{perolatPoincare2021}
 
-Mokhtari, A., Ozdaglar, A., and Pattathil, S.:
-\newblock A {{Unified Analysis}} of {{Extra-gradient}} and {{Optimistic Gradient Methods}} for {{Saddle Point Problems}}: {{Proximal Point Approach}}.
-\newblock In {\itshape  Proceedings of the {{Twenty Third International Conference}} on {{Artificial Intelligence}} and {{Statistics}} }, pages 1497--1507. {PMLR}, June 2020.
-
-\bibitem{liangRLlib2018}
-
-Liang, E., Liaw, R., Moritz, P., Nishihara, R., Fox, R., Goldberg, K., Gonzalez, J.~E., Jordan, M.~I., and Stoica, I.:
-\newblock {{RLlib}}: {{Abstractions}} for {{Distributed Reinforcement Learning}}, June 2018.
+Perolat, J., Munos, R., Lespiau, J.-B., Omidshafiei, S., Rowland, M., Ortega, P., Burch, N., Anthony, T., Balduzzi, D., Vylder, B.~D., Piliouras, G., Lanctot, M., and Tuyls, K.:
+\newblock From {{Poincar\'e Recurrence}} to {{Convergence}} in {{Imperfect Information Games}}: {{Finding Equilibrium}} via {{Regularization}}.
+\newblock In {\itshape  Proceedings of the 38th {{International Conference}} on {{Machine Learning}} }, pages 8525--8535. {PMLR}, July 2021.
 
 \end{thebibliography}

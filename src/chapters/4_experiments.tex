@@ -1,53 +1,72 @@
-\chapter{Experiments}
+\chapter{Tabular Experiments}
 
-We now evaluate our proposed methods experimentally in both tabular and function approximation settings.
-Though these algorithms can be applied both as approximate equilibrium solvers QRE and Nash equilibirum.
-We present some results for convergence to QRE in the tabular setting but focus on Nash convergence mainly 
-for the tabular and function approximation setting.
-
+We now evaluate our proposed methods experimentally in both tabular and function approximation
+settings as approximate equilibrium solvers.
 Through the experiments, we aim to answer the following questions:
-\begin{itemize}
-	\item How does the addition of NeuRD-fix, Extragradient updates, and Optimistic upates
-	      affect the convergence rate of these algorithms in solving for QREs, and Nash equilibrium?
-	\item What is the last-iterate vs average-iterate convergence behavior of these algorithms in the presence of these modifications?
-	\item Do these performance improvements scale well with the size of the game?
-\end{itemize}
+\begin{enumerate}
+	\item {What is
+	      the last-iterate and average-iterate convergence behavior of these algorithms?
+	      }\label{qn1}
+	\item {How does the addition of NeuRD-fix, Extragradient updates, and Optimistic upates
+	      affect the convergence rate of these algorithms?}\label{qn2}
+	\item {Do these performance improvements scale well with the size of the game?}\label{qn3}
+\end{enumerate}
 
-\section{Evaluation Metrics}
-Our main focus being the convergence behaviors and speed of convergence we need a notion of 
-distance from the equilibrium point to measure the performance of these algorithms.
+MMD has theoretical converegence guarantees only as a QRE solver, but shows a strong empirical
+performance for finding approximate Nash Equilibriums.
+In this work our main focus is convergence to the Nash Equilibrium, and as such we focus our main
+experimental results for the same.
+We provide some additional results for the performance of different algorithms as QRE solvers in
+the appendix.
+
+\section{Experiment Setup}
+We evaluate the algorithms on two normal form games namely, PerturbedRPS and Matching Pennies.
+The policies that are logit-parameterized with a softmax projection and all the algorithms use
+full-feedback gradient updates as discussed in Chapter 3.
+Being symmetric matrix games, both games have a unique Nash Equilibrium: Perturbed RPS ([1/7, 3/7,
+		3/7]), Matching Pennies ([1/2, 1/2]).
+For all the algorithms, we train both the players for 5000 training steps with alternating updates
+using the exact payoff vectors.
+We use the $m=10$ gradient steps per iteration with a learning rate of 0.1 for all the runs.
+For MMD and MDPO, we anneal the temperature (entropy coefficient) with the schedule $\alpha_t =
+	1/\sqrt{t}$.
+For the KL-coefficient, we use different schedules for MMD ($\eta_t = \max(1 / \sqrt{t}, 0.2)$),
+and MDPO ($\eta_t = \max(1 - t/T, 0.2)$).
+MDPO's schedule is motivated by mirror-descent theory, while MMD's schedule is closer to the type
+of annealing schedule used for the original MMD experiments found through a hyperparameter sweep.
+So for both of these methods we cap the KL-coefficient at 0.2 because very low values destabilize
+the updates, especially for the NeuRD version of the algorithms.
+
+\section{Evaluation
+  Metrics}
+Our main focus being the convergence behaviors and rates, we need a notion of distance from the
+equilibrium point to measure the performance of these algorithms.
 
 \subsection{Divergence to the equilibrium}
-In settings with a known unique equilibrium such as for QREs, or Nash equilibrium in symmetric markov games, 
-we can compute the distance of the current policy to the known equilibrium using a measure of distance in the policy space such as the KL-Divergence.
+In settings with a known unique equilibrium, we can compute the distance of the current policy to
+the known equilibrium using a measure of distance in the policy space such as the KL-Divergence.
+Given the policy at iteration $t$, $pi_t$, and an equilibrium policy $\pi_*$, the metric we measure
+is: $KL(\pi_t || \pi_*) = \sum_{a \in A} \pi_t(a) \log \left( \frac{\pi_t(a)}{\pi_*(a)} \right)$.
 
 \subsection{Exploitability}
-In general, there might not be a unique Nash equilibrium. 
-In such cases, another notion of distance from the equilibrium is needed to measure convergence.
-Exploitability measures the gain in value by deviating from the current strategy.
-This is measured by computing the utility of a best response agent against the current policy, as an indiciation 
-of incentive to deviate from the current policy.
+In general, there might not be a unique Nash equilibrium and we might not know which equilibrium
+point the current policy is converging towards.
+This makes it tricky to use a direct measure of distance as the above metric.
+Exploitability is another metric that is commonly used as a notion of optimality in game theory.
+Exploitability measures the gain in value a player can achieve by deviating from the current
+policy.
+We measure the value that a worst-case opponent can achieve by keeping the current policy fixed by
+computing a best response at every state.
+The difference between the value that this best-response opponent can acheive and the game value is
+the exploitability of the current policy.
 
 \blue{ - Exploitability formal expression in terms of best responses, and value.}
 
-\section{Tabular Experiments}
-For the tabular domain, we study the learning behavior of these algorithms on
-PerturbedRPS and Matching Pennies. 
-PerturbedRPS, a modified version of the standard Rock Paper Scissors, is a symmetric Normal form game 
-that has a unique Nash Equlibrium.
-Although it is a simple problem, standard RL algorithms fail to converge due to the non-stationarity 
-induced by the opponent.
-We employ the standard model of alternating updates to learn a parameterized policy for both agents. 
-We use softmax parameterization, and perform updates to learn the logits associated with each action. 
-The logits then act as action preferences which are sampled from using the softmax function to get a stochastic policy.
-
-For PerturbedRPS, we use the QRE solutions computed through Gambit and, we also derive the unique
-Nash Equilibrium (please refer to~\ref{sec:rpsne} in the appendix for the derivation) for
-PerturbedRPS.\
-
-\ref{tab:tabres} summarizes the last and average iterate convergences behaviors of 3 different algorithms -
-MMD, MDPO, SPG under the proposed modifications.
-We present the results for NE, and QRE convergence (with 0.5 temperature). Fig
+\section{Results} \ref{tab:tabres} summarizes the last and average
+iterate convergences behaviors of 3 different algorithms - MMD, MDPO, SPG under the proposed
+modifications.
+% We present the results for NE, and QRE convergence (with 0.5 temperature).
+Fig~\ref{fig:tabne} summarizes the results for convergence to the Nash Equilibrium.
 
 % \begin{noindent}
 
@@ -55,65 +74,55 @@ We present the results for NE, and QRE convergence (with 0.5 temperature). Fig
 	\centering
 	\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
 	\hline
-	\multirow{3}{*}{\textbf{Algorithm}} &
-	\multicolumn{4}{c|}{\textbf{Nash}} &
-	\multicolumn{2}{c|}{\textbf{QRE ($\alpha$=0.5)}} \\
-	\cline{2-7}
-	& 
-	\multicolumn{2}{c|}{\textbf{MMD}} & 
+	\multirow{2}{*}{\textbf{Algorithm}} &
+	% \multicolumn{4}{c|}{\textbf{Nash}} &
+	% \multicolumn{2}{c|}{\textbf{QRE ($\alpha$=0.5)}} \\
+	% \cline{2-7}
+	% & 
+	\multicolumn{2}{c|}{\textbf{PG}} & 
 	\multicolumn{2}{c|}{\textbf{MDPO}} &
 	\multicolumn{2}{c|}{\textbf{MMD}} \\
 	\cline{2-7}
 	& \textbf{Avg} & \textbf{Last} & \textbf{Avg} & \textbf{Last}
 	& \textbf{Avg} & \textbf{Last} \\
 	\hline
-	Base	 	& y & y & x & y 		& y & y \\
-	\hline
-	NeuRD 		& y & y & y & \red{x} 	& y & y \\
-	\hline
-	EG 			& y & y & y & y 	& y & y \\
-	\hline
-	OPT 		& y & y & y & n 	& y & y \\
-	\hline
-	EG-OPT 		& y & y & y & y 	& y & y \\
-	\hline
-	EG-N 		& y & y & y & y 	& y & y \\
-	\hline
-	OPT-N 		& y & y & y & n 	& y & y \\
-	\hline
-	EG-OPT-N	& y & y & y & y 	& y & y \\
-	\hline
+	Base	 	& \red{\texttimes} 	& \red{\texttimes} 	& \red{\texttimes} 	& \red{\texttimes}		& \checked 	& \checked \\ \hline
+	NeuRD 		& \checked 			& \red{\texttimes} 	& \checked 			& \red{\texttimes}		& \checked 	& \checked \\ \hline
+	EG 			& \checked 			& \checked 			& \checked 			& \checked 				& \checked 	& \checked \\ \hline
+	OPT 		& \checked 			& \checked 			& \checked 			& \checked 				& \checked 	& \checked \\ \hline
+	EG-OPT 		& \checked 			& \checked 			& \checked 			& \checked 				& \checked 	& \checked \\ \hline
+	EG-N 		& \checked 			& \checked 			& \checked 			& \checked 				& \checked 	& \checked \\ \hline
+	OPT-N 		& \checked 			& \checked 			& \checked 			& \checked 				& \checked 	& \checked \\ \hline
+	EG-OPT-N	& \checked 			& \checked 			& \checked 			& \checked 				& \checked 	& \checked \\ \hline
 	\end{tabular}
-	\caption{QRE and Nash convergence in Perturbed RPS for last, and average iterates.}
+	\caption{Convergence in Perturbed RPS for last, and average iterates.}
 	\label{tab:tabres}
 \end{table}
 % \end{noindent}
 
 \begin{figure}[H]
-	% \subfigure{\includegraphics[width=0.5\linewidth]{plots/MDPO_NE.png}}
-	% \subfigure{\input{plots/tikz/nash.pgf}}
+	\label{fig:tabne} \input{figs/tabular/nash.pgf}
 \end{figure}
 
-
-\begin{figure}[H]
-	\includegraphics[width=15cm]{plots/MMD_NE.png}
-\end{figure}
-
-\begin{itemize}
-	\item{MDPO-EG has superlinear last iterate convergence to Nash
-	            equilibrium.
-	      }
-	\item{MMD with NeuRD fix and extragradient }
-\end{itemize}
-
+\subsection{Observations}
 From the above experimental results, we note the following:
 
 \begin{itemize}
-	\item {MDPO with extragradient updates has superlinear convergence to Nash equilibrium}
-	\item {Extragradient updates, and the NeuRD fix speedup convergence in both MMD and MDPO for convergence 
-	to both Nash equilibrium and QREs.}
+	\item {EG, and Optimism enable last-iterate convergence as expected from the theory.
+	      }
+	\item {EG updates provide the most improvement in terms of convergence speeds.}
+	\item {MMD has no improvement with EG updates or Optimism.
+	      Entropy annealing shows slower convergence compared to the other mechanisms for last-iterate
+	      convergence.
+	      }
+	\item {NeuRD-fix speedsup convergence in all the algorithms with or without EG and Optimism.
+	      }
+	\item {In the presence of EG/Optimism to enable last-iterate convergence, trust-region constraints and entropy
+	      regularization slow-down the learning.}
+	\item {Combining Optimism with EG updates provides minimal improvements.
+	      }
+	\item {Most notably, SPG with NeuRD fix, has last-iterate convergence when combined with Optimistic updates.}
 \end{itemize}
 
-Based on the above findings, we test some of these variants in the function approximation setting for 
-two-player zero-sum games with a large state space.
-
+The tabular experiments, and the above observations provide some answers to questions~\ref{qn1},
+and~\ref{qn2}.
