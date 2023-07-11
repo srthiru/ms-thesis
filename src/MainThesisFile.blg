@@ -15,45 +15,45 @@ Database file #1: BibFile.bib
 Database file #2: Citations.bib
 Warning--I didn't find a database entry for ""
 Warning--empty journal in mertikopoulosOptimistic2019
-You've used 26 entries,
+You've used 27 entries,
             2045 wiz_defined-function locations,
-            923 strings with 16374 characters,
-and the built_in function-call counts, 6747 in all, are:
-= -- 516
-> -- 464
-< -- 4
-+ -- 165
-- -- 139
-* -- 557
-:= -- 1098
-add.period$ -- 52
-call.type$ -- 26
-change.case$ -- 25
+            929 strings with 16742 characters,
+and the built_in function-call counts, 7248 in all, are:
+= -- 558
+> -- 493
+< -- 6
++ -- 175
+- -- 148
+* -- 597
+:= -- 1166
+add.period$ -- 54
+call.type$ -- 27
+change.case$ -- 26
 chr.to.int$ -- 0
-cite$ -- 27
-duplicate$ -- 253
-empty$ -- 600
-format.name$ -- 139
-if$ -- 1455
+cite$ -- 28
+duplicate$ -- 276
+empty$ -- 641
+format.name$ -- 148
+if$ -- 1571
 int.to.chr$ -- 0
-int.to.str$ -- 26
-missing$ -- 21
-newline$ -- 153
-num.names$ -- 27
-pop$ -- 104
+int.to.str$ -- 27
+missing$ -- 22
+newline$ -- 159
+num.names$ -- 28
+pop$ -- 109
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 132
+skip$ -- 152
 stack$ -- 0
-substring$ -- 339
-swap$ -- 66
-text.length$ -- 4
+substring$ -- 379
+swap$ -- 80
+text.length$ -- 6
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 1
-while$ -- 53
-width$ -- 28
-write$ -- 272
+while$ -- 57
+width$ -- 29
+write$ -- 284
 (There were 2 warnings)

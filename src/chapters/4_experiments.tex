@@ -19,23 +19,12 @@ experimental results for the same.
 We provide some additional results for the performance of different algorithms as QRE solvers in
 the appendix.
 
-\section{Experiment Setup}
-We evaluate the algorithms on two normal form games namely, PerturbedRPS and Matching Pennies.
-The policies that are logit-parameterized with a softmax projection and all the algorithms use
-full-feedback gradient updates as discussed in Chapter 3.
-Being symmetric matrix games, both games have a unique Nash Equilibrium: Perturbed RPS ([1/7, 3/7,
-		3/7]), Matching Pennies ([1/2, 1/2]).
-For all the algorithms, we train both the players for 5000 training steps with alternating updates
-using the exact payoff vectors.
-We use the $m=10$ gradient steps per iteration with a learning rate of 0.1 for all the runs.
-For MMD and MDPO, we anneal the temperature (entropy coefficient) with the schedule $\alpha_t =
-	1/\sqrt{t}$.
-For the KL-coefficient, we use different schedules for MMD ($\eta_t = \max(1 / \sqrt{t}, 0.2)$),
-and MDPO ($\eta_t = \max(1 - t/T, 0.2)$).
-MDPO's schedule is motivated by mirror-descent theory, while MMD's schedule is closer to the type
-of annealing schedule used for the original MMD experiments found through a hyperparameter sweep.
-So for both of these methods we cap the KL-coefficient at 0.2 because very low values destabilize
-the updates, especially for the NeuRD version of the algorithms.
+\section{Experimental Domains}
+We evaluate the algorithms on two normal form games namely, Perturbed RPS and Matching Pennies.
+
+\textbf{Perturbed RPS}
+
+\textbf{Matching Pennies}
 
 \section{Evaluation
   Metrics}
@@ -61,6 +50,25 @@ The difference between the value that this best-response opponent can acheive an
 the exploitability of the current policy.
 
 \blue{ - Exploitability formal expression in terms of best responses, and value.}
+
+\subsection{Experiment Setup}
+The policies that are logit-parameterized with a softmax projection and all the algorithms use
+full-feedback gradient updates as discussed in Chapter 3.
+Being symmetric matrix games, both games have a unique Nash Equilibrium: Perturbed RPS
+$(\frac{1}{7}, \frac{3}{7}, \frac{3}{7})$, Matching Pennies $(\frac{1}{2}, \frac{1}{2})$.
+For all the algorithms, we train both the players for 5000 training steps with alternating updates
+using the exact payoff vectors.
+For the EG variants, we train the players for only 2500 steps as they use two gradient computation
+per step for a fair comparison.
+We use the $m=10$ gradient steps per iteration with a learning rate of 0.1 for all the runs.
+For MMD and MDPO, we anneal the temperature (entropy coefficient) with the schedule $\alpha_t =
+	1/\sqrt{t}$.
+For the KL-coefficient, we use different schedules for MMD ($\eta_t = \max(1 / \sqrt{t}, 0.2)$),
+and MDPO ($\eta_t = \max(1 - t/T, 0.2)$).
+MDPO's schedule is motivated by mirror-descent theory, while MMD's schedule is closer to the type
+of annealing schedule used for the original MMD experiments found through a hyperparameter sweep.
+So for both of these methods we cap the KL-coefficient at 0.2 because very low values destabilize
+the updates, especially for the NeuRD version of the algorithms.
 
 \section{Results} \ref{tab:tabres} summarizes the last and average
 iterate convergences behaviors of 3 different algorithms - MMD, MDPO, SPG under the proposed
@@ -101,27 +109,29 @@ Fig~\ref{fig:tabne} summarizes the results for convergence to the Nash Equilibri
 % \end{noindent}
 
 \begin{figure}[H]
-	\label{fig:tabne} \input{figs/tabular/nash.pgf}
+	\centering
+	\scalebox{0.7}[0.6]{\input{figs/tabular/nash.pgf}}
+	\caption{Last-iterate converegence plots in PerturbedRPS.}
+	\label{fig:tabne}
 \end{figure}
 
 \subsection{Observations}
 From the above experimental results, we note the following:
 
 \begin{itemize}
-	\item {EG, and Optimism enable last-iterate convergence as expected from the theory.
+	\item {NeuRD-fix speeds up convergence in all the algorithms with or without EG and Optimism.
 	      }
-	\item {EG updates provide the most improvement in terms of convergence speeds.}
-	\item {MMD has no improvement with EG updates or Optimism.
-	      Entropy annealing shows slower convergence compared to the other mechanisms for last-iterate
-	      convergence.
+	\item {Most notably, Optimistic-NeuRD (PG-nrd-opt2) exhibits faster last-iterate convergence.
 	      }
-	\item {NeuRD-fix speedsup convergence in all the algorithms with or without EG and Optimism.
+	      % \item {EG updates provide the most improvement in terms of convergence speeds.}
+	\item {MMD shows no performance improvements with the addition of Extragradient or Optimistic updates.
 	      }
+	      % \item {Entropy annealing (MMD) shows slower convergence compared to EG, or Optimism as a last-iterate
+	      %       inducing mechanism, however it is easier to implement in practice compared to the latter.}
 	\item {In the presence of EG/Optimism to enable last-iterate convergence, trust-region constraints and entropy
-	      regularization slow-down the learning.}
-	\item {Combining Optimism with EG updates provides minimal improvements.
+	      regularization slow-down the learning, as evidenced by the better performacne of SPG variants compared to the MDPO, and MMD variants.}
+	\item {Combining Optimism with EG updates provides minimal improvements as they fulfill a similar role.
 	      }
-	\item {Most notably, SPG with NeuRD fix, has last-iterate convergence when combined with Optimistic updates.}
 \end{itemize}
 
 The tabular experiments, and the above observations provide some answers to questions~\ref{qn1},
