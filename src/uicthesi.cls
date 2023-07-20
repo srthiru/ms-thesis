@@ -958,7 +958,7 @@
 \def\l@subsection{
    \@dottedtocline
       {2}               % chapter is level zero used by tocdepth
-      {0.75in}           % indentation of the entry in toc=
+      {0.9in}           % indentation of the entry in toc=
       {0.82in}}          % Indent + Space of l@section
 %    \end{macrocode}
 %

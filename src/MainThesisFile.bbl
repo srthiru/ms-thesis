@@ -12,11 +12,11 @@ Goodfellow, I., {Pouget-Abadie}, J., Mirza, M., Xu, B., {Warde-Farley}, D., Ozai
 \newblock Generative {{Adversarial Nets}}.
 \newblock In {\itshape  Advances in {{Neural Information Processing Systems}} }, volume~27. {Curran Associates, Inc.}, 2014.
 
-\bibitem{suttonReinforcement2018}
+\bibitem{shohamMultiagent2008}
 
-Sutton, R.~S. and Barto, A.~G.:
-\newblock {\itshape  Reinforcement Learning: An Introduction }.
-\newblock Adaptive Computation and Machine Learning Series. {Cambridge, Massachusetts}, {The MIT Press}, second edition edition, 2018.
+Shoham, Y. and {Leyton-Brown}, K.:
+\newblock {\itshape  Multiagent {{Systems}}: {{Algorithmic}}, {{Game-Theoretic}}, and {{Logical Foundations}} }.
+\newblock {Cambridge University Press}, December 2008.
 
 \bibitem{shalev-shwartzOnline2012}
 
@@ -24,22 +24,17 @@ Sutton, R.~S. and Barto, A.~G.:
 \newblock Online {{Learning}} and {{Online Convex Optimization}}.
 \newblock {\itshape  Foundations and Trends\textregistered{} in Machine Learning }, 4(2):107--194, 2012.
 
+\bibitem{suttonReinforcement2018}
+
+Sutton, R.~S. and Barto, A.~G.:
+\newblock {\itshape  Reinforcement Learning: An Introduction }.
+\newblock Adaptive Computation and Machine Learning Series. {Cambridge, Massachusetts}, {The MIT Press}, second edition edition, 2018.
+
 \bibitem{tomarMirror2022}
 
 Tomar, M., Shani, L., Efroni, Y., and Ghavamzadeh, M.:
 \newblock Mirror {{Descent Policy Optimization}}.
 \newblock In {\itshape  International {{Conference}} on {{Learning Representations}} }, January 2022.
-
-\bibitem{schulmanProximal2017}
-
-Schulman, J., Wolski, F., Dhariwal, P., Radford, A., and Klimov, O.:
-\newblock Proximal {{Policy Optimization Algorithms}}, August 2017.
-
-\bibitem{schulmanTrust2015}
-
-Schulman, J., Levine, S., Abbeel, P., Jordan, M., and Moritz, P.:
-\newblock Trust {{Region Policy Optimization}}.
-\newblock In {\itshape  Proceedings of the 32nd {{International Conference}} on {{Machine Learning}} }, pages 1889--1897. {PMLR}, June 2015.
 
 \bibitem{sokotaUnified2023}
 
@@ -132,17 +127,10 @@ Timbers, F., Bard, N., Lockhart, E., Lanctot, M., Schmid, M., Burch, N., Schritt
 Liang, E., Liaw, R., Moritz, P., Nishihara, R., Fox, R., Goldberg, K., Gonzalez, J.~E., Jordan, M.~I., and Stoica, I.:
 \newblock {{RLlib}}: {{Abstractions}} for {{Distributed Reinforcement Learning}}, June 2018.
 
-\bibitem{chhablaniCounterfactual2021}
+\bibitem{lanctotOpenSpiel2020}
 
-Chhablani, C. and Kash, I.~A.:
-\newblock Counterfactual {{Multiagent Policy Gradients}} and {{Regret Minimization}} in {{Cooperative Settings}}.
-\newblock In {\itshape  {{AAAI}} }, 2021.
-
-\bibitem{foersterCounterfactual2018}
-
-Foerster, J., Farquhar, G., Afouras, T., Nardelli, N., and Whiteson, S.:
-\newblock Counterfactual {{Multi-Agent Policy Gradients}}.
-\newblock {\itshape  Proceedings of the AAAI Conference on Artificial Intelligence }, 32(1), April 2018.
+Lanctot, M., Lockhart, E., Lespiau, J.-B., Zambaldi, V., Upadhyay, S., P{\'e}rolat, J., Srinivasan, S., Timbers, F., Tuyls, K., Omidshafiei, S., Hennes, D., Morrill, D., Muller, P., Ewalds, T., Faulkner, R., Kram{\'a}r, J., De~Vylder, B., Saeta, B., Bradbury, J., Ding, D., Borgeaud, S., Lai, M., Schrittwieser, J., Anthony, T., Hughes, E., Danihelka, I., and {Ryan-Davis}, J.:
+\newblock {{OpenSpiel}}: {{A Framework}} for {{Reinforcement Learning}} in {{Games}}, September 2020.
 
 \bibitem{perolatMastering2022}
 
@@ -155,5 +143,17 @@ Perolat, J., {de Vylder}, B., Hennes, D., Tarassov, E., Strub, F., {de Boer}, V.
 Perolat, J., Munos, R., Lespiau, J.-B., Omidshafiei, S., Rowland, M., Ortega, P., Burch, N., Anthony, T., Balduzzi, D., Vylder, B.~D., Piliouras, G., Lanctot, M., and Tuyls, K.:
 \newblock From {{Poincar\'e Recurrence}} to {{Convergence}} in {{Imperfect Information Games}}: {{Finding Equilibrium}} via {{Regularization}}.
 \newblock In {\itshape  Proceedings of the 38th {{International Conference}} on {{Machine Learning}} }, pages 8525--8535. {PMLR}, July 2021.
+
+\bibitem{chhablaniCounterfactual2021}
+
+Chhablani, C. and Kash, I.~A.:
+\newblock Counterfactual {{Multiagent Policy Gradients}} and {{Regret Minimization}} in {{Cooperative Settings}}.
+\newblock In {\itshape  {{AAAI}} }, 2021.
+
+\bibitem{foersterCounterfactual2018}
+
+Foerster, J., Farquhar, G., Afouras, T., Nardelli, N., and Whiteson, S.:
+\newblock Counterfactual {{Multi-Agent Policy Gradients}}.
+\newblock {\itshape  Proceedings of the AAAI Conference on Artificial Intelligence }, 32(1), April 2018.
 
 \end{thebibliography}

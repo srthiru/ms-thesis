@@ -17,43 +17,43 @@ Warning--I didn't find a database entry for ""
 Warning--empty journal in mertikopoulosOptimistic2019
 You've used 27 entries,
             2045 wiz_defined-function locations,
-            929 strings with 16742 characters,
-and the built_in function-call counts, 7248 in all, are:
-= -- 558
-> -- 493
-< -- 6
-+ -- 175
-- -- 148
-* -- 597
-:= -- 1166
-add.period$ -- 54
+            927 strings with 17183 characters,
+and the built_in function-call counts, 7249 in all, are:
+= -- 525
+> -- 550
+< -- 5
++ -- 194
+- -- 167
+* -- 619
+:= -- 1200
+add.period$ -- 53
 call.type$ -- 27
-change.case$ -- 26
+change.case$ -- 25
 chr.to.int$ -- 0
 cite$ -- 28
-duplicate$ -- 276
-empty$ -- 641
-format.name$ -- 148
-if$ -- 1571
+duplicate$ -- 263
+empty$ -- 619
+format.name$ -- 167
+if$ -- 1543
 int.to.chr$ -- 0
 int.to.str$ -- 27
-missing$ -- 22
+missing$ -- 23
 newline$ -- 159
 num.names$ -- 28
-pop$ -- 109
+pop$ -- 111
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 152
+skip$ -- 137
 stack$ -- 0
-substring$ -- 379
-swap$ -- 80
-text.length$ -- 6
+substring$ -- 339
+swap$ -- 68
+text.length$ -- 5
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 1
-while$ -- 57
+while$ -- 54
 width$ -- 29
-write$ -- 284
+write$ -- 282
 (There were 2 warnings)

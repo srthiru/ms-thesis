@@ -12,220 +12,279 @@ that are useful in understanding the approaches we study in this work.
 Game theory is the mathematical study of interaction between agents to produce outcomes while
 trying to uphold certain individual or group preferences.
 It has a wide range of applications including economics, biology, and computer science.
-In overcoming the challenges mentioned above, many algorithms have adopted game-theoretic
-constrtucts and ideas when designing Reinforcement learning algorithms for multi-agent settings.
-It is also a common practice to use game theoretic constructs in evaluating the performance of
-multi-agent algorithms and provide theoretical guarantees.
-In this work, we mainly focus on a branch of game theory called non-cooperative game theory in
-which each agent has their own indivudual preference.
+% In overcoming the challenges mentioned above, many algorithms have adopted game-theoretic
+% constrtucts and ideas when designing Reinforcement learning algorithms for multi-agent settings.
+% It is also a common practice to use game theoretic constructs in evaluating the performance of
+% multi-agent algorithms and provide theoretical guarantees.
+In this work, we mainly focus on a branch of game theory called non-cooperative game theory that
+assumes each agent has their own indivudual preference to uphold as opposed to a global preference.
 
 \subsection{Problem Representations}
 \label{subsec:reps}
-
-In discussing agent interactions, and preferences, we need a formal notion of how agents act, and
-how agent preferences can be defined.
-In game theory, agent preferences are formalized using Utility theory, where each agent has a
-utility function that maps the agents preferences over outcomes to a real value.
-
-The primary way of modeling problems in game theory is through a \textit{game} that encodes
-information about the agents, possible actions agents can take in different situations, their
-preferences, and the outcome of an interaction.
-There are many types of such representations, a few relevant of which we introduce below.
-Before we introduce such representations, we first cover some preliminary concepts that will be
-helpful in formally defining those representations and agent preferences.
-
-- what are utilities, and strategies?
+% In discussing agent interactions, and preferences, we need a formal notion of how agents act, and
+% how agent preferences can be defined.
+In game theory, the ordering of an agent's preferences over certain outcomes are formalized through
+a Utility or a \textit{Payoff function} that maps outcomes to a real value.
+Problems are commonly represented as a \textit{Game} that encodes information about the agents,
+possible actions agents can take in different situations, their preferences, and the outcome of a
+specific interaction.
+A \textit{Strategy} typically refers to the agent's choice of taking actions given the information
+it has.
+Agent's strategies can be \textit{pure} (deterministic) or \textit{mixed} (distribution over
+possible actions).
+Beyond these preliminary notions, there are different representations of games depending on the
+structure of the problem.
+We now briefly describe two common representations that are relevant to this work.
+For a more in-depth discussion of game representations, and their significance we refer the reader
+to~\cite{shohamMultiagent2008}.
 
 \textbf{Normal-Form Games:}
-Normal-Form games are a popular way of representing situations in which all agents act
-simultaneously and the outcome is revealed after each agent has taken their action.
-A few popular games that can be represented in this form are rock-paper-scissors, matching pennies,
-prisoner's dilemma etc. A more formal definition of a normal-form game is as follows:
+Normal-Form or Strategic form games are the most basic and foundational form of representing
+problems in game theory.
+In a Normal-form game (NFG), all agents act simultaneously to reveal the outcome immediately after,
+and a payoff is assigned to each agent.
+A more formal definition of a normal-form game is as follows:
 
 \begin{definition}[Normal-form games]
 
-	A $(N, A, u)$ tuple
-	is a n-player normal form game, where $N$ is the set of players, $A = A_1 \times A_2 \ldots \times
-		A_n$, with $A_i$ being the set of actions available to player $i$, and $u = (u_i \forall i \in N)$
-	is the set of utility functions that map an action profile to a real utility value for each agent,
-	$u_i: A \mapsto \R$.
+	A n-player, general-sum normal form game
+	is given by the $(N, A, u)$ tuple, where $N$ is the set of players, $A = A_1 \times A_2 \ldots
+		\times A_n$, with $A_i$ being the set of actions available to player $i$, and $u = (u_i \forall i
+		\in N)$ is the set of utility functions that map an action profile to a real utility value for each
+	agent, $u_i: A \mapsto \R$.
 
 \end{definition}
 
-Normal-form games are typically represented using a n-dimensional tensor, where each dimension
-represents the possible actions available to each agent, and every entry represents an outcome.
-The actual entries of the
+Normal-form games are typically represented using an n-dimensional matrix, where each dimension
+represents an action available to each agent, and each entry is the payoff assigned to each agent
+given that action profile.
+A few popular examples of NFGs are Rock-paper-scissors (RPS), Matching pennies, and Prisoner's
+dilemma etc.
 
-An NFG that is widely popular in the literature is
-the \textbf{Biased/Perturbed RPS} problem.
-\blue{add details.}
-
-\subsubsection*{Sequential Games}
-
-Although normal-form games provide a neat representation, many real-world scenarios necessitate
-agents act sequentially which is difficult to represent as a matrix.
-These problems require a tree-like representation where each node is an agent's turn to make a
-choice, and each edge is a possible action.
-There are a few ways to represent such scenarios, one being normal-form games themselves.
-A downside is that the size of the normal-form representation for sequential games explode
-exponentially in the size of the game tree.
-Other possible representations include the Extensive-form, and Sequence-form.
+\subsubsection*{Sequential Games} Normal-form games are limited in
+representing many real-world problems that necessitate agents to act sequentially along the
+temporal dimension.
+A common choice in representing such problems is the Extensive-form game which facilitiates
+sequential decision making.
 
 \begin{definition}[Extensive-form games]
 \end{definition}
 
+Given their tree-like representation, EFGs can be inefficient to operate over.
+Reduced-form NFGs are the normal-form representation of an EFG, where each row/column represents a
+pure-strategy of the entire EFG, instead of just a single action.
+Given this exponential blowup of action space, reduced-form NFGs are also computationally
+challenging to work with.
+Another useful representation is the Sequence-form, where instead of the entire pure-strategy,
+entries represent histories of actions taken so far.
+% This leads to a much more compact representation, though at the cost of additional complexity in
+% updating the representation as new actions are taken.
+
 \begin{definition}[Sequence form games]
 \end{definition}
 
+% There are a few ways to represent such scenarios, one being normal-form games themselves.
+% A downside is that the size of the normal-form representation for sequential games explode
+% exponentially in the size of the game tree.
+
 \subsection{Solution Concepts}
+While the above representations provide a well-defined framework to encode information about the
+problem, solution concepts define a notion of optimality of the agent's strategies given these
+representations.
+The main premise is identifying an \textit{equilibrium} point in the joint strategy space of all
+the agents.
+However, how this equlibrium point is defined, and what guarantees it provides leads to various
+definitions of equilibrium points.
 
-Now that we have - what are solution concepts?
-- what are the common solution concepts?
-Nash equilibrium, Quantal response equilibrium.
-- what are the relevant information related to solution conepts for this work?
-Existence of a nash equilibrium Uniqueness of QRE
-
-\section{Reinforcement
-  Learning} Reinforcement learning (RL) is sub-domain of machine learning that deals with designing
-interactive \textit{agents} that learn to maximize a \textit{reward} signal in an
-\textit{environment}.
-The reward signal encodes information about the goal that the agent has to learn to achieve without
-any specific directions about how that goal should be achevied.
-Reinforcement learning has been shown to be effective in many application domains to learn and
-solve an arbitrary problem as long as it can be encapsulated into an interactive environment with a
-well-defined reward signal.
-\blue{ - cite RL applications}
-
-% Motivation to study and design RL algorithms
-\textbf{Markov Decision Process.}
-Reinforcement learning problems are formally modeled as Markov Decision Processes (MDPs), usually
-represented as a tuple $(\calS, \calA, P, R, \gamma, \mu)$ where: $\calS$ is the state space,
-$\calA$ is the action space, $P(s'|s,a): \calS \times \calA \times \calS \mapsto [0, 1]$ is the
-transition or the dynamics function, $R(s,a) \subset \R$ is the reward function, $\gamma \in [0,1]$
-is the discount factor and $\mu$ is the initial state distribution.
-
-The objective is to maximize the expected discounted reward:
-\begin{equation}
-	\label{eqn:rlobj} G_t
-	= \sum_{k=0}^{\infty} \gamma^k R(s_{t+k}, a_{t+k})
-\end{equation}
-
-In learning
-to take actions that maximize this objective, algorithms usually involve learning value functions
-and policies.
-A policy is a mapping from a state to an action distribution $\pi: \calS \mapsto \calA$, and a
-value function, $V_{\pi}(s)$ estimates the expected reward that can be achieved from the current
-state under the policy $\pi$: $V_{\pi}(s) = \E_{\pi}[G_t | S_t = s]$.
-
-Now, the problem of learning a policy that maximizes the objective~\ref{eqn:rlobj} can stated in
-terms of the value function as follows.
-
-\begin{definition}[Reinforcement Learning (RL)]
-	Given an MDP: $\mathcal{M} = (\calS, \calA, P, R, \gamma, \mu)$, the Reinforcement learning problem is to find an
-	optimal policy mapping $\pi^*: \calS \mapsto \calA$, such that:
-	$$\pi^* = \arg \max_\pi \E_{s_0 \sim \mu}[V_{\pi}(s_0)]$$
-\end{definition}
-
-There maybe more than one optimal policy, but they all share the same value function
-$V_{\pi^{\ast}} = \max_{\pi} V_\pi(s), \forall s \in \calS$.
-
-Apart from the value function, a Q-value function estimates the expected reward of taking a
-specific action $a$ at a given state $s$ and then following the policy $\pi$: $ Q_{\pi}(s, a) =
-	\E_{\pi}[G_t | S_t = s, A_t = a] $.
-The difference between Q and V functions is referred to as the advantage function $A_\pi(s,a) =
-	Q_\pi(s,a) - V_\pi(s)$.
-This is the advantage of taking a particular action over following the average policy.
-The objective can also framed in terms of these alternate value functions.
-
-\textbf{Generalized Policy Iteration (GPI).}
-For small, finite state spaces optimal policies can be learnt through tabular methods and dynamic
-programming.
-Policy iteration is an iterative method to learn the optimal policy.
-The process of a policy iteration step involves both policy evaluation, and policy improvement.
-Policy evaluation is done to estimate the value function for the current policy using the following
-iterative update until it converges.
-$$V_{k+1}(s) = \E_{\pi} [R_{t+1} + \gamma V_k(S_t+1 | S_t = s)]$$
-
-Policy improvement then uses this estimated value function to greedily improve the current policy,
-$\pi_{k+1}(s) = \arg \max_{\pi(s)} V_{k+1}(s)$.
-Policy improvement always yields a strictly better policy except when the policy is already
-optimal~\cite{suttonReinforcement2018}.
-Requiring exact convergence of policy evaluation step might make this learning process slower.
-However, this step can be truncated to only evaluate the value for the immediate states (i.e.
-perform only one step of policy evaluation).
-This is known as \textbf{value iteration}.
-In a more general algorithm called the \textit{Generalized policy iteration (GPI)}, these steps are
-run independently, and asynchronously until convergence.
-
-For very large state spaces that is common in many practical applications, there is a need to learn
-approximate value functions and parameterized policies.
-This is typically done through function approximation.
-
-\blue{
+\fillin{
 	\begin{itemize}
-		\item Bellman eqn
-		\item
+		\item Nash equilibrium - Existence of a nash equilibrium
+		\item Quantal response equilibrium - Uniqueness of QRE
 	\end{itemize}
 }
 
-Fixed points of the Bellman quation are optimal policies and optimal value functions.
-For small MDPs that strictly satisfy the Markov property, Bellman equiation can be explicity
-solved.
-In settings where the transitions and rewards can be represented explicitly in a tabular manner,
-dynamic programming is one approach to solve the Bellman equation.
+% \subsection{Learning Strategies}
+
+\section{Reinforcement
+  Learning}
+Reinforcement learning (RL) is sub-domain of machine learning that deals with designing interactive
+\textit{agents} that learn to maximize a \textit{reward} signal in an \textit{environment}.
+The reward signal encodes information about the goal that the agent has to learn to achieve without
+any specific directions about how that goal should be achevied.
+% Reinforcement learning has been shown to be effective in many application domains to learn and
+% solve an arbitrary problem as long as it can be encapsulated into an interactive environment with a
+% well-defined reward signal.
+% Motivation to study and design RL algorithms
+% \fillin{ - cite RL applications}.
+
+\textbf{Markov Decision Process.}
+Markov Decision Processes (MDPs) provide a framework to formalize reinforcement learning problems.
+A $\gamma$-discounted MDP ($\mathcal{M}$) is given by the tuple, $\mathcal{M}=(\calS, \calA, P, R,
+	\gamma)$ where: $\calS$ is the state space, $\calA$ is the action space,
+$P(s',r|s,a):~\calS\times\calA\times\calS~\mapsto~[0,1]$ is the transition dynamics function,
+$R(s,a) \subset \R$ is the reward function, $\gamma \in [0,1]$ is the discount factor.
+
+The objective of an agent interacting with this MDP is to learn to act in a way that maximize its
+\textit{expected return} at each state.
+% While $R_t(s_t, a_t)$ is the immediate reward, to prevent the agent from becoming myopic of future 
+% rewards, the alternate form discounted reward is used in practice.
+% To encode the consequence of taking specific actions, and to prevent the agent from becoming myopic of 
+% future rewards, the discounted reward $G_t = \sum_{k=t+1}^{T} \gamma^{k-t-1} R_k$ is commonly used rather 
+% than the immediate reward $R_t$.
+The expected return, $G_t$, at time step $t$ is the discounted sum of rewards accumulated by the
+agent starting from $t$ till the end of the episode (\fillin{episodes?
+}).
+Formally, $G_t = \sum_{k=t+1}^{T} \gamma^{k-t-1} R_k$, where the discount rate $\gamma$ indicates
+how much importance is placed upon future rewards over immediate rewards.
+% Discounting also helps in keeping the return bounded in infinite horizon settings.
+The objective of an agent within an MDP is to learn to act at each state so as to maximize their
+\textit{expected returns}.
+
+% In addition to rewards, and returns, reinforcement learning also involves the notion of policies
+% and value functions.
+While the expected return quantifies the objective, policy and value functions are representations
+that dictate how the agent should act in a given state.
+Reinforcement learning algorithms typically involve learning polices and estimating value
+functions.
+A \textit{Policy} is a mapping from a state to an action distribution $\pi: \calS \mapsto \calA$.
+A \textit{Value function}, $V_{\pi}(s)$ estimates the expected reward that can be achieved from the
+current state under the policy $\pi$: $V_{\pi}(s) = \E_{\pi}[G_t | S_t = s]$.
+Analogously, the \textit{Q-value function} estimates the expected reward of taking a specific
+action $a$ at a given state $s$ and then following the policy $\pi$: $ Q_{\pi}(s, a) = \E_{\pi}[G_t
+		| S_t = s, A_t = a] $.
+The difference between Q and V functions is referred to as the advantage function $A_\pi(s,a) =
+	Q_\pi(s,a) - V_\pi(s)$.
+This is the advantage of taking a particular action over following the average policy.
+
+Value functions impose a ranking over policies in terms of the expected return achieved by an agent
+following a given policy.
+An \textit{optimal policy} ($\pi^\ast$) is one that is atleast as better as any other policy ($\pi
+	\in \Pi$) in terms of this ranking, i.e. $V_{\pi^\ast}(s) \geq V_\pi(s), \forall s \in \calS$.
+While there maybe more than one optimal policy, they all share the same unique \textit{optimal
+	value function}: $V_{\pi^{\ast}} = \max_{\pi} V_\pi(s), \forall s \in \calS$.
+
+\subsection{Tabular methods}
+For a given policy, the value function satisfies the \textbf{Bellman equation}:
+\begin{equation}
+	\label{eqn:bellman} V_\pi(s) \doteq \E_\pi \left[r + \gamma V_\pi(s') | R_t = r, S_{t+1} = s'
+		\right]
+\end{equation}
+
+For small state spaces, it is possible to learn optimal
+value functions by iterating using Dynamic programming.
+Starting with an arbitrary policy, we can learn an optimal policy interleaving Policy evaluation,
+and Policy improvement.
+In the \textit{Policy Evaluation} step, we first estimate the value function until it
+satisfies~\ref{eqn:bellman}.
+Next, in the \textit{Policy Improvement} step, we update the policy greedily at every state until
+we acheive a strictly better policy.
+This method of interleaving these two steps is called \textit{Policy Iteration}.
+Alternatively, \textit{Value Iteration} approximates this improvement by only updating the policy
+greedily with respect to the immediate next step.
+
+At step $k$ of learning a tabular policy,
+\begin{itemize}
+	\item \textbf{Policy Evaluation}:
+	      $v_{k+1}(s) \doteq \E_\pi \left[R_{t+1} + \gamma v_k(S_{t+1}) |S_t =s\right]$
+	\item \textbf{Value
+		      Iteration}: $v_{k+1}(s) \doteq \E_\pi \left[R_{t+1} + \gamma v_k(S_{t+1}) |S_t =s\right]$
+	\item
+	      \textbf{Policy Iteration}:
+\end{itemize}
+
+We can construct an optimal policy
+simply by acting greedily with respect to the optimal value function.
+
+Most of the tabular, and iterative methods require an explicit model of an environment with access
+to the transition functions.
+In the absence of a model or transition functions, one can use Monet Carlo methods to approximate
+these probabilities through sampling.
+
+Tabular methods are realizable in settings with small state spaces, where we have access to the
+perfect model of the environment in the form of MDPs.
+Tabular methods are also useful in establishing theory and guarantees for various algorithms.
 However, for most practical applications it is common to use parameterized policies and approximate
 value functions.
 
-% In formulating Reinforcement learning algorithms, there are two major approaches, and their
-% derivatives.
-% Most of the tabular, and iterative methods require an
-% explicit model of an environment with access to the transition functions.
-% In the absence of a model or transition functions, one can use Monet Carlo methods to approximate
-% these probabilities through sampling.
+\subsection{Approximate Value-based methods}
 % This method of learning from experience by iteracting with a blackbox enivornment or a simulator is
-% the setting in most of the recent efforts in machine learning.
+% a common problem setting in many reinforcement learning problems.
 % This is because it is difficult to explictly design a model that accurately captures all the
 % properties of a real-world artifact, and exhaustively model the effects of taking all the actions
-% that are available to the agent.
-% It is also sometimes impossible or unknown.
+% that are available to the agent (which are also sometimes unknown).
 % However, it is possible to have access to such a real-world artifact, and we only need to provide
 % an interface for the agent to the artifact and expose available actions to the agent.
 % We can use the real-world artifact to evaluate these actions and their effects and convert them
 % into rewards to provide a signal for the agent to learn from.
+In approximate value-based methods, the objective is to learn the weights $w$ of a function
+$\hat{V}(s;w)$ that best approximates the value function $V_\pi$ under some policy $\pi$.
 
-\subsection{Multi-agent Reinforcement Learning (MARL)}\label{sec:marl}
-Reinforcement learning algorithms have also been studied in settings that have more than one agent
-where the agents try to maximize some objective in a cooperative or competitive manner.
-Athough many of these algorithms have exhibited strong empirical performance in multi-agent
-settings, there are a few key challenges when extending Reinforcement learning algorithms to
-multi-agent settings.
-From a theoretical perspective, the foundational assumption for RL algorithms is that the MDP's
-transition dynamics remain stationary.
-However, in multi-agent settings non-stationary is induced due to the presence of the other agents.
-This makes it difficult in adapting the algorithms disucssed above directly to multi-agent
-settings.
-From an algorithm design perspective, the action space explodes exponentially in multi-agent
+Predictive Objective: $\overline{\text{VE}}(w) \doteq \sum_{s \in \calS} \mu(s) [V_\pi(s) -
+		\hat{V}(s;w)]^2$.
+
+$\mu$ is the on-policy distribution, that determines the importance given to states in-terms of the prediction error.
+\begin{itemize}
+	\item If $v_\pi$ is not available, on can use monte-carlo estimates for target updates
+	\item If you use bootstrapping, then the assumption that the gradient is independent of the target becomes invalid (semi gradient methods)
+	\item For linear function approximation, bootstrapping still works robustly
+	\item On-policy control can be done in the same way as tabular case with $\epsilon$-greedy policies
+	\item Off-policy methods use importance sampling to weight the error based on target and behavior policies
+	\item Off-policy methods face divergence in value estimation (due to the difference in state distributions induced by behavior and target policies)
+	      when combined with function approximation and boostrapping (deadly triad)
+\end{itemize}
+
+\subsection{Policy Gradient methods}
+\label{sec:spg}
+Policy gradient methods allow for directly learning a parameterized policy that enables action
+selection without the use of a (action-)value function.
+% These are generally called Policy gradient methods, and are a major area of study within
+% Reinforcement learning.
+Policy gradient methods have the advantage that in many cases the policy space could be simpler to
+approximate compared to the value function space.
+We discuss Policy gradient methods in more detail in the next section as it serves as a base for
+the rest of our work.
+
+\section{Multi-agent Reinforcement Learning (MARL)}\label{sec:marl}
+% While game theory provides a framework in defining problems that are multiagent in nature and
+% optimiality of solutions to those problems, reinforcement learning can be leveraged to learn
+% such optimal strategies.
+There has been increasing interest in designing RL algorithms for the multiagent setting.
+
+\subsection{Challenges in MARL}
+Although Policy Gradient methods and their derivatives have theoretical guarantees in single-agent
+settings, they are not directly extendable to multi-agent settings due to the non-stationarity of
+the dynamics.
+% Reinforcement learning algorithms have also been studied in settings that have more than one agent
+% where the agents try to maximize some objective in a cooperative or competitive manner.
+% Athough many of these algorithms have exhibited strong empirical performance in multi-agent
+% settings, there are a few key challenges when extending Reinforcement learning algorithms to
+% multi-agent settings.
+% From a theoretical perspective, the foundational assumption for RL algorithms is that the MDP's
+% transition dynamics remain stationary.
+% However, in multi-agent settings non-stationary is induced due to the presence of the other agents.
+% This makes it difficult in adapting the algorithms disucssed above directly to multi-agent
+% settings.
+Also, from an algorithm design perspective, the action space explodes exponentially in multi-agent
 settings making it computationally challenging to apply reinforcement algorithms without
 decomposing the problem into more managable sub-problems first.
 
-\section{Online Learning and Mirror Descent}
+\subsection{Methods in MARL}
+\textbf{Independent RL}
+\begin{itemize}
+	\item {Independent PG}
+	      \item{Centralized Training, Decentralized Execution}
+\end{itemize}
 
-Online learning is the study of designing algorithms that use historical knowledge in making
-predictions for future rounds while trying to minimize some loss function in an adaptive (possibly
-adversarial) setting.
+\textbf{Self-play RL}
 
-% Why is it relevant?
-The problem of training agents in a potentially non-stationary setting can be cast into an online
-learning problem.
-Hence, it is useful to study online learning algorithms from the perspective of designing
-reinforcement learning algorithms as they provide a framework for the analysis of the algorithms
-and deriving theoretical guarantees.
-% In this work, we also study algorithms that can be derived from an online-learning perspective, and
-% also can be shown equivalent to popular online learning algorithms.
-The brief background provided in this section closely follows the details as presented
-in~\cite{shalev-shwartzOnline2012}.
-For a more in-depth introduction into Online learning and Online Convex Optimization, please refer
-to the above work.
+\textbf{Decentralized RL}
+
+\section{Online Convex Optimization and Mirror Descent}
+\textit{(The brief background provided in this section closely follows the details as presented
+	in~\cite{shalev-shwartzOnline2012}.
+	For a more in-depth introduction into Online learning and Online Convex Optimization, please refer
+	to the above work.)
+}
 
 % Definition
 In Online Learning, a learner is tasked with predicting the answer to a set of questions over a
@@ -321,7 +380,7 @@ leading to better convergence behaviors.
 
 The learning rule can be written as,
 
-$$\forall t, w_t = argmin_{w \in S}
+$$\forall t, w_t = \arg \min_{w \in S}
 	\sum_{i=1}^{t-1} f_i(w) + R(w).
 $$
 
@@ -370,29 +429,52 @@ yield similar regret bounds given that the regularization functions are strongly
 
 Gradient descent as a FTRL variant
 
-\section{Mirror Descent}
+\begin{equation}
+	\label{eqn:eucproj}
+	P_\calX(u) = \arg \min_{x \in \calX} \| u - x \|.
+\end{equation}
 
-In this section we discuss about Mirror Descent, and two mirror descent-based reinforcement
-learning algorithms (MDPO, and MMD).
+\textbf{Proximal mapping}
+\begin{definition}[Proximal mapping] Given a function $f: \calX \mapsto \R$, the proximal mapping
+	of $f$ is given by: $$\text{prox}_f(x) = \arg \min_{u \in \R} \left\{ f(u) + \frac{1}{2} \| u-x
+		\|^2 \right\} $$ for any $x \in \calX$.
+\end{definition}
+
+\textbf{Projected subgradient method}
+
+\begin{equation}
+	\label{eqn:projsubg}
+	x_{k+1} = P_{\calX}(x_k - t_k f'(x_k))
+\end{equation}
+
+where $f'(x_k) \in \partial f(x_k)$.
+
+\subsection{Mirror Descent}
 Mirror descent is a popular first order optimization algorithm that has seen wide applications in
 machine learning, and reinforcement learning.
+Mirror Descent generalizes the notion of projected subgradient method~\ref{eqn:projsubg} to
+non-euclidean settings through a generalized norm called Bergman Divergence.
 
-There are different views of arriving at Mirror Descent as an optimization algorithm, here we
-present the Mirror Descent framework through the lens of mirror maps.
-
-\subsection{Mirror Maps}
-
-% Define Bregman divergence
-\begin{definition}
+\begin{definition}[Bergman Divergence]
 	\label{def:bregman}
-	Given a convex set $\calX \subset \R^n$, and a differentiable convex function $f: \calX \mapsto
-		\R$, the Bregman Divergence associated with the function $f$ is defined as,
+	Given a convex set $\calX \subset \R^n$, and a differentiable $\sigma$-strongly convex function
+	$\omega: \calX \mapsto \R$, the Bregman Divergence associated with the function $\omega$ is defined
+	as,
 
-	$$
-		D_f(x, y) = f(x) - f(y) - \nabla f(y)^T (x-y).
+	$$ B_\omega(x, y) = \omega(x) - \omega(y) - \langle \nabla \omega(y), x-y
+		\rangle.
 	$$
 \end{definition}
 
+Bergman Divergence is not a true norm, since it does not satisfy the triangle inequality.
+% However it serves as a proximal measure for non-euclidean settings.
+
+\textbf{Non-euclidean Proximal Gradient method}
+
+\begin{equation}
+	\label{eqn:noneucproxgrad}
+	x_{k+1} = \arg \min_{x \in \calX} \left \{ \left \langle \frac{1}{L_k} \nabla f(x_k) - \nabla \omega(x_k), x \right \rangle + \frac{1}{L_k} g(x) + \omega(x) \right \}.
+\end{equation}
 For an alternate view of deriving Mirror Descent as an improvement of FoReL, please refer
 to~\cite{shalev-shwartzOnline2012}[Section 2.6].
 % A disadvantage of FoReL~\ref{sec:forel} in solving online learning problems is that, there is a

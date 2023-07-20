@@ -1,4 +1,5 @@
-\contentsline {figure}{\numberline {1}{\ignorespaces Simultaneous gradient updates vs Alternate gradient updates updates}}{28}{figure.caption.2}%
-\contentsline {figure}{\numberline {2}{\ignorespaces Last-iterate converegence plots in PerturbedRPS.\relax }}{36}{figure.caption.4}%
-\contentsline {figure}{\numberline {3}{\ignorespaces Performance in small EFGs, measured by exact exploitability.\relax }}{40}{figure.caption.5}%
-\contentsline {figure}{\numberline {4}{\ignorespaces Performance in larger EFGs, measured by approximate exploitability.\relax }}{41}{figure.caption.6}%
+\contentsline {figure}{\numberline {1}{\ignorespaces Simultaneous gradient updates vs Alternate gradient updates updates}}{31}{figure.caption.2}%
+\contentsline {figure}{\numberline {2}{\ignorespaces Last-iterate converegence in PerturbedRPS. \relax }}{40}{figure.caption.4}%
+\contentsline {figure}{\numberline {3}{\ignorespaces Average-iterate converegence in PerturbedRPS.\relax }}{41}{figure.caption.5}%
+\contentsline {figure}{\numberline {4}{\ignorespaces Performance in small EFGs, measured by exact exploitability.\relax }}{47}{figure.caption.6}%
+\contentsline {figure}{\numberline {5}{\ignorespaces Performance in larger EFGs, measured by approximate exploitability.\relax }}{48}{figure.caption.7}%

@@ -6,9 +6,9 @@
 \usepackage{hyperref}
 \usepackage{balance}
 \usepackage[dvips]{graphics,color}
+\usepackage[dvipsnames,usenames]{xcolor}
 
 \usepackage{epsfig}
-\usepackage{color}
 \usepackage{subcaption}
 \usepackage{multirow,tabularx}
 \usepackage{placeins}
@@ -23,7 +23,7 @@
 \usepackage[yyyymmdd,hhmmss]{datetime}
 \usepackage[subject={Todo}]{pdfcomment}
 \usepackage[textsize=scriptsize,bordercolor=black!20]{todonotes}
-\usepackage{xcolor,colortbl}
+\usepackage{colortbl}
 \usepackage{amssymb}% http://ctan.org/pkg/amssymb
 \usepackage{pifont}% http://ctan.org/pkg/pifont
 \usepackage[algo2e,titlenumbered,ruled]{algorithm2e} 
@@ -109,9 +109,20 @@
 \newtheorem{theorem}{Theorem}
 
 % Color comments
+\definecolor{teal2}{RGB}{115, 191, 184}
+\definecolor{lav}{RGB}{108, 110, 160}
+\definecolor{orang}{RGB}{222, 100, 73}
+\definecolor{gren}{RGB}{97, 148, 101}
+\definecolor{yel}{RGB}{246, 202, 131}
+
 \newcommand{\red}[1]{\textcolor{red}{#1}}
-\newcommand{\green}[1]{\textcolor{green}{#1}}
-\newcommand{\blue}[1]{\textcolor{blue}{#1}}
+\newcommand{\fillin}[1]{\textcolor{blue}{#1}}
+\newcommand{\rev}[1]{\textcolor{orang}{#1}}
+\newcommand{\revdone}[1]{\textcolor{gren}{#1}}
+\newcommand{\correct}[1]{\textcolor{teal2}{#1}}
+\newcommand{\note}[1]{\textcolor{lav}{#1}}
+\newcommand{\old}[1]{\textcolor{gray}{#1}}
+
 
 % Shorthand for notations
 \newcommand{\R}{\mathbb{R}}
@@ -123,6 +134,12 @@
 \newcommand{\calS}{\mathcal{S}}
 \newcommand{\calA}{\mathcal{A}}
 
+% For wrapping things around the text
+\usepackage{wrapfig}
+
+% For subtables
+\usepackage{subcaption}
+
 \begin{document}
 
 % Declarations for Front Matter
@@ -131,10 +148,10 @@
 \author{Thiruvenkadam Sivaprakasam Radhakrishnan}
 \pdegrees{}
 \degree{Master's in Computer Science}
-\committee{Prof.
-	Ian Kash, Chair and Advisor \\ Prof.
-	Anastasios Sidiropoulos \\ Prof.
-	Ugo Buy} \maketitle
+\committee{
+	Prof.~Ian Kash, Chair and Advisor \\
+	Prof.~Anastasios Sidiropoulos \\
+	Prof.~Ugo Buy} \maketitle
 
 \acknowledgements {The thesis has been completed.
 	% \dedication% {\null\vfil% {\large% \begin{center}% To myself,\\\vspace{12pt}% Perry H. Disdainful,\\\vspace{12pt}% the only person worthy of my company.% \end{center}}% \vfil\null}

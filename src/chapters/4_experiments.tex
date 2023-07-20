@@ -8,7 +8,7 @@ Through the experiments, we aim to answer the following questions:
 	      the last-iterate and average-iterate convergence behavior of these algorithms?
 	      }\label{qn1}
 	\item {How does the addition of NeuRD-fix, Extragradient updates, and Optimistic upates
-	      affect the convergence rate of these algorithms?}\label{qn2}
+	      affect the convergence rate of these algorithms (alone and in combination)?}\label{qn2}
 	\item {Do these performance improvements scale well with the size of the game?}\label{qn3}
 \end{enumerate}
 
@@ -22,12 +22,54 @@ the appendix.
 \section{Experimental Domains}
 We evaluate the algorithms on two normal form games namely, Perturbed RPS and Matching Pennies.
 
+% Is this duplicate with part 2?
+(\revdone{Not sure what goes here.
+	This seems likely to at least in part duplicate 2 as laid out, so be careful about that})
+
+% \begin{noindent}
+\begin{table}
+	\begin{subtable}[c]{0.5\textwidth}
+	\centering
+		\begin{tabular}{c|c c} 
+			\text{ } & H & T \\ 
+			\hline 
+			H & 1 & -1\\ 
+			T & -1 & 1 \\ 
+		\end{tabular} 
+		\subcaption{Matching Pennies Payoffs.}
+	\end{subtable}
+	\begin{subtable}[c]{0.5\textwidth}
+		\centering
+			\begin{tabular}{c|c c c} 
+				\text{ } & R & P & S \\ 
+				\hline 
+				R & 0 & -v & v \\ 
+				P & v & 0 & -1 \\ 
+				S & -v & 1 & 0 \\
+			\end{tabular} 
+			\subcaption{Perturbed RPS Payoffs.}
+	\end{subtable}
+	\caption{Tabular NFG Payoffs}
+	\label{tab:payoffs}
+\end{table}
+% \end{noindent}
+
+\textbf{Matching Pennies} Matching
+Pennies is a classic example from Game Theory that demonstrates decision making in multiagent
+settings in the simplest form.
+In matching pennies, two players toss coins independently and the row player wins if they both land
+on the same side, the column player wins otherwise.
+The payoffs for Matching Pennies are shown in~\ref{tab:payoffs}.
+
 \textbf{Perturbed RPS}
+Perturbed/Biased RPS is a modified version of the canonical normal form game Rock-Paper-Scissors
+with biased payoffs for each action.
+\ref{tab:payoffs} shows the payoff matrix for Perturbed RPS.
 
-\textbf{Matching Pennies}
+Being symmetric matrix games, both games have a unique Nash Equilibrium: Perturbed RPS
+$(\frac{1}{7}, \frac{3}{7}, \frac{3}{7})$, Matching Pennies $(\frac{1}{2}, \frac{1}{2})$.
 
-\section{Evaluation
-  Metrics}
+\section{Evaluation Metrics}
 Our main focus being the convergence behaviors and rates, we need a notion of distance from the
 equilibrium point to measure the performance of these algorithms.
 
@@ -49,90 +91,160 @@ computing a best response at every state.
 The difference between the value that this best-response opponent can acheive and the game value is
 the exploitability of the current policy.
 
-\blue{ - Exploitability formal expression in terms of best responses, and value.}
+\fillin{ - Exploitability formal expression in terms of best responses, and value.}
 
-\subsection{Experiment Setup}
+\section{Experiment Setup}
+ % This first sentence needs reworking, does not sound correct
+ (\rev{something wrong; this sentence doesn't parse.
+  Has enough facts in it that it is probably better to split into multiple sentences.
+ })
 The policies that are logit-parameterized with a softmax projection and all the algorithms use
 full-feedback gradient updates as discussed in Chapter 3.
-Being symmetric matrix games, both games have a unique Nash Equilibrium: Perturbed RPS
-$(\frac{1}{7}, \frac{3}{7}, \frac{3}{7})$, Matching Pennies $(\frac{1}{2}, \frac{1}{2})$.
 For all the algorithms, we train both the players for 5000 training steps with alternating updates
 using the exact payoff vectors.
 For the EG variants, we train the players for only 2500 steps as they use two gradient computation
 per step for a fair comparison.
 We use the $m=10$ gradient steps per iteration with a learning rate of 0.1 for all the runs.
+% Explain why this schedule?
+(\rev{Explain how this was chosen as you did for other parameters below.})
 For MMD and MDPO, we anneal the temperature (entropy coefficient) with the schedule $\alpha_t =
 	1/\sqrt{t}$.
 For the KL-coefficient, we use different schedules for MMD ($\eta_t = \max(1 / \sqrt{t}, 0.2)$),
 and MDPO ($\eta_t = \max(1 - t/T, 0.2)$).
 MDPO's schedule is motivated by mirror-descent theory, while MMD's schedule is closer to the type
 of annealing schedule used for the original MMD experiments found through a hyperparameter sweep.
-So for both of these methods we cap the KL-coefficient at 0.2 because very low values destabilize
-the updates, especially for the NeuRD version of the algorithms.
+For both of these methods we cap the KL-coefficient at 0.2 because very low values destabilize the
+updates, especially for the NeuRD version of the algorithms.
 
-\section{Results} \ref{tab:tabres} summarizes the last and average
-iterate convergences behaviors of 3 different algorithms - MMD, MDPO, SPG under the proposed
-modifications.
-% We present the results for NE, and QRE convergence (with 0.5 temperature).
-Fig~\ref{fig:tabne} summarizes the results for convergence to the Nash Equilibrium.
+\section{Results}
+ (\revdone{iankash: Currently the writing here is very choppy.
+	 Even when presenting results like this you should be telling the reader a story, not just spitting
+	 a list of facts at them.
+ })
 
-% \begin{noindent}
+ (\revdone{iankash: Keep this as just part of 5.3})
 
-\begin{table}[htbp]
-	\centering
-	\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
-	\hline
-	\multirow{2}{*}{\textbf{Algorithm}} &
-	% \multicolumn{4}{c|}{\textbf{Nash}} &
-	% \multicolumn{2}{c|}{\textbf{QRE ($\alpha$=0.5)}} \\
-	% \cline{2-7}
-	% & 
-	\multicolumn{2}{c|}{\textbf{PG}} & 
-	\multicolumn{2}{c|}{\textbf{MDPO}} &
-	\multicolumn{2}{c|}{\textbf{MMD}} \\
-	\cline{2-7}
-	& \textbf{Avg} & \textbf{Last} & \textbf{Avg} & \textbf{Last}
-	& \textbf{Avg} & \textbf{Last} \\
-	\hline
-	Base	 	& \red{\texttimes} 	& \red{\texttimes} 	& \red{\texttimes} 	& \red{\texttimes}		& \checked 	& \checked \\ \hline
-	NeuRD 		& \checked 			& \red{\texttimes} 	& \checked 			& \red{\texttimes}		& \checked 	& \checked \\ \hline
-	EG 			& \checked 			& \checked 			& \checked 			& \checked 				& \checked 	& \checked \\ \hline
-	OPT 		& \checked 			& \checked 			& \checked 			& \checked 				& \checked 	& \checked \\ \hline
-	EG-OPT 		& \checked 			& \checked 			& \checked 			& \checked 				& \checked 	& \checked \\ \hline
-	EG-N 		& \checked 			& \checked 			& \checked 			& \checked 				& \checked 	& \checked \\ \hline
-	OPT-N 		& \checked 			& \checked 			& \checked 			& \checked 				& \checked 	& \checked \\ \hline
-	EG-OPT-N	& \checked 			& \checked 			& \checked 			& \checked 				& \checked 	& \checked \\ \hline
-	\end{tabular}
-	\caption{Convergence in Perturbed RPS for last, and average iterates.}
-	\label{tab:tabres}
-\end{table}
-% \end{noindent}
+ (\revdone{iankash: Relatedly, one plot with 21 lines in it is illegible (at least in places).
+	 Can you break this giant plot into multiple plots from the same data that tell each part of the
+	 story in an easier to digest way?
+ })
 
-\begin{figure}[H]
-	\centering
-	\scalebox{0.7}[0.6]{\input{figs/tabular/nash.pgf}}
-	\caption{Last-iterate converegence plots in PerturbedRPS.}
-	\label{fig:tabne}
+ (\revdone{iankash: Seems like we should also have plots for the average iterate?})
+ (\revdone{iankash: Figures are missing x-axis label; Explain EG correction in them})
+
+We plot the last-iterate convergence in terms of both evaluation metrics in~\ref{fig:tabne_last} as
+a function of the iterations.
+We also plot the average-iterate convergence for all the methods in~\ref{fig:tabne_avg}.
+As mentioned in the experiment setup, the experiment was run for only 2500 steps and one iteration
+counts as 2.
+``No mod.'' indicates the base version of these algorithms without any modifications that serves as a baseline
+for comparison.
+% From these plots, we observe that the modifications made on top of these methods induce
+% last-iterate convergence in some cases, and speed up convergence in others.
+
+\begin{figure}[h] \centering \hspace*{-2cm} \scalebox{0.6}[0.6]{\input{figs/tabular/nash_last.pgf}}
+	\tiny{Note: One iteration counts as 2 for all EG variants.}
+	\caption{Last-iterate converegence in PerturbedRPS.
+	}\label{fig:tabne_last}
 \end{figure}
 
-\subsection{Observations}
-From the above experimental results, we note the following:
+\begin{figure}
+	\centering
+	\hspace*{-2cm}
+	\scalebox{0.6}[0.6]{\input{figs/tabular/nash_avg.pgf}}
+	\tiny{Note: One iteration counts as 2 for all EG variants.}
+	\caption{Average-iterate converegence in PerturbedRPS.}\label{fig:tabne_avg}
+\end{figure}
 
-\begin{itemize}
-	\item {NeuRD-fix speeds up convergence in all the algorithms with or without EG and Optimism.
-	      }
-	\item {Most notably, Optimistic-NeuRD (PG-nrd-opt2) exhibits faster last-iterate convergence.
-	      }
-	      % \item {EG updates provide the most improvement in terms of convergence speeds.}
-	\item {MMD shows no performance improvements with the addition of Extragradient or Optimistic updates.
-	      }
-	      % \item {Entropy annealing (MMD) shows slower convergence compared to EG, or Optimism as a last-iterate
-	      %       inducing mechanism, however it is easier to implement in practice compared to the latter.}
-	\item {In the presence of EG/Optimism to enable last-iterate convergence, trust-region constraints and entropy
-	      regularization slow-down the learning, as evidenced by the better performacne of SPG variants compared to the MDPO, and MMD variants.}
-	\item {Combining Optimism with EG updates provides minimal improvements as they fulfill a similar role.
-	      }
-\end{itemize}
+There are many observations that can be made from the performances of these algorithms in the
+presence of these modifications.
+We group these observations by the modifications, and contrast their effects on SPG, MDPO, and MMD.
+
+\textbf{NeuRD Fix:}
+SPG, and MDPO do not have last-iterate or average-iterate convergence guarantees, and the same is
+observed experimentally for their \textit{No mod.
+} baselines.
+The NeuRD variants of SPG, and MDPO have display average-iterate convergence~\ref{fig:tabne_avg},
+as guaranteed by its no-regret properties.
+However, as expected the addition of NeuRD fix does not induce last-iterate convergence for SPG,
+and MDPO.
+For MMD, which already has average iterate convergence guarantees, it speeds up the convergence
+speed.
+In fact, NeuRD-fix is the only modification that has a significant impact in terms of convergence
+for MMD.
+
+\textbf{EG, and Optimism:}
+The baseline version of MMD has last-iterate convergence as guaranteed by its theory.
+As seen in~\ref{fig:tabne_last}, EG, and Optimistic updates either induces last-iterate convergence
+or speeds it up in most cases.
+Interestingly, there are a few algorithm specific differences in terms of the improvement gained
+through these modifications.
+EG updates induce last-iterate convergence in SPG, and MDPO.
+On the contrary, the addition of EG updates slows down MMD.
+While Optimistic updates work well in SPG, they do not help with convergence for MDPO.
+
+\textbf{Combining the modifications:}
+We also experiment with combination of these modifications to see if this leads to a superior
+performance.
+Combining EG, and Optimism leads to marginal or no improvement, as they both perform a similar
+modification of extrapolating the gradients.
+However, we can see a significant improvement in convergence speeds when EG, and Optimistic updates
+are combined with the NeuRD fix.
+Hence, contrary to trust-region constraints, the NeuRD-fix provides an improvement that is
+tangential to EG/Optimistic Updates that also help in reducing the cycling around the equilibrium.
+For both SPG, and MDPO, `NeuRD + EG + Optimism' provides the fastest last-iterate convergence.
+Whereas, for MMD, `NeuRD', `NeuRD + Optimism' are the fastest variants.
+
+Finally, we highlight that the best performing variants are on top of SPG as opposed to MDPO, or
+MMD as can be seen from~\ref{fig:tabne_last}.
+This is surprising as the latter methods were proposed as improvements over SPG in single, and
+multi-agent settings.
+But, this indicates that EG/Optimistic updates provide a better last-iterate convergence rates
+compared to adaptive entropy regularization with trust-region constraints.
+While the convergence rates of EG, and Optimistic updates are well-studied, it is not the case for
+adaptive regularization.
+Most notably, Optimistic-NeuRD (SPG + NeuRD + Optimism) exhibits a faster last-iterate convergence
+that is straightforward to extend to more complicated settings.
+% SPG's performance in the presence of these modifications indicates that entropy regularization
+% or trust-region constraints.
+
+% Secondly, we note that NeuRD-fix speeds up convergence for all the algorithms even when combined
+% with EG or Optimistic Updates.
 
 The tabular experiments, and the above observations provide some answers to questions~\ref{qn1},
 and~\ref{qn2}.
+In the next section, we use the above observations to extend these results to function
+approximation settings.
+% We present the results for NE, and QRE convergence (with 0.5 temperature).
+
+% \begin{noindent}
+
+% \begin{table}[htbp]
+% 	\centering
+% 	\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+% 	\hline
+% 	\multirow{2}{*}{\textbf{Algorithm}} &
+% 	% \multicolumn{4}{c|}{\textbf{Nash}} &
+% 	% \multicolumn{2}{c|}{\textbf{QRE ($\alpha$=0.5)}} \\
+% 	% \cline{2-7}
+% 	% & 
+% 	\multicolumn{2}{c|}{\textbf{PG}} & 
+% 	\multicolumn{2}{c|}{\textbf{MDPO}} &
+% 	\multicolumn{2}{c|}{\textbf{MMD}} \\
+% 	\cline{2-7}
+% 	& \textbf{Avg} & \textbf{Last} & \textbf{Avg} & \textbf{Last}
+% 	& \textbf{Avg} & \textbf{Last} \\
+% 	\hline
+% 	Base	 	& \red{\texttimes} 	& \red{\texttimes} 	& \red{\texttimes} 	& \red{\texttimes}		& \checked 	& \checked \\ \hline
+% 	NeuRD 		& \checked 			& \red{\texttimes} 	& \checked 			& \red{\texttimes}		& \checked 	& \checked \\ \hline
+% 	EG 			& \checked 			& \checked 			& \checked 			& \checked 				& \checked 	& \checked \\ \hline
+% 	OPT 		& \checked 			& \checked 			& \checked 			& \checked 				& \checked 	& \checked \\ \hline
+% 	EG-OPT 		& \checked 			& \checked 			& \checked 			& \checked 				& \checked 	& \checked \\ \hline
+% 	EG-N 		& \checked 			& \checked 			& \checked 			& \checked 				& \checked 	& \checked \\ \hline
+% 	OPT-N 		& \checked 			& \checked 			& \checked 			& \checked 				& \checked 	& \checked \\ \hline
+% 	EG-OPT-N	& \checked 			& \checked 			& \checked 			& \checked 				& \checked 	& \checked \\ \hline
+% 	\end{tabular}
+% 	\caption{Convergence in Perturbed RPS for last, and average iterates.}
+% 	\label{tab:tabres}
+% \end{table}
+% \end{noindent}
