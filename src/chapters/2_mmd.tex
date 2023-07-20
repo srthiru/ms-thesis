@@ -73,12 +73,12 @@ Instances of trust region optimization methods such as PPO~ \cite{schulmanProxim
 \cite{schulmanTrust2015} and their variants have found large success in single agent RL with
 state-of-the-art performances in a wide array of tasks.
 
-Due to the presence of a proximal regularization, mirror descent in itself can be interpreted as a
+Due to the presence of a \textbf{}proximal regularization, mirror descent in itself can be interpreted as a
 trust-region optimization method.
 %cite reference?
 Building on top of existing theoretical guarantees for mirror descent in tabular RL settings, MDPO
 derives practical RL algorithms that is performant in function approximation settings.
-Using the formulation of a parameterized policy from~ \ref{sec:pg}, MDPO performs the following
+Using the formulation of a parameterized policy from~ \ref{sec:pg}, MDPO performs (an approximation of) the following
 update at each iteration:
 \begin{equation}
 	\label{eqn:mdrl} \pi_{k+1}(.
@@ -94,7 +94,7 @@ iteration by taking a few stochastic gradient steps.
 The gradient of the KL component of the above objective for one step of SGD is zero, and hence it
 is necessary to take multiple gradient steps every iteration to correctly approximate the mirror
 descent objective.
-Tomar et.al, derive on-policy and off-policy variants of MDPO, and in this work we mainly focus on
+Tomar et. al, derive on-policy and off-policy variants of MDPO, and in this work we mainly focus on
 the on-policy algorithm.
 
 For a parameterized policy $ \pi_{\theta}$ the on-policy MDPO update is given by: $$ \theta_{k+1}
@@ -133,9 +133,9 @@ policy parameters,
 % 	\end{split}
 % \end{equation*}
 
-MDPO strong connections to the other constrained optimization RL algorithms and entropy regularized
+MDPO has strong connections to the other constrained optimization RL algorithms and entropy regularized
 algorithms.
-We refer to~ \cite{tomarMirror2022} for a detailed discussion of connections between on-policy MDPO
+We refer to~\cite{tomarMirror2022} for a detailed discussion of connections between on-policy MDPO
 to PPO and TRPO, and off-policy MDPO to SAC.
 % MDPO has been shown to have better empirical performance than PPO, and TRPO in continuous control tasks, and Atari environments.
 
@@ -191,7 +191,7 @@ We mainly focus on the relation between VI problems with a similar structure, an
 
 Finding the QRE of a two-player zero-sum game can be represented as the following
 entropy-regularized saddle point problem.
-Given $\calX \subseteq \R^n$, $calY \subseteq \R^m$, and $g_1: \R^n \mapsto \R$, $g_2: \R^m \mapsto
+Given $\calX \subseteq \R^n$, $\calY \subseteq \R^m$, and $g_1: \R^n \mapsto \R$, $g_2: \R^m \mapsto
 	\R$, find:
 \begin{equation}
 	\label{eqn:saddle} \min_{x \in \mathcal{X}} \max_{y \in \mathcal{Y}}
@@ -278,7 +278,7 @@ Algorithm~
 
 The update rule from Algorithm~ \ref{alg:mmd} admits closed form in some instances, while requires
 approximation through gradient updates in other cases.
-For a parameterized policy $pi_\theta$, when $\psi$ is negative entropy the update rule from
+For a parameterized policy $\pi_\theta$, when $\psi$ is negative entropy the update rule from
 Algorithm~ \ref{alg:mmd} can be restated in RL terms as follows:
 \begin{equation}
 	\label{eqn:mmdbf}

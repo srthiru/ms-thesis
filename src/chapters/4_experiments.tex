@@ -8,7 +8,7 @@ Through the experiments, we aim to answer the following questions:
 	      the last-iterate and average-iterate convergence behavior of these algorithms?
 	      }\label{qn1}
 	\item {How does the addition of NeuRD-fix, Extragradient updates, and Optimistic upates
-	      affect the convergence rate of these algorithms?}\label{qn2}
+	      affect the convergence rate of these algorithms (alone and in combination)?}\label{qn2}
 	\item {Do these performance improvements scale well with the size of the game?}\label{qn3}
 \end{enumerate}
 
@@ -67,7 +67,7 @@ For the KL-coefficient, we use different schedules for MMD ($\eta_t = \max(1 / \
 and MDPO ($\eta_t = \max(1 - t/T, 0.2)$).
 MDPO's schedule is motivated by mirror-descent theory, while MMD's schedule is closer to the type
 of annealing schedule used for the original MMD experiments found through a hyperparameter sweep.
-So for both of these methods we cap the KL-coefficient at 0.2 because very low values destabilize
+For both of these methods we cap the KL-coefficient at 0.2 because very low values destabilize
 the updates, especially for the NeuRD version of the algorithms.
 
 \section{Results} \ref{tab:tabres} summarizes the last and average

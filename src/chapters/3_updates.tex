@@ -32,7 +32,7 @@ actions that are already less likely under the current policy.
 This problem is more evident in multiagent settings where the opponent's policy can change
 arbitrarily affecting rewards associated with actions even in the single-state setting.
 
-Motivated by this observation, Hennes et.al~\cite{hennesNeural2020} propose to make modifications
+Motivated by this observation, Hennes et. al~\cite{hennesNeural2020} propose to make modifications
 to SPG using the idea of Replicator dynamics from Evolutionary game theory.
 Replicator Dynamics defiens operators that describe the dynamics of a population's evolution when
 attempting to maximize some arbitrary utility function.
@@ -85,7 +85,7 @@ While gradient based methods including the classic Arrow-Hurwicz method work wel
 optimization problems, for saddle point problems they converge only under strong-convexity even in
 the unconstrained case~\cite{heConvergence2022}.
 
-The \textbf{Extragradients (EG)}: G.M.Korpelevich~\cite{korpelevichextragradient1976} introduced EG
+The \textbf{Extragradients (EG)}: G. M. Korpelevich~\cite{korpelevichextragradient1976} introduced EG
 as a modification of the Arrow-Hurwicz method for solving convex-concave saddle point problems, and
 variational inequality problems with strongly monotone operators.
 The EG algorithm follows the sequence of updates as given below:
@@ -97,7 +97,7 @@ The EG algorithm follows the sequence of updates as given below:
 				+ \eta f(\bar{x}_k, \bar{y}_k)]
 	\end{split}
 \end{equation} If $f$ is $L$-smooth, and $0 < \eta <
-	1/L$ is the step size, EG has asymptoticlast-iterate convergence.
+	1/L$ is the step size, EG has asymptotic last-iterate convergence.
 ~\cite{tsenglinear1995} - Last iterate linear convergence using extragradient method for VI problems.
 
 \textbf{Optimistic gradients (OPT)}: For the same problem~\cite{popovmodification1980} also proposed a modification to the Arrow-Hurwicz
