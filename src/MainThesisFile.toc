@@ -23,46 +23,46 @@
 \contentsline {section}{\numberline {3.1} SPG}{18}{section.3.1}%
 \contentsline {subsection}{\numberline {3.1.1} Trust-region methods}{20}{subsection.3.1.1}%
 \contentsline {section}{\numberline {3.2} MDPO}{20}{section.3.2}%
-\contentsline {subsection}{\numberline {3.2.1} Tabular MDPO}{21}{subsection.3.2.1}%
-\contentsline {section}{\numberline {3.3} MMD}{22}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1} Connection between Variational Inequalities and QREs}{22}{subsection.3.3.1}%
-\contentsline {subsection}{\numberline {3.3.2} MMD Algorithm}{24}{subsection.3.3.2}%
-\contentsline {subsection}{\numberline {3.3.3} Behavioral form MMD}{25}{subsection.3.3.3}%
-\contentsline {subsection}{\numberline {3.3.4} Closed-form vs Behavioral-form}{26}{subsection.3.3.4}%
-\contentsline {subsection}{\numberline {3.3.5} Comparison of MMD to other Mirror Decent based methods}{27}{subsection.3.3.5}%
+\contentsline {subsection}{\numberline {3.2.1} Tabular MDPO}{22}{subsection.3.2.1}%
+\contentsline {section}{\numberline {3.3} MMD}{23}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1} Connection between Variational Inequalities and QREs}{23}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2} MMD Algorithm}{25}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3} Behavioral form MMD}{26}{subsection.3.3.3}%
+\contentsline {subsection}{\numberline {3.3.4} Closed-form vs Behavioral-form}{27}{subsection.3.3.4}%
+\contentsline {subsection}{\numberline {3.3.5} Comparison of MMD to other Mirror Decent based methods}{28}{subsection.3.3.5}%
 \addvspace {\baselineskip }
-\contentsline {chapter}{\xnumberline {4\hskip 2em}\uppercase {Modified Updates for Last-iterate Convergence}}{28}{chapter.4}%
-\contentsline {section}{\numberline {4.1} Neural Replicator Dynamics (NeuRD)}{29}{section.4.1}%
-\contentsline {subsection}{\numberline {4.1.1} Replicator Dynamics and No-regret Learning}{29}{subsection.4.1.1}%
-\contentsline {subsection}{\numberline {4.1.2} NeuRD}{30}{subsection.4.1.2}%
-\contentsline {subsection}{\numberline {4.1.3} Relation to Natural Policy Gradients}{31}{subsection.4.1.3}%
-\contentsline {subsection}{\numberline {4.1.4} Alternating vs Simultaneous gradient updates}{31}{subsection.4.1.4}%
-\contentsline {section}{\numberline {4.2} Extragradient and Optimistic Gradient}{32}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1} Extragradient (EG)}{32}{subsection.4.2.1}%
-\contentsline {subsection}{\numberline {4.2.2} Optimistic gradient (OPT)}{33}{subsection.4.2.2}%
-\contentsline {subsection}{\numberline {4.2.3} Optimistic Mirror Descent}{34}{subsection.4.2.3}%
+\contentsline {chapter}{\xnumberline {4\hskip 2em}\uppercase {Modified Updates for Last-iterate Convergence}}{29}{chapter.4}%
+\contentsline {section}{\numberline {4.1} Neural Replicator Dynamics (NeuRD)}{30}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1} Replicator Dynamics and No-regret Learning}{30}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2} NeuRD}{31}{subsection.4.1.2}%
+\contentsline {subsection}{\numberline {4.1.3} Relation to Natural Policy Gradients}{32}{subsection.4.1.3}%
+\contentsline {subsection}{\numberline {4.1.4} Alternating vs Simultaneous gradient updates}{32}{subsection.4.1.4}%
+\contentsline {section}{\numberline {4.2} Extragradient and Optimistic Gradient}{33}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1} Extragradient (EG)}{33}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2} Optimistic gradient (OPT)}{35}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3} Optimistic Mirror Descent}{35}{subsection.4.2.3}%
 \addvspace {\baselineskip }
-\contentsline {chapter}{\xnumberline {5\hskip 2em}\uppercase {Tabular Experiments}}{36}{chapter.5}%
-\contentsline {section}{\numberline {5.1} Experimental Domains}{36}{section.5.1}%
-\contentsline {section}{\numberline {5.2} Evaluation Metrics}{37}{section.5.2}%
-\contentsline {subsection}{\numberline {5.2.1} Divergence to the equilibrium}{38}{subsection.5.2.1}%
-\contentsline {subsection}{\numberline {5.2.2} Exploitability}{38}{subsection.5.2.2}%
-\contentsline {section}{\numberline {5.3} Experiment Setup}{38}{section.5.3}%
-\contentsline {section}{\numberline {5.4} Results}{39}{section.5.4}%
+\contentsline {chapter}{\xnumberline {5\hskip 2em}\uppercase {Tabular Experiments}}{38}{chapter.5}%
+\contentsline {section}{\numberline {5.1} Experimental Domains}{38}{section.5.1}%
+\contentsline {section}{\numberline {5.2} Evaluation Metrics}{39}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1} Divergence to the equilibrium}{40}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2} Exploitability}{40}{subsection.5.2.2}%
+\contentsline {section}{\numberline {5.3} Experiment Setup}{40}{section.5.3}%
+\contentsline {section}{\numberline {5.4} Results}{41}{section.5.4}%
 \addvspace {\baselineskip }
-\contentsline {chapter}{\xnumberline {6\hskip 2em}\uppercase {Deep Multi-Agent RL Experiments}}{44}{chapter.6}%
-\contentsline {section}{\numberline {6.1} Experimental Domains}{44}{section.6.1}%
-\contentsline {section}{\numberline {6.2} Evaluation Metrics}{45}{section.6.2}%
-\contentsline {subsection}{\numberline {6.2.1} Approximate Exploitability}{45}{subsection.6.2.1}%
-\contentsline {section}{\numberline {6.3} Experiment Setup}{45}{section.6.3}%
-\contentsline {section}{\numberline {6.4} Results}{46}{section.6.4}%
+\contentsline {chapter}{\xnumberline {6\hskip 2em}\uppercase {Deep Multi-Agent RL Experiments}}{46}{chapter.6}%
+\contentsline {section}{\numberline {6.1} Experimental Domains}{46}{section.6.1}%
+\contentsline {section}{\numberline {6.2} Evaluation Metrics}{47}{section.6.2}%
+\contentsline {subsection}{\numberline {6.2.1} Approximate Exploitability}{47}{subsection.6.2.1}%
+\contentsline {section}{\numberline {6.3} Experiment Setup}{47}{section.6.3}%
+\contentsline {section}{\numberline {6.4} Results}{48}{section.6.4}%
 \addvspace {\baselineskip }
-\contentsline {chapter}{\xnumberline {7\hskip 2em}\uppercase {Discussion}}{49}{chapter.7}%
+\contentsline {chapter}{\xnumberline {7\hskip 2em}\uppercase {Discussion}}{51}{chapter.7}%
 \addvspace {\baselineskip }
-\contentsline {chapter}{\xnumberline {8\hskip 2em}\uppercase {Conclusion}}{51}{chapter.8}%
+\contentsline {chapter}{\xnumberline {8\hskip 2em}\uppercase {Conclusion}}{53}{chapter.8}%
 \addvspace {\baselineskip }
-\contentsline {chapter}{\xnumberline {\ }APPENDICES}{52}{chapter.8}%
-\contentsline {chapter}{\xnumberline {\ }\ \ \ \ \ Appendix A}{53}{appendix.A}%
-\contentsline {chapter}{\xnumberline {\ }\ \ \ \ \ Appendix B}{54}{appendix.B}%
+\contentsline {chapter}{\xnumberline {\ }APPENDICES}{54}{chapter.8}%
+\contentsline {chapter}{\xnumberline {\ }\ \ \ \ \ Appendix A}{55}{appendix.A}%
+\contentsline {chapter}{\xnumberline {\ }\ \ \ \ \ Appendix B}{56}{appendix.B}%
 \addvspace {\baselineskip }
-\contentsline {chapter}{\xnumberline {\ }CITED LITERATURE}{55}{appendix.B}%
+\contentsline {chapter}{\xnumberline {\ }CITED LITERATURE}{57}{appendix.B}%
