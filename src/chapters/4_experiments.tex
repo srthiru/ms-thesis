@@ -164,7 +164,7 @@ We group these observations by the modifications, and contrast their effects on 
 SPG, and MDPO do not have last-iterate or average-iterate convergence guarantees, and the same is
 observed experimentally for their \textit{No mod.
 } baselines.
-The NeuRD variants of SPG, and MDPO have display average-iterate convergence~\ref{fig:tabne_avg},
+The NeuRD variants of SPG, and MDPO display average-iterate convergence~\ref{fig:tabne_avg},
 as guaranteed by its no-regret properties.
 However, as expected the addition of NeuRD fix does not induce last-iterate convergence for SPG,
 and MDPO.
@@ -181,7 +181,7 @@ Interestingly, there are a few algorithm specific differences in terms of the im
 through these modifications.
 EG updates induce last-iterate convergence in SPG, and MDPO.
 On the contrary, the addition of EG updates slows down MMD.
-While Optimistic updates work well in SPG, they do not help with convergence for MDPO.
+While Optimistic updates work in SPG, they do not help with convergence for MDPO.
 
 \textbf{Combining the modifications:}
 We also experiment with combination of these modifications to see if this leads to a superior
@@ -191,11 +191,13 @@ modification of extrapolating the gradients.
 However, we can see a significant improvement in convergence speeds when EG, and Optimistic updates
 are combined with the NeuRD fix.
 Hence, contrary to trust-region constraints, the NeuRD-fix provides an improvement that is
-tangential to EG/Optimistic Updates that also help in reducing the cycling around the equilibrium.
+orthogonal to EG/Optimistic Updates that also help in reducing the cycling around the equilibrium.
 For both SPG, and MDPO, `NeuRD + EG + Optimism' provides the fastest last-iterate convergence.
 Whereas, for MMD, `NeuRD', `NeuRD + Optimism' are the fastest variants.
 
-Finally, we highlight that the best performing variants are on top of SPG as opposed to MDPO, or
+\textbf{Average vs Last Iterate:}
+
+\textbf{Choice of Algorithm:} Finally, we highlight that the best performing variants are on top of SPG as opposed to MDPO, or
 MMD as can be seen from~\ref{fig:tabne_last}.
 This is surprising as the latter methods were proposed as improvements over SPG in single, and
 multi-agent settings.
