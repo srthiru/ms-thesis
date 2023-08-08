@@ -9,113 +9,201 @@ that are useful in understanding the approaches we study in this work.
 
 \section{Game Theory}
 
-Game theory is the mathematical study of interaction between agents to produce outcomes while
-trying to uphold certain individual or group preferences.
-It has a wide range of applications including economics, biology, and computer science.
+Game theory~\cite{osborneintroduction2004} is the study of modeling interactions between
+decision-makers.
+Problems are represented as a game in which decision-makeres are players taking actions that adhere
+to a set of rules in accordance with some real-world situation.
+Games intuitively capture the nature of the interaction, while abstracting away irrelevant details
+and complexity of real-world problems that do not affect the outcome of interactions.
+Game theory is widely applied in modeling problems that are of economic, social, and political
+importance.
 % In overcoming the challenges mentioned above, many algorithms have adopted game-theoretic
 % constrtucts and ideas when designing Reinforcement learning algorithms for multi-agent settings.
 % It is also a common practice to use game theoretic constructs in evaluating the performance of
 % multi-agent algorithms and provide theoretical guarantees.
-In this work, we mainly focus on a branch of game theory called non-cooperative game theory that
-assumes each agent has their own indivudual preference to uphold as opposed to a global preference.
+In this section, we briefly introduce concepts from game theory that relevant for this work.
+For a more in-depth discussion we refer the reader
+to~\cite{shohamMultiagent2008,nisanAlgorithmic2007a}.
 
-\subsection{Problem Representations}
+\subsection{Problems formulations in Game Theory}
 \label{subsec:reps}
 % In discussing agent interactions, and preferences, we need a formal notion of how agents act, and
 % how agent preferences can be defined.
-In game theory, the ordering of an agent's preferences over certain outcomes are formalized through
-a Utility or a \textit{Payoff function} that maps outcomes to a real value.
-Problems are commonly represented as a \textit{Game} that encodes information about the agents,
-possible actions agents can take in different situations, their preferences, and the outcome of a
-specific interaction.
-A \textit{Strategy} typically refers to the agent's choice of taking actions given the information
-it has.
-Agent's strategies can be \textit{pure} (deterministic) or \textit{mixed} (distribution over
-possible actions).
-Beyond these preliminary notions, there are different representations of games depending on the
-structure of the problem.
-We now briefly describe two common representations that are relevant to this work.
-For a more in-depth discussion of game representations, and their significance we refer the reader
-to~\cite{shohamMultiagent2008}.
+The primary components of modeling a problem using game theory are \textit{actions} available to
+the players, and a specification of each players's preferences over outcomes.
+Players can choose from a set of available actions, and the availability of actions only depends on
+the situation, not on a player's preferences.
+Also, there is no restriction placed upon a player's preferences, and as such they can be
+risk-preferring, risk-averse, or even altruistic.
+It is also assumed that players follow \textit{rational choice}, i.e., given the same information,
+an agent consistently chooses the same action irrespective of the qualitative nature of that
+action.
+The set of actions of all the players in a specific situation is jointly referred to as the
+\textit{action profile}.
+Preferences are formalized through a \textit{payoff function} (or utility function) that maps
+outcomes to scalar payoffs (or utilities).
+Payoff functions only induce an ordering over outcomes, and are not reflective of the relative
+intensity or magnitude of such preferences.
 
-\textbf{Normal-Form Games:}
-Normal-Form or Strategic form games are the most basic and foundational form of representing
-problems in game theory.
-In a Normal-form game (NFG), all agents act simultaneously to reveal the outcome immediately after,
-and a payoff is assigned to each agent.
+A \textit{strategy} describes how the player acts when given some information, and strategies can
+be deterministic (\textit{pure strategies}) or distributions over pure strategies (\textit{mixed
+	strategies}).
+The expected payoff that can be acheived by a player following a given strategy is conditioned on
+the strategies of all the other players.
+% Players aim to learn strategies that maximize their expected payoff as they are being affected by.
+While each player aims to learn strategies to maximize their expected payoffs, the expected payoffs
+are themselves affected by the changing strategies, giving rise to the complexity in learning good
+strategies.
+
+\subsection{Game Representations}
+
+Two fundamental game-theoretic representations are the normal-form, and the extensive-form.
+% \subsubsection*{Normal-form Games}
+% Normal-form is the most fundamental form of representing problems in game theory.
+In a normal-form (or a strategic) game, all players act simultaneously to reveal an outcome
+immediately after, and a payoff is assigned to each player.
 A more formal definition of a normal-form game is as follows:
 
-\begin{definition}[Normal-form games]
-
-	A n-player, general-sum normal form game
-	is given by the $(N, A, u)$ tuple, where $N$ is the set of players, $A = A_1 \times A_2 \ldots
-		\times A_n$, with $A_i$ being the set of actions available to player $i$, and $u = (u_i \forall i
-		\in N)$ is the set of utility functions that map an action profile to a real utility value for each
-	agent, $u_i: A \mapsto \R$.
-
+\begin{definition}[Normal-form games] A n-player, general-sum normal form game is given by the $(N,
+		A, u)$ tuple, where:
+	\begin{itemize}
+		\item $N = \{1 \dots n \}$ is the set of players
+		\item $A =
+			      A_1 \times A_2 \ldots \times A_n$, with $A_i$ being the set of actions available to player $i$
+		\item $u = {u_i, \forall i \in N}$ is the set of payoff functions that map an action profile to a
+		      real payoff value for each agent, $u_i: A \mapsto \R$.
+	\end{itemize}
 \end{definition}
 
-Normal-form games are typically represented using an n-dimensional matrix, where each dimension
-represents an action available to each agent, and each entry is the payoff assigned to each agent
-given that action profile.
-A few popular examples of NFGs are Rock-paper-scissors (RPS), Matching pennies, and Prisoner's
-dilemma etc.
+For a normal-form game, the set of mixed strategies available to player $i$ is given by $S_i =
+	\Pi(A_i)$.
+The set of mixed strategy profiles of all the players in the game is called as the mixed strategy
+profile $S = S1 \times \dots \times S_n$.
+Normal-form games are typically represented as a n-dimensional matrix, where each dimension
+corresponds to the pure-strategy space of each player, and the entries correspond to the payoffs of
+action profiles.
+For this reason, normal-form games are also referred to as \textit{matrix games}.
+Canonical examples of normal-form-games from game theory literature includes Matching pennies,
+Battle of the sexes, Prisoner's dilemma, and Rock-paper-scissors (RPS) etc.
 
-\subsubsection*{Sequential Games} Normal-form games are limited in
-representing many real-world problems that necessitate agents to act sequentially along the
-temporal dimension.
-A common choice in representing such problems is the Extensive-form game which facilitiates
-sequential decision making.
+Normal-form games do not explicitly model the temporal nature of decision-making that occurs in
+many real-world problems.
+% \subsubsection*{Extensive-form Games} 
+As a result, while these problems can still be modeled as NFGs, this representation can be
+computationally expensive to work with.
+These problems are more naturally modeled as an Extensive-form game (EFG), a representation that
+explicitly incorporates for the sequential nature of interactions in the form of a game tree.
 
 \begin{definition}[Extensive-form games]
+	An extensive form game is specified by the tuple $G=(N, A, H, Z, \chi, \rho, \sigma, u)$, where:
+	\begin{itemize}
+		\item $N = \{1 \dots n \}$ is the set of players
+		\item $A$ is the set of actions
+		\item $H$ is the set of non-terminal decision nodes
+		\item $Z$ is the set of terminal nodes; $H \cap Z = \emptyset$
+		\item $\chi: H \mapsto 2^A$ is the action function that assigns each decision node a set of actions available to the player
+		\item $\rho: H \mapsto N$, is the player function
+		\item $\sigma: H \times A \mapsto H \cup Z$ is the successor function
+		\item $u = (u_i,
+			      \forall i \in N)$ is the set of payoff functions that map terminal nodes to a real payoff value
+		      for each agent, $u_i: Z \mapsto \R$.
+	\end{itemize}
 \end{definition}
 
-Given their tree-like representation, EFGs can be inefficient to operate over.
-Reduced-form NFGs are the normal-form representation of an EFG, where each row/column represents a
-pure-strategy of the entire EFG, instead of just a single action.
-Given this exponential blowup of action space, reduced-form NFGs are also computationally
-challenging to work with.
-Another useful representation is the Sequence-form, where instead of the entire pure-strategy,
-entries represent histories of actions taken so far.
-% This leads to a much more compact representation, though at the cost of additional complexity in
-% updating the representation as new actions are taken.
+The above representation definition assume that all the relevant information for decision making is
+available and accessible to all the players equally.
+This is known as the \textit{perfect-information} setting, as opposed to the
+\textit{imperfect-information} setting that occur in many real-world problem where relevant
+information is obscured to the players.
 
-\begin{definition}[Sequence form games]
+\begin{definition}[Imperfect-information Extensive-form games]
+	An imperfect-information extensive-form game, $G=(N, A, H, Z, \chi, \rho, \sigma, u, I)$ corresponds to a
+	perfect-information extensive-form game $G=(N, A, H, Z, \chi, \rho, \sigma, u$), where
+	$I = \{I_i, \forall i \in N\}$, and $I_i = (I_{i,1}, \dots, I_{i,k_i})$ defines a partition over all non terminal-histories
+	$\{h \in H : \rho(h) = i\}$, such that
+	$\chi(h) = \chi(h')$, and $\rho(h)=\rho(h')$, whenever $\exists j$ for which $h,h' \in I_{i,j}$.
 \end{definition}
 
-% There are a few ways to represent such scenarios, one being normal-form games themselves.
-% A downside is that the size of the normal-form representation for sequential games explode
-% exponentially in the size of the game tree.
+A crucial assumption in such a setting is \textit{perfect-recall} of the sequence of actions taken
+by a player to reach the current node of the game tree.
+If all players possess perfect-recall, then the game is said to be of perfect-recall.
+While mixed strategies in extensive-form games are distributions over the pure strategies of the
+entire game tree, \textit{behavioral strategies} are distributions over actions at each decision
+node.
+Normal-form representation of an extensive-form game is referred to as a reduced-NFG.
+Here the dimensions of the matrix represent pure-strategies over the entire sequence of
+interactions, leading to an exponential blowup of the action space for the reduced-form NFGs.
+A more efficient \textit{sequence-form} representation makes use of the varying depth of the game
+tree by defining the payoff matrix with respect to the subsets of histories instead of
+pure-strategy profiles.
+The payoffs acheived in the terminal histories are passed up the trees to non-terminal histories as
+well.
+
+Beyond the above representations, many variants have been developed to add account for specific
+characteristics of problems.
+More generally, definitions of game representations are typically based on the number of agents
+(Single-agent, Two-player, Multi-agent), the length of the game (single-shot, sequential), type of
+interaction (simultaneous-move, turn-based), utility values of players (general-sum, constant-sum,
+zero-sum) etc. In this work, we mainly deal with two-player zero-sum games (interchangably referred
+to in the text as 2p0s), a purely competitive setting that only involves interactions between two
+agents whose payoff functions are a negation of each other.
+\begin{definition}[Two-player Zero-sum games]
+	A two-player normal-form game is zero-sum if for each strategy profile $a \in A_1 \times A_2$,
+	$u_1(a) + u_2(a) = 0$.
+\end{definition}
+Two-player zero-sum games are an important class of problems that coincide with other important
+domains including saddle point optimization, variational inequalities, and image generation in deep
+learning.
 
 \subsection{Solution Concepts}
-While the above representations provide a well-defined framework to encode information about the
-problem, solution concepts define a notion of optimality of the agent's strategies given these
-representations.
-The main premise is identifying an \textit{equilibrium} point in the joint strategy space of all
-the agents.
-However, how this equlibrium point is defined, and what guarantees it provides leads to various
-definitions of equilibrium points.
+% The above representations provide a well-defined framework to formalize problems in a game-theoretic manner.
+Solution concepts are typically \textit{equilibrium} in the joint strategy space of the players
+that define a notion of optimality of a player's strategies and allows us to analyze player
+behaviors.
 
-\fillin{
-	\begin{itemize}
-		\item Nash equilibrium - Existence of a nash equilibrium
-		\item Quantal response equilibrium - Uniqueness of QRE
-	\end{itemize}
-}
+% \textbf{Best Response:}
+The best response of player $i$ to the strategy profile $s_{-i}$ is a mixed strategy such that
+$u_i(s_i^\ast, s_{-i}) \geq u_i(s_i, s_{-i}), \forall s_i \in S_i$.
 
-% \subsection{Learning Strategies}
+\begin{definition}[Nash equlibrium]
+	A strategy profile $s=(s_1, \dots, s_n), s \in S$ in an n-player normal-form game is a Nash-equilbrium if $s_i$ is a best response to $s_{-i}$, for all
+	$i$.
+\end{definition}
+
+A major result in game theorey ensures the existence of a Nash equilibrium for any finite n-person
+normal-form game~\cite{nashEquilibrium1950}, and extensive-form games with perfect
+recall~\cite{kuhnExtensive1950}.
+While Nash equlibrium is the most prevelant solution concept, various other solution concepts with
+interesting properties have also been proposed and studied.
+Minmax and Maxmin strategies assure payoffs for players in the most agressive (player $i$ playing
+to minimize player $j$'s payoffs) and most conservative (player $-i$ playing to minimize player
+$i$'s payoffs) scenarios.
+
+While the solution concept of Nash equilibrium assumes perfectly rationality, Quantal response
+equilibrium (QRE) models agents with a bounded rationality allowing for some errors in action
+predictions.
+QRE was first proposed for normal-form games~\cite{mckelveyQuantal1995}, and then later extended to
+extensive form games using the sequence form representation~\cite{mckelveyQuantal1998}.
+An instance of QRE is the logit-QRE (which we simply refer to as QRE going forward) where the
+errors are modeled using a Weibull distribution and added to the payoffs of each agent in a
+normal-form game.
+For extensive-form games, if the behavioral strategies of all agents is a QRE, then the joint
+policy is said to be an Agent QRE (AQRE).
+QRE predicts systematic deviations from Nash equilibrium when fit with experimental data of
+game-theoretic problems.
+
+\subsection{Regret Minimization and CFR}
+Regret minimization is an important class of algorithms for the problem learning in games.
+This approach aims to derive algorithms that have no-regret properties.
+\fillin{CFR}
 
 \section{Reinforcement
   Learning}
-Reinforcement learning (RL) is sub-domain of machine learning that deals with designing interactive
-\textit{agents} that learn to maximize a \textit{reward} signal in an \textit{environment}.
+Reinforcement learning (RL)~\cite{suttonReinforcement2018} deals with designing algorithms for
+\textit{agents} that interactively learn to maximize a \textit{reward} signal in an
+\textit{environment}.
 The reward signal encodes information about the goal that the agent has to learn to achieve without
 any specific directions about how that goal should be achevied.
-% Reinforcement learning has been shown to be effective in many application domains to learn and
-% solve an arbitrary problem as long as it can be encapsulated into an interactive environment with a
-% well-defined reward signal.
-% Motivation to study and design RL algorithms
-% \fillin{ - cite RL applications}.
 
 \textbf{Markov Decision Process.}
 Markov Decision Processes (MDPs) provide a framework to formalize reinforcement learning problems.
@@ -123,29 +211,13 @@ A $\gamma$-discounted MDP ($\mathcal{M}$) is given by the tuple, $\mathcal{M}=(\
 	\gamma)$ where: $\calS$ is the state space, $\calA$ is the action space,
 $P(s',r|s,a):~\calS\times\calA\times\calS~\mapsto~[0,1]$ is the transition dynamics function,
 $R(s,a) \subset \R$ is the reward function, $\gamma \in [0,1]$ is the discount factor.
-
-The objective of an agent interacting with this MDP is to learn to act in a way that maximize its
-\textit{expected return} at each state.
-% While $R_t(s_t, a_t)$ is the immediate reward, to prevent the agent from becoming myopic of future 
-% rewards, the alternate form discounted reward is used in practice.
-% To encode the consequence of taking specific actions, and to prevent the agent from becoming myopic of 
-% future rewards, the discounted reward $G_t = \sum_{k=t+1}^{T} \gamma^{k-t-1} R_k$ is commonly used rather 
-% than the immediate reward $R_t$.
+In this work we discuss finite MDPs where the sequence of interactions are characterized as
+episodes that have a terminal state.
 The expected return, $G_t$, at time step $t$ is the discounted sum of rewards accumulated by the
-agent starting from $t$ till the end of the episode (\fillin{episodes?
-}).
+agent starting from $t$ till the end of the episode.
 Formally, $G_t = \sum_{k=t+1}^{T} \gamma^{k-t-1} R_k$, where the discount rate $\gamma$ indicates
 how much importance is placed upon future rewards over immediate rewards.
-% Discounting also helps in keeping the return bounded in infinite horizon settings.
-The objective of an agent within an MDP is to learn to act at each state so as to maximize their
-\textit{expected returns}.
-
-% In addition to rewards, and returns, reinforcement learning also involves the notion of policies
-% and value functions.
-While the expected return quantifies the objective, policy and value functions are representations
-that dictate how the agent should act in a given state.
-Reinforcement learning algorithms typically involve learning polices and estimating value
-functions.
+The objective of an agent is to learn to act in a way that maximize its \textit{expected return}.
 A \textit{Policy} is a mapping from a state to an action distribution $\pi: \calS \mapsto \calA$.
 A \textit{Value function}, $V_{\pi}(s)$ estimates the expected reward that can be achieved from the
 current state under the policy $\pi$: $V_{\pi}(s) = \E_{\pi}[G_t | S_t = s]$.
@@ -168,316 +240,282 @@ For a given policy, the value function satisfies the \textbf{Bellman equation}:
 \begin{equation}
 	\label{eqn:bellman} V_\pi(s) \doteq \E_\pi \left[r + \gamma V_\pi(s') | R_t = r, S_{t+1} = s'
 		\right]
-\end{equation}
-
-For small state spaces, it is possible to learn optimal
-value functions by iterating using Dynamic programming.
+\end{equation} For small state spaces, it is possible to learn optimal value functions by
+iterating using Dynamic programming.
 Starting with an arbitrary policy, we can learn an optimal policy interleaving Policy evaluation,
 and Policy improvement.
 In the \textit{Policy Evaluation} step, we first estimate the value function until it
-satisfies~\ref{eqn:bellman}.
-Next, in the \textit{Policy Improvement} step, we update the policy greedily at every state until
-we acheive a strictly better policy.
-This method of interleaving these two steps is called \textit{Policy Iteration}.
-Alternatively, \textit{Value Iteration} approximates this improvement by only updating the policy
-greedily with respect to the immediate next step.
-
-At step $k$ of learning a tabular policy,
-\begin{itemize}
-	\item \textbf{Policy Evaluation}:
-	      $v_{k+1}(s) \doteq \E_\pi \left[R_{t+1} + \gamma v_k(S_{t+1}) |S_t =s\right]$
-	\item \textbf{Value
-		      Iteration}: $v_{k+1}(s) \doteq \E_\pi \left[R_{t+1} + \gamma v_k(S_{t+1}) |S_t =s\right]$
-	\item
-	      \textbf{Policy Iteration}:
-\end{itemize}
-
-We can construct an optimal policy
-simply by acting greedily with respect to the optimal value function.
+satisfies~\ref{eqn:bellman}, i.e., $v_{k+1}(s) \doteq \E_\pi \left[R_{t+1} + \gamma v_k(S_{t+1})
+		|S_t =s\right]$.
+Next, in the \textit{Policy Improvement} step, we update the policy greedily at every state, i.e.,
+$\pi'(s) \doteq \arg \max_{a} Q_\pi(s,a)$.
+The Policy improvement theorem guarantees that this new policy is strictly better than the old
+policy, unless the policy has converged.
+This method is known as \textit{Policy Iteration}, and if we the policy evaluation is approximated
+instead of exact convergence, then it is known as \textit{Value Iteration}.
 
 Most of the tabular, and iterative methods require an explicit model of an environment with access
 to the transition functions.
 In the absence of a model or transition functions, one can use Monet Carlo methods to approximate
 these probabilities through sampling.
-
 Tabular methods are realizable in settings with small state spaces, where we have access to the
 perfect model of the environment in the form of MDPs.
 Tabular methods are also useful in establishing theory and guarantees for various algorithms.
 However, for most practical applications it is common to use parameterized policies and approximate
 value functions.
-
-\subsection{Approximate Value-based methods}
-% This method of learning from experience by iteracting with a blackbox enivornment or a simulator is
-% a common problem setting in many reinforcement learning problems.
-% This is because it is difficult to explictly design a model that accurately captures all the
-% properties of a real-world artifact, and exhaustively model the effects of taking all the actions
-% that are available to the agent (which are also sometimes unknown).
-% However, it is possible to have access to such a real-world artifact, and we only need to provide
-% an interface for the agent to the artifact and expose available actions to the agent.
-% We can use the real-world artifact to evaluate these actions and their effects and convert them
-% into rewards to provide a signal for the agent to learn from.
-In approximate value-based methods, the objective is to learn the weights $w$ of a function
-$\hat{V}(s;w)$ that best approximates the value function $V_\pi$ under some policy $\pi$.
-
-Predictive Objective: $\overline{\text{VE}}(w) \doteq \sum_{s \in \calS} \mu(s) [V_\pi(s) -
-		\hat{V}(s;w)]^2$.
-
-$\mu$ is the on-policy distribution, that determines the importance given to states in-terms of the prediction error.
-\begin{itemize}
-	\item If $v_\pi$ is not available, on can use monte-carlo estimates for target updates
-	\item If you use bootstrapping, then the assumption that the gradient is independent of the target becomes invalid (semi gradient methods)
-	\item For linear function approximation, bootstrapping still works robustly
-	\item On-policy control can be done in the same way as tabular case with $\epsilon$-greedy policies
-	\item Off-policy methods use importance sampling to weight the error based on target and behavior policies
-	\item Off-policy methods face divergence in value estimation (due to the difference in state distributions induced by behavior and target policies)
-	      when combined with function approximation and boostrapping (deadly triad)
-\end{itemize}
-
-\subsection{Policy Gradient methods}
-\label{sec:spg}
-Policy gradient methods allow for directly learning a parameterized policy that enables action
-selection without the use of a (action-)value function.
-% These are generally called Policy gradient methods, and are a major area of study within
-% Reinforcement learning.
-Policy gradient methods have the advantage that in many cases the policy space could be simpler to
-approximate compared to the value function space.
-We discuss Policy gradient methods in more detail in the next section as it serves as a base for
-the rest of our work.
+Policy gradient methods allow for directly learning a parameterized policiy that enables action
+selection without the use of a value function.
+Policy gradient methods have the advantage that in many problem settings the policy space could be
+relatively simpler to approximate compared to the value function space.
+We discuss Policy gradient methods in more detail in the next chapter as it serves as a base for
+the rest of the thesis.
+We refer the reader to~\cite{suttonReinforcement2018} a more detailed discussion on tabular
+methods, and approximate value functions.
 
 \section{Multi-agent Reinforcement Learning (MARL)}\label{sec:marl}
 % While game theory provides a framework in defining problems that are multiagent in nature and
 % optimiality of solutions to those problems, reinforcement learning can be leveraged to learn
 % such optimal strategies.
-There has been increasing interest in designing RL algorithms for the multiagent setting.
+Single agent RL assumes the world to be markovian, and this assumption is still valid in many
+real-world settings, particularly when the environment can be isolated from the outside world.
+Advancements in theoretical understanding, development of algorithms for learning function
+approximators, and availability of computational resources has led to a resonating success of
+reinforcement learning in tasks with high-dimensional state spaces, and a diverse range of
+applications including game playing, nuclear reactor control, video compression, assisting surgeons
+with anasthesia control, and aligning models with human preferences~\fillin{citations}.
+However, often in real-world problems, there are multiple agents with objectives that can be
+aligned or indifferent, or adversarial to each other.
+Studying and designing learning algorithms for agents in this problem setting is termed
+\textit{Multi-agent learning (MAL)}~\cite{tuylsMultiagent2012}.
+The area of Multi-agent reinforcement learning (MARL) aims to design reinforcement learning
+algorithms that are performant in the multi-agent setting, with strong theoretical guarantees, and
+empirical performance.
+
+There are multiple approaches that have been explored in designing RL algorithms that are
+performant in the multiagent setting.
+Independent MARL treats every other agent as a part of the environment and tries to maximize the
+reward for an agent.
+This approach, although not grounded in theory, is a standard baseline approach for problem domains
+without theoretically grounded or empirically proven algorithms.
+Other approaches include designing fully-decentralized learning algorithms, and centralized
+algorithms that either share information only during the training, or both during training and
+execution.
+Amonth these, the Centralized Training Decentralized Execution (CDTE) regime has been widely
+adopted especially in cooperative settings.
+Another focus in cooperative or mixed-cooperative settings is to encourage agents to learn to
+communicate information while satisfying some communication bottlenecks.
+However, there is still a huge gap to fill in designing algorithms that support practical
+implementation, strong performance in real-world applications, and well-rooted in theory.
 
 \subsection{Challenges in MARL}
-Although Policy Gradient methods and their derivatives have theoretical guarantees in single-agent
-settings, they are not directly extendable to multi-agent settings due to the non-stationarity of
-the dynamics.
-% Reinforcement learning algorithms have also been studied in settings that have more than one agent
-% where the agents try to maximize some objective in a cooperative or competitive manner.
-% Athough many of these algorithms have exhibited strong empirical performance in multi-agent
-% settings, there are a few key challenges when extending Reinforcement learning algorithms to
-% multi-agent settings.
-% From a theoretical perspective, the foundational assumption for RL algorithms is that the MDP's
-% transition dynamics remain stationary.
-% However, in multi-agent settings non-stationary is induced due to the presence of the other agents.
-% This makes it difficult in adapting the algorithms disucssed above directly to multi-agent
-% settings.
-Also, from an algorithm design perspective, the action space explodes exponentially in multi-agent
-settings making it computationally challenging to apply reinforcement algorithms without
-decomposing the problem into more managable sub-problems first.
+Beyond the problems that are prevalant in the single-agent settings such as sample efficiency, and
+variance of updates, there are a new range of problems that arise in the multiagent setting.
+Many of the theoretical guarantees behind reinforcement learning, no longer hold in the multi-agent
+setting as the environment can be non-Markovian due to the presence of other agents that affect the
+reward an agent gets for taking the same set of actions.
+Also, the joint action space explodes exponentially in the number of agents making it
+computationally challenging to apply reinforcement algorithms.
+In cooperative settings, as agents act towards a common goal it becomes harder to discern the
+actions that led to some global reward, which is known as the credit assignment problem.
+Hence, designing algorithms that tackle the above issues is critical for better performance in many
+applications.
+To this end, there have been many attempts at designing MARL algorithms that borrow from game
+theory, online learning, evolutionary biology, and economics.
 
-\subsection{Methods in MARL}
-\textbf{Independent RL}
-\begin{itemize}
-	\item {Independent PG}
-	      \item{Centralized Training, Decentralized Execution}
-\end{itemize}
+\section{Online Learning, and Convex Optimization}
+As discussed in previous sections, problems in Game theory and Reinforcement learning typically
+involve learning strategies or policies in an online manner through interaction between agents and
+environment.
+Online Learning~\cite{shalev-shwartzOnline2012} studies the problem of learning to make accurate
+predictions in an online manner with an aim to minimize a potentially adversarial loss function.
+Formally, an Online learning problem is stated as follows:
 
-\textbf{Self-play RL}
-
-\textbf{Decentralized RL}
-
-\section{Online Convex Optimization and Mirror Descent}
-\textit{(The brief background provided in this section closely follows the details as presented
-	in~\cite{shalev-shwartzOnline2012}.
-	For a more in-depth introduction into Online learning and Online Convex Optimization, please refer
-	to the above work.)
-}
-
-% Definition
-In Online Learning, a learner is tasked with predicting the answer to a set of questions over a
-sequence of consecutive rounds.
-We now define an Online learning problem more formally as follows:
-
-\begin{definition}
-	\label{def:olearning} For each round $t$, given an instance $x_t \in \calX$, and
-	a prediction $p_t \in \calY$, a loss function $l(p_t, y_t) \mapsto \R$
+%\begin{noindent}
+\begin{definition}[Online Learning] 
+	\label{def:olearning} 
+	At each round $t$, given an instance or a question $x_t \in \calX$, a learner makes a prediction $p_t \in \mathcal{D}$, 
+	and is revealed the answer $y_t \in \calY$. The learner receives a scalar loss according to some loss function $l(p_t, y_t) \mapsto \R$. 
+	Here, $\calX$ is the instance domain, $\calY$ is the target domain, and $\mathcal{D}$ can be $\calY$ or some superset of $\calY$.
 \end{definition}
+%\end{noindent}
 
-At each round t, a question $x_t$ is taken from an instance domain $\calX$, and
-the learner is required to predict an answer, $p_t$ to this question.
-After the prediction is made, the correct answer $y_t$, from a target domain $\calY$ is revealed
-and the learner suffers a loss $l(p_t, y_t)$.
-The prediction $p_t$ could belong to $\calY$ or a larger set, $\mathcal{D}$.
-
-% Assumptions around the problem definition
-% It is known that without any further assumptions about the learning problem, a learner's regret can
-% be unbounded in an adversarial setting~\cite{coverBehavior1965}.
-
-% A popular assumption in Online learning settings is called Realizability, where we assume the
-% target mapping arises from a fixed hypothesis class $\calH$.
-The main aim of an online learning algorithm $A$, is to minimize the cumulative regret of a learner
-with respect to the best competing hypothesis $h^*$ from the assumed hypothesis class $\calH$.
-
+The answer for each round can be chosen by some
+adversary before observing the learner's prediction.
+The goal of an online learning algorithm $A$ is to make predictions that are competitive against
+the best fixed hypothesis from some hypothesis class ($\calH$).
+The relative performance of $A$ with respect to some fixed \textit{competing hypothesis} ($h^\ast$)
+is called its \textit{regret}:
 \begin{equation}
-	\label{eqn:regret}
-	Regret_T(h^*) = \sum_{t=1}^T l(p_t, y_t) - \sum_{t=1}^T l(h^*(x_t), y_t),
+	\label{eqn:regret} Regret_T(h^*) = \sum_{t=1}^T
+	l(p_t, y_t) - \sum_{t=1}^T l(h^*(x_t), y_t),
+\end{equation} Then, the regret of $A$ with respect to
+the hypothesis class $\calH$ is,
+\begin{equation}
+	\label{eqn:regret_all} Regret_T(\calH) =
+	\max_{h^* \in \calH} Regret_T(h^*)
 \end{equation}
 
-The regret of $A$ with $\calH$ is,
+If the loss of an Online
+learning grows sublinearly with each round then, the learner's average regret goes to zero as $t$
+tends to infinity.
+Algorithms that posess this property are called \textit{no-regret} algorithms and are of great
+iterest in online learning, learning strategies in games, and other prediction problems.
+If the learner is restricted to deterministic predictions at each round, it can be shown that there
+problems where the learner's regret grows unbounded~\cite{coverBehavior1965}.
+Hence, an important relaxation is to allow the learner to make randomized predictions and the
+adversary has to choose the answer $y_t$ without knowledge of the learner's randomization for that
+round.
 
-\begin{equation}
-	\label{eqn:regret_all} Regret_T(\calH) = \max_{h^* \in \calH} Regret_T(h^*)
-\end{equation}
+We now provide some definitions that will be useful for the rest of the discussion.
 
-A popular framework for studying and designing Online learning algorithms is
-through Convex optimization.
-The assumptions made around the framework provides properties that are useful in deriving
-convergence guarantees.
-We define a few terms below that are used in this section and the following ones.
-
-% Convex sets and Convex functions
-
-\begin{definition}[Strongly Smooth]~\label{def:strsmooth}
-	Given a convex set $\calX \in \R^n$, a convex function $f: \calX \mapsto \R$ is $\sigma$-strongly
-	smooth with respect to a norm $\|.
-		\|$, if $\|\nabla f(x) - \nabla f(y) \|_{\ast} \leq \sigma \|x - y \|, \forall x, y \in \calX$.
-	For a given constant $L$, this is also referred to as $L-smooth$.
+% Convex sets, convex functions, convexity?%
+% Strongly Convex
+\begin{definition}[$\mu$-Strongly-Convex]
+	~\label{def:strconvex}
+	For any $\mu$-strongly-convex function $f: S \mapsto \mathbb{R}$ with respect to a norm $\|.
+		\|$, for any $w \in S$,
+	\begin{equation}
+		\forall z \in \partial f(w), \forall u \in S, f(u) \geq f(w) + \langle z, u - w\rangle + \frac{\mu}{2}\| u - w \|^2.
+	\end{equation}
 \end{definition}
 
 % Strongly smooth/L-smooth
-
+\begin{definition}[$\sigma$-Strongly-Smooth]~\label{def:strsmooth}
+	Given a convex set $\calX \in \R^n$, a convex function $f: \calX \mapsto \R$ is
+	$\sigma$-strongly-smooth with respect to a norm $\|.
+		\|$, if $\|\nabla f(x) - \nabla f(y) \|_{\ast} \leq \sigma \|x - y \|, \forall x, y \in \calX$.
+	For a given constant $L$, this is also referred to as $L-smooth$.
+\end{definition}
 % Monotonicity/Strong monotonicity
 
-The typical structure of online learning expressed as an online convex optimization problem is as
-follows:
-
-\begin{alprocedure}[H] \algorithmcfname{OCO}~\label{alg:oco}
-
-	input: a convex set S for t = 1, 2, $\ldots$
-
-	predict a
-	vector $w_t \in S$
-
-	receive a convex loss function $f_t: S \mapsto \mathbb{R}$
-\end{alprocedure}
-
-Reframing~\ref{eqn:regret} in terms of convex optimization,
-we refer to a competing hypothesis here as some vector $u$ from the convex set $S$.
-
+\subsection{Convex Optimization}
+It is beneficial to use tools from the well-studied area of Convex Optimization in designing and
+analyzing online learning algorithms.
+In this case, predictions are vectors that belong to a convex set $w_t \in S$, and the learner's
+loss at each round is given by some function, $f_t: S \mapsto \mathbb{R}$, is convex in the
+$\text{dom}(S)$.
+Similarly, the competing hypothesis is also a vector from a convex set $u \in U$, and the
+Regret~(\ref{eqn:regret}) is redefined as follows:
 \begin{equation}
-	Regret_T(u) = \sum_{t=1}^T f_t(w_t) - \sum_{t=1}^T f_t(u)
-\end{equation}
-
-and
-similarly, the regret with respect to a set of competing vectors $U$ is,
+	Regret_T(u) = \sum_{t=1}^T
+	f_t(w_t) - \sum_{t=1}^T f_t(u)
+\end{equation} And, the regret with respect to a set of all
+competing vectors in $U$ is,
 \begin{equation}
 	Regret_T(U) = \max_{u \in U} Regret_T(u)
 \end{equation}
 
-The set $U$ can be same
-as $S$ or different in other cases.
-Here we assume $U=S$ and $S=\mathbb{R^d}$ unless specified otherwise.
+A common assumption is that $U=S=\mathbb{R}^d$.
+The convex optimization framework is useful in deriving performance guarantees for Online learning
+algorithms under these more restrictive assumptions.
+Also, for a non-convex problem there are various ways one can convexify the objective with loss of
+some accuracy in the solution to take advantage of algorithms with better performance guarantees.
+A preliminary algorithm is to choose the prediction vector that minimizes the cumulative loss of
+all previous rounds, this is called \textit{Follow-the-leader}(FTL).
+$$ \forall t, w_t = \arg \min_{w \in S} \sum_{i=1}^{t-1} f_i(w)$$
+As it turns out, this algorithm can have constant regret for some
+adversarial loss functions due to its unstable predictions.
 
-\subsection{FoReL}\label{sec:forel}
-
-Follow-the-Regularized-leader (FoReL) is a classic online learning algorithm that acts as a base in
-deriving various regret mimization algorithms.
-The idea of FoReL is to include a regularization term to stabilize the updates in each iteration
-leading to better convergence behaviors.
-
-The learning rule can be written as,
-
-$$\forall t, w_t = \arg \min_{w \in S}
-	\sum_{i=1}^{t-1} f_i(w) + R(w).
+\subsection{FTRL}\label{sec:ftrl}
+Follow-the-Regularized-leader (FTRL) extends FTL by including a regularization term to stabilize
+the predictions at each round.
+The learning rule can be written as, $$\forall t, w_t = \arg \min_{w \in S} \sum_{i=1}^{t-1} f_i(w)
+	+ R(w).
 $$
-
-where $R(w)$ is the regularization term.
+where $R: S \mapsto \R$ is the regularization function.
 The choice of the regularization function lead to different algorithms with varying regret bounds.
-
-\subsection{Gradient Descent}
-
-In the case of linear loss functions with respect to some $z_t$, i.e., $f_t(w) = \langle w, z_t
-	\rangle$, and $S=\mathbb{R}^d$, if FoReL is run with $l_2$-norm regularization $R(w) = \frac{1}{2
-		\eta} \|w\|_2^2$, then the learning rule can be written as,
-
+For instance, with a euclidean norm regularization, $R(w) = \frac{1}{2 \eta} \|w\|_2^2$, the FTRL
+update becomes:
 \begin{equation}
-	w_{t+1} = -\eta \sum_{i=1}^t z_i = w_t - \eta z_t
-\end{equation}
+	w_{t+1} = w_t - \eta \nabla f_t(w_t)
+\end{equation} leading to the
+familiar gradient descent udpate, referred to as the Online Gradient Descent.
 
-Since, $\nabla
-	f_t(w_t) = z_t$, this can also be written as, $w_{t+1} = w_t - \eta \nabla f_t(w_t)$.
-This update rule is also commonly known as Online Gradient Descent.
-The regret of FoReL run on Online linear optimization with a euclidean-norm regularizer is:
-
-$$Regret_T(U) \leq BL \sqrt {2T}.
-$$
-
-where $U = {u : \|u\| \leq B}$ and $\frac{1}{T} \sum_{t=1}^T \|z_t\|_2^2 \leq L^2$ with $\eta = \frac{B}{L\sqrt{2T}}$.
-
-Beyond Euclidean regularization, FoReL can also be run with other regularization functions and
-yield similar regret bounds given that the regularization functions are strongly convex.
-
-\begin{definition}
-	For any $\sigma$-strongly-convex function $f: S \mapsto \mathbb{R}$ with respect to a norm $\|.
-		\|$, for any $w \in S$,
-	\begin{equation}
-		\forall z \in \partial f(w), \forall u \in S, f(u) \geq f(w) + \langle z, u - w\rangle + \frac{\sigma}{2}\| u - w \|^2.
-	\end{equation}
-\end{definition}
-
-\begin{lemma}
-	\label{lem:forelrb}
-	For a FoReL algorithm producing a sequence of vectors $w_1, \ldots, w_T$ with a sequence of loss
-	functions $f_1, \ldots, f_T$, for all $u \in S$, $$\sum_{t=1}^T (f_t(w_t) - f_t(u)) \leq R(u) -
-		R(w_1) + \sum_{t=1}^T (f_t(w_t) - f_t(w_{t+1}))$$
-\end{lemma}
-
-\subsection{Hedge} - what is hedge?
-
-Gradient descent as a FTRL variant
-
-\begin{equation}
-	\label{eqn:eucproj}
-	P_\calX(u) = \arg \min_{x \in \calX} \| u - x \|.
-\end{equation}
-
-\textbf{Proximal mapping}
-\begin{definition}[Proximal mapping] Given a function $f: \calX \mapsto \R$, the proximal mapping
-	of $f$ is given by: $$\text{prox}_f(x) = \arg \min_{u \in \R} \left\{ f(u) + \frac{1}{2} \| u-x
-		\|^2 \right\} $$ for any $x \in \calX$.
-\end{definition}
-
-\textbf{Projected subgradient method}
-
-\begin{equation}
-	\label{eqn:projsubg}
-	x_{k+1} = P_{\calX}(x_k - t_k f'(x_k))
-\end{equation}
-
-where $f'(x_k) \in \partial f(x_k)$.
+For constrained problems (e.g., the predictions have to be a valid probability distribution), it is
+necessary to use non-euclidean regularization functions as FTRL with euclidean regularization (OGD)
+is no longer applicable.
+Mirror descent is a generalization of FTRL that relies on link functions or mirro maps to simplify
+FTRL updates.
+For the discussion of mirror descent we move away from the framework of Online learning, and state
+the ideas from an optimization perspective following-\cite{beckMirror2003a,beckFirstOrder2017}.
 
 \subsection{Mirror Descent}
-Mirror descent is a popular first order optimization algorithm that has seen wide applications in
-machine learning, and reinforcement learning.
-Mirror Descent generalizes the notion of projected subgradient method~\ref{eqn:projsubg} to
-non-euclidean settings through a generalized norm called Bergman Divergence.
+Consider the following convex optimization problem:
+\begin{equation}
+	\label{eqn:convopt} x^{\ast} =
+	\min_{x \in X} f(x)
+\end{equation} where $X \subseteq \R^n$ is closed and convex, and $f: X \mapsto
+	\R$ is convex, $L$-lipschitz with respect to some norm $\|.
+	\|$.
+
+Given some $u \in \R^n$, the euclidean projection of $u$ to $X$ is given by:
+\begin{equation}
+	\label{eqn:eucproj} P_\calX(u) = \arg \min_{x \in \calX} \| u - x \|.
+\end{equation}
+
+A popular approach to solve~\ref{eqn:convopt} is using the \textbf{Projected subgradient method},
+by iteratively applying the following update:
+\begin{equation}
+	\label{eqn:projsubg} x_{k+1} =
+	P_{\calX}(x_k - t_k f'(x_k))
+\end{equation} where $f'(x_k) \in \partial f(x_k)$ is a subgradient.
+Mirror Descent is an extension of the projected subgradient method~\ref{eqn:projsubg} to
+non-euclidean spaces that utilizes Bergman divergences instead of the euclidean norm.
 
 \begin{definition}[Bergman Divergence]
 	\label{def:bregman}
-	Given a convex set $\calX \subset \R^n$, and a differentiable $\sigma$-strongly convex function
-	$\omega: \calX \mapsto \R$, the Bregman Divergence associated with the function $\omega$ is defined
-	as,
-
-	$$ B_\omega(x, y) = \omega(x) - \omega(y) - \langle \nabla \omega(y), x-y
-		\rangle.
+	Given a convex set $\calX \subset \R^n$, and a differentiable $\sigma$-strongly convex potential
+	function $\phi: \calX \mapsto \R$, the Bregman Divergence associated $\phi$ is defined as, $$
+		B_\phi(x, y) = \phi(x) - \phi(y) - \langle \nabla \phi(y), x-y \rangle.
 	$$
 \end{definition}
 
-Bergman Divergence is not a true norm, since it does not satisfy the triangle inequality.
-% However it serves as a proximal measure for non-euclidean settings.
-
-\textbf{Non-euclidean Proximal Gradient method}
-
+Bergman Divergences are not true norms, as they can be asymmetric, and need not satisfy the
+triangle inequality.
+Given a strongly-convex potential function $\phi$, the mirror descent update rule is as follows:
 \begin{equation}
-	\label{eqn:noneucproxgrad}
-	x_{k+1} = \arg \min_{x \in \calX} \left \{ \left \langle \frac{1}{L_k} \nabla f(x_k) - \nabla \omega(x_k), x \right \rangle + \frac{1}{L_k} g(x) + \omega(x) \right \}.
+	x_{k+1} = \arg \min_{x \in \calX} \left \{ \left \langle t_k \nabla f(x_k), x
+	\right \rangle + B_\phi(x, x_k) \right \}.
 \end{equation}
-For an alternate view of deriving Mirror Descent as an improvement of FoReL, please refer
-to~\cite{shalev-shwartzOnline2012}[Section 2.6].
-% A disadvantage of FoReL~\ref{sec:forel} in solving online learning problems is that, there is a
-% minimization that must be performed at every step.
-% Mirror descent overcomes this by using a recursive update rule that does not required us to perform
-% a minimization at every step.
+
+%\end{noindent}
+One can recover the original projected subgradient method by letting $\phi=\|.
+	\|$.
+
+\subsection{Proximal gradient methods}
+Consider the following convex optimization problem with a composite objective:
+\begin{equation*}
+	x^{\ast} = \min_{x \in X} f(x) + g(x)
+\end{equation*} where $f$ is $L$-smooth $g$ is closed and
+convex.
+Applying projected subgradient method to the above problem results in the following update:
+
+$$ x_{k+1} = \arg \min_{x \in \calX} \left\{ t_k g(x) + \frac{1}{2} \| x - (x_k
+	- t_k \nabla f(x_k)) \|^2 \right\}$$.
+
+\begin{definition}[Proximal operator] The
+	proximal operator or proximal mapping of a function $f$ is given by:
+	$$\text{prox}_{t_k, g}(y_k) = \arg \min_{x \in \calX} \left\{ t_k g(x) + \frac{1}{2}\| x - y_k \|^2 \right\} $$.
+\end{definition}
+
+Simplifying the update rule using the proximal operator results in the \textbf{Proximal gradient
+	method}:
+
+$$ x_{k+1} = prox_{t_k, g}(x_k - t_k \nabla f(x_k))$$.
+
+Analogous to the extension of projected subgradient method to non-euclidean settings, the proximal
+gradient method can also be extended to non-euclidean settings by substituting the euclidean
+distance in the proximal operator with a Bergman divergence resulting in the \textbf{Non-euclidean
+	proximal gradient method}~\cite{tsengApproximation2010,beckFirstOrder2017}.
+
+\subsection{Convergence analysis}
+In discussing learning and optimization algorithms, it is of theoretical and practical interest to
+understand the convergence guarantees of iterative methods to ascertain the efficiency and
+computational demands in solving various problems.
+Analysis of such methods typically aim to bound performance measure of a sequence produced by the
+algorithm at each iteration against some solution point.
+Performance can be measured by the approximation accuracy ($\epsilon$) of the current iterate
+against some solution point or by establishing the asymptotic rate of convergence as a function of
+the number of iterations ($k$).
+Convergence rates in general can be sublinear (e.g., $O(1/k)$ or $O(1/\epsilon)$), linear (e.g.,
+$O(q^k)$ for some $q \in [0, 1]$ or $O(\log{(1/\epsilon)})$), superlinear, or quadratic.

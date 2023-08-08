@@ -140,11 +140,12 @@
 % For subtables
 \usepackage{subcaption}
 
+
 \begin{document}
 
 % Declarations for Front Matter
 
-\title{Modified upates for Mirror Descent based methods in two-player zero-sum games.}
+\title{Modified Updates for Mirror Descent based methods in two-player zero-sum games.}
 \author{Thiruvenkadam Sivaprakasam Radhakrishnan}
 \pdegrees{}
 \degree{Master's in Computer Science}
@@ -162,16 +163,17 @@
 	\end{flushright}}
 
 \tableofcontents \listoftables \listoffigures
-\listofabbreviations
+\listofabbreviations %\begin{noindent}
 \begin{list} {} {\setlength {\labelwidth}{1in} \setlength{\leftmargin}{1.5in}
 		\setlength{\labelsep}{.5in} \setlength{\rightmargin}{\leftmargin}}
-	\item[$\theta$\hfill] Parameters
-		of a function approximator.
+    \item[$\pi$\hfill] A policy.
+	  \item[$\theta$\hfill] Parameters of a function approximator.
 		% \acknowledgements% {I want to ``thank'' my committee, without whose ridiculous demands, I% would have graduated so, so, very much faster.}% \preface% This preface is purely optional at UIC.
 \end{list}
+%\end{noindent}
 
-\summary
-Put your summary of thesis.
+\summary Put your summary of
+thesis.
 
 \include{chapters/0_intro.tex}
 \include{chapters/outline.tex}
@@ -189,14 +191,7 @@ Put your summary of thesis.
 \appendices
 \newpage
 \appendix
-
-\chapter{Some Ancillary Stuff}
-
-Ancillary material should be put in appendices.
-
-\chapter{Some More Ancillary Stuff}
-
-% Here is yet another appendix! Wahoo!
+\include{chapters/appendix.tex}
 
 %\nocite{*}
 \bibformb

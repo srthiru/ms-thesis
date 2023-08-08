@@ -12,17 +12,47 @@ Goodfellow, I., {Pouget-Abadie}, J., Mirza, M., Xu, B., {Warde-Farley}, D., Ozai
 \newblock Generative {{Adversarial Nets}}.
 \newblock In {\itshape  Advances in {{Neural Information Processing Systems}} }, volume~27. {Curran Associates, Inc.}, 2014.
 
+\bibitem{osborneintroduction2004}
+
+Osborne, M.~J.:
+\newblock {\itshape  An Introduction to Game Theory }.
+\newblock {New York}, {Oxford University Press}, 2004.
+
 \bibitem{shohamMultiagent2008}
 
 Shoham, Y. and {Leyton-Brown}, K.:
 \newblock {\itshape  Multiagent {{Systems}}: {{Algorithmic}}, {{Game-Theoretic}}, and {{Logical Foundations}} }.
 \newblock {Cambridge University Press}, December 2008.
 
-\bibitem{shalev-shwartzOnline2012}
+\bibitem{nisanAlgorithmic2007a}
 
-{Shalev-Shwartz}, S.:
-\newblock Online {{Learning}} and {{Online Convex Optimization}}.
-\newblock {\itshape  Foundations and Trends\textregistered{} in Machine Learning }, 4(2):107--194, 2012.
+eds. N. Nisan, T. Roughgarden, E. Tardos, and V.~V. Vazirani
+\newblock {\itshape  Algorithmic {{Game Theory}} }.
+\newblock {Cambridge}, {Cambridge University Press}, 2007.
+
+\bibitem{nashEquilibrium1950}
+
+Nash, J.~F.:
+\newblock Equilibrium {{Points}} in n-{{Person Games}}.
+\newblock {\itshape  Proceedings of the National Academy of Sciences of the United States of America }, 36(1):48--49, 1950.
+
+\bibitem{kuhnExtensive1950}
+
+Kuhn, H.~W.:
+\newblock Extensive {{Games}}.
+\newblock {\itshape  Proceedings of the National Academy of Sciences of the United States of America }, 36(10):570--576, 1950.
+
+\bibitem{mckelveyQuantal1995}
+
+McKelvey, R.~D. and Palfrey, T.~R.:
+\newblock Quantal {{Response Equilibria}} for {{Normal Form Games}}.
+\newblock {\itshape  Games and Economic Behavior }, 10(1):6--38, July 1995.
+
+\bibitem{mckelveyQuantal1998}
+
+Mckelvey, R.~D. and Palfrey, T.~R.:
+\newblock Quantal {{Response Equilibria}} for {{Extensive Form Games}}.
+\newblock {\itshape  Experimental Economics }, 1(1):9--41, June 1998.
 
 \bibitem{suttonReinforcement2018}
 
@@ -30,11 +60,64 @@ Sutton, R.~S. and Barto, A.~G.:
 \newblock {\itshape  Reinforcement Learning: An Introduction }.
 \newblock Adaptive Computation and Machine Learning Series. {Cambridge, Massachusetts}, {The MIT Press}, second edition edition, 2018.
 
+\bibitem{shalev-shwartzOnline2012}
+
+{Shalev-Shwartz}, S.:
+\newblock Online {{Learning}} and {{Online Convex Optimization}}.
+\newblock {\itshape  Foundations and Trends\textregistered{} in Machine Learning }, 4(2):107--194, 2012.
+
+\bibitem{coverBehavior1965}
+
+Cover, T.:
+\newblock Behavior of sequential predictors of binary sequences.
+\newblock In {\itshape  Proc. of the 4th Prague Conference on Information Theory, Statistical Decision Functions and Random Processes }, pages 263--272. {Publishing House of the Czechoslovak Academy of Sciences}, 1965.
+
+\bibitem{beckFirstOrder2017}
+
+Beck, A.:
+\newblock {\itshape  First-{{Order Methods}} in {{Optimization}} }.
+\newblock {{MOS-SIAM Series}} on {{Optimization}}. {Society for Industrial and Applied Mathematics}, October 2017.
+
+\bibitem{tsengApproximation2010}
+
+Tseng, P.:
+\newblock Approximation accuracy, gradient methods, and error bound for structured convex optimization.
+\newblock {\itshape  Mathematical Programming }, 125(2):263--295, October 2010.
+
+\bibitem{kakadeApproximately2002a}
+
+Kakade, S. and Langford, J.:
+\newblock Approximately {{Optimal Approximate Reinforcement Learning}}.
+\newblock In {\itshape  International {{Conference}} on {{Machine Learning}} }, July 2002.
+
+\bibitem{schulmanTrust2015}
+
+Schulman, J., Levine, S., Abbeel, P., Jordan, M., and Moritz, P.:
+\newblock Trust {{Region Policy Optimization}}.
+\newblock In {\itshape  Proceedings of the 32nd {{International Conference}} on {{Machine Learning}} }, pages 1889--1897. {PMLR}, June 2015.
+
+\bibitem{schulmanProximal2017}
+
+Schulman, J., Wolski, F., Dhariwal, P., Radford, A., and Klimov, O.:
+\newblock Proximal {{Policy Optimization Algorithms}}, August 2017.
+
 \bibitem{tomarMirror2022}
 
 Tomar, M., Shani, L., Efroni, Y., and Ghavamzadeh, M.:
 \newblock Mirror {{Descent Policy Optimization}}.
 \newblock In {\itshape  International {{Conference}} on {{Learning Representations}} }, January 2022.
+
+\bibitem{shaniAdaptive2020}
+
+Shani, L., Efroni, Y., and Mannor, S.:
+\newblock Adaptive {{Trust Region Policy Optimization}}: {{Global Convergence}} and {{Faster Rates}} for {{Regularized MDPs}}.
+\newblock {\itshape  Proceedings of the AAAI Conference on Artificial Intelligence }, 34(04):5668--5675, April 2020.
+
+\bibitem{liuNeural2019}
+
+Liu, B., Cai, Q., Yang, Z., and Wang, Z.:
+\newblock Neural {{Trust Region}}/{{Proximal Policy Optimization Attains Globally Optimal Policy}}.
+\newblock In {\itshape  Advances in {{Neural Information Processing Systems}} }, volume~32. {Curran Associates, Inc.}, 2019.
 
 \bibitem{sokotaUnified2023}
 
@@ -59,12 +142,6 @@ Rockafellar, R.~T.:
 Tseng, P.:
 \newblock On linear convergence of iterative methods for the variational inequality problem.
 \newblock {\itshape  Journal of Computational and Applied Mathematics }, 60(1):237--252, June 1995.
-
-\bibitem{tsengApproximation2010}
-
-Tseng, P.:
-\newblock Approximation accuracy, gradient methods, and error bound for structured convex optimization.
-\newblock {\itshape  Mathematical Programming }, 125(2):263--295, October 2010.
 
 \bibitem{hennesNeural2020}
 
@@ -93,6 +170,12 @@ Gidel, G., Berard, H., Vignoud, G., Vincent, P., and {Lacoste-Julien}, S.:
 Daskalakis, C., Ilyas, A., Syrgkanis, V., and Zeng, H.:
 \newblock Training {{GANs}} with {{Optimism}}, February 2018.
 
+\bibitem{arrowStudies1958}
+
+Arrow, K.~J.:
+\newblock {\itshape  Studies in Linear and Non-Linear Programming }.
+\newblock Stanford Mathematical Studies in the Social Sciences. {Stanford, Calif.}, {Stanford University Press}, 1958.
+
 \bibitem{heConvergence2022}
 
 He, B., Xu, S., and Yuan, X.:
@@ -116,6 +199,34 @@ Mokhtari, A., Ozdaglar, A., and Pattathil, S.:
 \newblock A {{Unified Analysis}} of {{Extra-gradient}} and {{Optimistic Gradient Methods}} for {{Saddle Point Problems}}: {{Proximal Point Approach}}.
 \newblock In {\itshape  Proceedings of the {{Twenty Third International Conference}} on {{Artificial Intelligence}} and {{Statistics}} }, pages 1497--1507. {PMLR}, June 2020.
 
+\bibitem{weiLINEAR2021}
+
+Wei, C.-Y., Lee, C.-W., Zhang, M., and Luo, H.:
+\newblock Linear {{Last-iterate Convergence}} in {{Constrained Saddle-point Optimization}}, March 2021.
+
+\bibitem{cenFaster2022}
+
+Cen, S., Chi, Y., Du, S.~S., and Xiao, L.:
+\newblock Faster {{Last-iterate Convergence}} of {{Policy Optimization}} in {{Zero-Sum Markov Games}}.
+\newblock In {\itshape  The {{Eleventh International Conference}} on {{Learning Representations}} }, September 2022.
+
+\bibitem{caiTight2022}
+
+Cai, Y., Oikonomou, A., and Zheng, W.:
+\newblock Tight {{Last-Iterate Convergence}} of the {{Extragradient}} and the {{Optimistic Gradient Descent-Ascent Algorithm}} for {{Constrained Monotone Variational Inequalities}}, May 2022.
+
+\bibitem{gorbunovExtragradient2022}
+
+Gorbunov, E., Loizou, N., and Gidel, G.:
+\newblock Extragradient {{Method}}: {{O}}(1/{{K}}) {{Last-Iterate Convergence}} for {{Monotone Variational Inequalities}} and {{Connections With Cocoercivity}}.
+\newblock In {\itshape  Proceedings of {{The}} 25th {{International Conference}} on {{Artificial Intelligence}} and {{Statistics}} }, pages 366--402. {PMLR}, May 2022.
+
+\bibitem{gorbunovLastIterate2022}
+
+Gorbunov, E., Taylor, A., and Gidel, G.:
+\newblock Last-{{Iterate Convergence}} of {{Optimistic Gradient Method}} for {{Monotone Variational Inequalities}}.
+\newblock In {\itshape  Advances in {{Neural Information Processing Systems}} }, May 2022.
+
 \bibitem{timbersApproximate2022}
 
 Timbers, F., Bard, N., Lockhart, E., Lanctot, M., Schmid, M., Burch, N., Schrittwieser, J., Hubert, T., and Bowling, M.:
@@ -131,6 +242,11 @@ Liang, E., Liaw, R., Moritz, P., Nishihara, R., Fox, R., Goldberg, K., Gonzalez,
 
 Lanctot, M., Lockhart, E., Lespiau, J.-B., Zambaldi, V., Upadhyay, S., P{\'e}rolat, J., Srinivasan, S., Timbers, F., Tuyls, K., Omidshafiei, S., Hennes, D., Morrill, D., Muller, P., Ewalds, T., Faulkner, R., Kram{\'a}r, J., De~Vylder, B., Saeta, B., Bradbury, J., Ding, D., Borgeaud, S., Lai, M., Schrittwieser, J., Anthony, T., Hughes, E., Danihelka, I., and {Ryan-Davis}, J.:
 \newblock {{OpenSpiel}}: {{A Framework}} for {{Reinforcement Learning}} in {{Games}}, September 2020.
+
+\bibitem{schulmanHighDimensional2018}
+
+Schulman, J., Moritz, P., Levine, S., Jordan, M., and Abbeel, P.:
+\newblock High-{{Dimensional Continuous Control Using Generalized Advantage Estimation}}, October 2018.
 
 \bibitem{perolatMastering2022}
 

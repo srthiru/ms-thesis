@@ -94,26 +94,24 @@ the exploitability of the current policy.
 \fillin{ - Exploitability formal expression in terms of best responses, and value.}
 
 \section{Experiment Setup}
- % This first sentence needs reworking, does not sound correct
- (\rev{something wrong; this sentence doesn't parse.
+ (\revdone{something wrong; this sentence doesn't parse.
   Has enough facts in it that it is probably better to split into multiple sentences.
  })
-The policies that are logit-parameterized with a softmax projection and all the algorithms use
-full-feedback gradient updates as discussed in Chapter 3.
+ (\revdone{Explain how this was chosen as you did for other parameters below.})
+In the tabular experiments we use softmax-parameterized tabular policies and assume an all-action setting (full-feedback updates).
 For all the algorithms, we train both the players for 5000 training steps with alternating updates
 using the exact payoff vectors.
 For the EG variants, we train the players for only 2500 steps as they use two gradient computation
 per step for a fair comparison.
 We use the $m=10$ gradient steps per iteration with a learning rate of 0.1 for all the runs.
-% Explain why this schedule?
-(\rev{Explain how this was chosen as you did for other parameters below.})
 For MMD and MDPO, we anneal the temperature (entropy coefficient) with the schedule $\alpha_t =
 	1/\sqrt{t}$.
 For the KL-coefficient, we use different schedules for MMD ($\eta_t = \max(1 / \sqrt{t}, 0.2)$),
 and MDPO ($\eta_t = \max(1 - t/T, 0.2)$).
-MDPO's schedule is motivated by mirror-descent theory, while MMD's schedule is closer to the type
-of annealing schedule used for the original MMD experiments found through a hyperparameter sweep.
-For both of these methods we cap the KL-coefficient at 0.2 because very low values destabilize the
+MDPO's KL schedule is motivated by mirror-descent theory, while the entropy annealing and MMD's KL
+schedule are closer to the annealing schedule used in the original MMD experiments found through a
+hyperparameter sweep.
+For both of these methods we cap the KL-coefficient at 0.2 as very low values destabilize the
 updates, especially for the NeuRD version of the algorithms.
 
 \section{Results}
@@ -164,8 +162,8 @@ We group these observations by the modifications, and contrast their effects on 
 SPG, and MDPO do not have last-iterate or average-iterate convergence guarantees, and the same is
 observed experimentally for their \textit{No mod.
 } baselines.
-The NeuRD variants of SPG, and MDPO display average-iterate convergence~\ref{fig:tabne_avg},
-as guaranteed by its no-regret properties.
+The NeuRD variants of SPG, and MDPO display average-iterate convergence~\ref{fig:tabne_avg}, as
+guaranteed by its no-regret properties.
 However, as expected the addition of NeuRD fix does not induce last-iterate convergence for SPG,
 and MDPO.
 For MMD, which already has average iterate convergence guarantees, it speeds up the convergence
@@ -197,7 +195,8 @@ Whereas, for MMD, `NeuRD', `NeuRD + Optimism' are the fastest variants.
 
 \textbf{Average vs Last Iterate:}
 
-\textbf{Choice of Algorithm:} Finally, we highlight that the best performing variants are on top of SPG as opposed to MDPO, or
+\textbf{Choice of Algorithm:}
+Finally, we highlight that the best performing variants are on top of SPG as opposed to MDPO, or
 MMD as can be seen from~\ref{fig:tabne_last}.
 This is surprising as the latter methods were proposed as improvements over SPG in single, and
 multi-agent settings.

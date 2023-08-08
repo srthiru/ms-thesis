@@ -1,0 +1,60 @@
+This is BibTeX, Version 0.99d (TeX Live 2023)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: MainThesisFile.aux
+A level-1 auxiliary file: chapters/0_intro.aux
+A level-1 auxiliary file: chapters/outline.aux
+A level-1 auxiliary file: chapters/1_background.aux
+A level-1 auxiliary file: chapters/2_mmd.aux
+A level-1 auxiliary file: chapters/3_updates.aux
+A level-1 auxiliary file: chapters/4_experiments.aux
+A level-1 auxiliary file: chapters/5_neural.aux
+A level-1 auxiliary file: chapters/6_discussion.aux
+A level-1 auxiliary file: chapters/7_conclusion.aux
+A level-1 auxiliary file: chapters/appendix.aux
+The style file: formb.bst
+Database file #1: BibFile.bib
+Database file #2: Citations.bib
+Warning--I didn't find a database entry for "beckMirror2003a"
+Warning--empty journal in mertikopoulosOptimistic2019
+You've used 47 entries,
+            2045 wiz_defined-function locations,
+            1050 strings with 21238 characters,
+and the built_in function-call counts, 11715 in all, are:
+= -- 914
+> -- 750
+< -- 9
++ -- 269
+- -- 222
+* -- 916
+:= -- 1871
+add.period$ -- 95
+call.type$ -- 47
+change.case$ -- 41
+chr.to.int$ -- 0
+cite$ -- 48
+duplicate$ -- 474
+empty$ -- 1090
+format.name$ -- 222
+if$ -- 2570
+int.to.chr$ -- 0
+int.to.str$ -- 47
+missing$ -- 42
+newline$ -- 275
+num.names$ -- 49
+pop$ -- 205
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 239
+stack$ -- 0
+substring$ -- 550
+swap$ -- 125
+text.length$ -- 9
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 1
+while$ -- 93
+width$ -- 49
+write$ -- 492
+(There were 2 warnings)
