@@ -172,8 +172,32 @@
 \end{list}
 %\end{noindent}
 
-\summary Put your summary of
-thesis.
+\summary 
+
+Multiagent Systems (MAS)~\cite{tuylsMultiagent2012} are frameworks of problems of distributed
+nature with independent actors called agents that cooperate or compete to achieve some outcome.
+Due to the complexity of such problems, designing efficient algorithms for them can be challenging.
+Machine learning and Reinforcement learning present opportunities for creating learning algorithms
+for agents in Multi-agent settings.
+Multiagent Reinforcement Learning (MARL) as a research area deals with designing efficient and
+performant RL algorithms for general multiagent problems.
+Two-player zero-sum games are instances of multiagent systems that are purely competitive in
+nature.
+Due to their unique structure, two-player zero-sum games can also be represented as saddle-point
+problems that provide certain analytical properties.
+This presents an opportunity to study and design optimization algorithms under the dynamics of
+two-player zero-sum games, with an aim to extend these algorithms to general multiagent settings.
+Two-player zero-sum games also model other learning problems~\cite{goodfellowGenerative2014} and as
+such these advances can also be equivalently applied or adapted to solve them.
+Mirror Descent is a popular first-order optimization algorithm that has wide applications.
+In this work, we study mirror-descent-based reinforcement learning algorithms in the context of
+two-player zero-sum games.
+We evaluate the performance of these algorithms in benchmark extensive-form games under
+function approximation and summarize our findings regarding the effectiveness of mirror-descent-based reinforcement
+learning algorithms in the multiagent setting and the effect of the modifications we apply.
+Through this study, we provide some recommendations for designing MARL algorithms and close with some
+remarks about future research directions.
+
 
 \include{chapters/0_intro.tex}
 \include{chapters/outline.tex}

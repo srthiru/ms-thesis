@@ -1,7 +1,7 @@
 \chapter{Background}
 In this section, we lay out some ideas, and concepts from Game Theory, Reinforcement Learning, Online learning, and Optimization that are relevant to this work.
 We only introduce fundamental notions within these areas that are useful in following the thesis, and we direct the reader to more comprehensive resources for an in-depth discussion wherever necessary.
-The framework of multi-agent learning has been conventionally rooted in Game Theory, and so we begin by discussing preliminary constructs from game theory and detail the setting that this work is related to, namely, two-player zero-sum games.
+The framework of multi-agent learning has been conventionally rooted in Game Theory, and so we begin by discussing preliminary constructs from game theory and detail the setting that is pertinent to this work, namely, two-player zero-sum games.
 We then discuss foundational concepts within reinforcement learning that serves as a base for the algorithms discussed in this work. We also talk about the current limitations of Reinforcement learning methods in multi-agent settings and motivate the need for the development of better algorithms in this setting.
 Finally, we also present some preliminary concepts from online learning and optimization algorithms that are useful in understanding the approaches we study in this work.
 
@@ -15,7 +15,7 @@ and complexity of real-world problems that do not affect the outcome of interact
 Game theory is widely applied in modeling problems that are of economic, social, and political
 importance.
 % In overcoming the challenges mentioned above, many algorithms have adopted game-theoretic
-% constrtucts and ideas when designing Reinforcement learning algorithms for multi-agent settings.
+% constructs and ideas when designing Reinforcement learning algorithms for multi-agent settings.
 % It is also a common practice to use game theoretic constructs in evaluating the performance of
 % multi-agent algorithms and provide theoretical guarantees.
 In this section, we briefly introduce concepts from game theory that are relevant to this work.
@@ -56,7 +56,7 @@ strategies.
 
 Two fundamental game-theoretic representations are the normal form and the extensive form games.
 % \subsubsection*{Normal-form Games}
-% Normal-form is the most fundamental form of representing problems in game theory.
+% Normal form is the most fundamental form of representing problems in game theory.
 In a normal-form (or a strategic) game, all players act simultaneously to reveal an outcome
 immediately after, and a payoff is assigned to each player.
 A more formal definition of a normal-form game is as follows:
@@ -74,9 +74,9 @@ A more formal definition of a normal-form game is as follows:
 
 For a normal-form game, the set of mixed strategies available to player $i$ is given by $S_i =
 	\Pi(A_i)$.
-The set of mixed strategy profiles of all the players in the game is called as the mixed strategy
+The set of mixed-strategy profiles of all the players in the game is called the mixed strategy
 profile $S = S1 \times \dots \times S_n$.
-Normal-form games are typically represented as a n-dimensional matrix, where each dimension
+Normal-form games are typically represented as an n-dimensional matrix, where each dimension
 corresponds to the pure-strategy space of each player, and the entries correspond to the payoffs of
 action profiles.
 For this reason, normal-form games are also referred to as \textit{matrix games}.
@@ -203,12 +203,12 @@ A $\gamma$-discounted MDP ($\mathcal{M}$) is given by the tuple, $\mathcal{M}=(\
 	\gamma)$ where: $\calS$ is the state space, $\calA$ is the action space,
 $P(s',r|s,a):~\calS\times\calA\times\calS~\mapsto~[0,1]$ is the transition dynamics function,
 $R(s,a) \subset \R$ is the reward function, $\gamma \in [0,1]$ is the discount factor.
-In this work, we discuss finite MDPs where the sequence of interactions are characterized as
+In this work, we discuss finite MDPs where the sequence of interactions is characterized as
 episodes that have a terminal state.
 The expected return, $G_t$, at time step $t$ is the discounted sum of rewards accumulated by the
 agent starting from $t$ till the end of the episode.
 Formally, $G_t = \sum_{k=t+1}^{T} \gamma^{k-t-1} R_k$, where the discount rate $\gamma$ indicates
-how much importance is placed upon future rewards over immediate rewards.
+the importance placed upon future rewards over immediate rewards.
 The objective of an agent is to learn to act in a way that maximizes its \textit{expected return}.
 A \textit{Policy} is a mapping from a state to an action distribution $\pi: \calS \mapsto \calA$.
 A \textit{Value function}, $V_{\pi}(s)$ estimates the expected reward that can be achieved from the
@@ -265,13 +265,13 @@ We refer the reader to~\cite{suttonReinforcement2018} a more detailed discussion
 methods, and approximate value functions.
 
 \section{Multi-agent Reinforcement Learning (MARL)}\label{sec:marl}
-% While game theory provides a framework in defining problems that are multiagent in nature and
-% optimiality of solutions to those problems, reinforcement learning can be leveraged to learn
+% While game theory provides a framework for defining problems that are multiagent in nature and
+% optimality of solutions to those problems, reinforcement learning can be leveraged to learn
 % such optimal strategies.
 Single-agent RL assumes the world to be Markovian, and this assumption is still valid in many
 real-world settings, particularly when the environment can be isolated from the outside world.
 Advancements in theoretical understanding, development of algorithms for learning function
-approximators and the availability of computational resources has led to a resonating success of
+approximators and the availability of computational resources have led to a resonating success of
 reinforcement learning in tasks with high-dimensional state spaces, and a diverse range of
 applications including game playing, nuclear reactor control, video compression, assisting surgeons
 with anesthesia control, and aligning models with human preferences~\fillin{citations}.
