@@ -8,7 +8,7 @@ Machine learning and Reinforcement learning present opportunities for creating l
 for agents in Multi-agent settings.
 Multi-agent Reinforcement Learning (MARL) as a research area deals with designing efficient and
 performant RL algorithms for general multi-agent problems.
-Due to the inherent issues in multi-agent settings such as the violation of non-stationarity
+Due to the inherent issues in multi-agent settings such as the violation of the non-stationarity
 assumption that underlies most RL algorithms, their direct adaptation to the multi-agent setting
 can be limiting.
 Also, the multi-agent setting presents new complications in the form of large state and action
@@ -20,8 +20,8 @@ On the other hand, various works have adopted ideas from areas like online learn
 and evolutionary biology to design novel RL algorithms that circumvent the above limitations by
 providing new theoretical guarantees, and displaying strong empirical performances.
 Of these, a vast majority of methods rely on regret minimization and self-play learning where
-theoretical convergence guarantees necessitate maintaining an average of past strategies that the
-agents use (also called as the average policy in RL terms).
+theoretical convergence guarantees necessitate maintaining an average of past strategies of the
+agents.
 While this is easier in tabular settings, maintaining such averages of past policies can become
 burdening for large-scale problems especially when utilizing function approximation methods like
 neural networks to represent the policy parameters.
@@ -45,8 +45,8 @@ Our work primarily revolves around algorithms that were proposed or can be inter
 extensions of mirror descent as a reinforcement learning update rule.
 Mirror Descent is a popular first-order optimization algorithm that has seen wide application in
 various problem settings such as online learning, convex optimization, optimal transport, etc. In
-this work, we study adaptations of mirror descent to reinforcement learning algorithm in single,
-and multi-agent setting.
+this work, we study adaptations of mirror descent to reinforcement learning algorithms in single,
+and multi-agent settings.
 Specifically, we study Mirror Descent Policy Optimization (MDPO), and Magnetic Mirror Descent
 (MMD), two recent algorithms that extend mirror descent as RL algorithms, and approximate
 equilibrium solvers.
@@ -77,7 +77,7 @@ The modifications that we apply in this work are two-fold - one that modifies th
 by the algorithm, and the other that modifies the update structure of the algorithms, thereby
 affecting the problem's geometry in an effort to improve, or induce last-iterate convergence.
 The first modification is the Neural Replicator Dynamics (NeuRD), an extension of the Replicator
-dynamics framework from evolutionary game theory to function approximation, and deep reinforcement
+dynamics framework from evolutionary game theory to function approximation and deep reinforcement
 learning.
 NeuRD can be interpreted as a modification of softmax policy gradients (SPGs) to handle the
 plateauing effect of the nonlinearity in adapting to the non-stationary rewards in multi-agent
