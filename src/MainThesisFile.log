@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.7.10)  15 AUG 2023 13:44
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.7.10)  15 AUG 2023 13:53
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1107,7 +1107,12 @@ Overfull \hbox (3.33212pt too wide) in paragraph at lines 210--212
 
 LaTeX Warning: Citation `beckMirror2003a' on page 23 undefined on input line 486.
 
-[23] [24] [25]) [26] [27]
+[23] [24] [25] [26])
+Overfull \hbox (9.54733pt too wide) in paragraph at lines 575--207
+[]\OT1/cmr/m/n/10.95 Counterfactual Re-gret min-i-miza-tion (CFR) is an ex-ten-sion of re-gret min-i-miza-tion to extensive-
+ []
+
+[27]
 \openout2 = `chapters/2_mmd.aux'.
 
  (./chapters/2_mmd.tex
@@ -1538,7 +1543,7 @@ Here is how much of TeX's memory you used:
  1144 hyphenation exceptions out of 8191
  99i,16n,101p,1093b,620s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </opt/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></opt/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></opt/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></opt/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb></opt/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></opt/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></opt/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></opt/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></opt/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></opt/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></opt/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></opt/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></opt/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></opt/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></opt/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></opt/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></opt/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></opt/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></opt/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></opt/texlive/2023/texmf-dist/fonts/type1/public/doublestroke/dsrom10.pfb></opt/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></opt/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfti1095.pfb>
-Output written on MainThesisFile.pdf (85 pages, 1095813 bytes).
+Output written on MainThesisFile.pdf (85 pages, 1095829 bytes).
 PDF statistics:
  1082 PDF objects out of 1200 (max. 8388607)
  933 compressed objects within 10 object streams
