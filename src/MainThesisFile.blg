@@ -16,45 +16,45 @@ Database file #1: BibFile.bib
 Database file #2: Citations.bib
 Warning--I didn't find a database entry for "beckMirror2003a"
 Warning--empty journal in mertikopoulosOptimistic2019
-You've used 47 entries,
+You've used 53 entries,
             2045 wiz_defined-function locations,
-            1050 strings with 21238 characters,
-and the built_in function-call counts, 11715 in all, are:
-= -- 914
-> -- 750
-< -- 9
-+ -- 269
-- -- 222
-* -- 916
-:= -- 1871
-add.period$ -- 95
-call.type$ -- 47
-change.case$ -- 41
+            1084 strings with 23164 characters,
+and the built_in function-call counts, 13519 in all, are:
+= -- 1030
+> -- 921
+< -- 10
++ -- 328
+- -- 275
+* -- 1083
+:= -- 2175
+add.period$ -- 105
+call.type$ -- 53
+change.case$ -- 47
 chr.to.int$ -- 0
-cite$ -- 48
-duplicate$ -- 474
-empty$ -- 1090
-format.name$ -- 222
-if$ -- 2570
+cite$ -- 54
+duplicate$ -- 524
+empty$ -- 1225
+format.name$ -- 275
+if$ -- 2946
 int.to.chr$ -- 0
-int.to.str$ -- 47
-missing$ -- 42
-newline$ -- 275
-num.names$ -- 49
-pop$ -- 205
+int.to.str$ -- 53
+missing$ -- 45
+newline$ -- 308
+num.names$ -- 55
+pop$ -- 233
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 239
+skip$ -- 276
 stack$ -- 0
-substring$ -- 550
-swap$ -- 125
-text.length$ -- 9
+substring$ -- 633
+swap$ -- 143
+text.length$ -- 10
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 1
-while$ -- 93
-width$ -- 49
-write$ -- 492
+while$ -- 105
+width$ -- 55
+write$ -- 550
 (There were 2 warnings)

@@ -1,31 +1,114 @@
 \chapter{Introduction}
 
-Multiagent Systems (MAS)~\cite{tuylsMultiagent2012} are frameworks of problems of distributed
+% Setup
+Multi-agent Systems (MAS)~\cite{tuylsMultiagent2012} are frameworks of problems of distributed
 nature with independent actors called agents that cooperate or compete to achieve some outcome.
 Due to the complexity of such problems, designing efficient algorithms for them can be challenging.
 Machine learning and Reinforcement learning present opportunities for creating learning algorithms
 for agents in Multi-agent settings.
-Multiagent Reinforcement Learning (MARL) as a research area deals with designing efficient and
-performant RL algorithms for general multiagent problems.
-Two-player zero-sum games are instances of multiagent systems that are purely competitive in
-nature.
-Due to their unique structure, two-player zero-sum games can also be represented as saddle-point
-problems that provide certain analytical properties.
-This presents an opportunity to study and design optimization algorithms under the dynamics of
-two-player zero-sum games, with an aim to extend these algorithms to general multiagent settings.
-Two-player zero-sum games also model other learning problems~\cite{goodfellowGenerative2014} and as
-such these advances can also be equivalently applied or adapted to solve them.
+Multi-agent Reinforcement Learning (MARL) as a research area deals with designing efficient and
+performant RL algorithms for general multi-agent problems.
+Due to the inherent issues in multi-agent settings such as the violation of non-stationarity
+assumption that underlies most RL algorithms, their direct adaptation to the multi-agent setting
+can be limiting.
+Also, the multi-agent setting presents new complications in the form of large state and action
+spaces, high-dimensional problem representations, credit assignment to name a few.
+There have continued efforts to apply popular policy gradient, and value-based single-agent RL
+methods to multi-agent setting through novel adaptions that account for some of the above
+limitations.
+On the other hand, various works have adopted ideas from areas like online learning, game theory,
+and evolutionary biology to design novel RL algorithms that circumvent the above limitations by
+providing new theoretical guarantees, and display strong empirical performances.
+Of these, a vast majority of methods rely on regret minimization, and self-play learning where
+theoretical convergence guarantees necessitate maintaining an average of past strategies that the
+agents use (also called as the average policy in RL terms).
+While this is easier in tabular settings, maintaining such averages past policies can become
+burdening for large-scale problems especially when utilizing function approximation methods like
+neural networks to represent the policy parameters.
+Hence, there is a strong incentive in designing algorithms that have convergence guarantees for the
+last-iterate policy as opposed to having to maintain an average policy.
 
-Mirror Descent is a popular first-order optimization algorithm that has wide applications.
-In this work, we study mirror-descent-based reinforcement learning algorithms in the context of
-two-player zero-sum games.
-Specifically, we study Mirror Descent Policy Optimization, and Magnetic Mirror Descent, two recent
-algorithms that extend Mirror Descent as RL algorithms, and approximate equilibrium solvers.
-We propose novel improvements to these algorithms by incorporating existing techniques and study
-their convergence behaviors in normal-form games.
-We also evaluate the performance of these algorithms in benchmark extensive-form games under
-function approximation.
+In terms of the problem setting that concerns our work, we focus on the game-theoretic construct of
+two-player zero sum games (2p0s).
+There are various reasons for the interesting nature of two-player zero-sum games.
+Firstly, within various game-theoretic problem formulations these games present a simple enough
+structure while still retaining the multi-agent setting.
+This presents an opportunity to study and design algorithms under the dynamics of two-player
+zero-sum games, with an aim to extend these algorithms to general multi-agent settings.
+Second, two-player zero-sum games are saddle-point problems, and provide an opportunity to connect
+with optimization algorithms that have been studied extensively for solving saddle-point problems.
+Finally, two-player zero-sum games also model other learning problems such as generative
+adversarial networks (GANs)~\cite{goodfellowGenerative2014} and as such any improvements in methods
+for the games can provide insights into designing algorithms for applications like GANs.
+
+Our work primarily revolves around algorithms that were proposed or can be interpreted as
+extensions of mirror descent as a reinforcement learning update rule.
+Mirror Descent is a popular first-order optimization algorithm that has seen wide application in
+various problem settings such as online learning, convex optimization, optimal transport etc,.
+In this work, we study adaptations of mirror descent to reinforcement learning algorithm in single,
+and multi-agent setting.
+Specifically, we study Mirror Descent Policy Optimization (MDPO), and Magnetic Mirror Descent
+(MMD), two recent algorithms that extend mirror descent as RL algorithms, and approximate
+equilibrium solvers.
+While there have been many works studying mirror descent with the aim of designing RL algorithms,
+MDPO presents a practical deep RL algorithm and studies its similarities in structure, and
+connections to existing work in the literature.
+MDPO does not directly apply to two-player zero-sum games as it is a single-agent RL algorithm, and
+as such has no convergence guarantees.
+However, in our work we study its performance in this setting, and also propose some modifications
+to the update that MDPO uses to make it more amenable to the multi-agent setting.
+MMD, on the other hand approaches a different problem of entropy regularized equilibrium (QREs)
+solving in two-player zero-sum games.
+Finding such equilibrium is cast as variational inequality problems and an algorithm from the
+variational inequality literature is applied to this problem setting under the name of MMD.
+MMD enjoys novel linear last-iterate convergence by taking advantage of problem specific
+assumptions in finding QREs.
+Although there are no theoretical guarantees, MMD is also empirically studied as an algorithm for
+finding approximate Nash equilibria by annealing the strength of the regularization.
+MMD shows strong empirical performance as both tabular and deep reinforcement learning algorithm in
+self-play to converge to the Nash equilibrium.
+In this work, we use MMD as a baseline method, and empirically study the effect of the same
+proposed modifications to understand how it improves MMD's performance.
+Given the already strong baseline, any improvements observed can guide further algorithmic design
+choices, and direct more study to understand the effect of the proposed modification in this
+setting.
+
+The modifications that we apply in this work are two-fold - one that modifies loss being used by
+the algorithm, and the other that modifies the update structure of the algorithms, there by
+affecting the problem's geometry in an effort to improve, or induce last-iterate convergence.
+The first modification is the Neural Replicator Dynamics (NeuRD), an extension of the evolutionary
+game-theoretic notion of Replicator dynamics to function approximation, and deep reinforcement
+learning.
+NeuRD can be interpreted as a modification of softmax policy gradients (SPGs) to handle the
+plateauing effect of the non-linearity in adapting to the non-stationary rewards in multi-agent
+settings.
+Due to this structure, NeuRD can be incorporated into other algorithms that are extensions of SPGs.
+The second proposed modification is the incorporation of Extragradient, and Optimistic updates to
+the above algorithms.
+The idea of using extra-gradients, or reusing past gradients is independent of the loss function
+being used, and is therefore extendable to the algorithms discussed in this work.
+However, there can be inherent limitations in applying these algorithms due to the theoretical
+assumptions behind them when applied to specific problem-settings.
+We only study the effect of the modifications empirically, and do not provide any theoretical
+convergence guarantees for the proposed updates.
+However, we take the potential theoretical limitations into consideration when discussing the
+results of the empirical evaluations.
+
+We evaluate the proposed algorithms on the classic game-theoretic normal-form game of biased
+rock-paper-scissor to understand their empirical performance.
+% Results
+We show that in the presence of certain modifications for last-iterate convergence policy gradient
+methods outperform the newer methods in this basic setting.
+Through this comprehensive study, we then present these algorithms as extensions of policy gradient
+methods with various design choices.
+This presentation mainly aims at identifying the components of these extensions that contribute
+more towards the performance and potential components that detract the performance.
+Based on our findings, we proceed to implement and evaluate a subset of the modifications as deep
+multi-agent reinforcement learning algorithms by training the players in self-play.
+We use standard extensive-form games like Kuhn poker, and large-scale benchmarks like Abrupt Dark
+Hex to test the applicability and scalability of the modifications in two-player zero-sum extensive
+form games.
 We summarize our findings regarding the effectiveness of mirror-descent-based reinforcement
-learning algorithms in the multiagent setting and the effect of the modifications we apply.
-Through this study, we provide some recommendations in designing MARL algorithms and close with some
-remarks about future research directions.
+learning algorithms in the multi-agent setting and the effect of the modifications we apply.
+Through this study, we provide some recommendations in designing MARL algorithms and close with
+some remarks about future research directions.

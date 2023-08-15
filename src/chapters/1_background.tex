@@ -1,9 +1,18 @@
 \chapter{Background}
-In this section, we lay out some ideas, and concepts from Game Theory, Reinforcement Learning, Online learning, and Optimization that are relevant to this work.
-We only introduce fundamental notions within these areas that are useful in following the thesis, and we direct the reader to more comprehensive resources for an in-depth discussion wherever necessary.
-The framework of multi-agent learning has been conventionally rooted in Game Theory, and so we begin by discussing preliminary constructs from game theory and detail the setting that is pertinent to this work, namely, two-player zero-sum games.
-We then discuss foundational concepts within reinforcement learning that serves as a base for the algorithms discussed in this work. We also talk about the current limitations of Reinforcement learning methods in multi-agent settings and motivate the need for the development of better algorithms in this setting.
-Finally, we also present some preliminary concepts from online learning and optimization algorithms that are useful in understanding the approaches we study in this work.
+In this section, we lay out some ideas, and concepts from Game Theory, Reinforcement Learning,
+Online learning, and Optimization that are relevant to this work.
+We only introduce fundamental notions within these areas that are useful in following the thesis,
+and we direct the reader to more comprehensive resources for an in-depth discussion wherever
+necessary.
+The framework of multi-agent learning has been conventionally rooted in Game Theory, and so we
+begin by discussing preliminary constructs from game theory and detail the setting that is
+pertinent to this work, namely, two-player zero-sum games.
+We then discuss foundational concepts within reinforcement learning that serves as a base for the
+algorithms discussed in this work.
+We also talk about the current limitations of Reinforcement learning methods in multi-agent
+settings and motivate the need for the development of better algorithms in this setting.
+Finally, we also present some preliminary concepts from online learning and optimization algorithms
+that are useful in understanding the approaches we study in this work.
 
 \section{Game Theory}
 Game theory~\cite{osborneintroduction2004} is the study of modeling interactions between
@@ -19,8 +28,8 @@ importance.
 % It is also a common practice to use game theoretic constructs in evaluating the performance of
 % multi-agent algorithms and provide theoretical guarantees.
 In this section, we briefly introduce concepts from game theory that are relevant to this work.
-For an in-depth and more rigorous discussion of game theory and how it relates to problems in multi-agent learning, we refer the reader
-to~\cite{nisanAlgorithmic2007a, shohamMultiagent2008}.
+For an in-depth and more rigorous discussion of game theory and how it relates to problems in
+multi-agent learning, we refer the reader to~\cite{nisanAlgorithmic2007a, shohamMultiagent2008}.
 
 \subsection{Problems Formulations in Game Theory}
 \label{subsec:reps}
@@ -73,7 +82,7 @@ A more formal definition of a normal-form game is as follows:
 \end{definition}
 
 For a normal-form game, the set of mixed strategies available to player $i$ is given by $S_i =
-	\Pi(A_i)$.
+	\Pi(A_i) \in \Delta^{k_i}$.
 The set of mixed-strategy profiles of all the players in the game is called the mixed strategy
 profile $S = S1 \times \dots \times S_n$.
 Normal-form games are typically represented as an n-dimensional matrix, where each dimension
@@ -107,8 +116,8 @@ explicitly incorporates the sequential nature of interactions in the form of a g
 	\end{itemize}
 \end{definition}
 
-The above representation definition assumes that all the relevant information for decision-making is
-available and accessible to all the players equally.
+The above representation definition assumes that all the relevant information for decision-making
+is available and accessible to all the players equally.
 This is known as the \textit{perfect-information} setting, as opposed to the
 \textit{imperfect-information} setting that occurs in many real-world problems where relevant
 information is obscured to the players.
@@ -121,8 +130,8 @@ information is obscured to the players.
 	$\chi(h) = \chi(h')$, and $\rho(h)=\rho(h')$, whenever $\exists j$ for which $h,h' \in I_{i,j}$.
 \end{definition}
 
-A crucial assumption in such a setting is a \textit{perfect recall} of the sequence of actions taken
-by a player to reach the current node of the game tree.
+A crucial assumption in such a setting is a \textit{perfect recall} of the sequence of actions
+taken by a player to reach the current node of the game tree.
 If all players possess perfect recall, then the game is said to be of perfect recall.
 While mixed strategies in extensive-form games are distributions over the pure strategies of the
 entire game tree, \textit{behavioral strategies} are distributions over actions at each decision
@@ -141,28 +150,34 @@ characteristics of problems.
 More generally, definitions of game representations are typically based on the number of agents
 (Single-agent, Two-player, Multi-agent), the length of the game (single-shot, sequential), type of
 interaction (simultaneous-move, turn-based), utility values of players (general-sum, constant-sum,
-zero-sum), etc. In this work, we mainly deal with two-player zero-sum games (interchangeably referred
-to in the text as 2p0s), a purely competitive setting that only involves interactions between two
-agents whose payoff functions are a negation of each other.
+zero-sum), etc. In this work, we mainly deal with two-player zero-sum games (interchangeably
+referred to in the text as 2p0s), a purely competitive setting that only involves interactions
+between two agents whose payoff functions are a negation of each other.
 \begin{definition}[Two-player Zero-sum games]
 	A two-player normal-form game is zero-sum if for each strategy profile $a \in A_1 \times A_2$,
 	$u_1(a) + u_2(a) = 0$.
 \end{definition}
-Two-player zero-sum games are an important class of problems that coincide with other important
-domains including saddle point optimization, variational inequalities, and image generation in deep
-learning.
+As motivated in the introduction for studying this problem setting, two-player zero-sum games are
+an important class of problems that coincide with other important domains including saddle point
+optimization, variational inequalities, and image generation in deep learning.
 
-\subsection{Solution Concepts}
-% The above representations provide a well-defined framework to formalize problems in a game-theoretic manner.
-Solution concepts are typically \textit{equilibrium} in the joint strategy space of the players
-that define a notion of optimality of a player's strategies and allow us to analyze player
-behaviors.
+\subsection{Equilibrium Concepts}
+Equilibrium concepts are points in the joint strategy space of the players that define a notion of
+optimality of a player's strategies.
+They allow us to reason about behaviors of decision makers in real-world problem settings, and
+analyze the worst case payoffs in potentially adversarial settings.
+Based on the definition of optimality, the problem setting, and assumptions made about player
+behaviors there exist various well-established equilibrium concepts in game theory literature.
 
+\textbf{Nash Equilibrium:}
+Perhaps the most prevalent, and well-known concept is the Nash equilibrium which models perfectly
+rational decision makers as players and reasons about the best worst-case payoff one can achieve
+even in a completely adversarial scenario.
 % \textbf{Best Response:}
 The best response of player $i$ to the strategy profile $s_{-i}$ is a mixed strategy such that
 $u_i(s_i^\ast, s_{-i}) \geq u_i(s_i, s_{-i}), \forall s_i \in S_i$.
 
-\begin{definition}[Nash equlibrium]
+\begin{definition}[Nash equlibrium (NE)]
 	A strategy profile $s=(s_1, \dots, s_n), s \in S$ in an n-player normal-form game is a Nash-equilibrium if $s_i$ is a best response to $s_{-i}$, for all
 	$i$.
 \end{definition}
@@ -175,22 +190,45 @@ interesting properties have also been proposed and studied.
 Minmax and Maxmin strategies assure payoffs for players in the most aggressive (player $i$ playing
 to minimize player $j$'s payoffs) and most conservative (player $-i$ playing to minimize player
 $i$'s payoffs) scenarios.
+The seminal work of von-Neumann showed that in two-player zero sum games Nash equilibrium
+strategies fetch payoffs that are equivalent to their minmax and maxmin values.
 
+\textbf{Quantal Response Equilibrium:}
 While the solution concept of Nash equilibrium assumes perfect rationality, the Quantal response
 equilibrium (QRE) models agents with bounded rationality allowing for some errors in action
 predictions.
+So instead of modeling agent actions as best-response functions, QRE instead models player actions
+according to quantile response functions of their expected payoffs.
+A quantal response function $\sigma: \R^n \mapsto \Delta^n$ is nonempty in the interior of the
+simplex, continuous on $\R^n$, and monotonically increasing.
+QRE places all action choices within the interior of the probability simplex thereby allowing the
+possibility of any action occurring within observed data.
 QRE was first proposed for normal-form games~\cite{mckelveyQuantal1995}, and then later extended to
 extensive form games using the sequence form representation~\cite{mckelveyQuantal1998}.
+
+\begin{definition}[Quantal-response Equilibrium (QRE)]
+	For a given normal form game with payoff functions $u=(u_1,\dots, u_n)$, a strategy profile $S \in \Delta^{k_i}$ is
+	a quantal response equilibrium (QRE) if
+	$$ S_i = \sigma_{ij}(u_i(S)), for 1 \leq j \leq k$$
+
+\end{definition}
+
 An instance of QRE is the logit-QRE (which we simply refer to as QRE going forward) where the
-errors are modeled using a Weibull distribution and added to the payoffs of each agent in a
-normal-form game.
-For extensive-form games, if the behavioral strategies of all agents are a QRE, then the joint
+logistic quantal response function is used to model the player's action choices.
+$$ \pi_{ij} = \frac{e^{\lambda u_{ij}(\pi)}}{\sum_{j'=1}^k e^{\lambda u_{ij'}(\pi)}}$$
+
+For extensive-form games, if the behavioral strategies of all players are QREs, then the joint
 policy is said to be an Agent QRE (AQRE).
 QRE predicts systematic deviations from Nash equilibrium when fit with experimental data of
 game-theoretic problems.
+There exist many other prominent equilibrium concepts including the coarse-correlated equilibrium,
+the sub-game perfect equilibrium, and we refer the reader
+to~\cite{shohamMultiagent2008,osborneintroduction2004} for a more detailed discussion on these.
 
 \section{Reinforcement
   Learning}
+\rev{Connect RL with 2.1; can define various settings to be instances of GT problems like stochastic games}.
+1
 Reinforcement learning (RL)~\cite{suttonReinforcement2018} deals with designing algorithms for
 \textit{agents} that interactively learn to maximize a \textit{reward} signal in an
 \textit{environment}.
@@ -250,8 +288,8 @@ Most of the tabular, and iterative methods require an explicit model of an envir
 to the transition functions.
 In the absence of a model or transition functions, one can use Monet Carlo methods to approximate
 these probabilities through sampling.
-Tabular methods are realizable in settings with small state spaces, where we have access to the
-the perfect model of the environment in the form of MDPs.
+Tabular methods are realizable in settings with small state spaces, where we have access to the the
+perfect model of the environment in the form of MDPs.
 Tabular methods are also useful in establishing theory and guarantees for various algorithms.
 However, for most practical applications it is common to use parameterized policies and approximate
 value functions.
@@ -274,7 +312,8 @@ Advancements in theoretical understanding, development of algorithms for learnin
 approximators and the availability of computational resources have led to a resonating success of
 reinforcement learning in tasks with high-dimensional state spaces, and a diverse range of
 applications including game playing, nuclear reactor control, video compression, assisting surgeons
-with anesthesia control, and aligning models with human preferences~\fillin{citations}.
+with anesthesia control, and aligning models with human
+preferences~\cite{schambergContinuous2022,perolatMastering2022,ouyangTraining2022a,mandhaneMuZero2022}.
 However, often in real-world problems, there are multiple agents with objectives that can be
 aligned or indifferent, or adversarial to each other.
 Studying and designing learning algorithms for agents in this problem setting is termed
@@ -292,8 +331,8 @@ without theoretically grounded or empirically proven algorithms.
 Other approaches include designing fully-decentralized learning algorithms and centralized
 algorithms that either share information only during the training, or both during training and
 execution.
-Among these, the Centralized Training Decentralized Execution (CDTE) regime has been widely
-adopted especially in cooperative settings.
+Among these, the Centralized Training Decentralized Execution (CDTE) regime has been widely adopted
+especially in cooperative settings.
 Another focus in cooperative or mixed-cooperative settings is to encourage agents to learn to
 communicate information while satisfying some communication bottlenecks.
 However, there is still a huge gap to fill in designing algorithms that support practical
@@ -347,14 +386,27 @@ the hypothesis class $\calH$ is,
 	\max_{h^* \in \calH} Regret_T(h^*)
 \end{equation}
 
-If the loss of an Online
-learning grows sublinearly with each round then, the learner's average regret goes to zero as $t$
-tends to infinity.
-Algorithms that possess this property are called \textit{no-regret} algorithms and are of great
-interest in online learning, learning strategies in games, and other prediction problems.
+\subsection{Convergence
+	analysis} In discussing learning and optimization algorithms, it is of theoretical and practical
+interest to understand the convergence guarantees of iterative methods to ascertain the efficiency
+and computational demands in solving various problems.
+In analyzing a sequence of values produced by an iterative method $x_k$ at each iteration $k$ for
+an objective function $f$, against some solution point $x^{\ast}$, two commonly categorized
+convergence rates are linear, and sublinear convergences.
+The sequence is said to converge with a sublinear rate if $f(x_k) - f(x^\ast) \leq O(1/k)$, and
+with a linear rate if $f(x_k) - f(x^\ast) \leq O(q^k)$ for some $q \in [0, 1]$.
+Based on this rate, one can also derive a bound on number of iterations required to achieve a
+certain approximation accuracy of $\epsilon$, i.e. $f(x_k) - f(x^\ast) \leq \epsilon$.
+
+If the loss of an Online learning algorithm grows sublinearly with each round then, the learner's
+average regret goes to zero as $t$ tends to infinity.
+Algorithms that possess this property are called \textit{no-regret} or regret minimizing algorithms
+and are of great interest in online learning, learning strategies in games, and other prediction
+problems.
 If the learner is restricted to deterministic predictions at each round, it can be shown that there
 problems where the learner's regret grows unbounded~\cite{coverBehavior1965}.
-Hence, an important relaxation is to allow the learner to make randomized predictions and the adversary has to choose the answer $y_t$ without knowledge of the learner's randomization for that
+Hence, an important relaxation is to allow the learner to make randomized predictions and the
+adversary has to choose the answer $y_t$ without knowledge of the learner's randomization for that
 round.
 
 \subsection{Convex Optimization}
@@ -365,7 +417,8 @@ We begin this section with some relevant definitions for discussing convex optim
 % Strongly Convex
 \begin{definition}[$\mu$-Strongly-Convex]
 	~\label{def:strconvex}
-	A convex function $f: S \mapsto \mathbb{R}$ is $\mu$-strongly-convex with respect to a norm $\|.\|$ if for any $w \in S$
+	A convex function $f: S \mapsto \mathbb{R}$ is $\mu$-strongly-convex with respect to a norm $\|.
+		\|$ if for any $w \in S$
 	\begin{equation}
 		\forall z \in \partial f(w), \forall u \in S, f(u) \geq f(w) + \langle z, u - w\rangle + \frac{\mu}{2}\| u - w \|^2.
 	\end{equation}
@@ -400,8 +453,9 @@ competing vectors in $U$ is,
 A common assumption is that $U=S=\mathbb{R}^d$.
 The convex optimization framework is useful in deriving performance guarantees for Online Learning
 algorithms under these more restrictive assumptions.
-Also, for a non-convex problem, there are various ways one can convexify the objective with the loss of
-some accuracy in the solution to take advantage of algorithms with better performance guarantees.
+Also, for a non-convex problem, there are various ways one can convexify the objective with the
+loss of some accuracy in the solution to take advantage of algorithms with better performance
+guarantees.
 A preliminary algorithm is to choose the prediction vector that minimizes the cumulative loss of
 all previous rounds, this is called \textit{Follow-the-leader}(FTL).
 $$ \forall t, w_t = \arg \min_{w \in S} \sum_{i=1}^{t-1} f_i(w)$$
@@ -495,24 +549,28 @@ Simplifying the update rule using the proximal operator results in the \textbf{P
 
 $$ x_{k+1} = prox_{t_k, g}(x_k - t_k \nabla f(x_k))$$.
 
-Analogous to the extension of the projected subgradient method to non-euclidean settings, the proximal
-gradient method can also be extended to non-euclidean settings by substituting the Euclidean
-distance in the proximal operator with a Bergman divergence resulting in the \textbf{Non-euclidean
-	proximal gradient method}~\cite{tsengApproximation2010,beckFirstOrder2017}.
-
-\subsection{Convergence analysis}
-In discussing learning and optimization algorithms, it is of theoretical and practical interest to
-understand the convergence guarantees of iterative methods to ascertain the efficiency and
-computational demands in solving various problems.
-Analysis of such methods typically aims to bound performance measure of a sequence produced by the
-the algorithm at each iteration against some solution point.
-Performance can be measured by the approximation accuracy ($\epsilon$) of the current iterate
-against some solution point or by establishing the asymptotic rate of convergence as a function of
-the number of iterations ($k$).
-Convergence rates in general can be sublinear (e.g., $O(1/k)$ or $O(1/\epsilon)$), linear (e.g.,
-$O(q^k)$ for some $q \in [0, 1]$ or $O(\log{(1/\epsilon)})$), superlinear, or quadratic.
+Analogous to the extension of the projected subgradient method to non-euclidean settings, the
+proximal gradient method can also be extended to non-euclidean settings by substituting the
+Euclidean distance in the proximal operator with a Bergman divergence resulting in the
+\textbf{Non-euclidean proximal gradient method}~\cite{tsengApproximation2010,beckFirstOrder2017}.
 
 \subsection{Regret Minimization and CFR}
-Regret minimization is an important class of algorithms for problem learning in games.
-This approach aims to derive algorithms that have no-regret properties.
-\fillin{CFR}
+As discussed so far, regret quantifies the relative performance of an online learning algorithm in
+hindsight as compared to an alternative hypothesis or a best fixed action.
+This form of regret analysis is also useful in the problem of learning in games (such as repeated
+matrix games), and algorithms that aim to take actions that minimize the cumulative regret are
+known as \textit{regret minimization} algorithms.
+The above notion of regret as compared to a best fixed alternative is commonly referred to as
+\textit{external regret} in this domain.
+Another notion of regret called \textit{internal or swap} regret compares the actions taken while
+allowing the swapping of one or many actions with alternatives that can lead to a lower regret.
+An important connection between regret minimizing algorithms and game theory is that if at
+iteration $T$, if both player's average regret is less than $\epsilon$, then the average
+joint-strategy $\bar{\sigma}^T$ (average policy in RL terms) is a $2\epsilon$ Nash equilibrium.
+Hence, one approach to find approximate Nash equilibria is to design strong regret minimizing
+algorithms, and employ it as a strategy producing technique self-play learning.
+\textit{Regret matching} is a regret minimization algorithm where each player takes actions with probability
+distribution given by the normalized positive regrets associated with each action.
+Counterfactual Regret minimization (CFR) is an extension of regret minimization to extensive-form
+games that involves defining regret at the level of an information set, and allows for accumulating
+regrets along the game tree.

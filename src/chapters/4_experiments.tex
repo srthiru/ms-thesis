@@ -194,8 +194,58 @@ For both SPG, and MDPO, `NeuRD + EG + Optimism' provides the fastest last-iterat
 Whereas, for MMD, `NeuRD', `NeuRD + Optimism' are the fastest variants.
 
 \textbf{Average vs Last Iterate:}
+A primary motivation for our study is achieving last-iterate convergence, but it is also important
+to discuss the behavior of average iterate convergence and how it compares to the last-iterate
+convergence.
+For instance, it was shown that the last-iterate convergence is slower than the average-iterate for
+the EG method for smooth convex-concave saddle point problems in~\cite{golowichLast2020} by proving
+a tight lower bound for the last-iterate.
+% However, our problem setting in this section is two-player zero-sum normal form games which are
+% bilinear saddle-point problems.
+We note that from our tabular experimental results, the last-iterate convergence is better than the
+average iterate for all the algorithms.
 
-\textbf{Choice of Algorithm:}
+The tabular experiments, and the above observations provide some answers to questions~\ref{qn1},
+and~\ref{qn2}.
+
+\section{Algorithm Design Choices}
+
+\subsection{NeuRD-fix}
+The NeuRD-loss has also been previously applied on top of algorithms to improve performance or
+induce convergence in competitive and cooperative settings.
+Perolat et.~al,~\cite{perolatMastering2022} introduced Regularized Nash Dynamics (R-NAD) that
+utilizes NeuRD as a fixed-point approximator along with adaptive
+regularization~\cite{perolatPoincare2021} to achieve last-iterate convergence in the game of
+Stratego.
+Chhablani et.~al,~\cite{chhablaniCounterfactual2021} motivated the choice of an advantage baseline
+in COMA~\cite{foersterCounterfactual2018} through no-regret literature and demonstrated that
+applying the NeuRD loss to COMA's objective improved its performance even in cooperative settings
+such as identical-interest games.
+The improved performance of adapting the NeuRD-fix with mirror-descent based methods, and other
+techniques for last-iterate convergence is also evident from our experimental evaluations.
+Through this, we reinforce the idea that the NeuRD-loss can be more generally adapted into loss
+functions of various algorithms in multi-agent settings.
+\fillin{is there a benefit to adding NeuRD in single-agent setting? even if the reward function is not dynamic.}
+
+\subsection{Entropy Regularization}
+As noted in the tabular experiments, in some problem settings there might be faster methods to
+induce last-iterate convergence that adaptive regularization.
+However, entropy regularization is more widely studied within single, and multi-agent RL.
+Adaptive entropy regularization is also relatively easier to implement, and less constraining in
+terms of how each player updates their policy as compared to modifications like EG, or Optimism.
+In single-agent RL, entropy regularization is motivated as a means to encourage exploration, and
+make the policies more robust.
+In multi-agent RL, it has been studied more specifically to induce convergence even including in
+NeuRD, and MMD.
+Given the universal inclusion, and multiple perceived benefits, entropy regularization is
+considered a standard design choice to include in most algorithms.
+
+\subsection{Trust-region constraints}
+Trust-region constraints form the basis of state-of-the-art RL algorithms like PPO.
+The presence of a relatively strongly-convex proximal operator is necessary for deriving algorithms
+with strong performance guarantees.
+
+\subsection{EG and Optimism}
 Finally, we highlight that the best performing variants are on top of SPG as opposed to MDPO, or
 MMD as can be seen from~\ref{fig:tabne_last}.
 This is surprising as the latter methods were proposed as improvements over SPG in single, and
@@ -206,46 +256,7 @@ While the convergence rates of EG, and Optimistic updates are well-studied, it i
 adaptive regularization.
 Most notably, Optimistic-NeuRD (SPG + NeuRD + Optimism) exhibits a faster last-iterate convergence
 that is straightforward to extend to more complicated settings.
-% SPG's performance in the presence of these modifications indicates that entropy regularization
-% or trust-region constraints.
 
-% Secondly, we note that NeuRD-fix speeds up convergence for all the algorithms even when combined
-% with EG or Optimistic Updates.
-
-The tabular experiments, and the above observations provide some answers to questions~\ref{qn1},
-and~\ref{qn2}.
-In the next section, we use the above observations to extend these results to function
-approximation settings.
-% We present the results for NE, and QRE convergence (with 0.5 temperature).
-
-% \begin{noindent}
-
-% \begin{table}[htbp]
-% 	\centering
-% 	\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
-% 	\hline
-% 	\multirow{2}{*}{\textbf{Algorithm}} &
-% 	% \multicolumn{4}{c|}{\textbf{Nash}} &
-% 	% \multicolumn{2}{c|}{\textbf{QRE ($\alpha$=0.5)}} \\
-% 	% \cline{2-7}
-% 	% & 
-% 	\multicolumn{2}{c|}{\textbf{PG}} & 
-% 	\multicolumn{2}{c|}{\textbf{MDPO}} &
-% 	\multicolumn{2}{c|}{\textbf{MMD}} \\
-% 	\cline{2-7}
-% 	& \textbf{Avg} & \textbf{Last} & \textbf{Avg} & \textbf{Last}
-% 	& \textbf{Avg} & \textbf{Last} \\
-% 	\hline
-% 	Base	 	& \red{\texttimes} 	& \red{\texttimes} 	& \red{\texttimes} 	& \red{\texttimes}		& \checked 	& \checked \\ \hline
-% 	NeuRD 		& \checked 			& \red{\texttimes} 	& \checked 			& \red{\texttimes}		& \checked 	& \checked \\ \hline
-% 	EG 			& \checked 			& \checked 			& \checked 			& \checked 				& \checked 	& \checked \\ \hline
-% 	OPT 		& \checked 			& \checked 			& \checked 			& \checked 				& \checked 	& \checked \\ \hline
-% 	EG-OPT 		& \checked 			& \checked 			& \checked 			& \checked 				& \checked 	& \checked \\ \hline
-% 	EG-N 		& \checked 			& \checked 			& \checked 			& \checked 				& \checked 	& \checked \\ \hline
-% 	OPT-N 		& \checked 			& \checked 			& \checked 			& \checked 				& \checked 	& \checked \\ \hline
-% 	EG-OPT-N	& \checked 			& \checked 			& \checked 			& \checked 				& \checked 	& \checked \\ \hline
-% 	\end{tabular}
-% 	\caption{Convergence in Perturbed RPS for last, and average iterates.}
-% 	\label{tab:tabres}
-% \end{table}
-% \end{noindent}
+Based on the above findings, and discussion, we cast the various algorithms discussed as extensions
+of policy gradient methods with different added components.
+In the next section we perform an empirical study of these extensions under function approximation.

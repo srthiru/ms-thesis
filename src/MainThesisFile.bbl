@@ -18,17 +18,17 @@ Osborne, M.~J.:
 \newblock {\itshape  An Introduction to Game Theory }.
 \newblock {New York}, {Oxford University Press}, 2004.
 
-\bibitem{shohamMultiagent2008}
-
-Shoham, Y. and {Leyton-Brown}, K.:
-\newblock {\itshape  Multiagent {{Systems}}: {{Algorithmic}}, {{Game-Theoretic}}, and {{Logical Foundations}} }.
-\newblock {Cambridge University Press}, December 2008.
-
 \bibitem{nisanAlgorithmic2007a}
 
 eds. N. Nisan, T. Roughgarden, E. Tardos, and V.~V. Vazirani
 \newblock {\itshape  Algorithmic {{Game Theory}} }.
 \newblock {Cambridge}, {Cambridge University Press}, 2007.
+
+\bibitem{shohamMultiagent2008}
+
+Shoham, Y. and {Leyton-Brown}, K.:
+\newblock {\itshape  Multiagent {{Systems}}: {{Algorithmic}}, {{Game-Theoretic}}, and {{Logical Foundations}} }.
+\newblock {Cambridge University Press}, December 2008.
 
 \bibitem{nashEquilibrium1950}
 
@@ -59,6 +59,28 @@ Mckelvey, R.~D. and Palfrey, T.~R.:
 Sutton, R.~S. and Barto, A.~G.:
 \newblock {\itshape  Reinforcement Learning: An Introduction }.
 \newblock Adaptive Computation and Machine Learning Series. {Cambridge, Massachusetts}, {The MIT Press}, second edition edition, 2018.
+
+\bibitem{schambergContinuous2022}
+
+Schamberg, G., Badgeley, M., {Meschede-Krasa}, B., Kwon, O., and Brown, E.~N.:
+\newblock Continuous action deep reinforcement learning for propofol dosing during general anesthesia.
+\newblock {\itshape  Artificial Intelligence in Medicine }, 123:102227, January 2022.
+
+\bibitem{perolatMastering2022}
+
+Perolat, J., {de Vylder}, B., Hennes, D., Tarassov, E., Strub, F., {de Boer}, V., Muller, P., Connor, J.~T., Burch, N., Anthony, T., McAleer, S., Elie, R., Cen, S.~H., Wang, Z., Gruslys, A., Malysheva, A., Khan, M., Ozair, S., Timbers, F., Pohlen, T., Eccles, T., Rowland, M., Lanctot, M., Lespiau, J.-B., Piot, B., Omidshafiei, S., Lockhart, E., Sifre, L., Beauguerlange, N., Munos, R., Silver, D., Singh, S., Hassabis, D., and Tuyls, K.:
+\newblock Mastering the {{Game}} of {{Stratego}} with {{Model-Free Multiagent Reinforcement Learning}}.
+\newblock {\itshape  Science }, 378(6623):990--996, December 2022.
+
+\bibitem{ouyangTraining2022a}
+
+Ouyang, L., Wu, J., Jiang, X., Almeida, D., Wainwright, C.~L., Mishkin, P., Zhang, C., Agarwal, S., Slama, K., Ray, A., Schulman, J., Hilton, J., Kelton, F., Miller, L., Simens, M., Askell, A., Welinder, P., Christiano, P., Leike, J., and Lowe, R.:
+\newblock Training language models to follow instructions with human feedback, March 2022.
+
+\bibitem{mandhaneMuZero2022}
+
+Mandhane, A., Zhernov, A., Rauh, M., Gu, C., Wang, M., Xue, F., Shang, W., Pang, D., Claus, R., Chiang, C.-H., Chen, C., Han, J., Chen, A., Mankowitz, D.~J., Broshear, J., Schrittwieser, J., Hubert, T., Vinyals, O., and Mann, T.:
+\newblock {{MuZero}} with {{Self-competition}} for {{Rate Control}} in {{VP9 Video Compression}}, February 2022.
 
 \bibitem{shalev-shwartzOnline2012}
 
@@ -227,32 +249,11 @@ Gorbunov, E., Taylor, A., and Gidel, G.:
 \newblock Last-{{Iterate Convergence}} of {{Optimistic Gradient Method}} for {{Monotone Variational Inequalities}}.
 \newblock In {\itshape  Advances in {{Neural Information Processing Systems}} }, May 2022.
 
-\bibitem{timbersApproximate2022}
+\bibitem{golowichLast2020}
 
-Timbers, F., Bard, N., Lockhart, E., Lanctot, M., Schmid, M., Burch, N., Schrittwieser, J., Hubert, T., and Bowling, M.:
-\newblock Approximate {{Exploitability}}: {{Learning}} a {{Best Response}}.
-\newblock In {\itshape  Thirty-{{First International Joint Conference}} on {{Artificial Intelligence}} }, volume~4, pages 3487--3493, July 2022.
-
-\bibitem{liangRLlib2018}
-
-Liang, E., Liaw, R., Moritz, P., Nishihara, R., Fox, R., Goldberg, K., Gonzalez, J.~E., Jordan, M.~I., and Stoica, I.:
-\newblock {{RLlib}}: {{Abstractions}} for {{Distributed Reinforcement Learning}}, June 2018.
-
-\bibitem{lanctotOpenSpiel2020}
-
-Lanctot, M., Lockhart, E., Lespiau, J.-B., Zambaldi, V., Upadhyay, S., P{\'e}rolat, J., Srinivasan, S., Timbers, F., Tuyls, K., Omidshafiei, S., Hennes, D., Morrill, D., Muller, P., Ewalds, T., Faulkner, R., Kram{\'a}r, J., De~Vylder, B., Saeta, B., Bradbury, J., Ding, D., Borgeaud, S., Lai, M., Schrittwieser, J., Anthony, T., Hughes, E., Danihelka, I., and {Ryan-Davis}, J.:
-\newblock {{OpenSpiel}}: {{A Framework}} for {{Reinforcement Learning}} in {{Games}}, September 2020.
-
-\bibitem{schulmanHighDimensional2018}
-
-Schulman, J., Moritz, P., Levine, S., Jordan, M., and Abbeel, P.:
-\newblock High-{{Dimensional Continuous Control Using Generalized Advantage Estimation}}, October 2018.
-
-\bibitem{perolatMastering2022}
-
-Perolat, J., {de Vylder}, B., Hennes, D., Tarassov, E., Strub, F., {de Boer}, V., Muller, P., Connor, J.~T., Burch, N., Anthony, T., McAleer, S., Elie, R., Cen, S.~H., Wang, Z., Gruslys, A., Malysheva, A., Khan, M., Ozair, S., Timbers, F., Pohlen, T., Eccles, T., Rowland, M., Lanctot, M., Lespiau, J.-B., Piot, B., Omidshafiei, S., Lockhart, E., Sifre, L., Beauguerlange, N., Munos, R., Silver, D., Singh, S., Hassabis, D., and Tuyls, K.:
-\newblock Mastering the {{Game}} of {{Stratego}} with {{Model-Free Multiagent Reinforcement Learning}}.
-\newblock {\itshape  Science }, 378(6623):990--996, December 2022.
+Golowich, N., Pattathil, S., Daskalakis, C., and Ozdaglar, A.:
+\newblock Last {{Iterate}} is {{Slower}} than {{Averaged Iterate}} in {{Smooth Convex-Concave Saddle Point Problems}}.
+\newblock In {\itshape  Proceedings of {{Thirty Third Conference}} on {{Learning Theory}} }, pages 1758--1784. {PMLR}, July 2020.
 
 \bibitem{perolatPoincare2021}
 
@@ -271,5 +272,37 @@ Chhablani, C. and Kash, I.~A.:
 Foerster, J., Farquhar, G., Afouras, T., Nardelli, N., and Whiteson, S.:
 \newblock Counterfactual {{Multi-Agent Policy Gradients}}.
 \newblock {\itshape  Proceedings of the AAAI Conference on Artificial Intelligence }, 32(1), April 2018.
+
+\bibitem{lisyEquilibrium2017}
+
+Lisy, V. and Bowling, M.:
+\newblock Equilibrium {{Approximation Quality}} of {{Current No-Limit Poker Bots}}, January 2017.
+
+\bibitem{timbersApproximate2022}
+
+Timbers, F., Bard, N., Lockhart, E., Lanctot, M., Schmid, M., Burch, N., Schrittwieser, J., Hubert, T., and Bowling, M.:
+\newblock Approximate {{Exploitability}}: {{Learning}} a {{Best Response}}.
+\newblock In {\itshape  Thirty-{{First International Joint Conference}} on {{Artificial Intelligence}} }, volume~4, pages 3487--3493, July 2022.
+
+\bibitem{cowlingInformation2012}
+
+Cowling, P.~I., Powley, E.~J., and Whitehouse, D.:
+\newblock Information {{Set Monte Carlo Tree Search}}.
+\newblock {\itshape  IEEE Transactions on Computational Intelligence and AI in Games }, 4(2):120--143, June 2012.
+
+\bibitem{liangRLlib2018}
+
+Liang, E., Liaw, R., Moritz, P., Nishihara, R., Fox, R., Goldberg, K., Gonzalez, J.~E., Jordan, M.~I., and Stoica, I.:
+\newblock {{RLlib}}: {{Abstractions}} for {{Distributed Reinforcement Learning}}, June 2018.
+
+\bibitem{schulmanHighDimensional2018}
+
+Schulman, J., Moritz, P., Levine, S., Jordan, M., and Abbeel, P.:
+\newblock High-{{Dimensional Continuous Control Using Generalized Advantage Estimation}}, October 2018.
+
+\bibitem{lanctotOpenSpiel2020}
+
+Lanctot, M., Lockhart, E., Lespiau, J.-B., Zambaldi, V., Upadhyay, S., P{\'e}rolat, J., Srinivasan, S., Timbers, F., Tuyls, K., Omidshafiei, S., Hennes, D., Morrill, D., Muller, P., Ewalds, T., Faulkner, R., Kram{\'a}r, J., De~Vylder, B., Saeta, B., Bradbury, J., Ding, D., Borgeaud, S., Lai, M., Schrittwieser, J., Anthony, T., Hughes, E., Danihelka, I., and {Ryan-Davis}, J.:
+\newblock {{OpenSpiel}}: {{A Framework}} for {{Reinforcement Learning}} in {{Games}}, September 2020.
 
 \end{thebibliography}
