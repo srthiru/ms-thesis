@@ -1,14 +1,7 @@
 \chapter{Modified Updates for Last-iterate Convergence}
 \label{chp:updates}
-
-\old{Our main contribution is adapting existing techniques for inducing convergence in multiagent
-	settings with the algorithms discussed in the previous section.}
-(\revdone{Too brief.
-	Slow down and explain to the reader what the problem is that these modified updates are intended to
-	solve.
-})
-Last-iterate convergence of algorithms is an attractive property that has been studied widely in the context
-of optimization, and equilibirium learning algorithms.
+Last-iterate convergence of algorithms is an attractive property that has been studied widely in
+the context of optimization, and equilibirium learning algorithms.
 While there have been numerous methods proposed for equilibrium solving in games, many of them only
 guarantee convergence in the ergodic sense, i.e., only the average of their iterates converge to an
 equilibrium.
@@ -118,12 +111,6 @@ Asymmetric updates have also been studied in a similar context and have been sho
 speed of convergence~\cite{daskalakisTraining2018}.
 
 \section{Extragradient and Optimistic Gradient}
- (\revdone{Since you say EG builds on
-	 this (Arrow-Hurwicz) a few lines later, you need to tell the reader at least a bit more about what it is})
- (\revdone{For opt updates: explain what
-	 has changed})
- (\revdone{Make sure you have defined the various notions of convergence somewhere, probably in 2 or 3})
-
 While the NeuRD fix modifies the loss function to better adjust to changing dynamics in multiagent
 settings, there is no inherent change to the learning procedure as such.
 Iterative methods such as fictitous play, are part of a broader set of learning dynamics studied to

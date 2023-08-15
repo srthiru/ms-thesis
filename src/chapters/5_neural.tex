@@ -1,23 +1,30 @@
 \chapter{Deep Multi-Agent RL Experiments}
-
 All of the methods discussed in this work are typically implemented in function approximation
 settings.
 Hence, it is important to evaluate if the observed performance improvements carry over when the
 policy parameters, and the value approximation are both represented using neural networks.
 
+As mentioned, in this section we study the following variants of MPG by incorporating combinations
+of the following modifications - NeuRD Fix (nrd), Entropy regularization (ent), KL Penalty (kl),
+Optimistic Updates (opt).
+So for instance, a variant that uses the NeuRD fix and entropy regularization will be referred to
+as ``MPG-nrd-ent'' within the experiments.
 Expanding on our the observations from the tabular experiments, we proceed to evaluate the
 algorithms in large-scale 2p0s games to answer question~\ref{qn3}.
 For the neural experiments, we study the effect of the NeuRD-fix, and the utilization of
-Optimistic-variants of popular optimizers (Optimistic-SGD, and Optimistic-Adam) when paired with
-deep RL algorithms.
+Optimistic-variants of the popular Adam optimizer (Optimistic-Adam) when paired with deep RL
+algorithms.
 
 \section{Experimental Domains}
-In the tabular experiments, we evaluated the algorithms as reinforcement learning methods in
-normal-form games.
-In this section, we evaluate the deep RL variant of these algorithms in extensive-form games.
-EFGs have been used as common benchmark and milestones in designing and evaluating multi-agent
-reinforcement learning.
-\fillin{Should I expand on this?}
+% In this section, we evaluate the deep RL variant of these algorithms in extensive-form game
+% representations of popular large-scale two-player zero-sum game variants.
+Large-scale real-world games serve as challenging benchmarks for multi-agent reinforcement learning
+algorithms by imposing long range dependencies between actions, and rewards, and also present
+various tricky dynamics that the agents have to identify to perform well.
+Many of these games such as Chess, Go, etc., can be naturally represented as extensive-form games,
+and have been major milestones in the progress towards developing general learning agents that
+adapt and perform well in various problem domains.
+
 % A major achievement in recent times for reinforcement learning methods in large-scale game benchmarks was 
 % AlphaGo's performance against professional Go players including winning against the world champion. 
 We follow the suit of~\cite{sokotaUnified2023}, and choose four 2p0s EFGs for the evaluation,
@@ -94,11 +101,15 @@ mini-batches of size 128 to perform mini-batch SGD updates.
 We perform 30 SGD updates per iteration, and use a constant learning rate of 5e-5 for all the
 experiments.
 
-For the smaller games (Kuhn Poker, and Abrupt Dark Hex 2$\times$2), we train the agents for 1M
-steps, and for the larger games we train the agents for 5M steps.
-For Kuhn Poker, and 2x2 Dark Hex, we report the exact exploitability curves across the training
-iterations, For 3x3 Dark Hex, and Phantom TTT, due to the difficulty in computing exact
-exploitability we only report the approximate exploitability at the end of training.
+We use the smaller games (Kuhn Poker, and Abrupt Dark Hex 2$\times$2) to identify modifications
+that are generally more performant and stable in their implementation as deep RL algorithms.
+We then evaluate a subset of these variants that demonstrate a good performance in the large-scale
+benchmark games (Abrupt Dark Hex 3$\times$3, and Phantom TTT).
+For the smaller games, we train the agents in self-play for 200k steps, and we report the exact
+exploitability curves across the training iterations.
+For 3x3 Dark Hex, and Phantom TTT, we train the agents for 5M steps.
+Due to the difficulty in computing exact exploitability we only report the approximate
+exploitability at the end of training.
 To compute the approximate exploitability, we train a DQN approximate best-response agent against
 the trained joint-policy of the players for 5M steps.
 Then, we evaluate the performance of the DQN agent against the fixed joint-policy for 1000
@@ -148,6 +159,8 @@ performance.
 	\label{fig:neural2}
 \end{figure}
 
+\section{Algorithm Design Choices}
+
 Firstly, echoing the observations from the tabular experiments, we observe that the addition of
 NeuRD-fix improved the performance of MMD.
 Secondly, there is no consistent benefit of using the optimistic version of the optimizers in
@@ -155,3 +168,50 @@ contrast to their effect in normal-form games.
 
 \fillin{We also evaluate these algorithms by having the trained agents play against each other in a
 	head-to-head manner.}
+
+\subsection{NeuRD-fix}
+The NeuRD-loss has also been previously applied on top of algorithms to improve performance or
+induce convergence in competitive and cooperative settings.
+Perolat et.~al,~\cite{perolatMastering2022} introduced Regularized Nash Dynamics (R-NAD) that
+utilizes NeuRD as a fixed-point approximator along with adaptive
+regularization~\cite{perolatPoincare2021} to achieve last-iterate convergence in the game of
+Stratego.
+Chhablani et.~al,~\cite{chhablaniCounterfactual2021} motivated the choice of an advantage baseline
+in COMA~\cite{foersterCounterfactual2018} through no-regret literature and demonstrated that
+applying the NeuRD loss to COMA's objective improved its performance even in cooperative settings
+such as identical-interest games.
+The improved performance of adapting the NeuRD-fix with mirror-descent based methods, and other
+techniques for last-iterate convergence is also evident from our experimental evaluations.
+Through this, we reinforce the idea that the NeuRD-loss can be more generally adapted into loss
+functions of various algorithms in multi-agent settings.
+%is there a benefit to adding NeuRD in single-agent setting? even if the reward function is not dynamic.
+
+\subsection{Entropy Regularization}
+As noted in the tabular experiments, in some problem settings there might be faster methods to
+induce last-iterate convergence that adaptive regularization.
+However, entropy regularization is more widely studied within single, and multi-agent RL.
+Adaptive entropy regularization is also relatively easier to implement, and less constraining in
+terms of how each player updates their policy as compared to modifications like EG, or Optimism.
+In single-agent RL, entropy regularization is motivated as a means to encourage exploration, and
+make the policies more robust.
+In multi-agent RL, it has been studied more specifically to induce convergence even including in
+NeuRD, and MMD.
+Given the universal inclusion, and multiple perceived benefits, entropy regularization is
+considered a standard design choice to include in most algorithms.
+
+\subsection{Trust-region constraints}
+Trust-region constraints form the basis of state-of-the-art RL algorithms like PPO.
+The presence of a relatively strongly-convex proximal operator is necessary for deriving algorithms
+with strong performance guarantees.
+
+\subsection{EG and Optimism}
+Finally, we highlight that the best performing variants are on top of SPG as opposed to MDPO, or
+MMD as can be seen from~\ref{fig:tabne_last}.
+This is surprising as the latter methods were proposed as improvements over SPG in single, and
+multi-agent settings.
+But, this indicates that EG/Optimistic updates provide a better last-iterate convergence rates
+compared to adaptive entropy regularization with trust-region constraints.
+While the convergence rates of EG, and Optimistic updates are well-studied, it is not the case for
+adaptive regularization.
+Most notably, Optimistic-NeuRD (SPG + NeuRD + Optimism) exhibits a faster last-iterate convergence
+that is straightforward to extend to more complicated settings.

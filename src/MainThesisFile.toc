@@ -23,13 +23,13 @@
 \contentsline {section}{\numberline {3.1} SPG}{28}{section.3.1}%
 \contentsline {subsection}{\numberline {3.1.1} Trust-region methods}{30}{subsection.3.1.1}%
 \contentsline {section}{\numberline {3.2} MDPO}{31}{section.3.2}%
-\contentsline {subsection}{\numberline {3.2.1} Tabular MDPO}{33}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.1} Tabular MDPO}{32}{subsection.3.2.1}%
 \contentsline {section}{\numberline {3.3} MMD}{33}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1} Connection between Variational Inequalities and QREs}{34}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.1} Connection between Variational Inequalities and QREs}{33}{subsection.3.3.1}%
 \contentsline {subsection}{\numberline {3.3.2} MMD Algorithm}{35}{subsection.3.3.2}%
-\contentsline {subsection}{\numberline {3.3.3} Behavioral form MMD}{37}{subsection.3.3.3}%
+\contentsline {subsection}{\numberline {3.3.3} Behavioral form MMD}{36}{subsection.3.3.3}%
 \contentsline {subsection}{\numberline {3.3.4} Closed-form vs Behavioral-form}{37}{subsection.3.3.4}%
-\contentsline {subsection}{\numberline {3.3.5} Comparison of MMD to other Mirror Decent based methods}{38}{subsection.3.3.5}%
+\contentsline {subsection}{\numberline {3.3.5} Comparison of MMD to other Mirror Decent based methods}{37}{subsection.3.3.5}%
 \addvspace {\baselineskip }
 \contentsline {chapter}{\xnumberline {4\hskip 2em}\uppercase {Modified Updates for Last-iterate Convergence}}{39}{chapter.4}%
 \contentsline {section}{\numberline {4.1} Neural Replicator Dynamics (NeuRD)}{40}{section.4.1}%
@@ -46,18 +46,18 @@
 \contentsline {subsection}{\numberline {5.2.2} Exploitability}{49}{subsection.5.2.2}%
 \contentsline {section}{\numberline {5.3} Experiment Setup}{49}{section.5.3}%
 \contentsline {section}{\numberline {5.4} Results}{50}{section.5.4}%
-\contentsline {section}{\numberline {5.5} Algorithm Design Choices}{54}{section.5.5}%
-\contentsline {subsection}{\numberline {5.5.1} NeuRD-fix}{54}{subsection.5.5.1}%
-\contentsline {subsection}{\numberline {5.5.2} Entropy Regularization}{55}{subsection.5.5.2}%
-\contentsline {subsection}{\numberline {5.5.3} Trust-region constraints}{55}{subsection.5.5.3}%
-\contentsline {subsection}{\numberline {5.5.4} EG and Optimism}{56}{subsection.5.5.4}%
 \addvspace {\baselineskip }
-\contentsline {chapter}{\xnumberline {6\hskip 2em}\uppercase {Deep Multi-Agent RL Experiments}}{57}{chapter.6}%
-\contentsline {section}{\numberline {6.1} Experimental Domains}{57}{section.6.1}%
-\contentsline {section}{\numberline {6.2} Evaluation Metrics}{58}{section.6.2}%
-\contentsline {subsection}{\numberline {6.2.1} Approximate Exploitability}{58}{subsection.6.2.1}%
-\contentsline {section}{\numberline {6.3} Experiment Setup}{59}{section.6.3}%
-\contentsline {section}{\numberline {6.4} Results}{61}{section.6.4}%
+\contentsline {chapter}{\xnumberline {6\hskip 2em}\uppercase {Deep Multi-Agent RL Experiments}}{55}{chapter.6}%
+\contentsline {section}{\numberline {6.1} Experimental Domains}{55}{section.6.1}%
+\contentsline {section}{\numberline {6.2} Evaluation Metrics}{56}{section.6.2}%
+\contentsline {subsection}{\numberline {6.2.1} Approximate Exploitability}{56}{subsection.6.2.1}%
+\contentsline {section}{\numberline {6.3} Experiment Setup}{57}{section.6.3}%
+\contentsline {section}{\numberline {6.4} Results}{59}{section.6.4}%
+\contentsline {section}{\numberline {6.5} Algorithm Design Choices}{61}{section.6.5}%
+\contentsline {subsection}{\numberline {6.5.1} NeuRD-fix}{61}{subsection.6.5.1}%
+\contentsline {subsection}{\numberline {6.5.2} Entropy Regularization}{62}{subsection.6.5.2}%
+\contentsline {subsection}{\numberline {6.5.3} Trust-region constraints}{62}{subsection.6.5.3}%
+\contentsline {subsection}{\numberline {6.5.4} EG and Optimism}{63}{subsection.6.5.4}%
 \addvspace {\baselineskip }
 \contentsline {chapter}{\xnumberline {7\hskip 2em}\uppercase {Discussion}}{64}{chapter.7}%
 \addvspace {\baselineskip }

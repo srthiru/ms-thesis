@@ -255,24 +255,6 @@ Golowich, N., Pattathil, S., Daskalakis, C., and Ozdaglar, A.:
 \newblock Last {{Iterate}} is {{Slower}} than {{Averaged Iterate}} in {{Smooth Convex-Concave Saddle Point Problems}}.
 \newblock In {\itshape  Proceedings of {{Thirty Third Conference}} on {{Learning Theory}} }, pages 1758--1784. {PMLR}, July 2020.
 
-\bibitem{perolatPoincare2021}
-
-Perolat, J., Munos, R., Lespiau, J.-B., Omidshafiei, S., Rowland, M., Ortega, P., Burch, N., Anthony, T., Balduzzi, D., Vylder, B.~D., Piliouras, G., Lanctot, M., and Tuyls, K.:
-\newblock From {{Poincar\'e Recurrence}} to {{Convergence}} in {{Imperfect Information Games}}: {{Finding Equilibrium}} via {{Regularization}}.
-\newblock In {\itshape  Proceedings of the 38th {{International Conference}} on {{Machine Learning}} }, pages 8525--8535. {PMLR}, July 2021.
-
-\bibitem{chhablaniCounterfactual2021}
-
-Chhablani, C. and Kash, I.~A.:
-\newblock Counterfactual {{Multiagent Policy Gradients}} and {{Regret Minimization}} in {{Cooperative Settings}}.
-\newblock In {\itshape  {{AAAI}} }, 2021.
-
-\bibitem{foersterCounterfactual2018}
-
-Foerster, J., Farquhar, G., Afouras, T., Nardelli, N., and Whiteson, S.:
-\newblock Counterfactual {{Multi-Agent Policy Gradients}}.
-\newblock {\itshape  Proceedings of the AAAI Conference on Artificial Intelligence }, 32(1), April 2018.
-
 \bibitem{lisyEquilibrium2017}
 
 Lisy, V. and Bowling, M.:
@@ -304,5 +286,23 @@ Schulman, J., Moritz, P., Levine, S., Jordan, M., and Abbeel, P.:
 
 Lanctot, M., Lockhart, E., Lespiau, J.-B., Zambaldi, V., Upadhyay, S., P{\'e}rolat, J., Srinivasan, S., Timbers, F., Tuyls, K., Omidshafiei, S., Hennes, D., Morrill, D., Muller, P., Ewalds, T., Faulkner, R., Kram{\'a}r, J., De~Vylder, B., Saeta, B., Bradbury, J., Ding, D., Borgeaud, S., Lai, M., Schrittwieser, J., Anthony, T., Hughes, E., Danihelka, I., and {Ryan-Davis}, J.:
 \newblock {{OpenSpiel}}: {{A Framework}} for {{Reinforcement Learning}} in {{Games}}, September 2020.
+
+\bibitem{perolatPoincare2021}
+
+Perolat, J., Munos, R., Lespiau, J.-B., Omidshafiei, S., Rowland, M., Ortega, P., Burch, N., Anthony, T., Balduzzi, D., Vylder, B.~D., Piliouras, G., Lanctot, M., and Tuyls, K.:
+\newblock From {{Poincar\'e Recurrence}} to {{Convergence}} in {{Imperfect Information Games}}: {{Finding Equilibrium}} via {{Regularization}}.
+\newblock In {\itshape  Proceedings of the 38th {{International Conference}} on {{Machine Learning}} }, pages 8525--8535. {PMLR}, July 2021.
+
+\bibitem{chhablaniCounterfactual2021}
+
+Chhablani, C. and Kash, I.~A.:
+\newblock Counterfactual {{Multiagent Policy Gradients}} and {{Regret Minimization}} in {{Cooperative Settings}}.
+\newblock In {\itshape  {{AAAI}} }, 2021.
+
+\bibitem{foersterCounterfactual2018}
+
+Foerster, J., Farquhar, G., Afouras, T., Nardelli, N., and Whiteson, S.:
+\newblock Counterfactual {{Multi-Agent Policy Gradients}}.
+\newblock {\itshape  Proceedings of the AAAI Conference on Artificial Intelligence }, 32(1), April 2018.
 
 \end{thebibliography}

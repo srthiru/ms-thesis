@@ -87,17 +87,6 @@ The simple nature of the clipped objective makes it easier to extend this to oth
 RNNs, and parameter sharing where it was difficult to apply TRPO.
 
 \section[MDPO]{Mirror Descent Policy Optimization}
- (\revdone{For trust region methods: This seems like it mostly belongs in 3.1.2 and then you need to rework this introduction;})
-
- (\revdone{For MDPO citation: Make sure you include the citation at least the first time you reference them by name so that the reader can get evrything synced up})
-
- (\revdone{for tabular mirror descent guarantees: Which are?
-  need to establish some background either in 2 or here})
-
- (\revdone{On-policy only: Needs an explanation why}).
-
-(\revdone{Needs founddations somewhere}).
-
 Now, we move on to the first mirror descent-based algorithm, Mirror Descent Policy
 Optimization~\cite{tomarMirror2022} (MDPO).
 Although the trust-region methods discussed in the previous section approach the problem of
@@ -165,14 +154,6 @@ We use this update for the tabular experiments and the original on-policy
 formulation for the neural experiments.
 
 \section[MMD]{Magnetic Mirror Descent}
- (\revdone{It isn't immediately clear where the entropy and regularization are in
-	 (3.4)})
- (\revdone{For (3.7): This is an equation, not al algorithm, because it doesn't tell you how to compute the
-	 minimumum})
- (\revdone{For discussion on MMD vs CFR performance: Cite?
-	 Also, have you introduced CFR at some point?
- })
-
 The second extension of mirror descent that we study is Magnetic Mirror Descent (MMD).
 Sokota~et.~al~\cite{sokotaUnified2023}, study relation between equilibrium solving and Variational
 Inequalities with composite structures.
