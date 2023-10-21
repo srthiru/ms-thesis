@@ -172,35 +172,40 @@
 \end{list}
 %\end{noindent}
 
-\summary
-
-\rev{Remove overlaps with introduction, and shorten a bit.
-}
-
-Multiagent Systems (MAS)~\cite{tuylsMultiagent2012} are frameworks of problems of distributed
-nature with independent actors called agents that cooperate or compete to achieve some outcome.
-Due to the complexity of such problems, designing efficient algorithms for them can be challenging.
-Machine learning and Reinforcement learning present opportunities for creating learning algorithms
-for agents in Multi-agent settings.
-Multiagent Reinforcement Learning (MARL) as a research area deals with designing efficient and
-performant RL algorithms for general multiagent problems.
-Two-player zero-sum games are instances of multiagent systems that are purely competitive in
-nature.
-Due to their unique structure, two-player zero-sum games can also be represented as saddle-point
-problems that provide certain analytical properties.
-This presents an opportunity to study and design optimization algorithms under the dynamics of
-two-player zero-sum games, with an aim to extend these algorithms to general multiagent settings.
-Two-player zero-sum games also model other learning problems~\cite{goodfellowGenerative2014} and as
-such these advances can also be equivalently applied or adapted to solve them.
-Mirror Descent is a popular first-order optimization algorithm that has wide applications.
-In this work, we study mirror-descent-based reinforcement learning algorithms in the context of
-two-player zero-sum games.
-We evaluate the performance of these algorithms in benchmark extensive-form games under function
-approximation and summarize our findings regarding the effectiveness of mirror-descent-based
-reinforcement learning algorithms in the multiagent setting and the effect of the modifications we
-apply.
-Through this study, we provide some recommendations for designing MARL algorithms and close with
-some remarks about future research directions.
+\summary Due to the rising
+popularity of reinforcement learning as a practical approach in tackling problems in various
+domains, there has been increased efforts in designing reinforcement algorithms for multi-agent
+settings that are theoretically grounded, and practically useful.
+Reinforcement learning has seen a wide adaptation as a practical approach in tackling various
+problem domains with strides made in theoretical understanding, methods to curb limitations, and
+strong empirical performance in a diverse range of applications.
+This has accelerated the study of designing reinforcement learning algorithms for the multi-agent
+setting through the formulation of novel frameworks, and adaptation of ideas from other research
+areas.
+However, many such algorithms have complex implementation details and training procedures compared
+to their single-agent counterparts.
+It is of practical importance to design multi-agent reinforcement algorithms that are less
+convoluted and exhibit strong empirical performance in converging to an optimal or a near-optimal
+solution.
+To this end, we study reinforcement learning algorithms in the context of the fundamental
+multi-agent setting of two-player zero-sum games.
+We examine recent advancements in adapting mirror descent as a practical deep reinforcement
+learning algorithm.
+Specifically, we study two algorithms that are theoretically well-motivated and exhibit a strong
+performance in single, and multi-agent settings, namely - Mirror Descent Policy Optimization and
+Magnetic Mirror Descent.
+We propose the incorporation of certain modifications to these algorithms to improve their
+convergence behavior (particularly to induce or speed up last-iterate convergence) in two-player
+zero-sum games.
+The modifications we study, namely - the Neural Replicator Dynamics, Extragradient updates, and
+Optimistic Updates were originally proposed and studied under varying contexts.
+In this work, we aim to bring these together as potential candidates that can be incorporated into
+reinforcement learning algorithms and study their effects when combined with the above-mentioned
+algorithms.
+We experimentally evaluate the performance of these algorithms in tabular normal-form settings and
+in extensive-form games under function approximation.
+Through this study, we provide some recommendations for designing multi-agent reinforcement
+learning algorithms and close with some remarks about future research directions.
 
 \include{chapters/0_intro.tex}
 \include{chapters/outline.tex}

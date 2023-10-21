@@ -27,7 +27,7 @@ gradient of this objective function can be estimated without knowledge of the en
 distribution as long as it is stationary conditioned on the current policy.
 % One key challenge in Policy gradient methods is that the evaluation of performance of a policy% depends on the state distribution which could be unknown.
 
-$$ \nabla_\theta J(\theta) \propto \sum_s \mu(s) \sum_a q_\pi(s,a) \nabla_\theta \pi_theta(a|s) $$
+$$ \nabla_\theta J(\theta) \propto \sum_s \mu(s) \sum_a q_\pi(s,a) \nabla_\theta \pi_\theta(a|s) $$
 
 \textbf{Softmax Policy Gradients}
 For discrete action settings, it is common to use a parameterized function $y_\theta(s, a)$ to
@@ -96,9 +96,9 @@ negative entropy regularization along with an adaptive scaling for the proximal 
 A similar study of trust-region methods in the case of policies represented using neural networks
 was done in~\cite{liuNeural2019}.
 
-Following these theoretical results, Tomar et.~al~\cite{tomarMirror2022} present MDPO as a
-practical implementation of extending mirror descent as a deep reinforcement learning algorithm,
-that takes a mirror descent step at each iteration to update the policy:
+Following these theoretical results, Tomar et.~al~\cite{tomarMirror2022} present MDPO, a practical
+implementation of mirror descent as a deep reinforcement learning algorithm that takes a mirror
+descent step at each iteration to update the policy:
 \begin{equation}
 	\label{eqn:mdrl} \pi_{k+1}(.
 	|s) \leftarrow \arg
@@ -107,8 +107,8 @@ that takes a mirror descent step at each iteration to update the policy:
 	\frac{1}{t_k}
 	KL(s; \pi, \pi_k)
 \end{equation} This form of update is analagous to the trust-region methods
-discussed above, however is obtained from an optimization perspective instead of tackling the
-problem of performing conservative policy updates.
+discussed above, however is obtained from an optimization perspective instead of conservative
+policy updates.
 For a parameterized policy $\pi_{\theta}$, the on-policy MDPO update is given by: $$ \theta_{k+1}
 	\leftarrow \arg \max_{\theta} J(\theta, \theta_k)$$ $$ \text{where}, J(\theta, \theta_k) = \E_{s
 		\sim \rho_{\theta_k}} [ \E_{a \sim \pi_\theta}[A_{\theta_k}(s,a)] - \frac{1}{t_k} KL(s; \pi_\theta,
@@ -267,7 +267,7 @@ For a parameterized policy $\pi_\theta$, when $\psi$ is negative entropy it can 
 terms as follows:
 \begin{equation}
 	\label{eqn:mmdbf} \pi_{ \theta_{k+1}}(s,a) = \arg \max_{\theta}
-	\E_{s \sim \rho_{\theta_k}} \left[ \E_{a \sim \pi_{\theta_k}} [Q_{\theta_k}(s, a)] + \alpha
+	\E_{s \sim \rho_{\theta_k}} \left[ \E_{a \sim \pi_{\theta_k}} [A_{\theta_k}(s, a)] + \alpha
 		H(\pi_\theta) - \frac{1}{\eta} KL(\pi_\theta, \pi_{\theta_k}) \right],
 \end{equation}
 

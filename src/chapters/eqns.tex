@@ -1,0 +1,27 @@
+B_\phi(x, y) = \phi(x) - \phi(y) - \langle \nabla \phi(y), x-y \rangle
+
+x_{k+1}
+= \arg \min_{x \in \mathcal{X}} \left\{ \left \langle \nabla f(x_k), x-x_k \right \rangle +
+\frac{1}{t_k}B_\phi(x, x_k) \right\}
+
+\pi_{k+1}(.
+|s) \leftarrow \arg \max_{\pi \in \Pi} \mathbb{E}_{a \sim \pi} [A_{\pi_k}
+(s,a)] - \frac{1}{t_k} KL(s; \pi, \pi_k)
+
+%NeuRD
+
+%EG
+\bar{x}_{k} = P_{\mathcal{X}}[x_k - \eta f(x_k, y_k)]
+\\
+\bar{y}_{k} = P_{\mathcal{Y}}[y_k + \eta f(x_k, y_k)]
+\\
+x_{k+1} = P_{\mathcal{X}}[x_k - \eta f(\bar{x}_k, \bar{y}_k)]
+\\
+y_{k+1} = P_{\mathcal{Y}}[y_k + \eta f(\bar{x}_k, \bar{y}_k)]
+
+% Opt
+\bar{x}_{k} = P_{\mathcal{X}}[x_k - \eta f(\bar{x}_{k-1}, \bar{y}_{k-1})] \\
+\bar{y}_{k} = P_{\mathcal{Y}}[y_k + \eta f(\bar{x}_{k-1}, \bar{y}_{k-1})] \\
+x_{k+1} = P_{\mathcal{X}}[x_k - \eta f(\bar{x}_k, \bar{y}_k)] \\
+y_{k+1} = P_{\mathcal{Y}}[y_k + \eta f(\bar{x}_k, \bar{y}_k)]
+

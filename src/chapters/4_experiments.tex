@@ -87,7 +87,7 @@ computing a best response at every state.
 The difference between the value that this best-response opponent can acheive and the game value is
 the exploitability of the current policy.
 
-\fillin{ - Exploitability formal expression in terms of best responses, and value.}
+\note{Added a formal expression of exploitability in terms of best responses, and value.}
 
 \section{Experiment Setup}
 For experiments in this section, we use softmax-parameterized tabular policies and assume an
@@ -183,6 +183,7 @@ this work, for the problem setting of two-player zero-sum normal form games.
 
 The tabular experiments, and the above observations provide some answers to questions~\ref{qn1},
 and~\ref{qn2}.
+<<<<<<< Updated upstream
 Based on the above discussion on the experimental results, we cast the various algorithms discussed
 as extensions of policy gradient methods with different added components.
 These components are namely
@@ -200,3 +201,7 @@ Hence we dub variants of PG as MPG (Modified Policy Gradients), and study variat
 algorithm with the addition of the above components (by themselves, and in combination) in
 large-scale benchmark games under function approximation to evaluate their applicability, and
 scalability in this challenging setting.
+=======
+In the next section, we implement the methods as deep RL algorithms and evaluate them on
+extensive-form games.
+>>>>>>> Stashed changes

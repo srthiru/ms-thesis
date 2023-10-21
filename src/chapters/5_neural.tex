@@ -3,17 +3,11 @@ All of the methods discussed in this work are typically implemented in function 
 settings.
 Hence, it is important to evaluate if the observed performance improvements carry over when the
 policy parameters, and the value approximation are both represented using neural networks.
-
-As mentioned, in this section we study the following variants of MPG by incorporating combinations
-of the following modifications - NeuRD Fix (nrd), Entropy regularization (ent), KL Penalty (kl),
-Optimistic Updates (opt).
-So for instance, a variant that uses the NeuRD fix and entropy regularization will be referred to
-as ``MPG-nrd-ent'' within the experiments.
 Expanding on our the observations from the tabular experiments, we proceed to evaluate the
 algorithms in large-scale 2p0s games to answer question~\ref{qn3}.
 For the neural experiments, we study the effect of the NeuRD-fix, and the utilization of
-Optimistic-variants of the popular Adam optimizer (Optimistic-Adam) when paired with deep RL
-algorithms.
+Optimistic-variants of the popular Adam optimizer (Optimistic-Adam) when paired with a deep RL
+implementations of the algorithms in this study.
 
 \section{Experimental Domains}
 % In this section, we evaluate the deep RL variant of these algorithms in extensive-form game
@@ -65,7 +59,7 @@ joint policy to be exploited, then the approximate exploitability is given by:
 \begin{equation}
 	\label{eqn:appxexp} \text{Exp}_{appx} (\pi_{BR}, \pi_{fixed}) = \frac{1}{N} \left[ \sum_{i=1}^{N/2}
 		\E_{a \sim \pi_1, \pi_{BR}} [R] + \sum_{i=1}^{N/2} \E_{a \sim \pi_{BR}, \pi_2} [R] \right]
-\end{equation} \fillin{TBD: rephrase the equation in terms of cumulative episodic rewards.
+\end{equation} \note{Rephrase the equation in terms of cumulative episodic rewards.
 }
 
 \section{Experiment Setup}
@@ -134,11 +128,13 @@ performance.
 	\end{subfigure}
 	\begin{subfigure}[b]{0.6\textwidth}
 		\includegraphics[width=\textwidth]{figs/ahex22.png}
-		\caption{Abrupt Dark Hex (2$\times$2) (\red{1M steps version to be added})}
+		\caption{Abrupt Dark Hex (2$\times$2)}
 	\end{subfigure}
 	\caption{Performance in small EFGs, measured by exact exploitability.}
 	\label{fig:neuralsmall1}
 \end{figure}
+
+\note{Plots for optimistic variants to be added here.}
 
 % We also compute approximate exploitability for the smaller games by training a DQN best-response
 % agent for 1M steps against the fixed trained agents.
@@ -159,59 +155,12 @@ performance.
 	\label{fig:neural2}
 \end{figure}
 
-\section{Algorithm Design Choices}
-
 Firstly, echoing the observations from the tabular experiments, we observe that the addition of
 NeuRD-fix improved the performance of MMD.
 Secondly, there is no consistent benefit of using the optimistic version of the optimizers in
 contrast to their effect in normal-form games.
 
-\fillin{We also evaluate these algorithms by having the trained agents play against each other in a
-	head-to-head manner.}
+We also evaluate these algorithms by having the trained agents play against each other in a
+head-to-head manner.
+\note{Head-to-head tabulation results to be added here.}
 
-\subsection{NeuRD-fix}
-The NeuRD-loss has also been previously applied on top of algorithms to improve performance or
-induce convergence in competitive and cooperative settings.
-Perolat et.~al,~\cite{perolatMastering2022} introduced Regularized Nash Dynamics (R-NAD) that
-utilizes NeuRD as a fixed-point approximator along with adaptive
-regularization~\cite{perolatPoincare2021} to achieve last-iterate convergence in the game of
-Stratego.
-Chhablani et.~al,~\cite{chhablaniCounterfactual2021} motivated the choice of an advantage baseline
-in COMA~\cite{foersterCounterfactual2018} through no-regret literature and demonstrated that
-applying the NeuRD loss to COMA's objective improved its performance even in cooperative settings
-such as identical-interest games.
-The improved performance of adapting the NeuRD-fix with mirror-descent based methods, and other
-techniques for last-iterate convergence is also evident from our experimental evaluations.
-Through this, we reinforce the idea that the NeuRD-loss can be more generally adapted into loss
-functions of various algorithms in multi-agent settings.
-%is there a benefit to adding NeuRD in single-agent setting? even if the reward function is not dynamic.
-
-\subsection{Entropy Regularization}
-As noted in the tabular experiments, in some problem settings there might be faster methods to
-induce last-iterate convergence that adaptive regularization.
-However, entropy regularization is more widely studied within single, and multi-agent RL.
-Adaptive entropy regularization is also relatively easier to implement, and less constraining in
-terms of how each player updates their policy as compared to modifications like EG, or Optimism.
-In single-agent RL, entropy regularization is motivated as a means to encourage exploration, and
-make the policies more robust.
-In multi-agent RL, it has been studied more specifically to induce convergence even including in
-NeuRD, and MMD.
-Given the universal inclusion, and multiple perceived benefits, entropy regularization is
-considered a standard design choice to include in most algorithms.
-
-\subsection{Trust-region constraints}
-Trust-region constraints form the basis of state-of-the-art RL algorithms like PPO.
-The presence of a relatively strongly-convex proximal operator is necessary for deriving algorithms
-with strong performance guarantees.
-
-\subsection{EG and Optimism}
-Finally, we highlight that the best performing variants are on top of SPG as opposed to MDPO, or
-MMD as can be seen from~\ref{fig:tabne_last}.
-This is surprising as the latter methods were proposed as improvements over SPG in single, and
-multi-agent settings.
-But, this indicates that EG/Optimistic updates provide a better last-iterate convergence rates
-compared to adaptive entropy regularization with trust-region constraints.
-While the convergence rates of EG, and Optimistic updates are well-studied, it is not the case for
-adaptive regularization.
-Most notably, Optimistic-NeuRD (SPG + NeuRD + Optimism) exhibits a faster last-iterate convergence
-that is straightforward to extend to more complicated settings.

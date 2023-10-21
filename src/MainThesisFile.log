@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.7.10)  15 AUG 2023 15:55
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.7.10)  16 AUG 2023 19:45
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1105,10 +1105,10 @@ Overfull \hbox (3.33212pt too wide) in paragraph at lines 210--212
 
 [14] [15] [16] [17] [18] [19] [20] [21] [22]
 
-LaTeX Warning: Citation `beckMirror2003a' on page 23 undefined on input line 486.
+LaTeX Warning: Citation `beckMirror2003a' on page 23 undefined on input line 485.
 
 [23] [24] [25] [26])
-Overfull \hbox (9.54733pt too wide) in paragraph at lines 575--207
+Overfull \hbox (9.54733pt too wide) in paragraph at lines 574--212
 []\OT1/cmr/m/n/10.95 Counterfactual Re-gret min-i-miza-tion (CFR) is an ex-ten-sion of re-gret min-i-miza-tion to extensive-
  []
 
@@ -1189,7 +1189,7 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 
 
 ] [40]
-LaTeX Font Info:    Trying to load font information for U+dsrom on input line 78.
+LaTeX Font Info:    Trying to load font information for U+dsrom on input line 77.
  (/opt/texlive/2023/texmf-dist/tex/latex/doublestroke/Udsrom.fd
 File: Udsrom.fd 1995/08/01 v0.1 Double stroke roman font definitions
 ) (./figs/tabular/altvsim.pgf) [41] [42] [43] [44] [45]) [46]
@@ -1261,7 +1261,7 @@ Overfull \hbox (14.1896pt too wide) in paragraph at lines 129--132
  []|  [] 
  []
 
-[50] [51] [52] [53]) [54]
+[50] [51] [52]) [53] [54]
 \openout2 = `chapters/5_neural.aux'.
 
  (./chapters/5_neural.tex
@@ -1293,70 +1293,70 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 
 
 ] [56] [57] [58]
-<figs/kpoker.png, id=832, 2938.98pt x 1533.73pt>
+<figs/kpoker.png, id=835, 2938.98pt x 1533.73pt>
 File: figs/kpoker.png Graphic file (type png)
 <use figs/kpoker.png>
-Package pdftex.def Info: figs/kpoker.png  used on input line 132.
+Package pdftex.def Info: figs/kpoker.png  used on input line 126.
 (pdftex.def)             Requested size: 271.01524pt x 141.42314pt.
 
 
 Package caption Warning: Cannot determine current font size.
-(caption)                Try setting it with `size=' explicitly on input line 133.
+(caption)                Try setting it with `size=' explicitly on input line 127.
 See the caption package documentation for explanation.
 
 
 Package caption Warning: Cannot determine current font size.
-(caption)                Try setting it with `size=' explicitly on input line 133.
+(caption)                Try setting it with `size=' explicitly on input line 127.
 See the caption package documentation for explanation.
 
-<figs/ahex22.png, id=834, 2938.98pt x 1533.73pt>
+<figs/ahex22.png, id=837, 2938.98pt x 1533.73pt>
 File: figs/ahex22.png Graphic file (type png)
 <use figs/ahex22.png>
-Package pdftex.def Info: figs/ahex22.png  used on input line 136.
+Package pdftex.def Info: figs/ahex22.png  used on input line 130.
 (pdftex.def)             Requested size: 271.01524pt x 141.42314pt.
 
 Package caption Warning: Cannot determine current font size.
-(caption)                Try setting it with `size=' explicitly on input line 137.
+(caption)                Try setting it with `size=' explicitly on input line 131.
 See the caption package documentation for explanation.
 
 
 Package caption Warning: Cannot determine current font size.
-(caption)                Try setting it with `size=' explicitly on input line 137.
+(caption)                Try setting it with `size=' explicitly on input line 131.
 See the caption package documentation for explanation.
 
 [59]
-<figs/pttt.png, id=841, 2537.48pt x 1332.98pt>
+<figs/pttt.png, id=844, 2537.48pt x 1332.98pt>
 File: figs/pttt.png Graphic file (type png)
 <use figs/pttt.png>
-Package pdftex.def Info: figs/pttt.png  used on input line 151.
+Package pdftex.def Info: figs/pttt.png  used on input line 147.
 (pdftex.def)             Requested size: 180.67224pt x 94.90462pt.
 
 
 Package caption Warning: Cannot determine current font size.
-(caption)                Try setting it with `size=' explicitly on input line 152.
+(caption)                Try setting it with `size=' explicitly on input line 148.
 See the caption package documentation for explanation.
 
 
 Package caption Warning: Cannot determine current font size.
-(caption)                Try setting it with `size=' explicitly on input line 152.
+(caption)                Try setting it with `size=' explicitly on input line 148.
 See the caption package documentation for explanation.
 
-<figs/ahex33.png, id=842, 2537.48pt x 1332.98pt>
+<figs/ahex33.png, id=845, 2537.48pt x 1332.98pt>
 File: figs/ahex33.png Graphic file (type png)
 <use figs/ahex33.png>
-Package pdftex.def Info: figs/ahex33.png  used on input line 155.
+Package pdftex.def Info: figs/ahex33.png  used on input line 151.
 (pdftex.def)             Requested size: 180.67224pt x 94.90462pt.
 
 Package caption Warning: Cannot determine current font size.
-(caption)                Try setting it with `size=' explicitly on input line 156.
+(caption)                Try setting it with `size=' explicitly on input line 152.
 See the caption package documentation for explanation.
 
 
 Package caption Warning: Cannot determine current font size.
-(caption)                Try setting it with `size=' explicitly on input line 156.
+(caption)                Try setting it with `size=' explicitly on input line 152.
 See the caption package documentation for explanation.
 
-[60 <./figs/kpoker.png> <./figs/ahex22.png>] [61 <./figs/pttt.png> <./figs/ahex33.png>]) [62] [63]
+[60 <./figs/kpoker.png> <./figs/ahex22.png>]) [61 <./figs/pttt.png> <./figs/ahex33.png>]
 \openout2 = `chapters/6_discussion.aux'.
 
  (./chapters/6_discussion.tex
@@ -1382,12 +1382,12 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `\uppercase' on input line 1.
 
-) [64
+[62
 
 
 
 
-]
+] [63]) [64] [65]
 \openout2 = `chapters/7_conclusion.aux'.
 
  (./chapters/7_conclusion.tex
@@ -1413,7 +1413,7 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `\uppercase' on input line 1.
 
-) [65
+) [66
 
 
 
@@ -1421,17 +1421,17 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 ]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\hbox' on input line 218.
+(hyperref)                removing `\hbox' on input line 223.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\@tempdima' on input line 218.
+(hyperref)                removing `\@tempdima' on input line 223.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\hss' on input line 218.
+(hyperref)                removing `\hss' on input line 223.
 
-[66
+[67
 
 
 
@@ -1452,7 +1452,7 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `\hss' on input line 1.
 
-[67
+[68
 
 
 ]
@@ -1469,7 +1469,7 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `\hss' on input line 5.
 
-[68
+[69
 
 ]
 Appendix C.
@@ -1485,7 +1485,7 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `\hss' on input line 17.
 
-[69
+[70
 
 ]
 Appendix D.
@@ -1501,29 +1501,29 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `\hss' on input line 20.
 
-) [70
+) [71
 
 ]
 CITED LITERATURE.
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\hbox' on input line 225.
+(hyperref)                removing `\hbox' on input line 230.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\@tempdima' on input line 225.
+(hyperref)                removing `\@tempdima' on input line 230.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\hss' on input line 225.
+(hyperref)                removing `\hss' on input line 230.
 
-(./MainThesisFile.bbl [71
+(./MainThesisFile.bbl [72
 
 
 
-] [72{/opt/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}] [73] [74] [75]) [76] (./MainThesisFile.aux (./chapters/0_intro.aux) (./chapters/outline.aux) (./chapters/1_background.aux) (./chapters/2_mmd.aux) (./chapters/3_updates.aux) (./chapters/4_experiments.aux) (./chapters/5_neural.aux
+] [73{/opt/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}] [74] [75] [76]) [77] (./MainThesisFile.aux (./chapters/0_intro.aux) (./chapters/outline.aux) (./chapters/1_background.aux) (./chapters/2_mmd.aux) (./chapters/3_updates.aux) (./chapters/4_experiments.aux) (./chapters/5_neural.aux
 
-LaTeX Warning: Some of the footnotes might have moved. Rerun to fix the output on input line 19.
+LaTeX Warning: Some of the footnotes might have moved. Rerun to fix the output on input line 14.
 
 ) (./chapters/6_discussion.aux) (./chapters/7_conclusion.aux) (./chapters/appendix.aux))
  ***********
@@ -1535,21 +1535,21 @@ L3 programming layer <2023-06-16>
 LaTeX Warning: There were undefined references.
 
 Package rerunfilecheck Info: File `MainThesisFile.out' has not changed.
-(rerunfilecheck)             Checksum: 037EA911651013D39C84BA30E59335FD;10969.
+(rerunfilecheck)             Checksum: B857C34A9BA1FA033A56F18A406CDC46;11169.
  ) 
 Here is how much of TeX's memory you used:
- 42181 strings out of 475723
- 950305 string characters out of 5784843
- 2583763 words of memory out of 5000000
- 61864 multiletter control sequences out of 15000+600000
+ 42184 strings out of 475723
+ 950326 string characters out of 5784843
+ 2584769 words of memory out of 5000000
+ 61865 multiletter control sequences out of 15000+600000
  531105 words of font info for 102 fonts, out of 8000000 for 9000
  1144 hyphenation exceptions out of 8191
  99i,16n,101p,1093b,620s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </opt/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></opt/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></opt/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></opt/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb></opt/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></opt/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></opt/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></opt/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></opt/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></opt/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></opt/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></opt/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></opt/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></opt/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></opt/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></opt/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></opt/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></opt/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></opt/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></opt/texlive/2023/texmf-dist/fonts/type1/public/doublestroke/dsrom10.pfb></opt/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></opt/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfti1095.pfb>
-Output written on MainThesisFile.pdf (85 pages, 1094852 bytes).
+Output written on MainThesisFile.pdf (86 pages, 1096971 bytes).
 PDF statistics:
- 1084 PDF objects out of 1200 (max. 8388607)
- 935 compressed objects within 10 object streams
- 249 named destinations out of 1000 (max. 500000)
- 529 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1091 PDF objects out of 1200 (max. 8388607)
+ 941 compressed objects within 10 object streams
+ 251 named destinations out of 1000 (max. 500000)
+ 537 words of extra memory for PDF output out of 10000 (max. 10000000)
 

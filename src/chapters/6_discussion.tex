@@ -1,0 +1,98 @@
+<<<<<<< Updated upstream
+=======
+\chapter{Discussion}
+
+Before concluding the thesis, we discuss the broader implications of the observations from our
+experimental studies.
+Through this discussion, we hope to bring together the ideas from this thesis, and the other
+developments that led to the conceptualization of the modified algorithms by drawing upon their
+importance in multi-agent and reinforcement learning research.
+We close this sections with some remarks regarding interesting directions for future theoretical,
+and empirical research work.
+
+\section{Algorithm Design Choices:}
+We begin by interpreting the various algorithms and modifications of the proposed algorithms as
+design choices that can be a part of a higher-level framework in designing Multi-agent
+reinforcement learning algorithms.
+
+\subsection{NeuRD-fix}
+The NeuRD-loss has also been previously applied on top of algorithms to improve performance or
+induce convergence in competitive and cooperative settings.
+Perolat et.~al,~\cite{perolatMastering2022} introduced Regularized Nash Dynamics (R-NAD) that
+utilizes NeuRD as a fixed-point approximator along with adaptive
+regularization~\cite{perolatPoincare2021} to achieve last-iterate convergence in the game of
+Stratego.
+Chhablani et.~al,~\cite{chhablaniCounterfactual2021} motivated the choice of an advantage baseline
+in COMA~\cite{foersterCounterfactual2018} through no-regret literature and demonstrated that
+applying the NeuRD loss to COMA's objective improved its performance even in cooperative settings
+such as identical-interest games.
+The improved performance of adapting the NeuRD-fix with mirror-descent based methods, and other
+techniques for last-iterate convergence is also evident from our experimental evaluations.
+Through this, we reinforce the idea that the NeuRD-loss can be more generally adapted into loss
+functions of various algorithms in multi-agent settings.
+%is there a benefit to adding NeuRD in single-agent setting? even if the reward function is not dynamic.
+
+\section{Entropy Regularization}
+As noted in the tabular experiments, in some problem settings there might be faster methods to
+induce last-iterate convergence that adaptive regularization.
+However, entropy regularization is more widely studied within single, and multi-agent RL.
+Adaptive entropy regularization is also relatively easier to implement, and less constraining in
+terms of how each player updates their policy as compared to modifications like EG, or Optimism.
+In single-agent RL, entropy regularization is motivated as a means to encourage exploration, and
+make the policies more robust.
+In multi-agent RL, it has been studied more specifically to induce convergence even including in
+NeuRD, and MMD.
+Given the universal inclusion, and multiple perceived benefits, entropy regularization is
+considered a standard design choice to include in most algorithms.
+
+\subsection{Trust-region constraints}
+Trust-region constraints form the basis of state-of-the-art RL algorithms like PPO.
+The presence of a relatively strongly-convex proximal operator is necessary for deriving algorithms
+with strong performance guarantees.
+
+\subsection{EG and Optimism}
+Finally, we highlight that the best performing variants are on top of SPG as opposed to MDPO, or
+MMD as can be seen from~\ref{fig:tabne_last}.
+This is surprising as the latter methods were proposed as improvements over SPG in single, and
+multi-agent settings.
+But, this indicates that EG/Optimistic updates provide a better last-iterate convergence rates
+compared to adaptive entropy regularization with trust-region constraints.
+While the convergence rates of EG, and Optimistic updates are well-studied, it is not the case for
+adaptive regularization.
+Most notably, Optimistic-NeuRD (SPG + NeuRD + Optimism) exhibits a faster last-iterate convergence
+that is straightforward to extend to more complicated settings.
+
+\section{Directions for Future Work}
+From the above discussion, it is clear that many of these ideas can be treated as components of a
+meta-algorithmic framework that is reoccurring throughout the literature.
+However, an accurate formulation of such a framework is eluding due to the varying nature of the
+implementation details that make the algorithms practically useful.
+Nevertheless, we initiate a rudimentary outline of such a framework in discussing directions for
+extension of this work for further study.
+As can be seen from the specification of the algorithms in this study, the framework can be based
+on a form of Policy gradient method themselves.
+And, the methods, and their modifications in this study can be treated as components that can be
+drawn into this framework to produce instantiations of this unified framework.
+% These components are namely
+% \begin{itemize}
+% 	\item NeuRD fix
+% 	\item Entropy regularization
+% 	\item KL
+% 	      Penalty / Trust-region constraints
+% 	\item Extragradient and Optimistic Updates
+% \end{itemize}
+% Both MDPO, and MMD can be viewed as variants of PG methods with the added
+% components of an annealed KL-Divergence penalty, and adaptive entropy regularization.
+% Hence we dub variants of PG as MPG (Modified Policy Gradients), and study variations of this
+% algorithm with the addition of the above components (by themselves, and in combination) in
+% large-scale benchmark games under function approximation to evaluate their applicability, and
+% scalability in this challenging setting.
+However, to formulate such a unified framework in a precise and rigorous manner, many of these
+algorithmic implementation details need to be rooted down through a more fundamental motivation
+than as a part of algorithms for very specific problem settings.
+Alternatively, in the absence of a strong theoretical underpinning for the unified framework, these
+reoccurring themes can be brought together as a part of a broader experimental framework akin to
+the Rainbow study~\fillin{cite} in single-agent RL.
+This requires performing extensive hyperparameter tuning, and ablation studies which can be a
+computationally challenging undertaking.
+>>>>>>> Stashed changes

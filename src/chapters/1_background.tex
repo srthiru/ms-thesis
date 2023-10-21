@@ -227,8 +227,6 @@ to~\cite{shohamMultiagent2008,osborneintroduction2004} for a more detailed discu
 
 \section{Reinforcement
   Learning}
-\rev{Connect RL with 2.1; can define various settings to be instances of GT problems like stochastic games}.
-
 Reinforcement learning (RL)~\cite{suttonReinforcement2018} deals with designing algorithms for
 \textit{agents} that interactively learn to maximize a \textit{reward} signal in an
 \textit{environment}.
@@ -352,6 +350,7 @@ Hence, designing algorithms that tackle the above issues is critical for better 
 applications.
 To this end, there have been many attempts at designing MARL algorithms that borrow from game
 theory, online learning, evolutionary biology, and economics.
+% \note{Connect RL with 2.1; can define various settings to be instances of GT problems like stochastic games}.
 
 \section{Online Learning, and Convex Optimization}
 As discussed in previous sections, problems in Game theory and Reinforcement learning typically
@@ -512,20 +511,20 @@ non-euclidean spaces that utilize Bergman divergences instead of the Euclidean n
 	\label{def:bregman}
 	Given a convex set $\calX \subset \R^n$, and a differentiable $\sigma$-strongly convex potential
 	function $\phi: \calX \mapsto \R$, the Bregman Divergence associated $\phi$ is defined as, $$
-		B_\phi(x, y) = \phi(x) - \phi(y) - \langle \nabla \phi(y), x-y \rangle.
-	$$
+		B_\phi(x, y) = \phi(x) - \phi(y) - \langle \nabla \phi(y), x-y \rangle $$
 \end{definition}
 
-Bergman Divergences are not true norms, as they can be asymmetric, and need not satisfy the
-triangle inequality.
+Bergman Divergences are not true norms, as they can be asymmetric, and need not
+satisfy the triangle inequality.
 Given a strongly-convex potential function $\phi$, the mirror descent update rule is as follows:
 \begin{equation}
 	x_{k+1} = \arg \min_{x \in \calX} \left \{ \left \langle t_k \nabla f(x_k), x
-	\right \rangle + B_\phi(x, x_k) \right \}.
+	\right \rangle + B_\phi(x, x_k) \right \}
 \end{equation}
 
-%\end{noindent}
-One can recover the original projected subgradient method by letting $\phi=\|.
+One can recover the
+original projected subgradient method by letting $\phi=\|.
+	%\end{noindent}
 	\|$.
 
 \subsection{Proximal gradient methods}
